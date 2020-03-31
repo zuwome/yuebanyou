@@ -1,0 +1,59 @@
+//
+//  PrefixHeader.pch
+//  zwmMini
+//
+//  Created by Batata on 2018/11/13.
+//  Copyright © 2018 zuwome. All rights reserved.
+//
+
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+//常用宏定义
+#import "commonDefind.h"
+//MBManager
+#import "MBManager.h"
+#import "XJRongIMManager.h"
+//用户信息
+#import "XJUserModel.h"
+#import "XJUserManager.h"
+//通知name
+#import "notificationName.h"
+//urlss
+#import "RequestUrls.h"
+//创建UIView等
+#import "XJUIFactory.h"
+//工具类
+#import "XJUtils.h"
+#import "XJChatUtils.h"
+#import "UIAlertController+ConveniencePresent.h"
+#import "UIImage+FlatUI.h"
+#import "UIColor+Hex.h"
+#import "UIAlertView+Blocks.h"
+#import "XJUploader.h"
+#import "UITabBar+Badge.h"
+
+//网络
+#import "XJRequestManager.h"
+//各种第三方keys
+#import "APPKeys.h"
+//分类
+#import "UIView+XJ.h"
+#import "NSDate+Utilities.h"
+#import "NSDate+XJBirthday.h"
+#import "NSString+XJStringUitls.h"
+
+//第三方库
+#import "Masonry.h"
+#import "MJRefresh.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "YYModel.h"
+#import "JSONModel.h"
+
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */
