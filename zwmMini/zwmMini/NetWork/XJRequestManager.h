@@ -10,14 +10,26 @@
 
 #define AskManager [XJRequestManager sharedInstance]
 @class XJRequestError;
+typedef void (^requestCallback)(XJRequestError *error, id data, NSURLSessionDataTask *task);
 
 @interface XJRequestManager : NSObject
 
 + (XJRequestManager *)sharedInstance;
 
-- (void)GET:(NSString *)URLString dict:(NSMutableDictionary *)params succeed:(void (^)(id data,XJRequestError *rError))succeed failure:(void (^)(NSError *error))failure;
+- (void)GET:(NSString *)URLString
+       dict:(NSMutableDictionary *)params
+    succeed:(void (^)(id data,XJRequestError *rError))succeed
+    failure:(void (^)(NSError *error))failure;
 
-- (void)POST:(NSString *)URLString dict:(NSMutableDictionary *)params succeed:(void (^)(id data, XJRequestError *rError))succeed failure:(void (^)(NSError *error))failure;
+- (void)POST:(NSString *)URLString
+        dict:(NSMutableDictionary *)params
+     succeed:(void (^)(id data, XJRequestError *rError))succeed
+     failure:(void (^)(NSError *error))failure;
+
+- (void)Delete:(NSString *)URLString
+        dict:(NSMutableDictionary *)params
+     succeed:(void (^)(id data, XJRequestError *rError))succeed
+     failure:(void (^)(NSError *error))failure;
 
 - (void)specailPOST:(NSString *)URLString dict:(NSMutableDictionary *)params succeed:(void (^)(id data, XJRequestError *rError))succeed failure:(void (^)(NSError *error))failure;
 

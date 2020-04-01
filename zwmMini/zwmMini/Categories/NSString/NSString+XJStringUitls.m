@@ -85,4 +85,22 @@
     [string addAttribute:NSFontAttributeName value:font range:NSMakeRange(len1+1,len2)];
     return string;
 }
+
++ (CGFloat)findWidthForText:(NSString *)text havingWidth:(CGFloat)widthValue andFont:(UIFont *)font {
+    CGFloat result = font.pointSize + 4;
+    if (text)
+    {
+        CGSize textSize = { widthValue, CGFLOAT_MAX };       //Width and height of text area
+        CGSize size;
+        //iOS 7
+        CGRect frame = [text boundingRectWithSize:textSize
+                                          options:NSStringDrawingUsesLineFragmentOrigin
+                                       attributes:@{ NSFontAttributeName:font }
+                                          context:nil];
+        size = CGSizeMake(frame.size.width + 1, frame.size.height);
+        result = MAX(size.width, result); //At least one row
+    }
+    return result;
+}
+
 @end

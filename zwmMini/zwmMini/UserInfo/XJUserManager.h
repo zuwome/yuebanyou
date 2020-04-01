@@ -10,6 +10,8 @@
 #import "XJUserModel.h"
 #import "XJSystemCofigModel.h"
 #import "XJUnreadModel.h"
+#import "ZZCacheOrder.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 #define XJUserAboutManageer  [XJUserManager sharedInstance]
@@ -37,6 +39,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) XJPriceConfigModel *priceConfig;
 @property(nonatomic,copy) NSString *rongTonek;//融云token
 @property (strong, nonatomic) NSString *currentChatUid;//正在聊天的对象
+
+@property (strong, nonatomic) ZZCacheOrder *cacheOrder;//订单信息备份
+
+@property (strong, nonatomic) CLLocation *location;
+
+//上次支付方式
+@property (strong, nonatomic) NSString *lastPayMethod;
+
 
 + (XJUserManager *)sharedInstance;
 

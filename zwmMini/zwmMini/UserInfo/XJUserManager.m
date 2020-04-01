@@ -235,4 +235,15 @@ static XJUserManager *userManger = nil;
     return NO;
 }
 
+- (ZZCacheOrder *)cacheOrder {
+    NSString *name = [NSString stringWithFormat:@"usercacheOrder"];
+    NSData *objectData = [ZZUserDefaultsHelper objectForDestKey:name];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:objectData];
+}
+
+- (NSString *)lastPayMethod {
+    NSString *name = [NSString stringWithFormat:@"lastPayMethod"];
+    return [ZZUserDefaultsHelper objectForDestKey:name];
+}
+
 @end

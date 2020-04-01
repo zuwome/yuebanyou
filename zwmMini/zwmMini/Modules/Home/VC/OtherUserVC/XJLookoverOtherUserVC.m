@@ -19,16 +19,19 @@
 #import "XJLoginVC.h"
 #import "XJReportVC.h"
 #import "ZZUpdateAlertView.h"
+#import "XJSkill.h"
+#import "XJTopic.h"
+#import "XJRentSkillCell.h"
+#import "ZZRentChooseSkillViewController.h"
+#import "XJEditMyInfoVC.h"
 
-
-@interface XJLookoverOtherUserVC ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,XJPersonalDetailTbCellDelegate>
+@interface XJLookoverOtherUserVC ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,XJPersonalDetailTbCellDelegate, XJRentSkillCellDelegate>
 
 
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) SDCycleScrollView *headScroView;
 @property(nonatomic,strong) UIButton *backBtn;
-@property(nonatomic,strong) UIButton *priLetterBtn;
-@property(nonatomic,strong) UIButton *lookwxBtn;
+
 @property(nonatomic,strong) XJUserModel *lookuserModel;
 @property(nonatomic,strong) UIImageView *topgrayIV;
 @property(nonatomic,strong) UIButton *reportBtn;
@@ -41,6 +44,16 @@
 @property (nonatomic, strong) UIImageView *faceImageView;
 @property (nonatomic, strong) UIView *realFaceTipsView;
 @property (nonatomic, strong) UILabel *realFaceTipsLabel;//没有真实头像提示
+
+@property(nonatomic,strong) UIButton *priLetterBtn;
+
+@property(nonatomic,strong) UIButton *lookwxBtn;
+
+@property (nonatomic, strong) UIButton *rentBtn;
+
+@property (nonatomic, strong) UIView *footerView;
+
+@property (nonatomic, copy) NSArray<XJTopic *> *skillsArray;
 
 @end
 
@@ -77,31 +90,182 @@
     [self getLookUserInfo];
 }
 
-- (void)creatUI{
+- (void)createBtns {
+    //没有微信隐藏查看微信按钮
+    BOOL haveWechat = self.lookuserModel.have_wechat_no;
+    BOOL canBeRent = self.skillsArray.count > 0;
+    
+    _priLetterBtn.hidden = YES;
+    _lookwxBtn.hidden = YES;
+    _rentBtn.hidden = YES;
+    if (haveWechat && canBeRent) {
+        CGFloat btnWidth = (kScreenWidth - 30 - 22 - 28 * 2) / 2;
+        
+        _priLetterBtn.hidden = NO;
+        _lookwxBtn.hidden = NO;
+        _rentBtn.hidden = NO;
+        
+        [_priLetterBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_footerView).offset(29);
+            make.width.equalTo(@(30));
+        }];
+        
+        [_lookwxBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_priLetterBtn.mas_right).offset(22);
+            make.width.equalTo(@(btnWidth));
+            make.height.equalTo(@(52));
+        }];
+        
+        [_rentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_lookwxBtn.mas_right).offset(13);
+            make.width.equalTo(@(btnWidth));
+            make.height.equalTo(@(52));
+        }];
+    
+        [_priLetterBtn setImage:[UIImage imageNamed:@"iconTest"] forState:UIControlStateNormal];
+        [_priLetterBtn setTitle:@"私信" forState:UIControlStateNormal];
+        [_priLetterBtn setTitleColor:RGB(63, 58, 58) forState:UIControlStateNormal];
+        _priLetterBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        _priLetterBtn.imageView.size = CGSizeMake(23, 20);
+        [_priLetterBtn setImagePosition:LXMImagePositionTop spacing:2];
+    }
+    else if (!haveWechat && canBeRent) {
+        CGFloat btnWidth = (kScreenWidth - 30 - 22 - 28 * 2);
+        
+        _priLetterBtn.hidden = NO;
+        _lookwxBtn.hidden = YES;
+        _rentBtn.hidden = NO;
+        
+        [_priLetterBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_footerView).offset(29);
+            make.width.equalTo(@(30));
+        }];
+        
+        [_rentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_priLetterBtn.mas_right).offset(22);
+            make.width.equalTo(@(btnWidth));
+            make.height.equalTo(@(52));
+        }];
+    
+        [_priLetterBtn setImage:[UIImage imageNamed:@"iconTest"] forState:UIControlStateNormal];
+        [_priLetterBtn setTitle:@"私信" forState:UIControlStateNormal];
+        [_priLetterBtn setTitleColor:RGB(63, 58, 58) forState:UIControlStateNormal];
+        _priLetterBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        _priLetterBtn.imageView.size = CGSizeMake(23, 20);
+        [_priLetterBtn setImagePosition:LXMImagePositionTop spacing:2];
+    }
+    else if (haveWechat && !canBeRent) {
+        CGFloat btnWidth = (kScreenWidth - 30 - 22 - 28 * 2);
+            
+        _priLetterBtn.hidden = NO;
+        _lookwxBtn.hidden = NO;
+        _rentBtn.hidden = YES;
+        
+        [_priLetterBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_footerView).offset(29);
+            make.width.equalTo(@(30));
+        }];
+        
+        [_lookwxBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_priLetterBtn.mas_right).offset(22);
+            make.width.equalTo(@(btnWidth));
+            make.height.equalTo(@(52));
+        }];
+    
+        [_priLetterBtn setImage:[UIImage imageNamed:@"iconTest"] forState:UIControlStateNormal];
+        [_priLetterBtn setTitle:@"私信" forState:UIControlStateNormal];
+        [_priLetterBtn setTitleColor:RGB(63, 58, 58) forState:UIControlStateNormal];
+        _priLetterBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        _priLetterBtn.imageView.size = CGSizeMake(23, 20);
+        [_priLetterBtn setImagePosition:LXMImagePositionTop spacing:2];
+    }
+    else {
+        _priLetterBtn.hidden = NO;
+        _lookwxBtn.hidden = YES;
+        _rentBtn.hidden = YES;
+        
+        [_priLetterBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_footerView).offset(29);
+            make.right.equalTo(_footerView).offset(-29);
+            make.height.equalTo(@(52));
+        }];
+        
+        [_priLetterBtn setImage:nil forState:UIControlStateNormal];
+        [_priLetterBtn setTitle:@"私信" forState:UIControlStateNormal];
+        [_priLetterBtn setTitleColor:RGB(63, 58, 58) forState:UIControlStateNormal];
+        _priLetterBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+//        _priLetterBtn.imageView.size = CGSizeMake(23, 20);
+//        [_priLetterBtn setImagePosition:LXMImagePositionTop spacing:0];
+    }
+    
+//    if (!self.lookuserModel.have_wechat_no) {
+//        self.lookwxBtn.hidden = YES;
+//        [self.priLetterBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.bottom.equalTo(self.view).offset(-38);
+//            make.centerX.equalTo(self.view);
+//            make.width.mas_equalTo(340);
+//            make.height.mas_equalTo(64);
+//        }];
+//        [self.priLetterBtn setBackgroundImage:GetImage(@"sixinbtnimgy") forState:UIControlStateNormal];
+//    }
+    
+    [self.view layoutIfNeeded];
+    if (!haveWechat && !canBeRent) {
+        CAGradientLayer *btnGragientLayer = [XJUtils setGradualChangingColor:_priLetterBtn fromColor:RGB(252, 134, 98) toColor:RGB(254, 53, 53) endPoint:CGPointMake(1.0, 0) locations:@[@0.1, @0.8] type:nil];
+        btnGragientLayer.frame = _priLetterBtn.bounds;
+        btnGragientLayer.cornerRadius = 26;
+        [_priLetterBtn.layer addSublayer:btnGragientLayer];
+        [_priLetterBtn bringSubviewToFront:_priLetterBtn.titleLabel];
+        [_priLetterBtn bringSubviewToFront:_priLetterBtn.imageView];
+    }
+    else {
+        CAGradientLayer *btnGragientLayer = [XJUtils setGradualChangingColor:_lookwxBtn fromColor:RGB(252, 134, 98) toColor:RGB(254, 53, 53) endPoint:CGPointMake(1.0, 0) locations:@[@0.1, @0.8] type:nil];
+        btnGragientLayer.frame = _lookwxBtn.bounds;
+        btnGragientLayer.cornerRadius = 26;
+        [_lookwxBtn.layer addSublayer:btnGragientLayer];
+        [_lookwxBtn bringSubviewToFront:_lookwxBtn.titleLabel];
+        [_lookwxBtn bringSubviewToFront:_lookwxBtn.imageView];
+        
+        CAGradientLayer *btnGragientLayer1 = [XJUtils setGradualChangingColor:_rentBtn fromColor:RGB(252, 134, 98) toColor:RGB(254, 53, 53) endPoint:CGPointMake(1.0, 0) locations:@[@0.1, @0.8] type:nil];
+        btnGragientLayer1.frame = _rentBtn.bounds;
+        btnGragientLayer1.cornerRadius = 26;
+        [_rentBtn.layer addSublayer:btnGragientLayer1];
+        [_rentBtn bringSubviewToFront:_rentBtn.titleLabel];
+        [_rentBtn bringSubviewToFront:_rentBtn.imageView];
+    }
+}
+
+- (void)creatUI {
+    _footerView = [[UIView alloc] init];
+    _footerView.backgroundColor = UIColor.whiteColor;
+    [self.view addSubview:_footerView];
+    [_footerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.height.equalTo(@80.0);
+    }];
+    
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
+        make.left.right.equalTo(self.view);
         make.top.equalTo(self.view).offset(-20);
+        make.bottom.equalTo(_footerView.mas_top).offset(-1);
     }];
+    
     [self.view addSubview:self.topgrayIV];
     [self.topgrayIV addSubview:self.backBtn];
     [self.topgrayIV addSubview:self.reportBtn];
     
-    [self.view addSubview:self.priLetterBtn];
-    [self.view addSubview:self.lookwxBtn];
-    [self.priLetterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view).offset(-38);
-        make.right.equalTo(self.view.mas_centerX).offset(-8);
-        make.width.mas_equalTo(164);
-        make.height.mas_equalTo(64);
-    }];
-    [self.lookwxBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view).offset(-38);
-        make.left.equalTo(self.view.mas_centerX).offset(8);
-        make.width.mas_equalTo(164);
-        make.height.mas_equalTo(64);
-    }];
-    
+    [_footerView addSubview:self.priLetterBtn];
+    [_footerView addSubview:self.lookwxBtn];
+    [_footerView addSubview:self.rentBtn];
     
 }
 
@@ -132,7 +296,15 @@
     [AskManager GET:url dict:@{}.mutableCopy succeed:^(id data, XJRequestError *rError) {
         
         self.lookuserModel = [XJUserModel yy_modelWithDictionary:data];
-        NSMutableArray *cellTypeArray = @[@"1", @"2"].mutableCopy;
+        NSMutableArray *cellTypeArray = @[@"1"].mutableCopy;
+        
+        // 技能
+        if (self.lookuserModel.rent.topics.count > 0) {
+            [cellTypeArray addObject:@"5"];
+        }
+        
+        [cellTypeArray addObject:@"2"];
+        
         if (self.lookuserModel.tags_new && self.lookuserModel.tags_new.count > 0) {
             [cellTypeArray addObject:@"3"];
         }
@@ -167,19 +339,21 @@
             }];
         }
         
+        if (self.lookuserModel.rent.topics.count > 0) {
+            NSMutableArray *skillsArr = @[].mutableCopy;
+            [self.lookuserModel.rent.topics enumerateObjectsUsingBlock:^(XJTopic * _Nonnull topic, NSUInteger idx, BOOL * _Nonnull stop) {
+                XJSkill *skill = topic.skills[0];
+                if (skill.topicStatus == 2 || skill.topicStatus == 4) {//技能审核状态：0=>审核不通过 1=>待审核 2=>已审核 3=>待确认 4默认通过
+                    [skillsArr addObject:topic];
+                }
+            }];
+            
+            self.skillsArray = skillsArr.copy;
+        }
+        
         self.headScroView.imageURLStringsGroup = (NSArray *)tempA;
         
-        //没有微信隐藏查看微信按钮
-        if (!self.lookuserModel.have_wechat_no) {
-            self.lookwxBtn.hidden = YES;
-            [self.priLetterBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.bottom.equalTo(self.view).offset(-38);
-                make.centerX.equalTo(self.view);
-                make.width.mas_equalTo(340);
-                make.height.mas_equalTo(64);
-            }];
-            [self.priLetterBtn setBackgroundImage:GetImage(@"sixinbtnimgy") forState:UIControlStateNormal];
-        }
+        [self createBtns];
         
         [self showUserFaceTips];
         
@@ -239,6 +413,82 @@
     [self lookoverWx];
 }
 
+- (void)rentAction {
+    // 未登录
+    if (!XJUserAboutManageer.isLogin) {
+//        [self gotoLoginView];
+        return;
+    }
+    
+    // 被禁了
+    if ([XJUserAboutManageer isUserBanned]) {
+        return;
+    }
+    
+    // 未上架
+    if (_lookuserModel.rent.status == 2 && _lookuserModel.rent.show) {
+        
+    }
+    else {
+        [ZZHUD showErrorWithStatus:@"对方非可邀约的达人身份"];
+        return;
+    }
+    
+    // 头像正在人工审核并且没有旧头像不能租
+    if ([_lookuserModel isAvatarManualReviewing] && ![_lookuserModel didHaveOldAvatar]) {
+        return;
+    }
+    
+    if (XJUserAboutManageer.uModel && XJUserAboutManageer.uModel.avatarStatus == 0) {
+        [UIAlertView showWithTitle:@"提示" message:@"本人头像不是自己的照片，请先去修改" cancelButtonTitle:@"取消" otherButtonTitles:@[@"去修改"] tapBlock:^(UIAlertView * _Nonnull alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                XJEditMyInfoVC *vc =  [[XJEditMyInfoVC alloc] init];
+//                vc.delegate = self;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }];
+    } else {
+        __weak typeof(self) Weakself = self;
+        // 判断当前操作是否需要做验证
+        if ([XJUserAboutManageer.sysCofigModel.disable_module.no_have_face indexOfObject:@"add_order"] != NSNotFound) {
+            // 如果没有人脸
+            if (XJUserAboutManageer.uModel.faces.count == 0) {
+                // TODO: 去验证人脸
+                [UIAlertController presentAlertControllerWithTitle:@"目前账户安全级别较低，将进行身份识别，否则无法下单" message:nil doneTitle:@"前往" cancelTitle:@"取消" completeBlock:^(BOOL isCancelled) {
+//                    Weakself.bottomView.chatBtn.userInteractionEnabled = YES;
+//                    if (!isCancelled) { // 去验证人脸
+//                        [Weakself gotoVerifyFace:NavigationTypeOrder];
+//                    }
+                }];
+                return;
+            }
+            // 如果没有真实头像
+            if ([XJUserAboutManageer.sysCofigModel.disable_module.no_have_real_avatar indexOfObject:@"add_order"] == NSNotFound) {
+                ZZRentChooseSkillViewController *controller = [[ZZRentChooseSkillViewController alloc] init];
+                controller.user = _lookuserModel;
+                controller.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:controller animated:YES];
+            }
+            else {
+                XJPhoto *photo = XJUserAboutManageer.uModel.photos_origin.firstObject;
+                if (photo == nil || photo.face_detect_status != 3) {
+                    [UIAlertController presentAlertControllerWithTitle:@"您未上传本人正脸五官清晰照，无法下单，请前往上传真实头像" message:nil doneTitle:@"前往" cancelTitle:@"取消" completeBlock:^(BOOL isCancelled) {
+//                        Weakself.bottomView.chatBtn.userInteractionEnabled = YES;
+//                        if (!isCancelled) { // 去上传真实头像
+//                            [Weakself gotoUploadPicture:NavigationTypeOrder];
+//                        }
+                    }];
+                    return;
+                }
+                ZZRentChooseSkillViewController *controller = [[ZZRentChooseSkillViewController alloc] init];
+                controller.user = _lookuserModel;
+                controller.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:controller animated:YES];
+            }
+        }
+    }
+}
+
 //设置查看微信按钮图片
 - (void)setUpbottonBtnType{
     
@@ -246,17 +496,18 @@
     if (self.lookuserModel.can_see_wechat_no) {
         //已评价
         if (self.lookuserModel.have_commented_wechat_no) {
-            
-            [self.lookwxBtn setBackgroundImage:GetImage(@"yipingjiaimg") forState:UIControlStateNormal];
-            
+
+            [self.lookwxBtn setTitle:@"微信号已评价" forState:UIControlStateNormal];
+
             //未评价
         }else{
-            [self.lookwxBtn setBackgroundImage:GetImage(@"pingjiaimg") forState:UIControlStateNormal];
+            [self.lookwxBtn setTitle:@"评价微信号" forState:UIControlStateNormal];
         }
-        
+
         //未查看微信
     }else{
-        [self.lookwxBtn setBackgroundImage:GetImage(@"lookwximg") forState:UIControlStateNormal];
+        [self.lookwxBtn setTitle:@"查看微信" forState:UIControlStateNormal];
+//        [self.lookwxBtn setBackgroundImage:GetImage(@"lookwximg") forState:UIControlStateNormal];
     }
 }
 
@@ -384,6 +635,11 @@
     self.realFaceTipsView.hidden = isShow ? NO : YES;
 }
 
+#pragma mark - XJRentSkillCellDelegate
+- (void)cell:(XJRentSkillCell *)cell selectSkill:(XJTopic *)topic {
+    NSLog(@"%@",topic.skills[0].name);
+}
+
 #pragma mark tableviewDelegate and dataSource
 //
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -441,6 +697,16 @@
         [cell setUpName:umodel.nickname Gender:umodel.gender == 1 ? YES:NO Distance:umodel.distance isOneself:NO];
         return cell;
     }
+    else if ([type isEqualToString:@"5"]) {
+        // 技能
+        XJRentSkillCell *cell = [tableView dequeueReusableCellWithIdentifier:@"skill"];
+        if (!cell) {
+            cell = [[XJRentSkillCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"skill"];
+        }
+        cell.delegate = self;
+        cell.skillsArr = _skillsArray;
+        return cell;
+    }
     else if ([type isEqualToString:@"2"]) {
         XJPersonalDetailTbCell  *cell = [[XJPersonalDetailTbCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"detailcell"];
         cell.delegate = self;
@@ -485,10 +751,11 @@
         _tableView.backgroundColor = [UIColor whiteColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView setTableHeaderView:self.headBgView];
-        UIView *fview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 130)];
-        fview.backgroundColor = defaultWhite;
-      
+
+        UIView *fview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 20)];
+        fview.backgroundColor = UIColor.whiteColor;
         [_tableView setTableFooterView:fview];
+        
         _tableView.backgroundColor = defaultLineColor;
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -558,8 +825,6 @@
         _headScroView =  [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth) delegate:self placeholderImage:nil];
 //        _headScroView.imageURLStringsGroup = @[];
         _headScroView.autoScroll = NO;
-        
-        
     }
     return _headScroView;
     
@@ -591,32 +856,39 @@
 
 - (UIButton *)priLetterBtn{
     if (!_priLetterBtn) {
-        _priLetterBtn = [XJUIFactory creatUIButtonWithFrame:CGRectZero addToView:nil backColor:defaultClearColor nomalTitle:@"" titleColor:nil titleFont:nil nomalImageName:@"" selectImageName:@"" target:self action:@selector(priLetterAction)];
-        [_priLetterBtn setBackgroundImage:GetImage(@"priletterimg") forState:UIControlStateNormal];
-        
+        _priLetterBtn = [[UIButton alloc] init];
+        [_priLetterBtn addTarget:self action:@selector(priLetterAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _priLetterBtn;
     
 }
 - (UIButton *)lookwxBtn{
     if (!_lookwxBtn) {
-        _lookwxBtn = [XJUIFactory creatUIButtonWithFrame:CGRectZero addToView:nil backColor:defaultClearColor nomalTitle:@"" titleColor:nil titleFont:nil nomalImageName:@"" selectImageName:@"" target:self action:@selector(lookwxAction)];
-       
+        _lookwxBtn = [[UIButton alloc] init];
+        [_lookwxBtn setTitle:@"查看微信" forState:UIControlStateNormal];
+        [_lookwxBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        _lookwxBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        [_lookwxBtn addTarget:self action:@selector(lookwxAction) forControlEvents:UIControlEventTouchUpInside];
+        _lookwxBtn.backgroundColor = UIColor.greenColor;
+        _lookwxBtn.layer.cornerRadius = 26.0;
     }
     return _lookwxBtn;
     
 }
 
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UIButton *)rentBtn {
+    if (!_rentBtn) {
+        _rentBtn = [[UIButton alloc] init];
+        [_rentBtn setTitle:@"马上约TA" forState:UIControlStateNormal];
+        [_rentBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        _rentBtn.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+        [_rentBtn addTarget:self action:@selector(rentAction) forControlEvents:UIControlEventTouchUpInside];
+        _rentBtn.backgroundColor = UIColor.greenColor;
+        _rentBtn.layer.cornerRadius = 26.0;
+        
+    }
+    return _rentBtn;
 }
-*/
+
 
 @end

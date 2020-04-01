@@ -7,7 +7,8 @@
 //
 
 #import "XJUserModel.h"
-
+#import "XJSkill.h"
+#import "XJTopic.h"
 @implementation XJUserModel
 
 
@@ -41,6 +42,54 @@
         return YES;
     }
     return NO;
+}
+
+- (void)getBalance:(requestCallback)next {
+    [AskManager GET:@"api/user/balance" dict:nil succeed:^(id data, XJRequestError *rError) {
+        if (next) {
+            next(rError, data, nil);
+        }
+    } failure:^(NSError *error) {
+        XJRequestError *rError = [[XJRequestError alloc] init];
+        rError.code = error.code;
+        rError.message = error.localizedDescription;
+        if (next) {
+            next(rError, nil, nil);
+        }
+    }];
+
+}
+
++ (void)loadUser:(NSString *)uid
+           param:(NSDictionary *)param
+         succeed:(void (^)(id data,XJRequestError *rError))succeed
+         failure:(void (^)(NSError *error))failure {
+    NSString *path = ({
+        NSString *s = @"";
+        if (uid) {
+            s = [NSString stringWithFormat:@"api/user/%@", uid];
+        } else {
+            s = [NSString stringWithFormat:@"api/user"];
+        }
+        s;
+    });
+    
+    [AskManager GET:path dict:param.mutableCopy succeed:^(id data, XJRequestError *rError) {
+        if (!rError && data) {
+            XJUserAboutManageer.access_token = data[@"access_token"];
+            XJUserAboutManageer.qiniuUploadToken = data[@"upload_token"];
+            XJUserModel *userModel = [XJUserModel yy_modelWithDictionary:data[@"user"]];
+            XJUserAboutManageer.uModel = userModel;
+            XJUserAboutManageer.isLogin = YES;
+        }
+        if (succeed) {
+            succeed(data, rError);
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
 }
 
 
@@ -145,7 +194,11 @@
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
 
-    return @{@"topics" : [XJTopicsModel class]};
+    return @{
+        @"topics" : [XJTopic class],
+        @"address" : [XJCityModel class],
+        @"city" : [XJCityModel class],
+    };
 }
 
 
@@ -155,7 +208,7 @@
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
 
-    return @{@"skills" : [XJSkillModel class]};
+    return @{@"skills" : [XJSkill class]};
 }
 
 

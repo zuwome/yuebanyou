@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 //改变指定label字体颜色和大小
 + (NSMutableAttributedString *)changeStringColorAndFontWithOldStr:(NSString *)oldStr changeStr:(NSString *)changeStr color:(UIColor *)color font:(UIFont *)font;
+
++ (CGFloat)findWidthForText:(NSString *)text havingWidth:(CGFloat)widthValue andFont:(UIFont *)font;
 @end
 
 NS_ASSUME_NONNULL_END

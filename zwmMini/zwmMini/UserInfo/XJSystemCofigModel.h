@@ -14,6 +14,8 @@
 @class XJPriceConfigModel;
 @class ZZVersionModel;
 @class ZZUpdateModel;
+@class ZZSystemYjConfigModel;
+@class ZZDisableModuleModel;
 @interface XJSystemCofigModel : NSObject
 
 @property(nonatomic,copy) NSString *config_version;
@@ -25,6 +27,17 @@
 
 @property (nonatomic, strong) ZZUpdateModel *version;
 
+@property (nonatomic, strong) ZZSystemYjConfigModel *yj;
+
+// 禁止使用的列表
+@property (nonatomic, strong) ZZDisableModuleModel *disable_module;
+
+// 出租 邀约优享邀约服务查看微信价格
+@property (nonatomic, assign) double order_wechat_price;
+
+// 出租 邀约优享邀约服务查看微信价格 开关
+@property (nonatomic, assign) BOOL order_wechat_enable;
+
 @end
 
 @interface SkillCatalogModel : NSObject
@@ -33,7 +46,15 @@
 @property(nonatomic,assign) NSInteger classify;
 @property(nonatomic,copy) NSString *url;
 
+@end
 
+@interface ZZSystemYjConfigModel : NSObject
+
+@property (nonatomic, assign) double order_from;//订单抽佣
+@property (nonatomic, assign) double mmd;//么么答抽佣
+@property (nonatomic, assign) double mmd_tip;//么么答打赏抽佣
+@property (nonatomic, assign) double mmd_private;//私信抽佣
+@property (nonatomic, assign) double sk_tip;//时刻打赏抽佣
 
 @end
 
@@ -120,5 +141,14 @@
 @property (nonatomic, assign) NSInteger __v;
 
 @property (nonatomic, copy) NSString *title;
+
+@end
+
+@interface ZZDisableModuleModel : NSObject
+
+@property (nonatomic, strong) NSArray<NSString *> *no_have_face;//需要有人脸
+@property (nonatomic, strong) NSArray<NSString *> *no_have_face_text;//文本
+@property (nonatomic, strong) NSArray<NSString *> *no_have_real_avatar;//需要有头像
+@property (nonatomic, strong) NSArray<NSString *> *no_have_real_avatar_text;//文本
 
 @end

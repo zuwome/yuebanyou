@@ -76,4 +76,5 @@
 
 - (NSDate *)toLocalTime;
 
+- (NSDate *)dateByMinusMinutes:(NSUInteger)dMinutes;
 @end

@@ -386,4 +386,10 @@
     return [NSDate dateWithTimeInterval: seconds sinceDate: self];
 }
 
+- (NSDate *)dateByMinusMinutes:(NSUInteger)dMinutes {
+    NSTimeInterval aTimeInterval = [self timeIntervalSinceReferenceDate] - D_MINUTE * dMinutes;
+    NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
+    return newDate;
+}
+
 @end

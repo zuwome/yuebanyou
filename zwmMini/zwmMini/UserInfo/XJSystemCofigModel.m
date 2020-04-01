@@ -15,8 +15,17 @@
     return @{
         @"skill_catalog" : [SkillCatalogModel class],
         @"version" : [ZZUpdateModel class],
+        @"yj" : [ZZSystemYjConfigModel class],
+        @"disable_module" : [ZZDisableModuleModel class],
     };
 }
+
+
+@end
+
+@implementation ZZSystemYjConfigModel
+
+
 
 @end
 
@@ -50,6 +59,12 @@
 @end
 
 @implementation ZZVersionModel
+
+
+@end
+
+
+@implementation ZZDisableModuleModel
 
 
 @end

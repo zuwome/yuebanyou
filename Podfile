@@ -6,7 +6,7 @@ inhibit_all_warnings!
 
 target 'zwmMini' do
 pod 'SDWebImage', '~> 4.4.3'
-pod 'AFNetworking'
+pod 'AFNetworking', '~> 3.2.1'
 pod 'UITableView+FDTemplateLayoutCell'
 pod 'Underscore.m'
 pod 'NMRangeSlider'
@@ -41,5 +41,5 @@ pod 'UMCShare/UI'
 pod 'UMCShare/Social/WeChat'
 pod 'UMCShare/Social/QQ'
 pod 'UMCShare/Social/Sina'
-
+pod 'SVProgressHUD'
 end

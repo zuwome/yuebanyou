@@ -74,7 +74,7 @@ static NSString *myTableviewIdentifier = @"mytableviewIdentifier";
 
 - (void)editPersonalData{
     if ([XJUserAboutManageer isUserBanned]) {
-//        [MBManager showBriefAlert:@"您已被封禁"];
+        [MBManager showBriefAlert:@"您已被封禁"];
         return;
     }
     XJEditMyInfoVC *vc =  [[XJEditMyInfoVC alloc] init];

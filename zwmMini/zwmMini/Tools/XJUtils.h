@@ -94,5 +94,14 @@
 //phoneVersion
 + (NSString *)phoneVersion;
 
++ (CAGradientLayer *)setGradualChangingColor:(UIView *)view fromColor:(UIColor *)fromHexColor toColor:(UIColor *)toHexColor endPoint:(CGPoint )endPoint locations:(NSArray *)locationsArray type:(NSString *)type;
+
+/**
+ 比较两个版本号
+ */
++ (NSComparisonResult)compareVersionFrom:(NSString *)from to:(NSString *)to;
+
++ (NSString *)dealAccuracyDouble:(double)value;
+
 @end
 

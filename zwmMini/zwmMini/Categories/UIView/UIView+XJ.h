@@ -22,6 +22,35 @@ IB_DESIGNABLE
 @property(nonatomic, assign) IBInspectable UIColor *borderColor;
 @property(nonatomic, assign) IBInspectable CGFloat cornerRadius;
 
+/////FRAME SHORTCUTS//////////////////////
+/**
+ * Shortcut for frame.origin.x.
+ *
+ * Sets frame.origin.x = left
+ */
+@property (nonatomic) CGFloat left;
+
+/**
+ * Shortcut for frame.origin.y
+ *
+ * Sets frame.origin.y = top
+ */
+@property (nonatomic) CGFloat top;
+
+/**
+ * Shortcut for frame.origin.x + frame.size.width
+ *
+ * Sets frame.origin.x = right - frame.size.width
+ */
+@property (nonatomic) CGFloat right;
+
+/**
+ * Shortcut for frame.origin.y + frame.size.height
+ *
+ * Sets frame.origin.y = bottom - frame.size.height
+ */
+@property (nonatomic) CGFloat bottom;
+
 /**
  *  水平居中
  */

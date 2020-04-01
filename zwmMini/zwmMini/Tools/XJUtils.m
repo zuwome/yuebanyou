@@ -637,4 +637,45 @@
    
 }
 
+//绘制渐变色颜色的方法
++ (CAGradientLayer *)setGradualChangingColor:(UIView *)view fromColor:(UIColor *)fromHexColor toColor:(UIColor *)toHexColor endPoint:(CGPoint )endPoint locations:(NSArray *)locationsArray type:(NSString *)type{
+    
+    //    CAGradientLayer类对其绘制渐变背景颜色、填充层的形状(包括圆角)
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = view.bounds;
+    
+    //  创建渐变色数组
+    gradientLayer.colors = @[(__bridge id)fromHexColor.CGColor,(__bridge id)toHexColor.CGColor];
+    
+    //  设置渐变颜色方向，左上点为(0,0), 右下点为(1,1)
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint =  endPoint;
+    
+    //  设置颜色变化点，取值范围 0.0~1.0
+    gradientLayer.locations = locationsArray;
+    
+    return gradientLayer;
+}
+
+/**
+ 比较两个版本号
+ */
++ (NSComparisonResult)compareVersionFrom:(NSString *)from to:(NSString *)to {
+    NSComparisonResult result = [from compare:to options:NSNumericSearch];
+    return result;
+}
+
++ (NSString *)dealAccuracyDouble:(double)value
+{
+    if (fmod(value, 1) == 0) {//如果有一位小数点
+        return [NSString stringWithFormat:@"%.0f",value];
+    }
+    else if (fmod(value*10, 1) == 0) {//如果有两位小数点
+        return [NSString stringWithFormat:@"%.1f",value];
+    }
+    else {
+        return [NSString stringWithFormat:@"%.2f",value];
+    }
+}
+
 @end

@@ -14,9 +14,15 @@
 #import "XJGuidPageVC.h"
 #import "XYIAPKit.h"
 #import "XYStoreiTunesReceiptVerifier.h"
+#import "Pingpp.h"
+#import "XJUrlSchemaModel.h"
 
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) XJUrlSchemaModel *schemaModel;//urlschema打开
+
+@property (nonatomic, assign) BOOL haveLoad;
 
 @end
 
@@ -44,6 +50,7 @@
         [self.window makeKeyWindow];
 
     }else{
+        _haveLoad = YES;
         self.window.rootViewController = [[XJTabBarVC alloc] init];
         [self.window makeKeyWindow];
     }
@@ -123,10 +130,50 @@
     BOOL result = [[UMSocialManager defaultManager]  handleOpenURL:url options:options];
     if (!result) {
         // 其他如支付等SDK的回调
-        
+        __weak typeof(self) weakSelf = self;
+        NSString *urlString = [url.absoluteString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+        [Pingpp handleOpenURL:url withCompletion:nil];
+        if (result == NO) {
+            NSRange range = [urlString rangeOfString:@"iOSZuwomaAppOpenApp://"];
+            if (range.location != NSNotFound) {
+                NSDictionary *aDict = [XJUtils dictionaryWithJsonString:[urlString stringByReplacingOccurrencesOfString:@"iOSZuwomaAppOpenApp://" withString:@""]];
+                _schemaModel = [XJUrlSchemaModel yy_modelWithDictionary:aDict];
+                if (_haveLoad) {
+                    [weakSelf managerNextControllerWithModel:_schemaModel];
+                    _schemaModel = nil;
+                }
+            }
+        }
     }
     return result;
 }
 
+#pragma mark - Navigation
+- (void)managerNextControllerWithModel:(XJUrlSchemaModel *)model {
+    __weak typeof(self) weakSelf = self;
+    if (model) {
+        NSInteger type = [model.type integerValue];
+        switch (type) {
+            case 0:
+            {
+                UITabBarController *tabs = (UITabBarController*)weakSelf.window.rootViewController;
+                
+                __weak typeof(tabs) weakTabs = tabs;
+                UINavigationController *navCtl = [weakTabs selectedViewController];
+                __weak typeof(navCtl) weakNavCtl = navCtl;
+//                ZZRentViewController *controller = [[ZZRentViewController alloc] init];
+//                controller.uid = model.content;
+//                controller.isFromHome = YES;
+//                controller.hidesBottomBarWhenPushed = YES;
+//                [weakNavCtl pushViewController:controller animated:YES];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
 
 @end

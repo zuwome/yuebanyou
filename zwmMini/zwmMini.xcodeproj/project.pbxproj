@@ -127,7 +127,48 @@
 		81E2721E21C7AFF9005DFBF5 /* XJFirstOpenChatHintVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E2721D21C7AFF9005DFBF5 /* XJFirstOpenChatHintVC.m */; };
 		81E2722121C8914C005DFBF5 /* XJSystemNotiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E2722021C8914C005DFBF5 /* XJSystemNotiTableViewCell.m */; };
 		81E2722421C89725005DFBF5 /* XJSystemNotiVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 81E2722321C89725005DFBF5 /* XJSystemNotiVC.m */; };
+		BD07D8BC2432EF0D00FC5E4D /* XJRentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BD07D8BB2432EF0D00FC5E4D /* XJRentModel.m */; };
+		BD07D8BF2432EFC000FC5E4D /* XJTopic.m in Sources */ = {isa = PBXBuildFile; fileRef = BD07D8BE2432EFC000FC5E4D /* XJTopic.m */; };
+		BD07D8C22432F03700FC5E4D /* XJSkill.m in Sources */ = {isa = PBXBuildFile; fileRef = BD07D8C12432F03700FC5E4D /* XJSkill.m */; };
+		BD07D8CB243331BD00FC5E4D /* XJUrlSchemaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BD07D8CA243331BD00FC5E4D /* XJUrlSchemaModel.m */; };
 		BD39973521D5C0AD00EB3667 /* XJRCMImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD39973421D5C0AD00EB3667 /* XJRCMImageCollectionViewCell.m */; };
+		BDA5843924334A190053D820 /* UIButton+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5843824334A190053D820 /* UIButton+Utils.m */; };
+		BDA5843C24338F0D0053D820 /* XJRentSkillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5843B24338F0D0053D820 /* XJRentSkillCell.m */; };
+		BDA5843F2433946D0053D820 /* XJRentSkillItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5843E2433946D0053D820 /* XJRentSkillItemView.m */; };
+		BDA5844524339F7C0053D820 /* ZZRentChooseSkillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5844324339F7B0053D820 /* ZZRentChooseSkillViewController.m */; };
+		BDA5844824339FEA0053D820 /* ZZOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5844724339FEA0053D820 /* ZZOrder.m */; };
+		BDA5844B2433AD800053D820 /* ZZRentChooseSkillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5844A2433AD800053D820 /* ZZRentChooseSkillCell.m */; };
+		BDA5844E2433ADB40053D820 /* ZZDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5844C2433ADB30053D820 /* ZZDateHelper.m */; };
+		BDA584512433AE010053D820 /* ZZDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA584502433AE010053D820 /* ZZDatePicker.m */; };
+		BDA584542433B3930053D820 /* ZZHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA584532433B3930053D820 /* ZZHUD.m */; };
+		BDA58457243424860053D820 /* ZZRentOrderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA58455243424860053D820 /* ZZRentOrderInfoViewController.m */; };
+		BDA5845A243428F60053D820 /* ZZHoursPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA58459243428F60053D820 /* ZZHoursPicker.m */; };
+		BDA5846B243429930053D820 /* ZZRentOrderLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5845C243429920053D820 /* ZZRentOrderLocationCell.m */; };
+		BDA5846C243429930053D820 /* ZZRentOrderPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5845D243429920053D820 /* ZZRentOrderPayCell.m */; };
+		BDA5846D243429930053D820 /* ZZRentOrderSkillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5845E243429920053D820 /* ZZRentOrderSkillCell.m */; };
+		BDA5846E243429930053D820 /* ZZOrderCheckWeChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA58461243429930053D820 /* ZZOrderCheckWeChatCell.m */; };
+		BDA5846F243429930053D820 /* ZZRentOrderTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA58462243429930053D820 /* ZZRentOrderTimeCell.m */; };
+		BDA58470243429930053D820 /* ZZRentOrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA58464243429930053D820 /* ZZRentOrderHeaderView.m */; };
+		BDA58471243429930053D820 /* ZZRentDropdownMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA58466243429930053D820 /* ZZRentDropdownMenuView.m */; };
+		BDA58472243429930053D820 /* ZZRentOrderPriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA58469243429930053D820 /* ZZRentOrderPriceView.m */; };
+		BDA58475243429FE0053D820 /* XJTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA58474243429FE0053D820 /* XJTableViewCell.m */; };
+		BDA5847824342AB60053D820 /* ZZPostTaskRulesToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5847624342AB60053D820 /* ZZPostTaskRulesToastView.m */; };
+		BDA5847B24342B1E0053D820 /* ZZInfoToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5847924342B1E0053D820 /* ZZInfoToastView.m */; };
+		BDA5847E2434307F0053D820 /* ZZRentDropdownCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5847D2434307F0053D820 /* ZZRentDropdownCell.m */; };
+		BDA58481243430B50053D820 /* ZZRentDropdownModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA58480243430B50053D820 /* ZZRentDropdownModel.m */; };
+		BDA58484243435540053D820 /* ZZCacheOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA58482243435540053D820 /* ZZCacheOrder.m */; };
+		BDA58487243436010053D820 /* ZZUserDefaultsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA58486243436000053D820 /* ZZUserDefaultsHelper.m */; };
+		BDA58490243439D80053D820 /* ZZRentAbroadLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5848F243439D80053D820 /* ZZRentAbroadLocationViewController.m */; };
+		BDA58493243439ED0053D820 /* ZZSearchLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA58492243439ED0053D820 /* ZZSearchLocationController.m */; };
+		BDA5849624343A4A0053D820 /* ZZRentLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5849524343A4A0053D820 /* ZZRentLocationCell.m */; };
+		BDA5849924343A740053D820 /* ZZAbroadLocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5849724343A730053D820 /* ZZAbroadLocationModel.m */; };
+		BDA5849C24343B9C0053D820 /* ZZAFNHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA5849B24343B9C0053D820 /* ZZAFNHelper.m */; };
+		BDA584A2243440750053D820 /* ZZLocationSearchedController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA584A1243440750053D820 /* ZZLocationSearchedController.m */; };
+		BDA584A52434485D0053D820 /* ZZLinkWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA584A32434485D0053D820 /* ZZLinkWebViewController.m */; };
+		BDA584AB243449130053D820 /* ZZLinkWebNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA584A9243449130053D820 /* ZZLinkWebNavigationView.m */; };
+		BDA584AE243471350053D820 /* ZZRentOrderPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA584AD243471350053D820 /* ZZRentOrderPaymentViewController.m */; };
+		BDA584B124347A330053D820 /* ZZRentOrderPayCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA584B024347A330053D820 /* ZZRentOrderPayCompleteViewController.m */; };
+		BDA584B424347B4D0053D820 /* ZZRentPayCompleteChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA584B224347B4D0053D820 /* ZZRentPayCompleteChatCell.m */; };
 		BDB2D46A21D70E4F00F6CBA6 /* IDLFaceSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB2D46521D70E4F00F6CBA6 /* IDLFaceSDK.framework */; };
 		BDB2D46B21D70E4F00F6CBA6 /* idl-license.face-ios in Resources */ = {isa = PBXBuildFile; fileRef = BDB2D46721D70E4F00F6CBA6 /* idl-license.face-ios */; };
 		BDB2D46C21D70E4F00F6CBA6 /* com.baidu.idl.face.model.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BDB2D46821D70E4F00F6CBA6 /* com.baidu.idl.face.model.bundle */; };
@@ -521,9 +562,91 @@
 		81E2722021C8914C005DFBF5 /* XJSystemNotiTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJSystemNotiTableViewCell.m; sourceTree = "<group>"; };
 		81E2722221C89725005DFBF5 /* XJSystemNotiVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJSystemNotiVC.h; sourceTree = "<group>"; };
 		81E2722321C89725005DFBF5 /* XJSystemNotiVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJSystemNotiVC.m; sourceTree = "<group>"; };
+		BD07D8BA2432EF0D00FC5E4D /* XJRentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJRentModel.h; sourceTree = "<group>"; };
+		BD07D8BB2432EF0D00FC5E4D /* XJRentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJRentModel.m; sourceTree = "<group>"; };
+		BD07D8BD2432EFC000FC5E4D /* XJTopic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJTopic.h; sourceTree = "<group>"; };
+		BD07D8BE2432EFC000FC5E4D /* XJTopic.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJTopic.m; sourceTree = "<group>"; };
+		BD07D8C02432F03700FC5E4D /* XJSkill.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJSkill.h; sourceTree = "<group>"; };
+		BD07D8C12432F03700FC5E4D /* XJSkill.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJSkill.m; sourceTree = "<group>"; };
+		BD07D8C9243331BD00FC5E4D /* XJUrlSchemaModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJUrlSchemaModel.h; sourceTree = "<group>"; };
+		BD07D8CA243331BD00FC5E4D /* XJUrlSchemaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJUrlSchemaModel.m; sourceTree = "<group>"; };
 		BD39973321D5C0AD00EB3667 /* XJRCMImageCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJRCMImageCollectionViewCell.h; sourceTree = "<group>"; };
 		BD39973421D5C0AD00EB3667 /* XJRCMImageCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJRCMImageCollectionViewCell.m; sourceTree = "<group>"; };
 		BD3B936723CC0DC10018A26B /* https.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = https.cer; sourceTree = "<group>"; };
+		BDA5843724334A190053D820 /* UIButton+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Utils.h"; sourceTree = "<group>"; };
+		BDA5843824334A190053D820 /* UIButton+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Utils.m"; sourceTree = "<group>"; };
+		BDA5843A24338F0D0053D820 /* XJRentSkillCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJRentSkillCell.h; sourceTree = "<group>"; };
+		BDA5843B24338F0D0053D820 /* XJRentSkillCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJRentSkillCell.m; sourceTree = "<group>"; };
+		BDA5843D2433946D0053D820 /* XJRentSkillItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJRentSkillItemView.h; sourceTree = "<group>"; };
+		BDA5843E2433946D0053D820 /* XJRentSkillItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJRentSkillItemView.m; sourceTree = "<group>"; };
+		BDA5844324339F7B0053D820 /* ZZRentChooseSkillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentChooseSkillViewController.m; sourceTree = "<group>"; };
+		BDA5844424339F7B0053D820 /* ZZRentChooseSkillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentChooseSkillViewController.h; sourceTree = "<group>"; };
+		BDA5844624339FEA0053D820 /* ZZOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZOrder.h; sourceTree = "<group>"; };
+		BDA5844724339FEA0053D820 /* ZZOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZOrder.m; sourceTree = "<group>"; };
+		BDA584492433AD800053D820 /* ZZRentChooseSkillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentChooseSkillCell.h; sourceTree = "<group>"; };
+		BDA5844A2433AD800053D820 /* ZZRentChooseSkillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentChooseSkillCell.m; sourceTree = "<group>"; };
+		BDA5844C2433ADB30053D820 /* ZZDateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZDateHelper.m; sourceTree = "<group>"; };
+		BDA5844D2433ADB30053D820 /* ZZDateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZDateHelper.h; sourceTree = "<group>"; };
+		BDA5844F2433AE010053D820 /* ZZDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZDatePicker.h; sourceTree = "<group>"; };
+		BDA584502433AE010053D820 /* ZZDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZDatePicker.m; sourceTree = "<group>"; };
+		BDA584522433B3930053D820 /* ZZHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZHUD.h; sourceTree = "<group>"; };
+		BDA584532433B3930053D820 /* ZZHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZHUD.m; sourceTree = "<group>"; };
+		BDA58455243424860053D820 /* ZZRentOrderInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentOrderInfoViewController.m; sourceTree = "<group>"; };
+		BDA58456243424860053D820 /* ZZRentOrderInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentOrderInfoViewController.h; sourceTree = "<group>"; };
+		BDA58458243428F60053D820 /* ZZHoursPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZHoursPicker.h; sourceTree = "<group>"; };
+		BDA58459243428F60053D820 /* ZZHoursPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZHoursPicker.m; sourceTree = "<group>"; };
+		BDA5845B243429920053D820 /* ZZRentOrderHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentOrderHeaderView.h; sourceTree = "<group>"; };
+		BDA5845C243429920053D820 /* ZZRentOrderLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentOrderLocationCell.m; sourceTree = "<group>"; };
+		BDA5845D243429920053D820 /* ZZRentOrderPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentOrderPayCell.m; sourceTree = "<group>"; };
+		BDA5845E243429920053D820 /* ZZRentOrderSkillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentOrderSkillCell.m; sourceTree = "<group>"; };
+		BDA5845F243429920053D820 /* ZZRentOrderTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentOrderTimeCell.h; sourceTree = "<group>"; };
+		BDA58460243429920053D820 /* ZZOrderCheckWeChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZOrderCheckWeChatCell.h; sourceTree = "<group>"; };
+		BDA58461243429930053D820 /* ZZOrderCheckWeChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZOrderCheckWeChatCell.m; sourceTree = "<group>"; };
+		BDA58462243429930053D820 /* ZZRentOrderTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentOrderTimeCell.m; sourceTree = "<group>"; };
+		BDA58463243429930053D820 /* ZZRentOrderSkillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentOrderSkillCell.h; sourceTree = "<group>"; };
+		BDA58464243429930053D820 /* ZZRentOrderHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentOrderHeaderView.m; sourceTree = "<group>"; };
+		BDA58465243429930053D820 /* ZZRentDropdownMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentDropdownMenuView.h; sourceTree = "<group>"; };
+		BDA58466243429930053D820 /* ZZRentDropdownMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentDropdownMenuView.m; sourceTree = "<group>"; };
+		BDA58467243429930053D820 /* ZZRentOrderLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentOrderLocationCell.h; sourceTree = "<group>"; };
+		BDA58468243429930053D820 /* ZZRentOrderPriceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentOrderPriceView.h; sourceTree = "<group>"; };
+		BDA58469243429930053D820 /* ZZRentOrderPriceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentOrderPriceView.m; sourceTree = "<group>"; };
+		BDA5846A243429930053D820 /* ZZRentOrderPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentOrderPayCell.h; sourceTree = "<group>"; };
+		BDA58473243429FE0053D820 /* XJTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJTableViewCell.h; sourceTree = "<group>"; };
+		BDA58474243429FE0053D820 /* XJTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJTableViewCell.m; sourceTree = "<group>"; };
+		BDA5847624342AB60053D820 /* ZZPostTaskRulesToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZPostTaskRulesToastView.m; sourceTree = "<group>"; };
+		BDA5847724342AB60053D820 /* ZZPostTaskRulesToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZPostTaskRulesToastView.h; sourceTree = "<group>"; };
+		BDA5847924342B1E0053D820 /* ZZInfoToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZInfoToastView.m; sourceTree = "<group>"; };
+		BDA5847A24342B1E0053D820 /* ZZInfoToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZInfoToastView.h; sourceTree = "<group>"; };
+		BDA5847C2434307F0053D820 /* ZZRentDropdownCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentDropdownCell.h; sourceTree = "<group>"; };
+		BDA5847D2434307F0053D820 /* ZZRentDropdownCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentDropdownCell.m; sourceTree = "<group>"; };
+		BDA5847F243430B50053D820 /* ZZRentDropdownModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentDropdownModel.h; sourceTree = "<group>"; };
+		BDA58480243430B50053D820 /* ZZRentDropdownModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentDropdownModel.m; sourceTree = "<group>"; };
+		BDA58482243435540053D820 /* ZZCacheOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCacheOrder.m; sourceTree = "<group>"; };
+		BDA58483243435540053D820 /* ZZCacheOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCacheOrder.h; sourceTree = "<group>"; };
+		BDA58485243436000053D820 /* ZZUserDefaultsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZUserDefaultsHelper.h; sourceTree = "<group>"; };
+		BDA58486243436000053D820 /* ZZUserDefaultsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZUserDefaultsHelper.m; sourceTree = "<group>"; };
+		BDA5848E243439D80053D820 /* ZZRentAbroadLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentAbroadLocationViewController.h; sourceTree = "<group>"; };
+		BDA5848F243439D80053D820 /* ZZRentAbroadLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentAbroadLocationViewController.m; sourceTree = "<group>"; };
+		BDA58491243439EC0053D820 /* ZZSearchLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZSearchLocationController.h; sourceTree = "<group>"; };
+		BDA58492243439ED0053D820 /* ZZSearchLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZSearchLocationController.m; sourceTree = "<group>"; };
+		BDA5849424343A4A0053D820 /* ZZRentLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentLocationCell.h; sourceTree = "<group>"; };
+		BDA5849524343A4A0053D820 /* ZZRentLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentLocationCell.m; sourceTree = "<group>"; };
+		BDA5849724343A730053D820 /* ZZAbroadLocationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZZAbroadLocationModel.m; path = zwmMini/Modules/Home/Model/ZZAbroadLocationModel.m; sourceTree = SOURCE_ROOT; };
+		BDA5849824343A740053D820 /* ZZAbroadLocationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZZAbroadLocationModel.h; path = zwmMini/Modules/Home/Model/ZZAbroadLocationModel.h; sourceTree = SOURCE_ROOT; };
+		BDA5849A24343B9C0053D820 /* ZZAFNHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZAFNHelper.h; sourceTree = "<group>"; };
+		BDA5849B24343B9C0053D820 /* ZZAFNHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZAFNHelper.m; sourceTree = "<group>"; };
+		BDA584A0243440740053D820 /* ZZLocationSearchedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZLocationSearchedController.h; sourceTree = "<group>"; };
+		BDA584A1243440750053D820 /* ZZLocationSearchedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZLocationSearchedController.m; sourceTree = "<group>"; };
+		BDA584A32434485D0053D820 /* ZZLinkWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZLinkWebViewController.m; sourceTree = "<group>"; };
+		BDA584A42434485D0053D820 /* ZZLinkWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZLinkWebViewController.h; sourceTree = "<group>"; };
+		BDA584A9243449130053D820 /* ZZLinkWebNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZLinkWebNavigationView.m; sourceTree = "<group>"; };
+		BDA584AA243449130053D820 /* ZZLinkWebNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZLinkWebNavigationView.h; sourceTree = "<group>"; };
+		BDA584AC243471340053D820 /* ZZRentOrderPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentOrderPaymentViewController.h; sourceTree = "<group>"; };
+		BDA584AD243471350053D820 /* ZZRentOrderPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentOrderPaymentViewController.m; sourceTree = "<group>"; };
+		BDA584AF24347A330053D820 /* ZZRentOrderPayCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentOrderPayCompleteViewController.h; sourceTree = "<group>"; };
+		BDA584B024347A330053D820 /* ZZRentOrderPayCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentOrderPayCompleteViewController.m; sourceTree = "<group>"; };
+		BDA584B224347B4D0053D820 /* ZZRentPayCompleteChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZZRentPayCompleteChatCell.m; path = zwmMini/Modules/Home/View/ZZRentPayCompleteChatCell.m; sourceTree = SOURCE_ROOT; };
+		BDA584B324347B4D0053D820 /* ZZRentPayCompleteChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZZRentPayCompleteChatCell.h; path = zwmMini/Modules/Home/View/ZZRentPayCompleteChatCell.h; sourceTree = SOURCE_ROOT; };
 		BDB2D46521D70E4F00F6CBA6 /* IDLFaceSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IDLFaceSDK.framework; sourceTree = "<group>"; };
 		BDB2D46621D70E4F00F6CBA6 /* FaceParameterConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceParameterConfig.h; sourceTree = "<group>"; };
 		BDB2D46721D70E4F00F6CBA6 /* idl-license.face-ios */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "idl-license.face-ios"; sourceTree = "<group>"; };
@@ -969,6 +1092,7 @@
 		812D314F219BD0290061CA14 /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				BD07D8C624332D7000FC5E4D /* RentOrderVC */,
 				81C098E621BA5F5800226AB8 /* OtherUserVC */,
 				812D4E16219BAD330007DCC0 /* XJHomeVC.h */,
 				812D4E17219BAD330007DCC0 /* XJHomeVC.m */,
@@ -985,6 +1109,7 @@
 		812D3150219BD02E0061CA14 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BD07D8C72433319E00FC5E4D /* RentOrderView */,
 				81C098E721BA5F6C00226AB8 /* OtherUserView */,
 				81D7DE3121A6B3EF00095E1C /* XJSearchAccountView.h */,
 				81D7DE3221A6B3EF00095E1C /* XJSearchAccountView.m */,
@@ -996,6 +1121,10 @@
 				81D7DE4121A7E42C00095E1C /* XJRecommondCollectionViewCell.m */,
 				81D7DE4621A8E56100095E1C /* XJNearTableViewCell.h */,
 				81D7DE4721A8E56100095E1C /* XJNearTableViewCell.m */,
+				BDA5843A24338F0D0053D820 /* XJRentSkillCell.h */,
+				BDA5843B24338F0D0053D820 /* XJRentSkillCell.m */,
+				BDA5843D2433946D0053D820 /* XJRentSkillItemView.h */,
+				BDA5843E2433946D0053D820 /* XJRentSkillItemView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1003,9 +1132,16 @@
 		812D3151219BD0370061CA14 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BD07D8C8243331AF00FC5E4D /* RentOrderModel */,
 				81C098E821BA5F8600226AB8 /* OtherUserModel */,
 				81D7DE3721A7AC7800095E1C /* XJHomeListModel.h */,
 				81D7DE3821A7AC7800095E1C /* XJHomeListModel.m */,
+				BD07D8BA2432EF0D00FC5E4D /* XJRentModel.h */,
+				BD07D8BB2432EF0D00FC5E4D /* XJRentModel.m */,
+				BD07D8BD2432EFC000FC5E4D /* XJTopic.h */,
+				BD07D8BE2432EFC000FC5E4D /* XJTopic.m */,
+				BD07D8C02432F03700FC5E4D /* XJSkill.h */,
+				BD07D8C12432F03700FC5E4D /* XJSkill.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1098,6 +1234,8 @@
 		812D4DDE219ABE920007DCC0 /* NetWork */ = {
 			isa = PBXGroup;
 			children = (
+				BDA5849A24343B9C0053D820 /* ZZAFNHelper.h */,
+				BDA5849B24343B9C0053D820 /* ZZAFNHelper.m */,
 				812D4DE0219ABF790007DCC0 /* RequestUrls.h */,
 				812D4DE1219ABF790007DCC0 /* RequestUrls.m */,
 				812D4DE3219AC1440007DCC0 /* XJRequestManager.h */,
@@ -1255,6 +1393,7 @@
 		81801DE4219AABB400020537 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				BDA58436243349E90053D820 /* UIButton */,
 				BDE7CD8123C9CC4400E4C78E /* NSURL+XJUtils.h */,
 				BDE7CD8223C9CC4400E4C78E /* NSURL+XJUtils.m */,
 				BDF3AE8321FBEDFA00657CDC /* UIImagePickerController+Block.h */,
@@ -1279,6 +1418,16 @@
 		81801DE5219AAC4D00020537 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				BDA58485243436000053D820 /* ZZUserDefaultsHelper.h */,
+				BDA58486243436000053D820 /* ZZUserDefaultsHelper.m */,
+				BDA58458243428F60053D820 /* ZZHoursPicker.h */,
+				BDA58459243428F60053D820 /* ZZHoursPicker.m */,
+				BDA584522433B3930053D820 /* ZZHUD.h */,
+				BDA584532433B3930053D820 /* ZZHUD.m */,
+				BDA5844D2433ADB30053D820 /* ZZDateHelper.h */,
+				BDA5844C2433ADB30053D820 /* ZZDateHelper.m */,
+				BDA5844F2433AE010053D820 /* ZZDatePicker.h */,
+				BDA584502433AE010053D820 /* ZZDatePicker.m */,
 				BDB2D5E421D7136200F6CBA6 /* APPKeys.h */,
 				812D4DDD219AB7060007DCC0 /* commonDefind.h */,
 				812D4DE6219AC3AC0007DCC0 /* CreatUI */,
@@ -1591,6 +1740,88 @@
 				F31AD760141500D3DE77D701 /* libPods-zwmMini.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BD07D8C624332D7000FC5E4D /* RentOrderVC */ = {
+			isa = PBXGroup;
+			children = (
+				BDA584AF24347A330053D820 /* ZZRentOrderPayCompleteViewController.h */,
+				BDA584B024347A330053D820 /* ZZRentOrderPayCompleteViewController.m */,
+				BDA584AC243471340053D820 /* ZZRentOrderPaymentViewController.h */,
+				BDA584AD243471350053D820 /* ZZRentOrderPaymentViewController.m */,
+				BDA584A0243440740053D820 /* ZZLocationSearchedController.h */,
+				BDA584A1243440750053D820 /* ZZLocationSearchedController.m */,
+				BDA58491243439EC0053D820 /* ZZSearchLocationController.h */,
+				BDA58492243439ED0053D820 /* ZZSearchLocationController.m */,
+				BDA5848E243439D80053D820 /* ZZRentAbroadLocationViewController.h */,
+				BDA5848F243439D80053D820 /* ZZRentAbroadLocationViewController.m */,
+				BDA58456243424860053D820 /* ZZRentOrderInfoViewController.h */,
+				BDA58455243424860053D820 /* ZZRentOrderInfoViewController.m */,
+				BDA5844424339F7B0053D820 /* ZZRentChooseSkillViewController.h */,
+				BDA5844324339F7B0053D820 /* ZZRentChooseSkillViewController.m */,
+			);
+			path = RentOrderVC;
+			sourceTree = "<group>";
+		};
+		BD07D8C72433319E00FC5E4D /* RentOrderView */ = {
+			isa = PBXGroup;
+			children = (
+				BDA584B324347B4D0053D820 /* ZZRentPayCompleteChatCell.h */,
+				BDA584B224347B4D0053D820 /* ZZRentPayCompleteChatCell.m */,
+				BDA5849424343A4A0053D820 /* ZZRentLocationCell.h */,
+				BDA5849524343A4A0053D820 /* ZZRentLocationCell.m */,
+				BDA5847C2434307F0053D820 /* ZZRentDropdownCell.h */,
+				BDA5847D2434307F0053D820 /* ZZRentDropdownCell.m */,
+				BDA5847A24342B1E0053D820 /* ZZInfoToastView.h */,
+				BDA5847924342B1E0053D820 /* ZZInfoToastView.m */,
+				BDA584492433AD800053D820 /* ZZRentChooseSkillCell.h */,
+				BDA5844A2433AD800053D820 /* ZZRentChooseSkillCell.m */,
+				BDA58460243429920053D820 /* ZZOrderCheckWeChatCell.h */,
+				BDA58461243429930053D820 /* ZZOrderCheckWeChatCell.m */,
+				BDA58465243429930053D820 /* ZZRentDropdownMenuView.h */,
+				BDA58466243429930053D820 /* ZZRentDropdownMenuView.m */,
+				BDA5845B243429920053D820 /* ZZRentOrderHeaderView.h */,
+				BDA58464243429930053D820 /* ZZRentOrderHeaderView.m */,
+				BDA58467243429930053D820 /* ZZRentOrderLocationCell.h */,
+				BDA5845C243429920053D820 /* ZZRentOrderLocationCell.m */,
+				BDA5846A243429930053D820 /* ZZRentOrderPayCell.h */,
+				BDA5845D243429920053D820 /* ZZRentOrderPayCell.m */,
+				BDA58468243429930053D820 /* ZZRentOrderPriceView.h */,
+				BDA58469243429930053D820 /* ZZRentOrderPriceView.m */,
+				BDA58463243429930053D820 /* ZZRentOrderSkillCell.h */,
+				BDA5845E243429920053D820 /* ZZRentOrderSkillCell.m */,
+				BDA5845F243429920053D820 /* ZZRentOrderTimeCell.h */,
+				BDA58462243429930053D820 /* ZZRentOrderTimeCell.m */,
+				BDA5847724342AB60053D820 /* ZZPostTaskRulesToastView.h */,
+				BDA5847624342AB60053D820 /* ZZPostTaskRulesToastView.m */,
+			);
+			path = RentOrderView;
+			sourceTree = "<group>";
+		};
+		BD07D8C8243331AF00FC5E4D /* RentOrderModel */ = {
+			isa = PBXGroup;
+			children = (
+				BDA5849824343A740053D820 /* ZZAbroadLocationModel.h */,
+				BDA5849724343A730053D820 /* ZZAbroadLocationModel.m */,
+				BDA58483243435540053D820 /* ZZCacheOrder.h */,
+				BDA58482243435540053D820 /* ZZCacheOrder.m */,
+				BDA5847F243430B50053D820 /* ZZRentDropdownModel.h */,
+				BDA58480243430B50053D820 /* ZZRentDropdownModel.m */,
+				BDA5844624339FEA0053D820 /* ZZOrder.h */,
+				BDA5844724339FEA0053D820 /* ZZOrder.m */,
+				BD07D8C9243331BD00FC5E4D /* XJUrlSchemaModel.h */,
+				BD07D8CA243331BD00FC5E4D /* XJUrlSchemaModel.m */,
+			);
+			path = RentOrderModel;
+			sourceTree = "<group>";
+		};
+		BDA58436243349E90053D820 /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				BDA5843724334A190053D820 /* UIButton+Utils.h */,
+				BDA5843824334A190053D820 /* UIButton+Utils.m */,
+			);
+			path = UIButton;
 			sourceTree = "<group>";
 		};
 		BDB2D46421D70E4F00F6CBA6 /* BaiduFaceSDK */ = {
@@ -2159,10 +2390,16 @@
 		BDCCC53523C80BEA00718F42 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BDA584AA243449130053D820 /* ZZLinkWebNavigationView.h */,
+				BDA584A9243449130053D820 /* ZZLinkWebNavigationView.m */,
+				BDA584A42434485D0053D820 /* ZZLinkWebViewController.h */,
+				BDA584A32434485D0053D820 /* ZZLinkWebViewController.m */,
 				BDE7CD6423C9755D00E4C78E /* ZZProtocalChooseView.h */,
 				BDE7CD6523C9755D00E4C78E /* ZZProtocalChooseView.m */,
 				BDCCC53623C80BEA00718F42 /* ZZUpdateAlertView.h */,
 				BDCCC53723C80BEA00718F42 /* ZZUpdateAlertView.m */,
+				BDA58473243429FE0053D820 /* XJTableViewCell.h */,
+				BDA58474243429FE0053D820 /* XJTableViewCell.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2375,6 +2612,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDB2D5E221D712E600F6CBA6 /* XJGuidPageVC.m in Sources */,
+				BDA58487243436010053D820 /* ZZUserDefaultsHelper.m in Sources */,
 				81CB59D321A24E3900FEF732 /* XJUserModel.m in Sources */,
 				81E271FC21C620CC005DFBF5 /* XJCheckingFaceVC.m in Sources */,
 				81C098EB21BA61A200226AB8 /* XJLookWxPayCoinVC.m in Sources */,
@@ -2396,6 +2634,7 @@
 				BDB2D58C21D7109100F6CBA6 /* XJSelectJobsTbCell.m in Sources */,
 				BDB2D58F21D7109100F6CBA6 /* XJEditInfoTableViewCell.m in Sources */,
 				BDB2D56821D7109000F6CBA6 /* XJMyCoinVC.m in Sources */,
+				BDA58490243439D80053D820 /* ZZRentAbroadLocationViewController.m in Sources */,
 				81D7DE3F21A7E13B00095E1C /* XJRecommondVC.m in Sources */,
 				8104EABE21CB81CC00856FDE /* UIImage+PECrop.m in Sources */,
 				BDB2D54721D7109000F6CBA6 /* XJSelectInterestVC.m in Sources */,
@@ -2407,6 +2646,7 @@
 				810A37D221C12D6100380A8A /* XJUnreadModel.m in Sources */,
 				812D3177219C19670061CA14 /* HanyuPinyinOutputFormat.m in Sources */,
 				812D3174219C19670061CA14 /* PinyinFormatter.m in Sources */,
+				BDA5843924334A190053D820 /* UIButton+Utils.m in Sources */,
 				BDB2D57621D7109000F6CBA6 /* XJBeReviewTbCell.m in Sources */,
 				BDB2D55321D7109000F6CBA6 /* XJBlackListVC.m in Sources */,
 				812D4DD4219AB38C0007DCC0 /* MBManager.m in Sources */,
@@ -2418,6 +2658,7 @@
 				BDB2D54C21D7109000F6CBA6 /* XJHelpAndBackVC.m in Sources */,
 				81801DE9219AACAC00020537 /* UIAlertController+ConveniencePresent.m in Sources */,
 				81D7DE3921A7AC7800095E1C /* XJHomeListModel.m in Sources */,
+				BDA58484243435540053D820 /* ZZCacheOrder.m in Sources */,
 				BDB2D55821D7109000F6CBA6 /* ZZContactModel.m in Sources */,
 				BDF3AEAD21FBEF5B00657CDC /* TZPhotoPickerController.m in Sources */,
 				BDB2D5D521D710BE00F6CBA6 /* XJLoginView.m in Sources */,
@@ -2432,26 +2673,34 @@
 				8108A8B621C8D663002789CD /* XJSystemInfoTableViewCell.m in Sources */,
 				BDB2D5D621D710BE00F6CBA6 /* XJSelectAreaTbCell.m in Sources */,
 				BDE7CD8323C9CC4400E4C78E /* NSURL+XJUtils.m in Sources */,
+				BDA5845A243428F60053D820 /* ZZHoursPicker.m in Sources */,
 				BDB2D56221D7109000F6CBA6 /* XJWithDrawProtocalVC.m in Sources */,
 				BDB2D5C621D710BE00F6CBA6 /* XJRestPasswordView.m in Sources */,
 				810A37E921C5064000380A8A /* XJRCMTextsCollectionViewCell.m in Sources */,
+				BDA584B424347B4D0053D820 /* ZZRentPayCompleteChatCell.m in Sources */,
 				BDB2D56D21D7109000F6CBA6 /* XJHasReviewListModel.m in Sources */,
 				81D7DEF021B138CE00095E1C /* PPGetAddressBook.m in Sources */,
+				BDA5846E243429930053D820 /* ZZOrderCheckWeChatCell.m in Sources */,
+				BDA584512433AE010053D820 /* ZZDatePicker.m in Sources */,
 				BDB2D5CA21D710BE00F6CBA6 /* XJSetUpPsWordVC.m in Sources */,
 				819CA24C21D1D2E100B831EF /* JX_GCDTimerManager.m in Sources */,
 				819CA24521D1D0A200B831EF /* ZZPrivateChatPayMoneyView.m in Sources */,
 				8104EABA21CB81CC00856FDE /* PECropRectView.m in Sources */,
+				BDA58471243429930053D820 /* ZZRentDropdownMenuView.m in Sources */,
 				BDB2D5D021D710BE00F6CBA6 /* XJRegistView.m in Sources */,
 				BDB2D5EA21D7147600F6CBA6 /* AppDelegate+setUpUIs.m in Sources */,
 				BDB2D54121D7109000F6CBA6 /* XJPernalDataVC.m in Sources */,
 				BDB2D55621D7109000F6CBA6 /* ZZViewHelper.m in Sources */,
 				BD39973521D5C0AD00EB3667 /* XJRCMImageCollectionViewCell.m in Sources */,
 				BDE7CD7923C9C82600E4C78E /* HttpDNS.m in Sources */,
+				BDA5844524339F7C0053D820 /* ZZRentChooseSkillViewController.m in Sources */,
 				BDB2D5CF21D710BE00F6CBA6 /* XJRegistDoneView.m in Sources */,
+				BD07D8BF2432EFC000FC5E4D /* XJTopic.m in Sources */,
 				BDB2D55721D7109000F6CBA6 /* ZZContactCell.m in Sources */,
 				BDF3AEAC21FBEF5B00657CDC /* TZImageManager.m in Sources */,
 				BDB2D5EE21D7148D00F6CBA6 /* AppDelegate.m in Sources */,
 				812D4DFE219ACA790007DCC0 /* UILabel+ShadowText.m in Sources */,
+				BDA5843C24338F0D0053D820 /* XJRentSkillCell.m in Sources */,
 				8104EABB21CB81CC00856FDE /* PEResizeControl.m in Sources */,
 				81E271FF21C6254F005DFBF5 /* FaceBaseViewController.m in Sources */,
 				BDB2D57221D7109000F6CBA6 /* XJSetUpSitchTbCell.m in Sources */,
@@ -2460,6 +2709,7 @@
 				81C098F121BE445000226AB8 /* XJNoEvaluateVC.m in Sources */,
 				8106877B21CC7DC5007BF0B0 /* XJReportImgsTbCell.m in Sources */,
 				819CA23821D07A9B00B831EF /* UIViewController+XJShowSeletcController.m in Sources */,
+				BDA584A2243440750053D820 /* ZZLocationSearchedController.m in Sources */,
 				BDF3AEA821FBEF5B00657CDC /* UIView+Layout.m in Sources */,
 				812D4DE2219ABF790007DCC0 /* RequestUrls.m in Sources */,
 				81D7DE4521A8DEC600095E1C /* XJNearVC.m in Sources */,
@@ -2478,11 +2728,13 @@
 				81D7DE2521A6A9A000095E1C /* UIColor+Hex.m in Sources */,
 				8104EAC721CBA8E700856FDE /* XJReportTextTbCell.m in Sources */,
 				8108A8B021C8D402002789CD /* XJSystemMsgListModel.m in Sources */,
+				BDA5846D243429930053D820 /* ZZRentOrderSkillCell.m in Sources */,
 				BDB2D58D21D7109100F6CBA6 /* XJEditHeadViewAddPhotoCoCell.m in Sources */,
 				81D7DE3621A6BDC100095E1C /* XJSearchTableViewCell.m in Sources */,
 				BDB2D53F21D7109000F6CBA6 /* XJIDCardVC.m in Sources */,
 				BDB2D57C21D7109000F6CBA6 /* XJMyWalletHeadTbwCell.m in Sources */,
 				81D7DF1E21B6223100095E1C /* XJLookoverOtherUserVC.m in Sources */,
+				BDA58475243429FE0053D820 /* XJTableViewCell.m in Sources */,
 				BDB2D5D321D710BE00F6CBA6 /* XJSelectAreaCodeVC.m in Sources */,
 				BDF3AEA621FBEF5B00657CDC /* TZAssetModel.m in Sources */,
 				BDB2D57A21D7109000F6CBA6 /* XJPersonalTagsTbCell.m in Sources */,
@@ -2497,6 +2749,7 @@
 				BDB2D55121D7109000F6CBA6 /* XJAccountAndSafeVC.m in Sources */,
 				81E2720A21C625B2005DFBF5 /* ImageUtils.m in Sources */,
 				81C098EE21BE0DE700226AB8 /* XJLookWxEnougCoinVC.m in Sources */,
+				BDA5846B243429930053D820 /* ZZRentOrderLocationCell.m in Sources */,
 				BDB2D58421D7109100F6CBA6 /* XJMyWalletContentTbCell.m in Sources */,
 				BDB2D57421D7109000F6CBA6 /* XJSetUpTableViewCell.m in Sources */,
 				81D7DDCE21A5344900095E1C /* XJUploader.m in Sources */,
@@ -2507,12 +2760,15 @@
 				BDB2D58A21D7109100F6CBA6 /* XJEditHeadViewPhotoCollCell.m in Sources */,
 				812D4DD7219AB4D40007DCC0 /* XJBaseVC.m in Sources */,
 				BDB2D54F21D7109000F6CBA6 /* XJNewMessageAlerVC.m in Sources */,
+				BDA5847B24342B1E0053D820 /* ZZInfoToastView.m in Sources */,
 				BDF3AEAE21FBEF5B00657CDC /* TZPhotoPreviewCell.m in Sources */,
 				81D7DE3C21A7D04900095E1C /* XJHomeTitleSelectView.m in Sources */,
 				BDB2D56621D7109000F6CBA6 /* XJCoinRecordVC.m in Sources */,
+				BDA5844824339FEA0053D820 /* ZZOrder.m in Sources */,
 				81C098E521BA584E00226AB8 /* XJLookWxBalanceModel.m in Sources */,
 				812D3178219C19670061CA14 /* ChineseInclude.m in Sources */,
 				BDB2D47421D70E9600F6CBA6 /* XJTabBar.m in Sources */,
+				BDA584AB243449130053D820 /* ZZLinkWebNavigationView.m in Sources */,
 				BDE7CD6623C9755D00E4C78E /* ZZProtocalChooseView.m in Sources */,
 				BDB2D5CB21D710BE00F6CBA6 /* XJRegistVC.m in Sources */,
 				810A37CF21C0F3FE00380A8A /* XJMessageListTbCell.m in Sources */,
@@ -2521,15 +2777,19 @@
 				BDB2D53D21D7109000F6CBA6 /* XJIDCardAbroadVC.m in Sources */,
 				81D7DDEE21A686A000095E1C /* SKTagButton.m in Sources */,
 				BDB2D57B21D7109000F6CBA6 /* XJPersonalDataNameTbCell.m in Sources */,
+				BDA5847824342AB60053D820 /* ZZPostTaskRulesToastView.m in Sources */,
 				BDB2D5CE21D710BE00F6CBA6 /* XJSelectGenderView.m in Sources */,
 				BDB2D57D21D7109000F6CBA6 /* XJYoubiTbCell.m in Sources */,
 				8108A8B321C8D480002789CD /* XJSystemMsgModel.m in Sources */,
 				81D7DE3021A6B1FD00095E1C /* UIDevice+Hardware.m in Sources */,
 				81D7DE7521ABDC3500095E1C /* RACollectionViewTripletLayout.m in Sources */,
+				BDA5849624343A4A0053D820 /* ZZRentLocationCell.m in Sources */,
 				BDB2D55A21D7109000F6CBA6 /* ZZContactAuthorityAlert.m in Sources */,
 				81D7DE2B21A6B0FF00095E1C /* XJSeachUserVC.m in Sources */,
+				BD07D8CB243331BD00FC5E4D /* XJUrlSchemaModel.m in Sources */,
 				812D4DDB219AB5910007DCC0 /* XJBaseWebVC.m in Sources */,
 				BDB2D54221D7109000F6CBA6 /* XJEditNicknameVC.m in Sources */,
+				BD07D8BC2432EF0D00FC5E4D /* XJRentModel.m in Sources */,
 				812D3173219C19670061CA14 /* ChineseToPinyinResource.m in Sources */,
 				BDB2D5CC21D710BE00F6CBA6 /* XJUsePrivaProtocalVC.m in Sources */,
 				BDB2D58621D7109100F6CBA6 /* XJMyCoinView.m in Sources */,
@@ -2537,20 +2797,29 @@
 				812D4DF9219ACA5B0007DCC0 /* UIImageView+SDWebImage.m in Sources */,
 				8108A8A921C8A782002789CD /* ZZMessageChatWechatPayModel.m in Sources */,
 				BDB2D59021D7109100F6CBA6 /* XJEditMyinfoHeadView.m in Sources */,
+				BDA58470243429930053D820 /* ZZRentOrderHeaderView.m in Sources */,
 				810A37E621C4D39C00380A8A /* XJRCMVoiceeCollectionViewCell.m in Sources */,
+				BDA5847E2434307F0053D820 /* ZZRentDropdownCell.m in Sources */,
 				812D312C219BC92D0061CA14 /* XJMessageVC.m in Sources */,
+				BDA5843F2433946D0053D820 /* XJRentSkillItemView.m in Sources */,
 				81D7DEF121B138CE00095E1C /* PPPersonModel.m in Sources */,
 				BDF3AE8421FBEDFA00657CDC /* UIImagePickerController+Block.m in Sources */,
 				BDB2D5D421D710BE00F6CBA6 /* XJContryListModel.m in Sources */,
 				81CB59D621A24E4E00FEF732 /* XJUserManager.m in Sources */,
+				BDA5844E2433ADB40053D820 /* ZZDateHelper.m in Sources */,
 				8106878121CD1CA3007BF0B0 /* XJRCMReportCollectionViewCell.m in Sources */,
+				BDA584B124347A330053D820 /* ZZRentOrderPayCompleteViewController.m in Sources */,
 				BDB2D58721D7109100F6CBA6 /* XJEditAgeTableViewCell.m in Sources */,
 				BDB2D58321D7109100F6CBA6 /* XJWithDarwInputMoneyTbCell.m in Sources */,
 				BDB2D58521D7109100F6CBA6 /* XJMyCoinCollectionViewCell.m in Sources */,
+				BDA584542433B3930053D820 /* ZZHUD.m in Sources */,
+				BDA58493243439ED0053D820 /* ZZSearchLocationController.m in Sources */,
+				BDA5849924343A740053D820 /* ZZAbroadLocationModel.m in Sources */,
 				BDB2D57521D7109000F6CBA6 /* XJMyTableViewCell.m in Sources */,
 				BDB2D56421D7109000F6CBA6 /* XJBalanceRecordVC.m in Sources */,
 				810E589421A3E966005AE4B2 /* UIImagePickerController+Block.m in Sources */,
 				812D4DFA219ACA5B0007DCC0 /* UIImageView+RoundedCorner.m in Sources */,
+				BDA58472243429930053D820 /* ZZRentOrderPriceView.m in Sources */,
 				BDF3AEB121FBEF5B00657CDC /* TZGifPhotoPreviewController.m in Sources */,
 				BDB2D57F21D7109100F6CBA6 /* SubTitleView.m in Sources */,
 				BDB2D54821D7109000F6CBA6 /* XJEditAgeVC.m in Sources */,
@@ -2559,10 +2828,12 @@
 				81D7DDDB21A6862300095E1C /* ZZCityViewController.m in Sources */,
 				BDB2D47521D70E9600F6CBA6 /* XJTabBarVC.m in Sources */,
 				BDE7CD7823C9C82600E4C78E /* HostModel.m in Sources */,
+				BDA5846C243429930053D820 /* ZZRentOrderPayCell.m in Sources */,
 				8104EABC21CB81CC00856FDE /* PECropView.m in Sources */,
 				81801DD8219A8DFF00020537 /* main.m in Sources */,
 				BDB2D55021D7109000F6CBA6 /* XJChangePsVC.m in Sources */,
 				BDB2D58221D7109100F6CBA6 /* XJWithDrawView.m in Sources */,
+				BDA5844B2433AD800053D820 /* ZZRentChooseSkillCell.m in Sources */,
 				BDB2D54321D7109000F6CBA6 /* XJSelectJobsVC.m in Sources */,
 				81E2720D21C625D3005DFBF5 /* RemindView.m in Sources */,
 				BDB2D56A21D7109000F6CBA6 /* XJPayCoinModel.m in Sources */,
@@ -2581,11 +2852,13 @@
 				BDB2D56521D7109000F6CBA6 /* XJMyWalletVC.m in Sources */,
 				81D7DE9721AE838100095E1C /* NSDate+Utilities.m in Sources */,
 				810A37E321C49BD600380A8A /* XJChatLbel.m in Sources */,
+				BDA584AE243471350053D820 /* ZZRentOrderPaymentViewController.m in Sources */,
 				812D3179219C19670061CA14 /* NSString+PinYin4Cocoa.m in Sources */,
 				BDB2D5C421D710BE00F6CBA6 /* XJForgetPasswordVC.m in Sources */,
 				BDB2D55B21D7109000F6CBA6 /* ZZContactViewController.m in Sources */,
 				81C098F421BE516300226AB8 /* XJBadEvualuateCoCell.m in Sources */,
 				BDB2D5C921D710BE00F6CBA6 /* XJRegistDoneVC.m in Sources */,
+				BDA58457243424860053D820 /* ZZRentOrderInfoViewController.m in Sources */,
 				81D7DEBE21B0DEE500095E1C /* ZZFileHelper.m in Sources */,
 				BDB2D57121D7109000F6CBA6 /* XJRealNameVCTbCell.m in Sources */,
 				81E2722121C8914C005DFBF5 /* XJSystemNotiTableViewCell.m in Sources */,
@@ -2595,14 +2868,18 @@
 				81D7DE1F21A6A91000095E1C /* UIImage+FlatUI.m in Sources */,
 				BDB2D56B21D7109000F6CBA6 /* XJBlanceRecordModel.m in Sources */,
 				BDB2D55E21D7109000F6CBA6 /* XJBeReviewWechatVC.m in Sources */,
+				BD07D8C22432F03700FC5E4D /* XJSkill.m in Sources */,
 				BDB2D5C521D710BE00F6CBA6 /* XJForgetResetPasswordVC.m in Sources */,
 				812D4DEC219AC6FE0007DCC0 /* XJUtils.m in Sources */,
 				BDB2D55D21D7109000F6CBA6 /* XJMyVC.m in Sources */,
 				819CA24921D1D0DD00B831EF /* NSObject+Extensions.m in Sources */,
 				BDB2D57821D7109000F6CBA6 /* XJHasReviewTbTaCell.m in Sources */,
+				BDA584A52434485D0053D820 /* ZZLinkWebViewController.m in Sources */,
+				BDA58481243430B50053D820 /* ZZRentDropdownModel.m in Sources */,
 				BDB2D58E21D7109100F6CBA6 /* XJEditAgeTbBottomView.m in Sources */,
 				BDB2D57921D7109000F6CBA6 /* XJPersonalDetailTbCell.m in Sources */,
 				81D7DE9421AE825A00095E1C /* NSDate+XJBirthday.m in Sources */,
+				BDA5846F243429930053D820 /* ZZRentOrderTimeCell.m in Sources */,
 				812D3142219BCCD70061CA14 /* UITabBar+Badge.m in Sources */,
 				BDB2D5C721D710BE00F6CBA6 /* XJLiveCheckFaceVC.mm in Sources */,
 				81D7DE4221A7E42C00095E1C /* XJRecommondCollectionViewCell.m in Sources */,
@@ -2617,6 +2894,7 @@
 				BDB2D54A21D7109000F6CBA6 /* XJHasReviewWechatVC.m in Sources */,
 				819CA23F21D1D05300B831EF /* CABasicAnimation+Ext.m in Sources */,
 				BDB2D5DF21D712E600F6CBA6 /* XJGuidPageView.m in Sources */,
+				BDA5849C24343B9C0053D820 /* ZZAFNHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

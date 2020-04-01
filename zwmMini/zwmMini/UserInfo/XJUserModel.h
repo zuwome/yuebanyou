@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XJRequestManager.h"
 
 @class XJCityModel;
 @class XJBanModel;
@@ -29,6 +30,7 @@
 
 @property(nonatomic,copy) NSString *ZWMId;//么么号
 @property (strong, nonatomic) NSString *uid;
+@property (strong, nonatomic) NSString *uuid;
 @property (strong, nonatomic) NSString *phone;
 @property (copy, nonatomic) NSString *nickname;//昵称
 @property (strong, nonatomic) NSString *version;//版本号
@@ -158,7 +160,12 @@
 - (BOOL)didHaveRealAvatar;
 
 + (void)loadUser:(NSString *)uid param:(NSDictionary *)param;
++ (void)loadUser:(NSString *)uid
+           param:(NSDictionary *)param
+         succeed:(void (^)(id data,XJRequestError *rError))succeed
+         failure:(void (^)(NSError *error))failure;
 
+- (void)getBalance:(requestCallback)next;
 @end
 
 
@@ -327,6 +334,8 @@
 
 //出租信息
 @class XJTopicsModel;
+@class XJTopic;
+@class XJCityModel;
 @interface XJRent : NSObject
 
 @property (strong, nonatomic) NSDate *updated_at;
@@ -335,21 +344,23 @@
 @property (strong, nonatomic) XJCityModel *address;
 @property (strong, nonatomic) NSArray *time;
 @property (strong, nonatomic) NSString *people;
-@property (strong, nonatomic) NSMutableArray<XJTopicsModel *> *topics;
+@property (strong, nonatomic) NSMutableArray<XJTopic *> *topics;
 
 @property (assign, nonatomic) float minPrice;
 
 @property (assign, nonatomic) NSUInteger paid_status; //0未付费（老用户和未付费的新用户都返回0）  1:已过期  2:未过期
 @property (copy, nonatomic) NSString *expired_at_text;//会员时间信息 "到期时间2017-12-30"
 
+@property (strong, nonatomic) XJCityModel *city;
+
 @end
 
 //技能
-@class XJSkillModel;
+@class XJSkill;
 @interface XJTopicsModel : NSObject
 
 @property (strong, nonatomic) NSString *price;
-@property (strong, nonatomic) NSMutableArray <XJSkillModel *> *skills;
+@property (strong, nonatomic) NSMutableArray <XJSkill *> *skills;
 
 @end
 

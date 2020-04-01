@@ -167,7 +167,11 @@
 //            NSLog(@"regeocode = %@",regeocode);
 //            NSLog(@"location = %lf====%lf",location.coordinate.longitude,location.coordinate.latitude);
             [MBManager hideAlert];
-
+            
+            if (location) {
+                XJUserAboutManageer.location = location;
+            }
+            
             //经纬度
             NSString *lng = [NSString stringWithFormat:@"%lf",location.coordinate.longitude];
             NSString *lat = [NSString stringWithFormat:@"%lf",location.coordinate.latitude];

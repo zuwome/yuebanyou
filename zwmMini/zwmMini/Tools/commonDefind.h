@@ -9,7 +9,28 @@
 #ifndef commonDefind_h
 #define commonDefind_h
 
+//通知
+#define KMsg_CreateOrderNotification    @"KMsg_CreateOrderNotification" // 创建订单的通知
+#define kMsg_UpdateOrder                @"OrderDidUpdateNotification"//更新订单
+#define kMsg_OrderStatusChante          @"kUpdateOrderStatus"//订单状态更新
 
+/**
+ *  安全地调用 block
+ */
+#define BLOCK_SAFE_CALLS(block, ...) block ? block(__VA_ARGS__) : nil
+
+//自适应宽度
+#define AdaptedWidth(x)  ceilf((x)/375.0f * kScreenWidth)
+//自适应高度
+#define AdaptedHeight(x) ceilf((x)/667.0f * kScreenHeight)
+
+//左键间距
+#define kLeftEdgeInset              -11
+
+#define kOrderQuickTimeString       @"尽快"
+
+//判断是否空字符串
+#define isNullString(s)     ((!s) || [s isEqual:[NSNull null]] || [s isEqualToString:@""])
 
 //weakself
 #define WeakObj(o) autoreleasepool{} __weak typeof(o) weak##o = o;
@@ -27,6 +48,19 @@
 #define iPhoneXStatusBarHeight (iPhoneX ? 44 : 20)
 #define iPhoneTabbarHeight (iPhoneX ? 49 : 49)
 
+//导航栏+状态栏高度navigationBar
+#define NAVIGATIONBAR_HEIGHT        (kScreenHeight >= 812.0 ? 88 : 64)
+//底部圆角宏
+#define SafeAreaBottomHeight (kScreenHeight == 812.0 ? 34 : 0)
+//状态栏高度 iPhoneX状态栏44
+#define STATUSBAR_HEIGHT            (kScreenHeight == 812.0 ? 44 : 20)
+//状态栏的bar返回按钮移动高度
+#define STATUSBARBar_HEIGHT            (kScreenHeight == 812.0 ? 12 : 0)
+//顶部状态栏新增加高度
+#define STATUSBARBar_ADD_HEIGHT            (kScreenHeight == 812.0 ? 48 : 32)
+//顶部距离导航中心的距离偏移
+#define STATUSBARBar_Center           (kScreenHeight == 812.0 ? 22 : 10)
+
 //判断是否是iOS8及以上
 #define IOS8_OR_LATER   ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -35,6 +69,8 @@
 
 //判断是否是iOS11及以上
 #define IOS11_OR_LATER   ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0)
+
+#define isFullScreenDevice           (kScreenHeight >= 812.0)
 
 //颜色
 #define RGB(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
@@ -56,6 +92,64 @@
 #define defaultClearColor [UIColor clearColor]
 #define defaultRedColor RGB(254, 83, 108)
 
+// 背景色
+#define kBGColor                HEXCOLOR(0xF5F5F5)
+
+// 黑色文字
+#define kBlackTextColor         HEXCOLOR(0x000000)
+
+/// 黑色文字  63 58 58
+#define kBlackColor             HEXCOLOR(0x3f3a3a)
+
+// 灰色文字
+#define kGrayTextColor          HEXCOLOR(0xababab)
+
+//深灰色文字
+#define kGrayContentColor       HEXCOLOR(0x808080)
+
+//评论灰色字(7A7A7B)
+#define kGrayCommentColor       HEXCOLOR(0x7A7A7B)
+
+//灰色的线
+#define kGrayLineColor          HEXCOLOR(0xD8D8D8)
+
+//灰色线颜色
+#define kLineViewColor          HEXCOLOR(0xededed)
+
+//黄色
+#define kYellowColor            HEXCOLOR(0xF4CB07)
+
+//红色
+#define kRedColor               HEXCOLOR(0xF42407)
+#define kUploadRedColor         HEXCOLOR(0xec0005)
+
+//红色字体
+#define kRedTextColor           HEXCOLOR(0xFD5F66)
+
+//红点颜色
+//#define kRedPointColor          HEXCOLOR(0xF32426)
+#define kRedPointColor          HEXCOLOR(0xFA595A)
+
+//蓝色颜色
+#define kBlueColor              HEXCOLOR(0xF32426)
+
+//棕灰色   rgb:102, 102, 102
+#define kBrownishGreyColor      HEXCOLOR(0x666666)
+
+//日光黄   rgb:255, 223, 54
+#define kSunYellow              HEXCOLOR(0xFFDF36)
+
+//金菊色
+#define kGoldenRod              HEXCOLOR(0xF0C20D)
+
+//rgb:252, 47, 82
+#define kReddishPink            HEXCOLOR(0xFC2F52)
+
+//Warm Gray rgb:153, 153, 153
+#define kWarmGray               HEXCOLOR(0x999999)
+
+//石板灰   rgb:230, 230, 230
+#define kStoneGray              HEXCOLOR(0xE6E6E6)
 
 
 //字体

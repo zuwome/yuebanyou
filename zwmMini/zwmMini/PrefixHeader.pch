@@ -9,7 +9,13 @@
 
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
-
+#import "ZZHUD.h"
+#import "XJTableViewCell.h"
+#import "ZZInfoToastView.h"
+#import "ZZUserDefaultsHelper.h"
+#import "ZZDateHelper.h"
+#import "XJBaseWebVC.h"
+#import "ZZLinkWebViewController.h"
 
 //常用宏定义
 #import "commonDefind.h"
@@ -44,6 +50,8 @@
 #import "NSDate+Utilities.h"
 #import "NSDate+XJBirthday.h"
 #import "NSString+XJStringUitls.h"
+#import "UIButton+Utils.h"
+#import "NSObject+Extensions.h"
 
 //第三方库
 #import "Masonry.h"
