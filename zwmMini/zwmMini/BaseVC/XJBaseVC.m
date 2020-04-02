@@ -7,7 +7,7 @@
 //
 
 #import "XJBaseVC.h"
-
+#import "XJLoginVC.h"
 #import <MJRefresh/MJRefresh.h>
 
 
@@ -41,6 +41,24 @@
     [self showNavLeftButton:nil action:sel image:[UIImage imageNamed:@"fanhui"] imageOn:nil];
 }
 
+- (void)createNavigationRightDoneBtn
+{
+    _navigationRightDoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    _navigationRightDoneBtn.frame = CGRectMake(0, 0, 30, 20);
+//    [_navigationRightDoneBtn setImage:[UIImage imageNamed:@"done"] forState:UIControlStateNormal];
+//    [_navigationRightDoneBtn setImage:[UIImage imageNamed:@"done"] forState:UIControlStateHighlighted];
+    _navigationRightDoneBtn.frame = CGRectMake(0, 0, 70, 21);
+    [_navigationRightDoneBtn setTitle:@"保存" forState:UIControlStateNormal];
+    [_navigationRightDoneBtn setTitle:@"保存" forState:UIControlStateHighlighted];
+    [_navigationRightDoneBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_navigationRightDoneBtn setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [_navigationRightDoneBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    UIBarButtonItem *btnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    UIBarButtonItem *rightBarButon = [[UIBarButtonItem alloc]initWithCustomView:_navigationRightDoneBtn];
+    btnItem.width = kLeftEdgeInset;
+    self.navigationItem.rightBarButtonItems = @[btnItem, rightBarButon];
+    
+}
 
 -(void)showNavRightButton:(NSString*)title action:(SEL)sel image:(UIImage *)imageName imageOn:(UIImage*)imageOnName{
     self.navigationItem.rightBarButtonItems = nil;
@@ -322,6 +340,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)gotoLoginView {
+    XJLoginVC *loginV = [[XJLoginVC alloc] init];
+    [self.navigationController pushViewController:loginV animated:YES];
 }
 
 /*

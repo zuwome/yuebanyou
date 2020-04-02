@@ -101,8 +101,12 @@
         }
         
         [XJUserModel loadUser:uid param:nil succeed:^(id data, XJRequestError *rError) {
-            self.user = XJUserAboutManageer.uModel;
-            [self reload];
+            if (!rError && data) {
+                XJUserModel *userModel = [XJUserModel yy_modelWithDictionary:data[@"user"]];
+                self.user = userModel;
+                [self reload];
+            }
+            
         } failure:^(NSError *error) {
             if (error) {
                 [MBManager showBriefAlert:error.localizedDescription];

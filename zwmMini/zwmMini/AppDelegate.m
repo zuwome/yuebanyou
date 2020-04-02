@@ -14,9 +14,8 @@
 #import "XJGuidPageVC.h"
 #import "XYIAPKit.h"
 #import "XYStoreiTunesReceiptVerifier.h"
-#import "Pingpp.h"
 #import "XJUrlSchemaModel.h"
-
+#import "Pingpp.h"
 
 @interface AppDelegate ()
 

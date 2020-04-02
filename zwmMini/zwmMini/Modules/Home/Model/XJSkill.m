@@ -38,7 +38,7 @@
     if (self.name) {
         [d setObject:self.name forKey:@"name"];
     }
-    [AskManager POST:@"/api/skill" dict:d succeed:^(id data, XJRequestError *rError) {
+    [AskManager POST:@"api/skill" dict:d succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -53,7 +53,7 @@
 }
 
 + (void)syncWithParams:(NSDictionary *)params next:(requestCallback)next {
-    [AskManager GET:@"/api/skills" dict:params.mutableCopy succeed:^(id data, XJRequestError *rError) {
+    [AskManager GET:@"api/skills" dict:params.mutableCopy succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }

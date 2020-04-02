@@ -48,6 +48,20 @@
 
 - (void)setUpIndexPath:(NSIndexPath *)indexpath Imge:(NSString *)img Title:(NSString *)title{
     
+    if (indexpath.section == 0) {
+        self.IV.image = nil;
+        self.titleLb.text = title;
+        self.titleLb.font = [UIFont boldSystemFontOfSize:17];
+        
+        self.mywxExplainLb.hidden = YES;
+        self.accessoryType = UITableViewCellAccessoryNone;
+        
+        [self.titleLb mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView).offset(15);
+        }];
+        return;
+    }
+    
     self.IV.image = GetImage(img);
     self.titleLb.text = title;
     if (indexpath.row == 1) {

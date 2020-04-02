@@ -27,7 +27,7 @@
 @class XJZmxy;
 
 @interface XJUserModel : NSObject
-
+@property (assign, nonatomic) NSInteger follow_status;//是否关注
 @property(nonatomic,copy) NSString *ZWMId;//么么号
 @property (strong, nonatomic) NSString *uid;
 @property (strong, nonatomic) NSString *uuid;
@@ -154,6 +154,11 @@
  */
 - (BOOL)isAvatarManualReviewing;
 
+/*
+ *  可以显示的头像
+ */
+- (NSString *)displayAvatar;
+
 /**
  *  MARK: 是否拥有真实头像
  */
@@ -166,6 +171,13 @@
          failure:(void (^)(NSError *error))failure;
 
 - (void)getBalance:(requestCallback)next;
+
+/**
+ *  关注
+ */
+- (void)followWithUid:(NSString *)uid next:(requestCallback)next;
+
+- (void)unfollowWithUid:(NSString *)uid next:(requestCallback)next;
 @end
 
 

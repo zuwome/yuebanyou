@@ -22,9 +22,11 @@
 #import "XJCheckingFaceVC.h"
 #import <IDLFaceSDK/IDLFaceSDK.h>
 #import "XJUploadRealHeadImgVC.h"
+#import "ZZUserCenterOrderCell.h"
+#import "ZZOrderListViewController.h"
 
 static NSString *myTableviewIdentifier = @"mytableviewIdentifier";
-
+static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
 @interface XJMyVC ()<UITableViewDelegate,UITableViewDataSource,XJMyHeadViewDelegate, XJEditMyInfoVCDelegate>
 
 @property(nonatomic,strong) UITableView *tableView;
@@ -60,6 +62,32 @@ static NSString *myTableviewIdentifier = @"mytableviewIdentifier";
     }
 }
 
+/**
+我的档期
+ */
+- (void)gotoOrderWithIndex:(NSInteger)index {
+    OrderListType _type = OrderListTypeAll;
+    switch (index) {
+        case 0: {
+            _type = OrderListTypeIng;
+        } break;
+        case 1: {
+            _type = OrderListTypeComment;
+        } break;
+        case 2: {
+            _type = OrderListTypeDone;
+        } break;
+        default: {
+            _type = OrderListTypeAll;
+        } break;
+    }
+    ZZOrderListViewController *controller = [[ZZOrderListViewController alloc] init];
+    controller.hidesBottomBarWhenPushed = YES;
+    controller.type = _type;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+
 - (void)clickHeadIV {
     if ([XJUserAboutManageer isUserBanned]) {
         //        [MBManager showBriefAlert:@"您已被封禁"];
@@ -90,87 +118,125 @@ static NSString *myTableviewIdentifier = @"mytableviewIdentifier";
 
 #pragma mark tableviewDelegate and dataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        return 76;
+    }
     return 65.f;
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.imgsArray.count;
+    return section == 0 ? 2 : self.imgsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    XJMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:myTableviewIdentifier];
-    
-    if (cell == nil) {
-        cell = [[XJMyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:myTableviewIdentifier];
+    if (indexPath.section == 0) {
+        
+        if (indexPath.row == 0) {
+            XJMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:myTableviewIdentifierr];
+            
+            if (cell == nil) {
+                cell = [[XJMyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:myTableviewIdentifierr];
+            }
+            [cell setUpIndexPath:indexPath Imge:nil Title:@"我的档期"];
+            return cell;
+        }
+        else {
+            ZZUserCenterOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ordercell"];
+            cell.selectOrder = ^(NSInteger index) {
+                [self gotoOrderWithIndex:index];
+            };
+            [cell setData];
+            return cell;
+        }
     }
-    [cell setUpIndexPath:indexPath Imge:self.imgsArray[indexPath.row] Title:self.titlesArray[indexPath.row]];
-    return cell;
+    else {
+        XJMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:myTableviewIdentifier];
+        
+        if (cell == nil) {
+            cell = [[XJMyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:myTableviewIdentifier];
+        }
+        [cell setUpIndexPath:indexPath Imge:self.imgsArray[indexPath.row] Title:self.titlesArray[indexPath.row]];
+        return cell;
+    }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    switch (indexPath.row) {
-        case 0: {
-            //我的钱包
-            [self.navigationController pushViewController:[XJMyWalletVC new] animated:YES];
-            break;
-        }
-        case 1: {
-            //我的微信号
-            self.selecttype = 0;
-
-            if (XJUserAboutManageer.uModel.faces.count == 0) {
-                [self showAlerVCtitle:@"目前账户安全级别较低，将进行身份识别，否则无法设置微信号" message:@"" sureTitle:@"前往" cancelTitle:@"取消" sureBlcok:^{
-                    //验证人脸
-                    XJCheckingFaceVC* lvc = [[XJCheckingFaceVC alloc] init];
-                    [lvc livenesswithList:@[@(0),@(4),@(6)] order:YES numberOfLiveness:3];
-                    [self presentViewController:lvc animated:YES completion:nil];
-                    lvc.endBlock = ^(UIImage * _Nonnull bestImg) {
-                        [self checkIshack:bestImg];
-                    };
-                } cancelBlock:^{
-                    
-                }];
-                return;
-            }
-            
-            [self.navigationController pushViewController:[XJMywechatVC new] animated:YES];
-            break;
-        }
-        case 2: {
-            //已查看微信号
-            [self.navigationController pushViewController:[XJHasReviewWechatVC new] animated:YES];
-            break;
-        }
-        case 3: {
-            //实名认证
-          
-            self.selecttype = 1;
-//            if ([self isNeedToCheck:1]) {
-//                break;
-//            }
-            if (XJUserAboutManageer.uModel.faces.count == 0) {
-                [self showAlerVCtitle:@"目前账户安全级别较低，将进行身份识别，否则无法设置微信号" message:@"" sureTitle:@"前往" cancelTitle:@"取消" sureBlcok:^{
-                    //验证人脸
-                    XJCheckingFaceVC* lvc = [[XJCheckingFaceVC alloc] init];
-                    [lvc livenesswithList:@[@(0),@(4),@(6)] order:YES numberOfLiveness:3];
-                    [self presentViewController:lvc animated:YES completion:nil];
-                    lvc.endBlock = ^(UIImage * _Nonnull bestImg) {
-                        [self checkIshack:bestImg];
-                    };
-                } cancelBlock:^{
-                    
-                }];
-                return;
-            }
-            
-            [self.navigationController pushViewController:[XJRealNameAutoVC new] animated:YES];
-            break;
-        }
-        default:
-            break;
+    if (indexPath.section == 0) {
+        [self gotoOrderWithIndex:4];
     }
-    
+    else {
+        switch (indexPath.row) {
+            case 0: {
+                //我的钱包
+                [self.navigationController pushViewController:[XJMyWalletVC new] animated:YES];
+                break;
+            }
+            case 1: {
+                //我的微信号
+                self.selecttype = 0;
+
+                if (XJUserAboutManageer.uModel.faces.count == 0) {
+                    [self showAlerVCtitle:@"目前账户安全级别较低，将进行身份识别，否则无法设置微信号" message:@"" sureTitle:@"前往" cancelTitle:@"取消" sureBlcok:^{
+                        //验证人脸
+                        XJCheckingFaceVC* lvc = [[XJCheckingFaceVC alloc] init];
+                        [lvc livenesswithList:@[@(0),@(4),@(6)] order:YES numberOfLiveness:3];
+                        [self presentViewController:lvc animated:YES completion:nil];
+                        lvc.endBlock = ^(UIImage * _Nonnull bestImg) {
+                            [self checkIshack:bestImg];
+                        };
+                    } cancelBlock:^{
+                        
+                    }];
+                    return;
+                }
+                
+                [self.navigationController pushViewController:[XJMywechatVC new] animated:YES];
+                break;
+            }
+            case 2: {
+                //已查看微信号
+                [self.navigationController pushViewController:[XJHasReviewWechatVC new] animated:YES];
+                break;
+            }
+            case 3: {
+                //实名认证
+              
+                self.selecttype = 1;
+    //            if ([self isNeedToCheck:1]) {
+    //                break;
+    //            }
+                if (XJUserAboutManageer.uModel.faces.count == 0) {
+                    [self showAlerVCtitle:@"目前账户安全级别较低，将进行身份识别，否则无法设置微信号" message:@"" sureTitle:@"前往" cancelTitle:@"取消" sureBlcok:^{
+                        //验证人脸
+                        XJCheckingFaceVC* lvc = [[XJCheckingFaceVC alloc] init];
+                        [lvc livenesswithList:@[@(0),@(4),@(6)] order:YES numberOfLiveness:3];
+                        [self presentViewController:lvc animated:YES completion:nil];
+                        lvc.endBlock = ^(UIImage * _Nonnull bestImg) {
+                            [self checkIshack:bestImg];
+                        };
+                    } cancelBlock:^{
+                        
+                    }];
+                    return;
+                }
+                
+                [self.navigationController pushViewController:[XJRealNameAutoVC new] animated:YES];
+                break;
+            }
+            default:
+                break;
+        }
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
 }
 
 #pragma mark 是否需要验证
@@ -294,7 +360,7 @@ static NSString *myTableviewIdentifier = @"mytableviewIdentifier";
 {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
-        _tableView.backgroundColor = [UIColor whiteColor];
+//        _tableView.backgroundColor = HEXCOLOR(0xf5f5f5);
         _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _tableView.separatorColor = defaultLineColor;
         _tableView.estimatedSectionHeaderHeight = 0;
@@ -312,6 +378,8 @@ static NSString *myTableviewIdentifier = @"mytableviewIdentifier";
             //            self.automaticallyAdjustsScrollViewInsets = NO;
         }
         
+        [_tableView registerClass:[ZZUserCenterOrderCell class] forCellReuseIdentifier:@"ordercell"];
+        
     }
     return _tableView;
 }
@@ -321,6 +389,7 @@ static NSString *myTableviewIdentifier = @"mytableviewIdentifier";
         
         _headView = [[XJMyHeadView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 140)];
         _headView.delegate = self;
+        _headView.backgroundColor = UIColor.whiteColor;
     }
     
     return _headView;
@@ -348,21 +417,19 @@ static NSString *myTableviewIdentifier = @"mytableviewIdentifier";
     [MBManager showLoading];
     
 //    if (!_shouldRefresh) {
-        [AskManager GET:API_GET_USERINFO_LIST dict:@{}.mutableCopy succeed:^(id data, XJRequestError *rError) {
-             if (!rError) {
-                XJUserAboutManageer.uModel = [XJUserModel yy_modelWithDictionary:data];
+    [XJUserModel loadUser:XJUserAboutManageer.uModel.uid param:nil succeed:^(id data, XJRequestError *rError) {
+            if (!rError && data) {
+                XJUserModel *userModel = [XJUserModel yy_modelWithDictionary:data];
+                XJUserAboutManageer.uModel = userModel;
+                XJUserAboutManageer.isLogin = YES;
                 [self.headView setUpHeadViewInfo:XJUserAboutManageer.uModel];
                 if (self.tableView) {
                     [self.tableView reloadData];
                 }
-                
             }
             [MBManager hideAlert];
-            
         } failure:^(NSError *error) {
-            
             [MBManager hideAlert];
-            
         }];
 }
 @end

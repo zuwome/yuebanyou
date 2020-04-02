@@ -246,4 +246,21 @@ static XJUserManager *userManger = nil;
     return [ZZUserDefaultsHelper objectForDestKey:name];
 }
 
+/**
+ *  MARK: 用户头像审核中，是否可以显示旧头像
+ */
+- (BOOL)canShowUserOldAvatarWhileIsManualReviewingg:(XJUserModel *)user {
+    if ([self isUsersAvatarManuallReviewing:user] && user.old_avatar.length > 0) {
+        return YES;
+    }
+    return NO;
+}
+
+/**
+ *  MARK: 用户头像是否在审核中
+ */
+- (BOOL)isUsersAvatarManuallReviewing:(XJUserModel *)user {
+    return user.avatar_manual_status == 1;
+}
+
 @end

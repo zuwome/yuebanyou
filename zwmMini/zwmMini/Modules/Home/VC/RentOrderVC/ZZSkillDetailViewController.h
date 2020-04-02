@@ -8,6 +8,7 @@
 
 #import "XJBaseVC.h"
 
+@class XJTopic;
 typedef NS_ENUM(NSInteger, SkillDetailType) {
     SkillDetailTypeShow = 0,    //技能展示
     SkillDetailTypePreview,     //编辑技能前的预览
@@ -15,8 +16,8 @@ typedef NS_ENUM(NSInteger, SkillDetailType) {
 
 @interface ZZSkillDetailViewController : XJBaseVC
 
-@property (nonatomic, strong) ZZTopic *topic;   //所选他人的技能
-@property (nonatomic, strong) ZZUser *user;     //所选他人的用户信息
+@property (nonatomic, strong) XJTopic *topic;   //所选他人的技能
+@property (nonatomic, strong) XJUserModel *user;     //所选他人的用户信息
 
 @property (nonatomic, assign) BOOL isHideBar;//从搜索、他人页等过来隐藏导航栏的viewcontroller
 @property (nonatomic, assign) NSInteger chooseType;//线下选达人列表实时刷新个人页是否可以选TA : 1、选他 2、已选定 3、不可选

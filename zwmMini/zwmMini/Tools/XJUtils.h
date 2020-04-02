@@ -103,5 +103,14 @@
 
 + (NSString *)dealAccuracyDouble:(double)value;
 
+/**
+ 小数点精度返回
+ */
++ (NSString *)dealAccuracyNumber:(NSNumber *)number;
+
++ (BOOL)isPureInt:(NSString *)string;
+
++ (BOOL)limitTextFieldWithTextField:(UITextField *)textField range:(NSRange)range replacementString:(NSString *)string pure:(BOOL)pure;
+
 @end
 

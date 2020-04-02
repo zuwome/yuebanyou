@@ -678,4 +678,84 @@
     }
 }
 
++ (NSString *)dealAccuracyNumber:(NSNumber *)number
+{
+    double f = [number doubleValue];
+    
+    if (fmod(f, 1)==0) {//如果有一位小数点
+        return [NSString stringWithFormat:@"%.0f",f];
+    } else if (fmod(f*10, 1)==0) {//如果有两位小数点
+        return [NSString stringWithFormat:@"%.1f",f];
+    } else {
+        return [NSString stringWithFormat:@"%.2f",f];
+    }
+}
+
++ (BOOL)isPureInt:(NSString *)string
+{
+    NSScanner* scan = [NSScanner scannerWithString:string];
+    int val;
+    return [scan scanInt:&val] && [scan isAtEnd];
+}
+
+//设置textField只能输入一个小数点 并且小数点后只有两位
++ (BOOL)limitTextFieldWithTextField:(UITextField *)textField range:(NSRange)range replacementString:(NSString *)string pure:(BOOL)pure
+{
+    BOOL isHaveDian = YES;
+    if ([textField.text rangeOfString:@"."].location == NSNotFound) {
+        isHaveDian = NO;
+    }
+    if ([string length] > 0) {
+        unichar single = [string characterAtIndex:0];//当前输入的字符
+        if ((single >= '0' && single <= '9') || single == '.') {
+            //数据格式正确
+            //首字母不能为0和小数点
+            if([textField.text length] == 0) {
+                if(single == '.') {
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+            }
+            
+            //输入的字符是否是小数点
+            if (single == '.') {
+                if (pure) {
+                    return NO;
+                }
+                if(!isHaveDian) {
+                    return YES;
+                    
+                }
+                else {
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+            }
+            else {
+                if (isHaveDian) {
+                    //存在小数点
+                    //判断小数点的位数
+                    NSRange ran = [textField.text rangeOfString:@"."];
+                    if (range.location - ran.location <= 2) {
+                        return YES;
+                    }
+                    else {
+                        return NO;
+                    }
+                }
+                else {
+                    return YES;
+                }
+            }
+        }
+        else {//输入的数据格式不正确
+            [textField.text stringByReplacingCharactersInRange:range withString:@""];
+            return NO;
+        }
+    }
+    else {
+        return YES;
+    }
+}
+
 @end

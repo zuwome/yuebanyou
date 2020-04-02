@@ -34,7 +34,7 @@
 
 - (void)enable:(BOOL)show next:(requestCallback)next {
     if (show) {
-        [AskManager POST:@"/api/rent/show" dict:nil succeed:^(id data, XJRequestError *rError) {
+        [AskManager POST:@"api/rent/show" dict:nil succeed:^(id data, XJRequestError *rError) {
             if (next) {
                 next(rError, data, nil);
             }
@@ -43,7 +43,7 @@
         }];
     }
     else {
-        [AskManager Delete:@"/api/rent/show" dict:nil succeed:^(id data, XJRequestError *rError) {
+        [AskManager Delete:@"api/rent/show" dict:nil succeed:^(id data, XJRequestError *rError) {
             
         } failure:^(NSError *error) {
             

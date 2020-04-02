@@ -24,6 +24,7 @@
 #import "XJRentSkillCell.h"
 #import "ZZRentChooseSkillViewController.h"
 #import "XJEditMyInfoVC.h"
+#import "ZZSkillDetailViewController.h"
 
 @interface XJLookoverOtherUserVC ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,XJPersonalDetailTbCellDelegate, XJRentSkillCellDelegate>
 
@@ -296,10 +297,23 @@
     [AskManager GET:url dict:@{}.mutableCopy succeed:^(id data, XJRequestError *rError) {
         
         self.lookuserModel = [XJUserModel yy_modelWithDictionary:data];
+        
+        if (self.lookuserModel.rent.topics.count > 0) {
+            NSMutableArray *skillsArr = @[].mutableCopy;
+            [self.lookuserModel.rent.topics enumerateObjectsUsingBlock:^(XJTopic * _Nonnull topic, NSUInteger idx, BOOL * _Nonnull stop) {
+                XJSkill *skill = topic.skills[0];
+                if (skill.topicStatus == 2 || skill.topicStatus == 4) {//技能审核状态：0=>审核不通过 1=>待审核 2=>已审核 3=>待确认 4默认通过
+                    [skillsArr addObject:topic];
+                }
+            }];
+            
+            self.skillsArray = skillsArr.copy;
+        }
+        
         NSMutableArray *cellTypeArray = @[@"1"].mutableCopy;
         
         // 技能
-        if (self.lookuserModel.rent.topics.count > 0) {
+        if (self.skillsArray.count > 0) {
             [cellTypeArray addObject:@"5"];
         }
         
@@ -339,17 +353,7 @@
             }];
         }
         
-        if (self.lookuserModel.rent.topics.count > 0) {
-            NSMutableArray *skillsArr = @[].mutableCopy;
-            [self.lookuserModel.rent.topics enumerateObjectsUsingBlock:^(XJTopic * _Nonnull topic, NSUInteger idx, BOOL * _Nonnull stop) {
-                XJSkill *skill = topic.skills[0];
-                if (skill.topicStatus == 2 || skill.topicStatus == 4) {//技能审核状态：0=>审核不通过 1=>待审核 2=>已审核 3=>待确认 4默认通过
-                    [skillsArr addObject:topic];
-                }
-            }];
-            
-            self.skillsArray = skillsArr.copy;
-        }
+        
         
         self.headScroView.imageURLStringsGroup = (NSArray *)tempA;
         
@@ -637,7 +641,12 @@
 
 #pragma mark - XJRentSkillCellDelegate
 - (void)cell:(XJRentSkillCell *)cell selectSkill:(XJTopic *)topic {
-    NSLog(@"%@",topic.skills[0].name);
+    ZZSkillDetailViewController *controller = [[ZZSkillDetailViewController alloc] init];
+    controller.user = _lookuserModel;
+    controller.topic = topic;
+    controller.isHideBar = NO;
+    controller.fromLiveStream = NO;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark tableviewDelegate and dataSource

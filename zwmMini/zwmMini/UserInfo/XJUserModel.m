@@ -60,6 +60,30 @@
 
 }
 
+/*
+ *  可以显示的头像
+ *  如果用户正在审核,并且有可用的旧头像, 就显示旧的头像. 如果没有就显示avatar.(这边东西多逻辑奇怪)
+ */
+- (NSString *)displayAvatar {
+    if ([self isAvatarManualReviewing] && [self didHaveOldAvatar]) {
+        return self.old_avatar;
+    }
+    else {
+        if ([self.avatar isEqualToString:@"http://img.movtrip.com/user/avatar.png"]) {
+            if (self.photos.count > 0) {
+                XJPhoto *photo = self.photos[0];
+                return photo.url;
+            }
+            else {
+                return @"";
+            }
+        }
+        else {
+            return self.avatar;
+        }
+    }
+}
+
 + (void)loadUser:(NSString *)uid
            param:(NSDictionary *)param
          succeed:(void (^)(id data,XJRequestError *rError))succeed
@@ -75,13 +99,12 @@
     });
     
     [AskManager GET:path dict:param.mutableCopy succeed:^(id data, XJRequestError *rError) {
-        if (!rError && data) {
-            XJUserAboutManageer.access_token = data[@"access_token"];
-            XJUserAboutManageer.qiniuUploadToken = data[@"upload_token"];
-            XJUserModel *userModel = [XJUserModel yy_modelWithDictionary:data[@"user"]];
-            XJUserAboutManageer.uModel = userModel;
-            XJUserAboutManageer.isLogin = YES;
-        }
+//        if (!rError && data) {
+//            XJUserAboutManageer.access_token = data[@"access_token"];
+//            XJUserAboutManageer.qiniuUploadToken = data[@"upload_token"];
+//            XJUserModel *userModel = [XJUserModel yy_modelWithDictionary:data[@"user"]];
+//            XJUserAboutManageer.uModel = userModel;
+//        }
         if (succeed) {
             succeed(data, rError);
         }
@@ -115,6 +138,30 @@
     } failure:^(NSError *error) {
         
     }];
+}
+
+- (void)followWithUid:(NSString *)uid next:(requestCallback)next {
+//    [AskManager POST:@"api/user/%@/follow" dict:nil succeed:^(id data, XJRequestError *rError) {
+//
+//    } failure:^(NSError *error) {
+//
+//    }];
+//    [ZZRequest method:@"POST" path:[NSString stringWithFormat:@"/api/user/%@/follow",uid] params:nil next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+//        next(error, data, task);
+//        if (data) {
+//            [ZZUserHelper shareInstance].updateAttentList = YES;
+//        }
+//    }];
+}
+
+- (void)unfollowWithUid:(NSString *)uid next:(requestCallback)next {
+//    [UIAlertView showWithTitle:@"提示" message:@"取消关注之后，将无法及时获取TA的动态消息，确定取消关注TA吗？" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确定"] tapBlock:^(UIAlertView * _Nonnull alertView, NSInteger buttonIndex) {
+//        if (buttonIndex == 1) {
+//            [ZZRequest method:@"POST" path:[NSString stringWithFormat:@"/api/user/%@/unfollow",uid] params:nil next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+//                next(error, data, task);
+//            }];
+//        }
+//    }];
 }
 
 @end

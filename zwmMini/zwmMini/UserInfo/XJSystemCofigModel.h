@@ -18,6 +18,13 @@
 @class ZZDisableModuleModel;
 @interface XJSystemCofigModel : NSObject
 
+@property (nonatomic, strong) NSDictionary *comments;
+
+// true代表隐藏私信红包
+@property (nonatomic, assign) BOOL hide_mmd_private_at_userdetail;
+
+// true代表隐藏个人详情页的连麦按钮
+@property (nonatomic, assign) BOOL hide_link_mic;
 @property(nonatomic,copy) NSString *config_version;
 @property(nonatomic,copy) NSArray<SkillCatalogModel *> *skill_catalog;
 @property(nonatomic,copy) NSString *static_version;

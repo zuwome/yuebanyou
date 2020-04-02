@@ -16,7 +16,8 @@
 #import "ZZDateHelper.h"
 #import "XJBaseWebVC.h"
 #import "ZZLinkWebViewController.h"
-
+#import "ZZRefreshHeader.h"
+#import "ZZRefreshFooter.h"
 //常用宏定义
 #import "commonDefind.h"
 //MBManager
@@ -40,6 +41,11 @@
 #import "UIAlertView+Blocks.h"
 #import "XJUploader.h"
 #import "UITabBar+Badge.h"
+#import "UIViewController+XJShowSeletcController.h"
+#import "UITextView+Placeholder.h"
+#import "UIActionSheet+Blocks.h"
+#import "UIAlertView+Blocks.h"
+#import "UIImagePickerController+Block.h"
 
 //网络
 #import "XJRequestManager.h"

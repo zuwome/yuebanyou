@@ -12,8 +12,12 @@
 #import "XJPersonalDetailTbCell.h"
 #import "XJPersonalTagsTbCell.h"
 #import "XJEditMyInfoVC.h"
+#import "XJRentSkillCell.h"
+#import "XJTopic.h"
+#import "ZZSkillDetailViewController.h"
+#import "XJSkill.h"
 
-@interface XJPernalDataVC ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,XJEditMyInfoVCDelegate>
+@interface XJPernalDataVC ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,XJEditMyInfoVCDelegate,XJRentSkillCellDelegate>
 
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) SDCycleScrollView *headScroView;
@@ -29,6 +33,8 @@
 // 1. name 2.info 3.user tag 4.interest
 @property(nonatomic,copy) NSArray *cellTypeArray;
 
+@property (nonatomic, copy) NSArray<XJTopic *> *skillsArray;
+
 @end
 
 @implementation XJPernalDataVC
@@ -36,11 +42,50 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self creatUI];
+    [self createSkills];
     [self createCellTypes];
+    
+    [self loadUserInfo];
+}
+
+- (void)loadUserInfo {
+    [XJUserModel loadUser:XJUserAboutManageer.uModel.uid param:nil succeed:^(id data, XJRequestError *rError) {
+        if (!rError && data) {
+            XJUserModel *userModel = [XJUserModel yy_modelWithDictionary:data];
+            XJUserAboutManageer.uModel = userModel;
+        }
+        [self createSkills];
+        [self createCellTypes];
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        
+    }];
+
+}
+
+- (void)createSkills {
+    if (XJUserAboutManageer.uModel.rent.topics.count > 0) {
+        NSMutableArray *skillsArr = @[].mutableCopy;
+        [XJUserAboutManageer.uModel.rent.topics enumerateObjectsUsingBlock:^(XJTopic * _Nonnull topic, NSUInteger idx, BOOL * _Nonnull stop) {
+            XJSkill *skill = topic.skills[0];
+            if (skill.topicStatus == 2 || skill.topicStatus == 4) {//技能审核状态：0=>审核不通过 1=>待审核 2=>已审核 3=>待确认 4默认通过
+                [skillsArr addObject:topic];
+            }
+        }];
+        self.skillsArray = skillsArr.copy;
+    }
+        
 }
 
 - (void)createCellTypes {
-    NSMutableArray *cellTypeArray = @[@"1", @"2"].mutableCopy;
+    NSMutableArray *cellTypeArray = @[@"1"].mutableCopy;
+    // 技能
+    if (self.skillsArray.count > 0) {
+        [cellTypeArray addObject:@"5"];
+    }
+    
+    [cellTypeArray addObject:@"2"];
+    
     if (XJUserAboutManageer.uModel.tags_new && XJUserAboutManageer.uModel.tags_new.count > 0) {
         [cellTypeArray addObject:@"3"];
     }
@@ -87,6 +132,10 @@
     _headScroView.imageURLStringsGroup = [self loadImage];
 }
 
+- (void)cell:(XJRentSkillCell *)cell selectSkill:(XJTopic *)topic {
+    
+}
+
 #pragma mark tableviewDelegate and dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _cellTypeArray.count;
@@ -100,6 +149,16 @@
     if ([type isEqualToString:@"1"]) {
         XJPersonalDataNameTbCell  *cell = [[XJPersonalDataNameTbCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"namecell"];
         [cell setUpName:umodel.nickname Gender:umodel.gender == 1 ? YES:NO Distance:umodel.distance isOneself:NO];
+        return cell;
+    }
+    else if ([type isEqualToString:@"5"]) {
+        // 技能
+        XJRentSkillCell *cell = [tableView dequeueReusableCellWithIdentifier:@"skill"];
+        if (!cell) {
+            cell = [[XJRentSkillCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"skill"];
+        }
+        cell.delegate = self;
+        cell.skillsArr = _skillsArray;
         return cell;
     }
     else if ([type isEqualToString:@"2"]) {
@@ -303,5 +362,6 @@
     }
     return _editBtn;
 }
+     
 
 @end

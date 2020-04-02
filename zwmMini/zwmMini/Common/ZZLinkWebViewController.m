@@ -26,8 +26,7 @@
 @interface ZZLinkWebViewController () <UIWebViewDelegate,WKNavigationDelegate,UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIButton *navigationLeftBtn;
-
-@property (nonatomic, strong) UIButton *navigationRightDoneBtn;
+;
 
 @property (nonatomic, strong) ZZLinkWebNavigationView *navigationView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
@@ -125,15 +124,15 @@
 
 - (void)createNavigationRightDoneBtn
 {
-    _navigationRightDoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _navigationRightDoneBtn.frame = CGRectMake(0, 0, 70, 21);
-    [_navigationRightDoneBtn setTitle:@"保存" forState:UIControlStateNormal];
-    [_navigationRightDoneBtn setTitle:@"保存" forState:UIControlStateHighlighted];
-    [_navigationRightDoneBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [_navigationRightDoneBtn setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-    [_navigationRightDoneBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    self.navigationRightDoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.navigationRightDoneBtn.frame = CGRectMake(0, 0, 70, 21);
+    [self.navigationRightDoneBtn setTitle:@"保存" forState:UIControlStateNormal];
+    [self.navigationRightDoneBtn setTitle:@"保存" forState:UIControlStateHighlighted];
+    [self.navigationRightDoneBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.navigationRightDoneBtn setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [self.navigationRightDoneBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
     UIBarButtonItem *btnItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    UIBarButtonItem *rightBarButon = [[UIBarButtonItem alloc]initWithCustomView:_navigationRightDoneBtn];
+    UIBarButtonItem *rightBarButon = [[UIBarButtonItem alloc]initWithCustomView:self.navigationRightDoneBtn];
     btnItem.width = kLeftEdgeInset;
     self.navigationItem.rightBarButtonItems = @[btnItem, rightBarButon];
     

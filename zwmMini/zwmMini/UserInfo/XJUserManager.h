@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XJUserManager : NSObject
 
+@property (assign, nonatomic) BOOL updateMessageList;
+
 @property (nonatomic, assign) BOOL shouldChangeAppTips;
 
 //face++
@@ -53,6 +55,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)managerRemoveUserInfo;
 
 - (BOOL)isUserBanned;
+
+- (BOOL)isUsersAvatarManuallReviewing:(XJUserModel *)user;
+
+/**
+ *  MARK: 用户头像审核中，是否可以显示旧头像
+ */
+- (BOOL)canShowUserOldAvatarWhileIsManualReviewingg:(XJUserModel *)user;
 
 @end
 

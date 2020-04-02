@@ -13,6 +13,8 @@
 @property (nonatomic, strong) UITableView * theTableView;
 @property (nonatomic, strong) UICollectionView * theCollectionView;
 @property (nonatomic, assign) NSInteger page;
+@property (nonatomic, strong) UIButton *navigationLeftBtn;
+@property (nonatomic, strong) UIButton *navigationRightDoneBtn;
 
 
 -(void)showBack:(SEL)sel;
@@ -26,6 +28,8 @@
  *  @param imageOnName 按下图片
  */
 -(void)showNavRightButton:(NSString*)title action:(SEL)sel image:(UIImage *)imageName imageOn:(UIImage*)imageOnName;
+
+- (void)createNavigationRightDoneBtn;
 
 /**
  *  显示左按钮
@@ -50,6 +54,6 @@
 //隐藏无数据
 - (void)hideNodataView;
 
-
+- (void)gotoLoginView;
 
 @end
