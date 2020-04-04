@@ -16,7 +16,8 @@
 #import "XYStoreiTunesReceiptVerifier.h"
 #import "XJUrlSchemaModel.h"
 #import "Pingpp.h"
-
+#import "ZZThirdPayHelper.h"
+#import "ZZPayViewController.h"
 @interface AppDelegate ()
 
 @property (nonatomic, strong) XJUrlSchemaModel *schemaModel;//urlschema打开
@@ -114,7 +115,33 @@
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSLog(@"PY_进入前台");
+    //查询订单支付情况
+    NSDictionary *paymentData = [ZZUserDefaultsHelper objectForDestKey:kPaymentData];
+    NSString *paymentId = paymentData[@"id"];
+    if (paymentId) {
+        [ZZThirdPayHelper pingxxRetrieve:paymentId next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
+            if (error) {
+                //do nothing
+            }
+            else if (data) {
+                [ZZUserDefaultsHelper removeObjectForDestKey:kPaymentData];
+                UITabBarController *tabs = (UITabBarController*)self.window.rootViewController;
+                if (tabs && [tabs isKindOfClass:[UITabBarController class]]) {
+                    UINavigationController *navCtl = [tabs selectedViewController];
+                    
+                    if ([[[navCtl.viewControllers lastObject] class] isEqual:[ZZPayViewController class]]) {
+                        ZZPayViewController *controller = (ZZPayViewController *)[navCtl.viewControllers lastObject];
+                        [controller paymentRecall:@{@"type":paymentData[@"type"],@"paid":data[@"paid"]}];
+                    }
+                }
+                
+            }
+        }];
+    }
+    
+//    // 获取当前的出口IP,并上传服务器
+//    [self sendCurrentIpAddress];
 }
 
 

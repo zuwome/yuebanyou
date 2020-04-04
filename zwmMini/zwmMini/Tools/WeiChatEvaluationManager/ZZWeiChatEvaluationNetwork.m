@@ -41,11 +41,21 @@
     if (!isNullString(content)) {
         [evaluation setObject:content forKey:@"content"];
     }
-    [ZZRequest method:@"POST" path:[NSString stringWithFormat:@"/api/user/%@/wechat/comment",uid] params:evaluation next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+    [AskManager POST:[NSString stringWithFormat:@"api/user/%@/wechat/comment",uid] dict:evaluation succeed:^(id data, XJRequestError *rError) {
         if (nextCallback) {
-            nextCallback(error,data,task);
+            nextCallback(rError,data,nil);
+        }
+    } failure:^(NSError *error) {
+        XJRequestError *rError = [[XJRequestError alloc] init];
+        rError.code =error.code;
+        rError.message = error.localizedDescription;
+        if (nextCallback) {
+            nextCallback(rError,nil,nil);
         }
     }];
+//    [ZZRequest method:@"POST" path:[NSString stringWithFormat:@"/api/user/%@/wechat/comment",uid] params:evaluation next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+//
+//    }];
 }
 //举报虚假微信
 + (void)reportFalseWXWithWeiXinNumber:(NSString *)weiXinNumber  userId:(NSString *)userId {
@@ -53,15 +63,19 @@
         return ;
     }
     [ZZReportModel reportWithParam:@{@"content":weiXinNumber,
-                                     @"type":@"1"} uid:userId next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
-                                         if (error) {
-                                             [ZZHUD showErrorWithStatus:error.message];
-                                         } else {
-                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                 [ZZHUD showSuccessWithStatus:@"谢谢您的举报，我们将在2个工作日内解决!"];
-                                             });
-                                         }
-                                     }];
+                                     @"type":@"1"}.mutableCopy uid:userId next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
+            if (error) {
+                [ZZHUD showErrorWithStatus:error.message];
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [ZZHUD showSuccessWithStatus:@"谢谢您的举报，我们将在2个工作日内解决!"];
+                });
+            }
+    }];
+//    [ZZReportModel reportWithParam:@{@"content":weiXinNumber,
+//                                     @"type":@"1"} uid:userId next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+//
+//                                     }];
 }
 
 /**
@@ -70,19 +84,31 @@
 + (void)checkIfisReported:(NSString *)userId next:(requestCallback)nextCallback {
     
     NSDictionary *param = @{
-        @"from" : [ZZUserHelper shareInstance].loginer.uid,
+        @"from" : XJUserAboutManageer.uModel.uid,
         @"to" : userId
     };
     [ZZHUD show];
-    [ZZRequest method:@"POST"
-                 path:@"/api/wechat/existReportWechat"
-               params:param
-                 next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
-        [ZZHUD dismiss];
+    [AskManager POST:@"api/wechat/existReportWechat" dict:param.mutableCopy succeed:^(id data, XJRequestError *rError) {
         if (nextCallback) {
-            nextCallback(error,data,task);
+            nextCallback(rError,data,nil);
+        }
+    } failure:^(NSError *error) {
+        XJRequestError *rError = [[XJRequestError alloc] init];
+        rError.code =error.code;
+        rError.message = error.localizedDescription;
+        if (nextCallback) {
+            nextCallback(rError,nil,nil);
         }
     }];
+//    [ZZRequest method:@"POST"
+//                 path:@"/api/wechat/existReportWechat"
+//               params:param
+//                 next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+//        [ZZHUD dismiss];
+//        if (nextCallback) {
+//            nextCallback(error,data,task);
+//        }
+//    }];
 }
 
 @end

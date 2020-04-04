@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XJEditMyInfoVC : XJBaseVC
 
+@property (nonatomic, assign) BOOL gotoRootCtl;//pop时 是否回到 我 页面
+
 @property (nonatomic, weak)id<XJEditMyInfoVCDelegate> delegate;
 
 @end

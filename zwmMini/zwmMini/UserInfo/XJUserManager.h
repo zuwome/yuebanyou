@@ -18,6 +18,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XJUserManager : NSObject
 
+//上次打赏的金额
+@property (strong, nonatomic) NSString *lastPacketMoney;
+
+//上次提问么么答的金额
+@property (strong, nonatomic) NSString *lastAskMoney;
+
+//是否是第一次订单付全款
+@property (strong, nonatomic) NSString *firstOrderDetailPage;
 @property (assign, nonatomic) BOOL updateMessageList;
 
 @property (nonatomic, assign) BOOL shouldChangeAppTips;
@@ -62,6 +70,14 @@ NS_ASSUME_NONNULL_BEGIN
  *  MARK: 用户头像审核中，是否可以显示旧头像
  */
 - (BOOL)canShowUserOldAvatarWhileIsManualReviewingg:(XJUserModel *)user;
+
++ (void)getUserBalanceRecordWithParam:(NSDictionary *)param next:(requestCallback)next;
+
+/**
+MARK: 检测文本是否违规
+*/
++ (void)checkTextWithText:(NSString *)text type:(NSInteger)type
+next:(requestCallback)next;
 
 @end
 

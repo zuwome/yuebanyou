@@ -43,6 +43,49 @@ typedef NS_ENUM(NSInteger,NavigationType) {
     NavigationTypeUnknow = -1,       // unknow
 };
 
+#define RegisterRentUrl @"http://static.zuwome.com/rent/apply.html"
+#define RentCompleteUrl @"/rent/rentinfo"
+
+//Tabbar 高度
+#define TABBAR_HEIGHT               (kScreenHeight == 812.0 ? 83 : 49)
+
+//当前订单的支付数据（用于验证支付结果）
+#define kPaymentData    @"kPaymentData"
+
+#define REMOVE_MSG(STRID)       [[NSNotificationCenter defaultCenter] removeObserver:self name:STRID object:nil];
+#define REMOVE_ALL_MSG()        [[NSNotificationCenter defaultCenter] removeObserver:self]
+
+/**
+ * 生成 commonInit 方法
+ */
+#define commonInitSafe(className)                   [self className ## _commonInit]
+#define commonInitImplementationSafe(className)     -(void) className##_commonInit
+
+#define INT_TO_STRING(i)        [NSString stringWithFormat:@"%zd",i]
+#define DOUBLE_TO_STRING(i)        [NSString stringWithFormat:@"%f",i]
+
+/**
+ * 通知相关
+ */
+#define BIND_MSG_WITH_OBSERVER(OBSERVER, STRID, SELECTOR, OBJ)   [[NSNotificationCenter defaultCenter] addObserver:OBSERVER  \
+selector:SELECTOR      \
+name:STRID         \
+object:OBJ];
+
+#define BIND_MSG_WITH_OBJ(STRID, SELECTOR, OBJ)     BIND_MSG_WITH_OBSERVER(self, STRID, SELECTOR, OBJ);
+
+#define BIND_MSG(STRID, SELECTOR)                   BIND_MSG_WITH_OBJ(STRID, SELECTOR, nil);
+
+
+#ifdef DEBUG
+#define kQNPrefix_url        @"http://img.movtrip.com/"
+#else
+#define kQNPrefix_url        @"http://img.zuwome.com/"
+
+#endif
+
+#define kCustomerServiceId          @"KEFU146288374711644"
+
 //自适应字体
 #define AdaptedFontSize(R)     CHINESE_SYSTEM(AdaptedWidth(R))
 #define ADaptedFontSCBoldSize(R)  [UIFont fontWithName:@"PingFang-SC-Bold" size:R]?[UIFont fontWithName:@"PingFang-SC-Bold" size:R]:[UIFont fontWithName:@"Helvetica-Bold" size:R]
@@ -88,8 +131,39 @@ typedef NS_ENUM(NSInteger,NavigationType) {
 #define kScreenHeight  [[UIScreen mainScreen] bounds].size.height
 #define kScreenWidth   [[UIScreen mainScreen] bounds].size.width
 
+#define SCREEN_HEIGHT  [[UIScreen mainScreen] bounds].size.height
+#define SCREEN_WIDTH   [[UIScreen mainScreen] bounds].size.width
+
 // 判断是否iPhoneX YES:iPhoneX屏幕 NO:传统屏幕
 #define iPhoneX ([UIApplication sharedApplication].statusBarFrame.size.height == 44 ? YES : NO )
+
+// 判断iPhone4
+#define ISiPhone4       CGSizeEqualToSize([[UIScreen mainScreen] preferredMode].size, CGSizeMake(640, 960))
+
+// 判断iPhone5
+#define ISiPhone5       CGSizeEqualToSize([[UIScreen mainScreen] preferredMode].size, CGSizeMake(640, 1136))
+
+// 判断iPhone6
+#define ISiPhone6       CGSizeEqualToSize([[UIScreen mainScreen] preferredMode].size, CGSizeMake(750, 1334))
+
+//判断iPhone6p
+#define ISiPhone6P      CGSizeEqualToSize([[UIScreen mainScreen] preferredMode].size, CGSizeMake(1242, 2208))
+
+// 判断iOS7 或者7 之后
+#define IOS7_OR_LATER   ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+
+//判断是否是iOS8及以上
+#define IOS8_OR_LATER   ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+
+//判断是否是iOS9及以上
+#define IOS9_OR_LATER   ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0)
+
+//判断是否是iOS10及以上
+#define IOS10_OR_LATER   ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0)
+
+//判断是否是iOS11及以上
+#define IOS11_OR_LATER   ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0)
+
 // 安全区域
 #define SafeAreaTopHeight (iPhoneX ? 88 : 64)
 #define SafeAreaBottomHeight (iPhoneX ? 34 : 0)
@@ -127,6 +201,7 @@ typedef NS_ENUM(NSInteger,NavigationType) {
 #define isIPhoneXsMax                   (kScreenHeight == 896.0)
 
 //颜色
+#define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
 #define RGB(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
 #define RGBA(a, b, c, d) [UIColor colorWithRed:(a / 255.0f) green:(b / 255.0f) blue:(c / 255.0f) alpha:d]
 // 十六进制颜色设置

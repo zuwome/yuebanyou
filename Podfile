@@ -42,4 +42,7 @@ pod 'UMCShare/Social/WeChat'
 pod 'UMCShare/Social/QQ'
 pod 'UMCShare/Social/Sina'
 pod 'SVProgressHUD'
+pod 'UITableView+FDTemplateLayoutCell'
+pod 'YTKKeyValueStore'
+pod 'MJExtension'
 end

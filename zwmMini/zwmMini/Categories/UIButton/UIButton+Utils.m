@@ -10,6 +10,74 @@
 
 @implementation UIButton (Utils)
 
+@dynamic normalTitle;
+@dynamic selectedTitle;
+@dynamic normalTitleColor;
+@dynamic selectedTitleColor;
+@dynamic titleFont;
+@dynamic normalImage;
+@dynamic selectedImage;
+
+- (void)setNormalTitle:(NSString *)normalTitle {
+    [self setTitle:normalTitle forState:UIControlStateNormal];
+}
+
+- (NSString *)normalTitle {
+    return [self titleForState:UIControlStateNormal];
+}
+
+- (void)setSelectedTitle:(NSString *)selectedTitle {
+    [self setTitle:selectedTitle forState:UIControlStateSelected];
+}
+
+- (NSString *)selectedTitle {
+    return [self titleForState:UIControlStateSelected];
+}
+
+- (void)setNormalTitleColor:(UIColor *)normalTitleColor {
+    [self setTitleColor:normalTitleColor forState:UIControlStateNormal];
+}
+
+- (UIColor *)normalTitleColor {
+    return [self titleColorForState:UIControlStateNormal];
+}
+
+- (void)setSelectedTitleColor:(UIColor *)selectedTitleColor {
+     [self setTitleColor:selectedTitleColor forState:UIControlStateSelected];
+}
+
+- (UIColor *)selectedTitleColor {
+    return [self titleColorForState:UIControlStateSelected];
+}
+
+- (void)setTitleFont:(UIFont *)titleFont {
+    self.titleLabel.font = titleFont;
+}
+
+- (UIFont *)titleFont {
+    return self.titleLabel.font;
+}
+
+- (void)setNormalImage:(UIImage *)normalImage {
+    [self setImage:normalImage forState:UIControlStateNormal];
+}
+
+- (UIImage *)normalImage {
+   return [self imageForState:UIControlStateNormal];
+}
+
+- (void)setSelectedImage:(UIImage *)selectedImage {
+    [self setImage:selectedImage forState:UIControlStateSelected];
+}
+
+- (UIImage *)selectedImage {
+    return [self imageForState:UIControlStateSelected];
+}
+
+- (void)actionTarget:(id)target selector:(SEL)selector {
+    [self addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+}
+
 - (void)setImagePosition:(LXMImagePosition)postion spacing:(CGFloat)spacing {
     [self setTitle:self.currentTitle forState:UIControlStateNormal];
     [self setImage:self.currentImage forState:UIControlStateNormal];

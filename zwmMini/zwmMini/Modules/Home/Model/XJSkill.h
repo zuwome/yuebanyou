@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ZZSkillDetail :NSObject
+@interface ZZSkillDetail :JSONModel
 
 @property (nonatomic, assign) NSInteger status;//0=>审核不通过 1=>待审核 2=>已审核
 
@@ -18,14 +18,21 @@
 
 @end
 
-@interface ZZSkillTag : NSObject
+@protocol ZZSkillTag 
+
+@end
+
+@interface ZZSkillTag : JSONModel
 
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *tagname;
 @end
 
-@interface XJSkill : NSObject
+@protocol XJSkill
+@end
+
+@interface XJSkill : JSONModel
 
 @property (nonatomic, copy) NSString *id;           //技能id
 @property (nonatomic, copy) NSString *skillID;

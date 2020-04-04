@@ -16,12 +16,15 @@ PODS:
     - AFNetworking/NSURLSession
   - AMap2DMap (5.6.1):
     - AMapFoundation (~> 1.4)
-  - AMapFoundation (1.6.2)
-  - AMapLocation (2.6.4):
-    - AMapFoundation (~> 1.6.1)
-  - AMapSearch (7.1.0):
-    - AMapFoundation (~> 1.4)
+  - AMapFoundation (1.6.3)
+  - AMapLocation (2.6.5):
+    - AMapFoundation (~> 1.6.3)
+  - AMapSearch (7.3.0):
+    - AMapFoundation (~> 1.6.3)
   - BRPickerView (2.2.1)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - IQKeyboardManager (6.5.5)
   - JSONModel (1.8.0)
   - LCActionSheet (3.5.4):
@@ -29,6 +32,7 @@ PODS:
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
   - MGSwipeTableCell (1.6.11)
+  - MJExtension (3.2.1)
   - MJRefresh (3.3.1)
   - NJKScrollFullScreen (0.2.6)
   - NMRangeSlider (1.2.1)
@@ -87,6 +91,8 @@ PODS:
   - XYIAPKit/iTunesReceiptVerify (1.0.1):
     - XYIAPKit/Core
     - YYModel (~> 1.0.4)
+  - YTKKeyValueStore (0.1.2):
+    - FMDB (~> 2.0)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
@@ -102,6 +108,7 @@ DEPENDENCIES:
   - Masonry
   - MBProgressHUD
   - MGSwipeTableCell
+  - MJExtension
   - MJRefresh
   - NJKScrollFullScreen
   - NMRangeSlider
@@ -124,6 +131,7 @@ DEPENDENCIES:
   - Underscore.m
   - XYIAPKit
   - XYIAPKit/iTunesReceiptVerify
+  - YTKKeyValueStore
   - YYModel
 
 SPEC REPOS:
@@ -134,12 +142,14 @@ SPEC REPOS:
     - AMapLocation
     - AMapSearch
     - BRPickerView
+    - FMDB
     - IQKeyboardManager
     - JSONModel
     - LCActionSheet
     - Masonry
     - MBProgressHUD
     - MGSwipeTableCell
+    - MJExtension
     - MJRefresh
     - NJKScrollFullScreen
     - NMRangeSlider
@@ -158,21 +168,24 @@ SPEC REPOS:
     - UMCShare
     - Underscore.m
     - XYIAPKit
+    - YTKKeyValueStore
     - YYModel
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   AMap2DMap: cac76bc057de18a1641f34df6b50bf5bc6b23571
-  AMapFoundation: 672dc3a4759cb733f447c1e1b020f7ba2729f4ab
-  AMapLocation: b4162db67f813508a14ee7e05c7ee4073785221d
-  AMapSearch: 6bd6d361c5eb00110e0bffa4acf88b7bb9f7e059
+  AMapFoundation: 9ed923193b357ebb30a073e9fe255d3c24054d5a
+  AMapLocation: c566d448285cd502c1e313063d9e2460bd4d7100
+  AMapSearch: a048bcca3bf0b8083345070e1f193f814bd8dc01
   BRPickerView: 0590a8c5de9bd98c6b4e4f117a3dff6de287d5b2
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   LCActionSheet: a015dee43c54c8f6631e86facd9e2ad59dc1b5ab
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MGSwipeTableCell: b804e4e450dee439c42250be90bd50458bf67fce
+  MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
   MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
   NJKScrollFullScreen: 13e370f935da7385b92779644b31df8d83a91447
   NMRangeSlider: 317ded652431eb90501c8421d9cddc3930d891e6
@@ -191,8 +204,9 @@ SPEC CHECKSUMS:
   UMCShare: a250203b34a56cde25cc4c28335449b542f0255d
   Underscore.m: dc9ca06fe2c9a79d01ce20c3d2c1e8f91f2d92dc
   XYIAPKit: 639c88d24659e2aab61fcf9f88d6d0034f8b9204
+  YTKKeyValueStore: 4d002941540dd5108fa23009b71e0f2f937f7a0f
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: cceea7c46ddac57e6a29028e89374767b7bcefc3
+PODFILE CHECKSUM: c299bc89ba9d3ef18aa09916fc71815711c0ea70
 
 COCOAPODS: 1.7.1

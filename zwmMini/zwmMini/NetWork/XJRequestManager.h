@@ -33,6 +33,12 @@ typedef void (^requestCallback)(XJRequestError *error, id data, NSURLSessionData
 
 - (void)specailPOST:(NSString *)URLString dict:(NSMutableDictionary *)params succeed:(void (^)(id data, XJRequestError *rError))succeed failure:(void (^)(NSError *error))failure;
 
+- (void)POST:(NSString *)URLString
+   dict:(NSMutableDictionary *)params
+ extraUrlPar:(NSString *)str
+succeed:(void (^)(id data, XJRequestError *rError))succeed
+     failure:(void (^)(NSError *error))failure;
+
 @end
 
 @interface XJRequestError : NSObject

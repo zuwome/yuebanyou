@@ -7,12 +7,16 @@
 //
 
 #import "ZZOrderLiveStreamDetailVC.h"
+#import "XJChatViewController.h"
 #import "ZZOrderOptionsTableViewController.h"
 #import "ZZRentChooseSkillViewController.h"
 #import "ZZOrderLocationViewController.h"
 #import "ZZReportViewController.h"
 #import "ZZPayViewController.h"
 //#import "ZZTabBarViewController.h"
+
+#import "XJPernalDataVC.h"
+#import "XJLookoverOtherUserVC.h"
 
 #import "ZZLinkWebViewController.h"
 #import "ZZOrderCommentViewController.h"
@@ -138,12 +142,11 @@
     chatService.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController :chatService animated:YES];
     //以防融云一更新客服聊天中 用户自己的头像又没了
-    [RCIMClient sharedRCIMClient].currentUserInfo.portraitUri = [ZZUserHelper shareInstance].loginer.avatar;
+    [RCIMClient sharedRCIMClient].currentUserInfo.portraitUri = XJUserAboutManageer.uModel.avatar;
 }
 
 - (void)navigationRightBtnClick
 {
-    [MobClick event:Event_click_order_detail_more];
     if (!_order) {
         return;
     }
@@ -156,14 +159,14 @@
                          if (buttonIndex == 0) {
                              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                  ZZReportViewController *controller = [[ZZReportViewController alloc] init];
-                                 ZZNavigationController *navCtl = [[ZZNavigationController alloc] initWithRootViewController:controller];
+                                 XJNaviVC *navCtl = [[XJNaviVC alloc] initWithRootViewController:controller];
                                  controller.uid = _userId;
                                  [self.navigationController presentViewController:navCtl animated:YES completion:NULL];
                              });
                          }
                          if (buttonIndex == 1) {
                              if (_isBan) {
-                                 [ZZUser removeBlackWithUid:_userId next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+                                 [XJUserModel removeBlackWithUid:_userId next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
                                      if (error) {
                                          [ZZHUD showErrorWithStatus:error.message];
                                      } else if (data) {
@@ -185,7 +188,7 @@
                                      }
                                  }];
                              } else {
-                                 [ZZUser addBlackWithUid:_userId next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+                                 [XJUserModel addBlackWithUid:_userId next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
                                      if (error) {
                                          [ZZHUD showErrorWithStatus:error.message];
                                      } else if (data) {
@@ -200,7 +203,7 @@
 //检测拉黑状态
 - (void)checkBlackStatus {
     
-    ZZUser *loginer = [ZZUserHelper shareInstance].loginer;
+    XJUserModel *loginer = XJUserAboutManageer.uModel;
     if ([loginer.uid isEqualToString:_order.from.uid]) {
         _userId = _order.to.uid;
     } else {
@@ -220,7 +223,7 @@
 - (void)fetchOrderId:(NSString *)orderId {
     [ZZHUD showWithStatus:@"加载中..."];
     WEAK_SELF();
-    [ZZOrder loadInfo:orderId next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+    [ZZOrder loadInfo:orderId next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
         if (error) {
             [ZZHUD showErrorWithStatus:error.message];
         } else {
@@ -237,7 +240,7 @@
 
 - (void)loadMessages {
     WEAK_SELF();
-    [ZZMessage pullOrder:_order.id next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+    [ZZMessage pullOrder:_order.id next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
         if (error) {
             [ZZHUD showErrorWithStatus:error.message];
         } else {
@@ -254,7 +257,7 @@
 // 更新变量
 - (void)reloadInfo {
     
-    _loginerId = [ZZUserHelper shareInstance].loginerId;
+    _loginerId = XJUserAboutManageer.uModel.uid;
     _isFrom = [_order.from.uid isEqualToString:_loginerId];
 }
 
@@ -342,11 +345,11 @@
     
     self.orderStateLabel.text = _order.statusText;
     // 头像
-    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:headUrl] placeholderImage:defaultBackgroundImage_SelectTalent options:SDWebImageRetryFailed];
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:headUrl] placeholderImage:[UIImage imageFromColor:RGB(242, 242, 242)] options:SDWebImageRetryFailed];
     // 昵称
     self.nickName.text = nickName;
     // 订单金额
-    self.orderPrice.text = [NSString stringWithFormat:@"¥%@",[ZZUtils dealAccuracyNumber:_order.totalPrice]];
+    self.orderPrice.text = [NSString stringWithFormat:@"¥%@",[XJUtils dealAccuracyNumber:_order.totalPrice]];
     // 主题
     self.themelabel.text = [NSString stringWithFormat:@"主题：%@", _order.skill.name];
     // 时间
@@ -367,45 +370,74 @@
     
     if (_order.type == 4) {//闪聊的情况下，才会显示么币
         if (_isFrom) {
-            self.orderPrice.text = [NSString stringWithFormat:@"%@么币", [ZZUtils dealAccuracyNumber:_order.totalPrice]];
+            self.orderPrice.text = [NSString stringWithFormat:@"%@么币", [XJUtils dealAccuracyNumber:_order.totalPrice]];
         } else {
-            self.orderPrice.text = [NSString stringWithFormat:@"¥ %@", [ZZUtils dealAccuracyNumber:_order.totalPrice]];
+            self.orderPrice.text = [NSString stringWithFormat:@"¥ %@", [XJUtils dealAccuracyNumber:_order.totalPrice]];
         }
     }
 }
 
 - (void)tapAvatar {
-    ZZRentViewController *vc = [[ZZRentViewController alloc] init];
+    NSString *uid = nil;
+    XJUserModel *model = nil;
     if (_isFrom) {
-        vc.uid = _order.to.uid;
+        uid = _order.to.uid;
+        model = _order.to;
     } else {
-        vc.uid = _order.from.uid;
+        uid = _order.from.uid;
+        model = _order.from;
     }
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    if ([XJUserAboutManageer.uModel.uid isEqualToString:uid]) {
+        [self.navigationController pushViewController:[XJPernalDataVC new] animated:YES];
+    }else{
+        XJLookoverOtherUserVC *lookvc = [XJLookoverOtherUserVC new];
+        lookvc.topUserModel = model;
+        [self.navigationController pushViewController:lookvc animated:YES];
+    }
+    
+//    ZZRentViewController *vc = [[ZZRentViewController alloc] init];
+//    if (_isFrom) {
+//        vc.uid = _order.to.uid;
+//    } else {
+//        vc.uid = _order.from.uid;
+//    }
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 // 聊天
 - (IBAction)oChat:(id)sender {
     
-    if ([ZZUtils isBan]) {
+    if (XJUserAboutManageer.isUserBanned) {
         return;
     }
-    [MobClick event:Event_chat_order];
     if (_isFromChat) {
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }
     
-    ZZChatViewController *controller = [[ZZChatViewController alloc] init];
-    controller.uid = _isFrom?_order.to.uid:_order.from.uid;
-    controller.nickName = _isFrom?_order.to.nickname:_order.from.nickname;
-    controller.portraitUrl = _isFrom?_order.to.avatar:_order.from.avatar;
-    controller.isFromOrderDetail = YES;
+    
+    
+    XJChatViewController *conversationVC = [[XJChatViewController alloc] init];
+    conversationVC.conversationType = ConversationType_PRIVATE;
+    conversationVC.targetId = _isFrom?_order.to.uid:_order.from.uid;
+    RCUserInfo *userinfo = [[RCIM sharedRCIM] getUserInfoCache:_isFrom?_order.to.uid:_order.from.uid];
+    if (userinfo == nil) {
+        [[RCIM sharedRCIM].userInfoDataSource getUserInfoWithUserId:_isFrom?_order.to.uid:_order.from.uid completion:^(RCUserInfo *userInfo) {
+            conversationVC.title = _isFrom?_order.to.nickname:_order.from.nickname;
+        }];
+    }else{
+        conversationVC.title = _isFrom?_order.to.nickname:_order.from.nickname;
+    }
+//    controller.uid = _isFrom?_order.to.uid:_order.from.uid;
+//    controller.nickName = _isFrom?_order.to.uid:_order.from.uid;
+//    controller.portraitUrl = _isFrom?_order.to.avatar:_order.from.avatar;
+//    controller.isFromOrderDetail = YES;
 //    controller.orderId = _order.id;
-    controller.statusChange = ^{
-        [self fetchOrderId:_orderId];
-    };
-    [self.navigationController pushViewController:controller animated:YES];
+//    controller.statusChange = ^{
+//        [self fetchOrderId:_orderId];
+//    };
+    [self.navigationController pushViewController:conversationVC animated:YES];
 }
 
 - (IBAction)evaluateClick:(UIButton *)sender {
@@ -416,7 +448,7 @@
 
 - (IBAction)orderDetailPrice:(id)sender {
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/api/order/price_detail/page?oid=%@&&access_token=%@",kBase_URL,_order.id,[ZZUserHelper shareInstance].oAuthToken];
+    NSString *urlString = [NSString stringWithFormat:@"%@api/order/price_detail/page?oid=%@&&access_token=%@",APIBASE,_order.id,XJUserAboutManageer.access_token];
     ZZLinkWebViewController *controller = [[ZZLinkWebViewController alloc] init];
     controller.urlString = urlString;
     controller.navigationItem.title = @"价格详情";

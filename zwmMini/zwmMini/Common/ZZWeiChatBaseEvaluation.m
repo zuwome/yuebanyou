@@ -13,7 +13,7 @@
 
 - (instancetype)init{
     if (self = [super init]) {
-        self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        self.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.76];
         UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click)];
         tap1.delegate = self;

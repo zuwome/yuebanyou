@@ -15,6 +15,7 @@
     return @{
         @"tags" : [ZZSkillTag class],
         @"photo" : [XJPhoto class],
+        @"detail" : [ZZSkillDetail class],
     };
 }
 

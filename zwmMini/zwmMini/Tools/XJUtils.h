@@ -112,5 +112,19 @@
 
 + (BOOL)limitTextFieldWithTextField:(UITextField *)textField range:(NSRange)range replacementString:(NSString *)string pure:(BOOL)pure;
 
+/**
+ 是否已身份认证
+ */
++ (BOOL)isIdentifierAuthority:(XJUserModel *)user;
+
+/**
+ 浮点型对比
+ */
++ (NSComparisonResult)compareWithValue1:(id)value1 value2:(id)value2;
+
+//设置textField在不是整数情况下只能输入一个小数点 并且小数点后只有两位
++ (BOOL)limitTextFieldWithTextField:(UITextField *)textField range:(NSRange)range replacementString:(NSString *)string pure:(BOOL)pure;
+
++ (BOOL)limitTextFieldWithTextField:(UITextField *)textField range:(NSRange)range replacementString:(NSString *)string;
 @end
 

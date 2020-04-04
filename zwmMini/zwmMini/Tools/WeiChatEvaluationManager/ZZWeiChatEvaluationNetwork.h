@@ -7,7 +7,6 @@
 //微信号评价的接口
 
 #import <Foundation/Foundation.h>
-#import "ZZRequest.h"
 @interface ZZWeiChatEvaluationNetwork : NSObject
 
 

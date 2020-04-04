@@ -13,7 +13,7 @@
 //#import "ZZUserEditViewController.h"
 
 //#import "ZZChatViewController.h"
-//#import "ZZSkillOptionViewController.h"
+#import "ZZSkillOptionViewController.h"
 #import "ZZRentOrderInfoViewController.h"
 
 #import "ZZRentPageNavigationView.h"
@@ -453,10 +453,10 @@
 }
 
 - (void)gotoEditSkill {
-//    ZZSkillOptionViewController *controller = [[ZZSkillOptionViewController alloc] init];
-//    controller.type = SkillOptionTypeEdit;
-//    controller.topic = self.topic;
-//    [self.navigationController pushViewController:controller animated:YES];
+    ZZSkillOptionViewController *controller = [[ZZSkillOptionViewController alloc] init];
+    controller.type = SkillOptionTypeEdit;
+    controller.topic = self.topic;
+    [self.navigationController pushViewController:controller animated:YES];
     
 //    ZZSkillEditViewController *controller = [[ZZSkillEditViewController alloc] init];
 //    controller.skillEditType = SkillEditTypeEditTheme;

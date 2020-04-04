@@ -86,7 +86,7 @@
         _emptyLab = [[UILabel alloc]init];
         _emptyLab.textColor = RGB(165, 165, 165);
         _emptyLab.textAlignment = NSTextAlignmentCenter;
-        _emptyLab.text = @"无网络可用\n检查空虾网络连接权限及当前网络状态";
+        _emptyLab.text = @"无网络可用\n检查租我吗网络连接权限及当前网络状态";
         _emptyLab.numberOfLines = 0;
         _emptyLab.font = [UIFont systemFontOfSize:15];
         [UILabel changeLineSpaceForLabel:_emptyLab WithSpace:5];

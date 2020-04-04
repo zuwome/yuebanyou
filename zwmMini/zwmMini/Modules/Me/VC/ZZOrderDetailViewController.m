@@ -25,7 +25,7 @@ NSString *identifier = @"topiccell";
 #import "ZZOrderDetailTopicCell.h"
 #import "ZZOrderDetailCell.h"
 #import "ZZOrderFirstGuideView.h"
-
+#import "XJChatViewController.h"
 #import "ZZMessage.h"
 #import "ZZFalsePhoneAlertViewGuide.h"
 #import "HttpDNS.h"
@@ -36,6 +36,10 @@ NSString *identifier = @"topiccell";
 #import "ZZNewOrderRefuseReasonViewController.h"//新的拒绝理由
 #import "ZZOrderTalentShowViewController.h"
 #import "ZZNewOrderRefundOptionsViewController.h"
+
+#import "XJEditMyInfoVC.h"
+#import "XJLookoverOtherUserVC.h"
+#import "XJPernalDataVC.h"
 @interface ZZOrderDetailViewController () <UITableViewDataSource,UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 {
     NSString            *_loginerId;
@@ -144,7 +148,7 @@ NSString *identifier = @"topiccell";
     if (_firstPay) {
         BOOL haveCtl = NO;
         for (UITableViewController *controller in self.navigationController.viewControllers) {
-            if ([controller isKindOfClass:[ZZChatViewController class]]) {
+            if ([controller isKindOfClass:[XJChatViewController class]]) {
                 [self.navigationController popToViewController:controller animated:YES];
                 break;
             }
@@ -190,12 +194,11 @@ NSString *identifier = @"topiccell";
     chatService.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController :chatService animated:YES];
     //以防融云一更新客服聊天中 用户自己的头像又没了
-    [RCIMClient sharedRCIMClient].currentUserInfo.portraitUri = [ZZUserHelper shareInstance].loginer.avatar;
+    [RCIMClient sharedRCIMClient].currentUserInfo.portraitUri = XJUserAboutManageer.uModel.avatar;
 }
 
 - (void)navigationRightBtnClick
 {
-    [MobClick event:Event_click_order_detail_more];
     if (!_order) {
         return;
     }
@@ -208,14 +211,14 @@ NSString *identifier = @"topiccell";
                          if (buttonIndex == 0) {
                              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                  ZZReportViewController *controller = [[ZZReportViewController alloc] init];
-                                 ZZNavigationController *navCtl = [[ZZNavigationController alloc] initWithRootViewController:controller];
+                                 XJNaviVC *navCtl = [[XJNaviVC alloc] initWithRootViewController:controller];
                                  controller.uid = _userId;
                                  [self.navigationController presentViewController:navCtl animated:YES completion:NULL];
                              });
                          }
                          if (buttonIndex == 1) {
                              if (_isBan) {
-                                 [ZZUser removeBlackWithUid:_userId next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+                                 [XJUserModel removeBlackWithUid:_userId next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
                                      if (error) {
                                          [ZZHUD showErrorWithStatus:error.message];
                                      } else if (data) {
@@ -237,7 +240,7 @@ NSString *identifier = @"topiccell";
                                      }
                                  }];
                              } else {
-                                 [ZZUser addBlackWithUid:_userId next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+                                 [XJUserModel addBlackWithUid:_userId next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
                                      if (error) {
                                          [ZZHUD showErrorWithStatus:error.message];
                                      } else if (data) {
@@ -263,11 +266,11 @@ NSString *identifier = @"topiccell";
 // 弹出是否要完善信息
 - (void)checkInfo {
     if ([_order.status isEqualToString:@"pending"]) {
-        ZZUser *loginer = [ZZUserHelper shareInstance].loginer;
+        XJUserModel *loginer = XJUserAboutManageer.uModel;
         if (!loginer.height || !loginer.weight) {
             [UIAlertView showWithTitle:@"提示" message:@"完善资料可以提高约见几率" cancelButtonTitle:@"暂不需要" otherButtonTitles:@[@"完善资料"] tapBlock:^(UIAlertView * _Nonnull alertView, NSInteger buttonIndex) {
                 if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"完善资料"]) {
-                    ZZUserEditViewController *controller = [[ZZUserEditViewController alloc] init];
+                    XJEditMyInfoVC *controller = [[XJEditMyInfoVC alloc] init];
                     [self.navigationController pushViewController:controller animated:YES];
                 }
             }];
@@ -278,7 +281,7 @@ NSString *identifier = @"topiccell";
 //检测拉黑状态
 - (void)checkBlackStatus
 {
-    ZZUser *loginer = [ZZUserHelper shareInstance].loginer;
+    XJUserModel *loginer = XJUserAboutManageer.uModel;
     if ([loginer.uid isEqualToString:_order.from.uid]) {
         _userId = _order.to.uid;
     } else {
@@ -297,7 +300,7 @@ NSString *identifier = @"topiccell";
 
 - (void)fetchOrderId:(NSString *)orderId {
     [ZZHUD showWithStatus:@"加载中..."];
-    [ZZOrder loadInfo:orderId next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+    [ZZOrder loadInfo:orderId next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
         if (error) {
             [ZZHUD showErrorWithStatus:error.message];
         } else {
@@ -312,7 +315,7 @@ NSString *identifier = @"topiccell";
             }
             
             if (_detailType == OrderDetailTypePending && !_isFrom) {
-                if (![ZZUserHelper shareInstance].firstOrderDetailPage) {
+                if (!XJUserAboutManageer.firstOrderDetailPage) {
                     [self createGuideView];
                 }
             }
@@ -326,7 +329,7 @@ NSString *identifier = @"topiccell";
     ZZOrderFirstGuideView *guideView = [[ZZOrderFirstGuideView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.view.window addSubview:guideView];
     
-    [ZZUserHelper shareInstance].firstOrderDetailPage = @"firstOrderDetailPage";
+    XJUserAboutManageer.firstOrderDetailPage = @"firstOrderDetailPage";
 }
 
 - (void)loadMessages {
@@ -350,7 +353,8 @@ NSString *identifier = @"topiccell";
 //        }
     
 //    }];
-    [ZZMessage pullOrder:_order.id next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+    
+    [ZZMessage pullOrder:_order.id next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
         
         if (error) {
             [ZZHUD showErrorWithStatus:error.message];
@@ -401,7 +405,7 @@ NSString *identifier = @"topiccell";
 
 - (void)managerStatus
 {
-    _loginerId = [ZZUserHelper shareInstance].loginerId;
+    _loginerId = XJUserAboutManageer.uModel.uid;
     _isFrom = [_order.from.uid isEqualToString:_loginerId];
     if ([_order.status isEqualToString:@"pending"]) {//等待接受
         _detailType = OrderDetailTypePending;
@@ -553,7 +557,7 @@ NSString *identifier = @"topiccell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row==0) {
-        NSString *urlString = [NSString stringWithFormat:@"%@/api/order/price_detail/page?oid=%@&&access_token=%@",kBase_URL,_order.id,[ZZUserHelper shareInstance].oAuthToken];
+        NSString *urlString = [NSString stringWithFormat:@"%@api/order/price_detail/page?oid=%@&&access_token=%@",APIBASE,_order.id,XJUserAboutManageer.access_token];
         ZZLinkWebViewController *controller = [[ZZLinkWebViewController alloc] init];
         controller.urlString = urlString;
         controller.navigationItem.title = @"价格详情";
@@ -1028,7 +1032,7 @@ NSString *identifier = @"topiccell";
                 }
                     break;
                 case 2:{
-                    NSString *fistkey = [NSString stringWithFormat:@"%@%@",@"ZZFalsePhoneAlertViewGuideKey",[ZZUserHelper shareInstance].loginer.uid];
+                    NSString *fistkey = [NSString stringWithFormat:@"%@%@",@"ZZFalsePhoneAlertViewGuideKey",XJUserAboutManageer.uModel.uid];
                     NSString *string = [ZZKeyValueStore getValueWithKey:fistkey];
                     if (!string) {
                         [ZZFalsePhoneAlertViewGuide showAlertViewGuideViewWhenFirstIntoSureBack:^{
@@ -1298,32 +1302,49 @@ NSString *identifier = @"topiccell";
 
 //点击头像
 - (void)tapAvatar {
-    ZZRentViewController *vc = [[ZZRentViewController alloc] init];
+    NSString *uid = nil;
+    XJUserModel *model = nil;
     if (_isFrom) {
-        vc.uid = _order.to.uid;
+        uid = _order.to.uid;
+        model = _order.to;
     } else {
-        vc.uid = _order.from.uid;
+        uid = _order.from.uid;
+        model = _order.from;
     }
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    if ([XJUserAboutManageer.uModel.uid isEqualToString:uid]) {
+        [self.navigationController pushViewController:[XJPernalDataVC new] animated:YES];
+    }else{
+        XJLookoverOtherUserVC *lookvc = [XJLookoverOtherUserVC new];
+        lookvc.topUserModel = model;
+        [self.navigationController pushViewController:lookvc animated:YES];
+    }
+//    ZZRentViewController *vc = [[ZZRentViewController alloc] init];
+//    if (_isFrom) {
+//        vc.uid = _order.to.uid;
+//    } else {
+//        vc.uid = _order.from.uid;
+//    }
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 // 取消
 - (void)cancel {
-    if ([ZZUtils isBan]) {
+    if (XJUserAboutManageer.isUserBanned) {
         return;
     }
-    [MobClick event:Event_cancel_order];
+    WEAK_SELF()
     if (_isFrom && _detailType == OrderDetailTypePaying) {
         ZZNewOrderRefundOptionsViewController *controller = [[ZZNewOrderRefundOptionsViewController alloc]init];
         controller.order = self.order;
         controller.isFromChat = NO;
         [self.navigationController pushViewController:controller animated:YES];
-        WS(weakSelf);
+        
         controller.callBack = ^(NSString *status) {
             weakSelf.order.status = @"cancel";
             [weakSelf reloadInfo];
             if (weakSelf.callBack) {
-                weakSelf.callBack(_order.status);
+                weakSelf.callBack(weakSelf.order.status);
             }
             [weakSelf reduceOngoingCount];
         };
@@ -1335,10 +1356,10 @@ NSString *identifier = @"topiccell";
         vc.isFrom = _isFrom;
 
         vc.callBack = ^(NSString *status) {
-            _order.status = status;
+            weakSelf.order.status = status;
             [self reloadInfo];
-            if (_callBack) {
-                _callBack(_order.status);
+            if (weakSelf.callBack) {
+                weakSelf.callBack(weakSelf.order.status);
             }
             [self reduceOngoingCount];
         };
@@ -1348,19 +1369,19 @@ NSString *identifier = @"topiccell";
 
 // 拒绝
 - (void)refuse {
-    if ([ZZUtils isBan]) {
+    if (XJUserAboutManageer.isUserBanned) {
         return;
     }
-    [MobClick event:Event_refuse_order];
+    WEAK_SELF()
     ZZOrderTalentShowViewController *vc = [[ZZOrderTalentShowViewController alloc] init];
     vc.order = self.order;
     vc.isRefusedInvitation = YES;
     vc.isFrom = NO;
     vc.callBack = ^(NSString *status) {
-        _order.status = status;
+        weakSelf.order.status = status;
         [self reloadInfo];
-        if (_callBack) {
-            _callBack(_order.status);
+        if (weakSelf.callBack) {
+            weakSelf.callBack(weakSelf.order.status);
         }
         [self reduceOngoingCount];
     };
@@ -1370,20 +1391,19 @@ NSString *identifier = @"topiccell";
 // 编辑约会
 - (void)edit {
     
-    if ([ZZUtils isBan]) {
+    if (XJUserAboutManageer.isUserBanned) {
         return;
     }
-    [MobClick event:Event_modify_order];
     ZZRentChooseSkillViewController *controller = [[ZZRentChooseSkillViewController alloc] init];
     controller.isEdit = YES;
     controller.order = _order;
-    ZZNavigationController *nav = [[ZZNavigationController alloc] initWithRootViewController:controller];
+    XJNaviVC *navCtl = [[XJNaviVC alloc] initWithRootViewController:controller];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(orderDidUpdate:)
                                                  name:kMsg_UpdateOrder
                                                object:nil];
     
-    [self presentViewController:nav animated:YES completion:nil];
+    [self presentViewController:navCtl animated:YES completion:nil];
 }
 
 - (void)orderDidUpdate:(NSNotification *)sender {
@@ -1395,46 +1415,56 @@ NSString *identifier = @"topiccell";
 
 // 聊天
 - (void)chat {
-    
-    if ([ZZUtils isBan]) {
+    WEAK_SELF()
+    if (XJUserAboutManageer.isUserBanned) {
         return;
     }
-    [MobClick event:Event_chat_order];
     if (_isFromChat) {
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }
-    
-    ZZChatViewController *controller = [[ZZChatViewController alloc] init];
-    controller.uid = _isFrom?_order.to.uid:_order.from.uid;
-    controller.nickName = _isFrom?_order.to.nickname:_order.from.nickname;
-    controller.portraitUrl = _isFrom?_order.to.avatar:_order.from.avatar;
-    controller.isFromOrderDetail = YES;
-    controller.orderId = _order.id;
-    controller.statusChange = ^{
-        [self fetchOrderId:_orderId];
-    };
-    [self.navigationController pushViewController:controller animated:YES];
+        XJChatViewController *conversationVC = [[XJChatViewController alloc] init];
+        conversationVC.conversationType = ConversationType_PRIVATE;
+        conversationVC.targetId = _isFrom?_order.to.uid:_order.from.uid;
+        RCUserInfo *userinfo = [[RCIM sharedRCIM] getUserInfoCache:_isFrom?_order.to.uid:_order.from.uid];
+        if (userinfo == nil) {
+            [[RCIM sharedRCIM].userInfoDataSource getUserInfoWithUserId:_isFrom?_order.to.uid:_order.from.uid completion:^(RCUserInfo *userInfo) {
+                conversationVC.title = _isFrom?weakSelf.order.to.nickname:weakSelf.order.from.nickname;
+            }];
+        }else{
+            conversationVC.title = _isFrom?_order.to.nickname:_order.from.nickname;
+        }
+        [self.navigationController pushViewController:conversationVC animated:YES];
+//    ZZChatViewController *controller = [[ZZChatViewController alloc] init];
+//    controller.uid = _isFrom?_order.to.uid:_order.from.uid;
+//    controller.nickName = _isFrom?_order.to.nickname:_order.from.nickname;
+//    controller.portraitUrl = _isFrom?_order.to.avatar:_order.from.avatar;
+//    controller.isFromOrderDetail = YES;
+//    controller.orderId = _order.id;
+//    controller.statusChange = ^{
+//        [self fetchOrderId:_orderId];
+//    };
+//    [self.navigationController pushViewController:controller animated:YES];
 }
 
 // 接受预约
 - (void)accept {
     
-    if ([ZZUtils isBan]) {
+    if (XJUserAboutManageer.isUserBanned) {
         return;
-    }
-    [MobClick event:Event_accept_order];
+    };
+    WEAK_SELF()
     [ZZHUD showWithStatus:nil];
-    [_order accept:_order.status next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+    [_order accept:_order.status next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
         if (error) {
             [ZZHUD showErrorWithStatus:error.message];
         } else if (data) {
             [ZZHUD dismiss];
-            _order.status = data[@"status"];
-            _order.statusText = @"等待付款";
+            weakSelf.order.status = data[@"status"];
+            weakSelf.order.statusText = @"等待付款";
             [self reloadInfo];
-            if (_callBack) {
-                _callBack(_order.status);
+            if (weakSelf.callBack) {
+                weakSelf.callBack(weakSelf.order.status);
             }
         }
     }];
@@ -1443,19 +1473,19 @@ NSString *identifier = @"topiccell";
 // 付款
 - (void)pay {
     
-    if ([ZZUtils isBan]) {
+    if (XJUserAboutManageer.isUserBanned) {
         return;
     }
-    [MobClick event:Event_pay_order];
+    WEAK_SELF()
     ZZPayViewController *vc = [[ZZPayViewController alloc] init];
     vc.order = _order;
     vc.type = PayTypeOrder;
     vc.didPay = ^() {
-        _order.status = @"meeting";
-        _order.statusText = @"见面中";
+        weakSelf.order.status = @"meeting";
+        weakSelf.order.statusText = @"见面中";
         [self reloadInfo];
-        if (_callBack) {
-            _callBack(_order.status);
+        if (weakSelf.callBack) {
+            weakSelf.callBack(weakSelf.order.status);
         }
     };
     [self.navigationController pushViewController:vc
@@ -1464,17 +1494,17 @@ NSString *identifier = @"topiccell";
 
 //申请退款
 - (void)wantToRefund {
-    if ([ZZUtils isBan]) {
+    if (XJUserAboutManageer.isUserBanned) {
         return;
     }
-    [MobClick event:Event_refund_order];
+    WEAK_SELF()
     ZZNewOrderRefundOptionsViewController *vc = [[ZZNewOrderRefundOptionsViewController alloc] init];
     vc.order = _order;
     vc.callBack = ^(NSString *status) {
-        _order.status = status;
+        weakSelf.order.status = status;
         [self reloadInfo];
-        if (_callBack) {
-            _callBack(_order.status);
+        if (weakSelf.callBack) {
+            weakSelf.callBack(_order.status);
         }
     };
     [self.navigationController pushViewController:vc animated:YES];
@@ -1482,22 +1512,21 @@ NSString *identifier = @"topiccell";
 
 // 同意退款
 - (void)refundYes {
-    if ([ZZUtils isBan]) {
+    if (XJUserAboutManageer.isUserBanned) {
         return;
     }
-    [MobClick event:Event_refund_yes_order];
-    WS(weakSelf);
+    WEAK_SELF()
     if ([self.order.reason_type intValue] == 2 ) {
         ZZARRentAlertView *alertView =   [[ZZARRentAlertView alloc]init];
         alertView.detailTitleLab.text = @"对方选择您的原因退款,同意退款租金将全部返回给对方,并扣相应信任值。";
         [UILabel changeLineSpaceForLabel:alertView.detailTitleLab WithSpace:5];
         [alertView showAlertView];
         [alertView.seeButton setTitle:@"取消" forState:UIControlStateNormal];
-        alertView.sureButton.backgroundColor = RGBCOLOR(244, 203, 7);
+        alertView.sureButton.backgroundColor = RGB(244, 203, 7);
         [alertView.sureButton setTitle:@"确认" forState:UIControlStateNormal];
         alertView.sureBlock = ^{
             [ZZHUD showWithStatus:@"正在操作..."];
-            [weakSelf.order refundYes:_order.status next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+            [weakSelf.order refundYes:weakSelf.order.status next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
                 if (error) {
                     [ZZHUD showErrorWithStatus:error.message];
                 } else if (data) {
@@ -1514,7 +1543,7 @@ NSString *identifier = @"topiccell";
         };
     }else{
         [ZZHUD showWithStatus:@"正在操作..."];
-        [weakSelf.order refundYes:_order.status next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+        [weakSelf.order refundYes:_order.status next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
             if (error) {
                 [ZZHUD showErrorWithStatus:error.message];
             } else if (data) {
@@ -1534,40 +1563,40 @@ NSString *identifier = @"topiccell";
 
 // 拒绝退款
 - (void)refundNo {
-    if ([ZZUtils isBan]) {
+    if (XJUserAboutManageer.isUserBanned) {
         return;
     }
-    [MobClick event:Event_refund_no_order];
     
     ZZNewOrderRefuseReasonViewController *controller = [[ZZNewOrderRefuseReasonViewController alloc] init];
     
     controller.order = _order;
     [self.navigationController pushViewController:controller animated:YES];
-    WS(weakSelf);
+    WEAK_SELF()
     controller.callBack = ^(NSString *status) {
         [weakSelf fetchOrderId:weakSelf.orderId];
-        if (_callBack) {
-            _callBack(_order.status);
+        if (weakSelf.callBack) {
+            weakSelf.callBack(weakSelf.order.status);
         }
     };
 }
 
 - (void)revokeRefund
 {
-    if ([ZZUtils isBan]) {
+    if (XJUserAboutManageer.isUserBanned) {
         return;
     }
     NSString *string = @"您撤销退意向金申请后，邀约将会继续进行，资金仍由平台监管。您只有一次撤销申请的机会，确定撤销本次退意向金申请吗？";
     if (_order.paid_at) {
         string = @"您撤销退款申请后，邀约将会继续进行，资金仍由平台监管。您只有一次撤销申请的机会，确定撤销本次退款申请吗？";
     }
+    WEAK_SELF()
     [UIAlertView showWithTitle:@"提示" message:string cancelButtonTitle:@"取消" otherButtonTitles:@[@"确认"] tapBlock:^(UIAlertView * _Nonnull alertView, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
-            [ZZOrder revokeRefundOrder:_order.id status:_order.status next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+            [ZZOrder revokeRefundOrder:weakSelf.order.id status:weakSelf.order.status next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
                 if (error) {
                     [ZZHUD showErrorWithStatus:error.message];
                 } else {
-                    [self fetchOrderId:_order.id];
+                    [self fetchOrderId:weakSelf.order.id];
                 }
             }];
         }
@@ -1576,17 +1605,18 @@ NSString *identifier = @"topiccell";
 
 - (void)editRefund
 {
-    if ([ZZUtils isBan]) {
+    if (XJUserAboutManageer.isUserBanned) {
         return;
     }
+    WEAK_SELF()
     ZZNewOrderRefundOptionsViewController *controller = [[ZZNewOrderRefundOptionsViewController alloc] init];
     controller.order = _order;
     controller.isModify = YES;
     controller.callBack = ^(NSString *status) {
-        _order.status = status;
+        weakSelf.order.status = status;
         [self reloadInfo];
-        if (_callBack) {
-            _callBack(_order.status);
+        if (weakSelf.callBack) {
+            weakSelf.callBack(weakSelf.order.status);
         }
     };
     [self.navigationController pushViewController:controller animated:YES];
@@ -1594,18 +1624,16 @@ NSString *identifier = @"topiccell";
 
 // 已见面
 - (void)met {//whw
-    if ([ZZUtils isBan]) {
+    if (XJUserAboutManageer.isUserBanned) {
         return;
     }
     if (_isFrom) {
-        [MobClick event:Event_from_click_met_order];
         [UIAlertView showWithTitle:@"提示" message:@"邀约是否已顺利完成，确定后款项将会支付给对方" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确认"] tapBlock:^(UIAlertView * _Nonnull alertView, NSInteger buttonIndex) {
             if (buttonIndex == 1) {
                 [self metRequest];
             }
         }];
     } else {
-        [MobClick event:Event_to_click_met_order];
         [UIAlertView showWithTitle:@"提示" message:@"确认已到达见面地点？" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确认"] tapBlock:^(UIAlertView * _Nonnull alertView, NSInteger buttonIndex) {
             if (buttonIndex == 1) {
                 [self metRequest];
@@ -1616,18 +1644,19 @@ NSString *identifier = @"topiccell";
 
 - (void)metRequest
 {
+    WEAK_SELF()
     [ZZHUD showWithStatus:@"确认中..."];
-    [_order met:[ZZUserHelper shareInstance].location status:_order.status next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+    [_order met:XJUserAboutManageer.location status:_order.status next:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
         if (error) {
             [ZZHUD showErrorWithStatus:error.message];
         } else if (data) {
             [ZZHUD dismiss];
-            _order.status = data[@"status"];
-            _order.met = [[ZZOrderMet alloc] initWithDictionary:data[@"met"] error:nil];
+            weakSelf.order.status = data[@"status"];
+            weakSelf.order.met = [[ZZOrderMet alloc] initWithDictionary:data[@"met"] error:nil];
             [self reloadInfo];
             if (_isFrom) {
-                if (_callBack) {
-                    _callBack(_order.status);
+                if (weakSelf.callBack) {
+                    weakSelf.callBack(weakSelf.order.status);
                 }
                 [self reduceOngoingCount];
             }
@@ -1637,10 +1666,9 @@ NSString *identifier = @"topiccell";
 
 // 电话
 - (void)call {
-    if ([ZZUtils isBan]) {
+    if (XJUserAboutManageer.isUserBanned) {
         return;
     }
-    [MobClick event:Event_phone_order];
     
 //    BOOL canPlayAudio = YES;
 //    NSString *targetId = @"";
@@ -1661,7 +1689,7 @@ NSString *identifier = @"topiccell";
 ////        [[RCCall sharedRCCall] startSingleCall:targetId mediaType:RCCallMediaAudio];
 //    } else {
         [ZZHUD showWithStatus:@"正在获取电话"];
-        [_order getPhone:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+        [_order getPhone:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
             if (error) {
                 [ZZHUD showErrorWithStatus:error.message];
             } else {
@@ -1676,17 +1704,17 @@ NSString *identifier = @"topiccell";
 
 // 评价
 - (void)comment {
-    if ([ZZUtils isBan]) {
+    if (XJUserAboutManageer.isUserBanned) {
         return;
     }
-    [MobClick event:Event_comment_order];
+    WEAK_SELF()
     ZZOrderCommentViewController *controller = [[ZZOrderCommentViewController alloc] init];
     controller.order = _order;
     controller.successCallBack = ^{
-        _order.status = @"commented";
+        weakSelf.order.status = @"commented";
         [self reloadInfo];
-        if (_callBack) {
-            _callBack(_order.status);
+        if (weakSelf.callBack) {
+            weakSelf.callBack(_order.status);
         }
     };
     [self.navigationController pushViewController:controller animated:YES];
@@ -1694,8 +1722,8 @@ NSString *identifier = @"topiccell";
 
 - (void)reduceOngoingCount
 {
-    if ([ZZUserHelper shareInstance].unreadModel.order_ongoing_count > 0) {
-        [ZZUserHelper shareInstance].unreadModel.order_ongoing_count--;
+    if (XJUserAboutManageer.unreadModel.order_ongoing_count > 0) {
+       XJUserAboutManageer.unreadModel.order_ongoing_count--;
     }
 //    [[ZZTabBarViewController sharedInstance] managerAppBadge];
 }

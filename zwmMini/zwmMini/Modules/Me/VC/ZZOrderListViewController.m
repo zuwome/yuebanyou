@@ -182,8 +182,7 @@
         
         } else if (data) {
             self.emptyNotWorkView.hidden = YES;
-
-            NSMutableArray *d = [ZZOrder arrayOfModelsFromDictionaries:data error:nil];
+            NSMutableArray *d = [[NSArray yy_modelArrayWithClass:[ZZOrder class] json:data] mutableCopy];
             if (d.count == 0) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }

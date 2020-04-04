@@ -138,7 +138,7 @@
 - (UILabel *)detailTitleLab {
     if (!_detailTitleLab) {
         _detailTitleLab = [[UILabel alloc]init];
-        _detailTitleLab.font = CustomFont(14);
+        _detailTitleLab.font = [UIFont systemFontOfSize:14];
         _detailTitleLab.textColor = kBlackColor;
         _detailTitleLab.textAlignment = NSTextAlignmentCenter;
         _detailTitleLab.numberOfLines = 0;
@@ -152,9 +152,9 @@
     if (!_sureButton) {
         _sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_sureButton addTarget:self action:@selector(sureClick) forControlEvents:UIControlEventTouchUpInside];
-        _sureButton.backgroundColor = RGBCOLOR(216, 216, 216);
+        _sureButton.backgroundColor = RGB(216, 216, 216);
         [_sureButton setTitle:@"确认退款" forState:UIControlStateNormal];
-        _sureButton.titleLabel.font = CustomFont(15);
+        _sureButton.titleLabel.font = [UIFont systemFontOfSize:15];
         _sureButton.layer.cornerRadius = 4;
         [_sureButton setTitleColor:kBlackColor forState:UIControlStateNormal];
     }
@@ -172,9 +172,9 @@
     if (!_seeButton) {
         _seeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_seeButton addTarget:self action:@selector(seeButtonClick) forControlEvents:UIControlEventTouchUpInside];
-        _seeButton.backgroundColor = RGBCOLOR(244, 203, 7);
+        _seeButton.backgroundColor = RGB(244, 203, 7);
         [_seeButton setTitle:@"联系看看" forState:UIControlStateNormal];
-        _seeButton.titleLabel.font = CustomFont(15);
+        _seeButton.titleLabel.font = [UIFont systemFontOfSize:15];
         _seeButton.layer.cornerRadius = 4;
         [_seeButton setTitleColor:kBlackColor forState:UIControlStateNormal];
     }

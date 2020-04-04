@@ -164,12 +164,92 @@
 //    }];
 }
 
++ (void)addBlackWithUid:(NSString *)uid next:(requestCallback)next
+{
+    [AskManager POST:[NSString stringWithFormat:@"api/user/%@/black/add",uid] dict:nil succeed:^(id data, XJRequestError *rError) {
+        if (rError) {
+            if (next) {
+                next(rError, data, nil);
+            }
+        } else {
+            [[RCIMClient sharedRCIMClient] addToBlacklist:uid success:^{
+                [ZZHUD showSuccessWithStatus:@"已把TA加入黑名单"];
+                if (next) {
+                    next(rError, data, nil);
+                }
+                NSDictionary *aDict = @{@"uid":uid};
+//                [[NSNotificationCenter defaultCenter] postNotificationName:kMsg_AddUserBlack object:nil userInfo:aDict];
+            } error:^(RCErrorCode status) {
+                [ZZHUD showErrorWithStatus:@"操作失败"];
+            }];
+        }
+    } failure:^(NSError *error) {
+        XJRequestError *rError = [[XJRequestError alloc] init];
+        rError.code = error.code;
+        rError.message = error.localizedDescription;
+        if (next) {
+            next(rError, nil, nil);
+        }
+    }];
+//    [ZZRequest method:@"POST" path:[NSString stringWithFormat:@"/api/user/%@/black/add",uid] params:nil next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+//        if (error) {
+//            if (next) {
+//                next(error, data, task);
+//            }
+//        } else {
+//            [[RCIMClient sharedRCIMClient] addToBlacklist:uid success:^{
+//                [ZZHUD showSuccessWithStatus:@"已把TA加入黑名单"];
+//                if (next) {
+//                    next(error, data, task);
+//                }
+//                NSDictionary *aDict = @{@"uid":uid};
+//                [[NSNotificationCenter defaultCenter] postNotificationName:kMsg_AddUserBlack object:nil userInfo:aDict];
+//            } error:^(RCErrorCode status) {
+//                [ZZHUD showErrorWithStatus:@"操作失败"];
+//            }];
+//        }
+//    }];
+}
+
++ (void)removeBlackWithUid:(NSString *)uid next:(requestCallback)next
+{
+    [AskManager POST:[NSString stringWithFormat:@"api/user/%@/black/remove",uid] dict:nil succeed:^(id data, XJRequestError *rError) {
+        if (rError) {
+            if (next) {
+                next(rError, data, nil);
+            }
+        } else {
+            [[RCIMClient sharedRCIMClient] removeFromBlacklist:uid success:^{
+                [ZZHUD showSuccessWithStatus:@"已把TA移除黑名单"];
+                if (next) {
+                    next(rError, data, nil);
+                }
+            } error:^(RCErrorCode status) {
+                [ZZHUD showErrorWithStatus:@"操作失败"];
+            }];
+        }
+    } failure:^(NSError *error) {
+        XJRequestError *rError = [[XJRequestError alloc] init];
+        rError.code = error.code;
+        rError.message = error.localizedDescription;
+        if (next) {
+            next(rError, nil, nil);
+        }
+    }];
+}
+
+
 @end
 
 
 
 @implementation XJCityModel
 
+//返回一个 Dict，将 Model 属性名对映射到 JSON 的 Key。
++ (NSDictionary *)modelCustomPropertyMapper {
+    return @{@"cityId" :  @"id",
+             };
+}
 
 @end
 
@@ -205,7 +285,50 @@
 
 @implementation XJPhoto
 
+- (void)add:(requestCallback)next {
+    NSString *jsonString = [self yy_modelToJSONString];
+    if (jsonString == nil) {
+        NSLog(@"json解析失败");
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic1 = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+    
+    }
+    [AskManager POST:@"api/photo" dict:dic1.mutableCopy succeed:^(id data, XJRequestError *rError) {
+        next(rError, data, nil);
+    } failure:^(NSError *error) {
+        XJRequestError *rError = [[XJRequestError alloc] init];
+        rError.code = error.code;
+        rError.message = error.localizedDescription;
+        if (next) {
+            next(rError, nil, nil);
+        }
+    }];
+//    [ZZRequest method:@"POST" path:@"/api/photo" params:[self toDictionary] next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+//
+//    }];
+}
 
+- (void)remove:(requestCallback)next {
+    [AskManager Delete:[NSString stringWithFormat:@"api/photo/%@", self.id] dict:nil succeed:^(id data, XJRequestError *rError) {
+        next(rError, data, nil);
+    } failure:^(NSError *error) {
+            XJRequestError *rError = [[XJRequestError alloc] init];
+            rError.code = error.code;
+            rError.message = error.localizedDescription;
+            if (next) {
+                next(rError, nil, nil);
+            }
+    }];
+//    [ZZRequest method:@"DELETE" path:[NSString stringWithFormat:@"/api/photo/%@", self.id] params:nil next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+//        next(error, data, task);
+//    }];
+}
 
 @end
 

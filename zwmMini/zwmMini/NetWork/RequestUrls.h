@@ -15,7 +15,7 @@
 #ifdef DEBUG
 
 #define Old_APIBASE @"http://banyou.movtrip.com/"
-#define APIBASE @"http://www.movtrip.com/"
+#define APIBASE @"http://192.168.31.51:5000/"//@"http://www.movtrip.com/"//@"http://www.movtrip.com/"
 #define PICTURE @"http://pic.zhangjiamenhu.com/"  //图片测试
 
 #else

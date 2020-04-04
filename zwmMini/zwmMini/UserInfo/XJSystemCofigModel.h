@@ -18,6 +18,17 @@
 @class ZZDisableModuleModel;
 @interface XJSystemCofigModel : NSObject
 
+/**
+最高提现金额
+*/
+@property (nonatomic, assign) NSInteger max_bankcard_transfer ;
+
+// 邀约报名的服务费
+@property (nonatomic, assign) CGFloat pd_agency;
+
+// 1v1视频评价按钮选项
+@property (nonatomic, strong) NSDictionary *link_mic_comments;
+
 @property (nonatomic, strong) NSDictionary *comments;
 
 // true代表隐藏私信红包

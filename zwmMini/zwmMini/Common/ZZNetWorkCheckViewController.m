@@ -99,7 +99,7 @@
         _titleOneDetailoneLab = [[UILabel alloc]init];
         _titleOneDetailoneLab.textAlignment = NSTextAlignmentLeft;
         _titleOneDetailoneLab.textColor = kBlackColor;
-        NSString *string = @"打开【设置】-【蜂窝移动网络】-【使用无线局域网与蜂窝的应用】，找到【空虾】，勾选【无线局域网与蜂窝移动数据】即可。";
+        NSString *string = @"打开【设置】-【蜂窝移动网络】-【使用无线局域网与蜂窝的应用】，找到【租我吗】，勾选【无线局域网与蜂窝移动数据】即可。";
         _titleOneDetailoneLab.numberOfLines = 0 ;
         [UILabel settingLabelTextAttributesWithLineSpacing:5 FirstLineHeadIndent:0 FontOfSize:15 TextColor:kBlackColor text:string AddLabel:_titleOneDetailoneLab];
     }
@@ -109,7 +109,7 @@
     if (!_titleOneDetailTwoLab) {
         _titleOneDetailTwoLab = [[UILabel alloc]init];
         _titleOneDetailTwoLab.textAlignment = NSTextAlignmentLeft;
-        NSString *string  = @"如果在【使用无线局域网与蜂窝移动的应用】中，未找到【空虾】，请重启手机再次尝试。";
+        NSString *string  = @"如果在【使用无线局域网与蜂窝移动的应用】中，未找到【租我吗】，请重启手机再次尝试。";
         _titleOneDetailTwoLab.numberOfLines = 0 ;
     [UILabel settingLabelTextAttributesWithLineSpacing:5 FirstLineHeadIndent:0 FontOfSize:15 TextColor:kBlackColor text:string AddLabel:_titleOneDetailTwoLab];
     }
@@ -120,7 +120,7 @@
     if (!_titleOneDetailThirdLab) {
         _titleOneDetailThirdLab = [[UILabel alloc]init];
         _titleOneDetailThirdLab.textAlignment = NSTextAlignmentLeft;
-        NSString *string  = @"如果您的手机不是中国版，则：打开【设置】-【蜂窝移动网络】，找到【空虾】，启用开关即可。";
+        NSString *string  = @"如果您的手机不是中国版，则：打开【设置】-【蜂窝移动网络】，找到【租我吗】，启用开关即可。";
         _titleOneDetailThirdLab.numberOfLines = 0 ;
         [UILabel settingLabelTextAttributesWithLineSpacing:5 FirstLineHeadIndent:0 FontOfSize:15 TextColor:kBlackColor text:string AddLabel:_titleOneDetailThirdLab];
 

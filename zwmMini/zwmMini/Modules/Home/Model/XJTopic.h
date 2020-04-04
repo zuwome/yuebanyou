@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class XJSkill;
-@interface XJTopic : NSObject
+@interface XJTopic : JSONModel
 
 @property (strong, nonatomic) NSString *price;
 @property (strong, nonatomic) NSMutableArray <XJSkill *> *skills;

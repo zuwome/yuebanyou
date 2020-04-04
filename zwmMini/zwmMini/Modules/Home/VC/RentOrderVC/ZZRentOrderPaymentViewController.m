@@ -17,6 +17,9 @@
 #import "Pingpp.h"
 #import "ZZRentDropdownModel.h"
 #import "ZZOrder.h"
+#import "MJExtension.h"
+#import "XJChatViewController.h"
+#import "ZZRentChooseSkillViewController.h"
 
 @interface ZZRentOrderPaymentViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -325,11 +328,11 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:KMsg_CreateOrderNotification object:nil];
                 }
                 
-                [Weakself showPayCompleteView];
+                [Weakself gotoChatView];
             } else {
                 [Pingpp createPayment:data
                        viewController:self
-                         appURLScheme:@"kongxia"
+                         appURLScheme:@"zuwoma"
                        withCompletion:^(NSString *result, PingppError *error) {
                            if ([result isEqualToString:@"success"]) {
                                dispatch_async(dispatch_get_main_queue(), ^{
@@ -338,7 +341,8 @@
                                    if (Weakself.order.wechat_service) {
                                        [[NSNotificationCenter defaultCenter] postNotificationName:KMsg_CreateOrderNotification object:nil];
                                    }
-                                   [Weakself showPayCompleteView];
+                                   [Weakself gotoChatView];
+//                                   [Weakself showPayCompleteView];
                                });
                            } else {
                                // 支付失败或取消
@@ -374,7 +378,31 @@
 }
 
 - (void)gotoChatView {
-//    XJUserAboutManageer.unreadModel.order_ongoing_count++;
+    XJUserAboutManageer.unreadModel.order_ongoing_count++;
+    XJChatViewController *conversationVC = [[XJChatViewController alloc] init];
+    conversationVC.conversationType = ConversationType_PRIVATE;
+    conversationVC.targetId = _order.to.uid;
+    RCUserInfo *userinfo = [[RCIM sharedRCIM] getUserInfoCache:_order.to.uid];
+    if (userinfo == nil) {
+        [[RCIM sharedRCIM].userInfoDataSource getUserInfoWithUserId:_order.to.uid completion:^(RCUserInfo *userInfo) {
+            conversationVC.title = _order.to.nickname;
+        }];
+    }else{
+        conversationVC.title = _order.to.nickname;
+    }
+    
+    NSMutableArray<__kindof UIViewController *> *array = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+//    NSInteger index = array.count - 2;
+//    if (array.count > index) {
+//        [array removeObjectAtIndex:(array.count - 2)];
+//        [array removeObjectAtIndex:(array.count - 2)];
+//    }
+    while ([array.lastObject isKindOfClass:[ZZRentOrderPaymentViewController class]] || [array.lastObject isKindOfClass: [ZZRentOrderInfoViewController class]] || [array.lastObject isKindOfClass: [ZZRentChooseSkillViewController class]]) {
+        [array removeLastObject];
+    }
+    [array addObject:conversationVC];
+    [self.navigationController setViewControllers:array animated:YES];
+    
 //
 //    [self savePayMethod];
 //    [self backupOrder];

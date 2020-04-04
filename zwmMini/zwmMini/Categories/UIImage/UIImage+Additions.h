@@ -17,4 +17,6 @@
 - (UIColor *)averageColor;
 - (UIImage *)circleImage;
 
++ (UIImage *)imageFromColor:(UIColor *)color;
+
 @end

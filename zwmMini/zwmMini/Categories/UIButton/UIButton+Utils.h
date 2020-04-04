@@ -19,6 +19,21 @@ typedef NS_ENUM(NSInteger, LXMImagePosition) {
 
 @interface UIButton (Utils)
 
+@property (nonatomic,   copy) NSString *normalTitle;
+
+@property (nonatomic,   copy) NSString *selectedTitle;
+
+@property (nonatomic, strong) UIColor  *normalTitleColor;
+
+@property (nonatomic, strong) UIColor  *selectedTitleColor;
+
+@property (nonatomic, strong) UIFont   *titleFont;
+
+@property (nonatomic, strong) UIImage *normalImage;
+
+@property (nonatomic, strong) UIImage *selectedImage;
+
+
 - (void)setImagePosition:(LXMImagePosition)postion spacing:(CGFloat)spacing;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <JSONModel/JSONModel.h>
 #import "XJRequestManager.h"
 
 @class XJCityModel;
@@ -26,7 +27,11 @@
 @class XJWeibo;
 @class XJZmxy;
 
-@interface XJUserModel : NSObject
+@interface XJUserModel : JSONModel
+@property (assign,nonatomic)  BOOL open_charge;//该用户是否开启了私聊付费的
+
+@property (strong, nonatomic) NSString * forzen;//冻结资金带有文字了
+
 @property (assign, nonatomic) NSInteger follow_status;//是否关注
 @property(nonatomic,copy) NSString *ZWMId;//么么号
 @property (strong, nonatomic) NSString *uid;
@@ -178,6 +183,10 @@
 - (void)followWithUid:(NSString *)uid next:(requestCallback)next;
 
 - (void)unfollowWithUid:(NSString *)uid next:(requestCallback)next;
+
++ (void)addBlackWithUid:(NSString *)uid next:(requestCallback)next;
+
++ (void)removeBlackWithUid:(NSString *)uid next:(requestCallback)next;
 @end
 
 
@@ -185,7 +194,7 @@
 
 
 //省市
-@interface XJCityModel : NSObject
+@interface XJCityModel : JSONModel
 
 @property (nonatomic, copy) NSString *cityId;
 @property (nonatomic, copy) NSString *province; //!< 省/直辖市
@@ -200,7 +209,7 @@
 
 
 //封禁
-@interface XJBanModel : NSObject
+@interface XJBanModel : JSONModel
 @property (nonatomic,assign) BOOL friends;
 @property (nonatomic,copy) NSString *start_at;
 @property (nonatomic,copy) NSString *expire;
@@ -210,14 +219,14 @@
 
 @end
 //紧急联系人
-@interface XJContactPeople : NSObject
+@interface XJContactPeople : JSONModel
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *phone;
 
 @end
 
 //兴趣
-@interface XJInterstsModel : NSObject
+@interface XJInterstsModel : JSONModel
 
 @property (nonatomic, copy) NSString *labelId;
 @property (nonatomic, copy) NSString *content;
@@ -228,7 +237,7 @@
 
 
 //过去30天统计
-@interface XJStatisDataModel : NSObject
+@interface XJStatisDataModel : JSONModel
 
 @property (assign, nonatomic) NSInteger bebrowsed_count;//浏览数
 @property (assign, nonatomic) NSInteger beordered_count;//预约数
@@ -237,7 +246,7 @@
 @end
 
 //个人状态
-@interface XJMarkModel : NSObject
+@interface XJMarkModel : JSONModel
 
 @property (nonatomic, assign) BOOL is_flighted_user;
 @property (nonatomic, assign) BOOL is_new_rent;
@@ -245,24 +254,30 @@
 
 @end
 
+@protocol XJPhoto
+@end
+
 //用户头像
-@interface XJPhoto : NSObject
+@interface XJPhoto : JSONModel
 
 @property (copy, nonatomic) NSString *id;
 @property (copy, nonatomic) NSString *url;
 @property (assign, nonatomic) NSInteger status; // 0表示不通过 1 待审核 2审核通过
 @property (assign, nonatomic) NSInteger face_detect_status;//3代表人脸有比对通过 2代表人脸有比对但不通过 1代表人脸未比对
+@property (nonatomic, strong) UIImage *image;
+- (void)add:(requestCallback)next;
+- (void)remove:(requestCallback)next;
 @end
 
 //隐私配置
-@interface XJPrivacyConfigModel : NSObject
+@interface XJPrivacyConfigModel : JSONModel
 
 @property (nonatomic, assign) BOOL open_chat;//已打开 false未打开
 
 @end
 
 //推送配置
-@interface XJPushConfigModel : NSObject
+@interface XJPushConfigModel : JSONModel
 
 @property (nonatomic, assign) BOOL chat;
 @property (nonatomic, assign) BOOL following;
@@ -293,7 +308,7 @@
 @end
 
 //QQ
-@interface XJQQModel : NSObject
+@interface XJQQModel : JSONModel
 
 @property (copy, nonatomic) NSString *openid;
 
@@ -301,7 +316,7 @@
 
 
 //wechat
-@interface XJWechat : NSObject
+@interface XJWechat : JSONModel
 
 @property (strong, nonatomic) NSString *wx;
 @property (strong, nonatomic) NSString *unionid;
@@ -315,7 +330,7 @@
 @end
 
 //weibo
-@interface XJWeibo : NSObject
+@interface XJWeibo : JSONModel
 @property (copy, nonatomic) NSString *uid;
 @property (copy, nonatomic) NSString *userName;//用户名
 @property (copy, nonatomic) NSString *iconURL;//头像
@@ -329,7 +344,7 @@
 
 @class XJRealnamePic;
 //实名认证信息
-@interface XJRealNameModel : NSObject
+@interface XJRealNameModel : JSONModel
 
 @property (strong, nonatomic) NSDate *updated_at;
 @property (assign, nonatomic) NSInteger status;//0未认证，1待审核，2审核成功 3不通过
@@ -339,7 +354,7 @@
 
 @end
 
-@interface XJRealnamePic : NSObject
+@interface XJRealnamePic : JSONModel
 @property (copy, nonatomic) NSString *front;
 @property (copy, nonatomic) NSString *hold;
 @end
@@ -348,7 +363,7 @@
 @class XJTopicsModel;
 @class XJTopic;
 @class XJCityModel;
-@interface XJRent : NSObject
+@interface XJRent : JSONModel
 
 @property (strong, nonatomic) NSDate *updated_at;
 @property (assign, nonatomic) NSInteger status; //0、未出租 1、待审核 2、已上架 3、已下架
@@ -369,7 +384,7 @@
 
 //技能
 @class XJSkill;
-@interface XJTopicsModel : NSObject
+@interface XJTopicsModel : JSONModel
 
 @property (strong, nonatomic) NSString *price;
 @property (strong, nonatomic) NSMutableArray <XJSkill *> *skills;
@@ -379,7 +394,7 @@
 //技能详细
 @class XJSkillDetail;
 @class XJSkillTagModel;
-@interface XJSkillModel : NSObject
+@interface XJSkillModel : JSONModel
 
 @property (nonatomic, copy) NSString *id;           //技能id
 @property (nonatomic, copy) NSString *name;
@@ -412,28 +427,28 @@
 @end
 
 //新版出租添加字段
-@interface XJSkillDetail : NSObject
+@interface XJSkillDetail : JSONModel
 
 @property (nonatomic, assign) NSInteger status;     //0=>审核不通过 1=>待审核 2=>已审核
 @property (nonatomic, copy) NSString *content;
 
 @end
 
-@interface XJSkillTagModel : NSObject
+@interface XJSkillTagModel : JSONModel
 
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) NSString *name;
 
 @end
 //积分梯度
-@interface XJSignTastDetailModel : NSObject
+@interface XJSignTastDetailModel : JSONModel
 
 @property(nonatomic,strong) NSArray *score_list;// 积分梯度 数组
 @property(nonatomic,assign) NSNumber *day;// 连续签到天数
 @end
 
 //芝麻信用
-@interface XJZmxy : NSObject
+@interface XJZmxy : JSONModel
 
 @property (nonatomic, copy) NSString *openid;
 

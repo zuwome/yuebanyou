@@ -65,6 +65,16 @@
     [self creatUI];
     [self getLookUserInfo];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:reloadLookOtherInfo object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(createOrderReload) name:KMsg_CreateOrderNotification object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)createOrderReload {
+    [self getLookUserInfo];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -646,6 +656,7 @@
     controller.topic = topic;
     controller.isHideBar = NO;
     controller.fromLiveStream = NO;
+
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -747,10 +758,7 @@
     
     
 }
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+
 
 #pragma mark lzay
 - (UITableView *)tableView

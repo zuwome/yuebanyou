@@ -16,6 +16,7 @@
 #import "XJTopic.h"
 #import "ZZSkillDetailViewController.h"
 #import "XJSkill.h"
+#import "ZZSkillDetailViewController.h"
 
 @interface XJPernalDataVC ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,XJEditMyInfoVCDelegate,XJRentSkillCellDelegate>
 
@@ -133,7 +134,13 @@
 }
 
 - (void)cell:(XJRentSkillCell *)cell selectSkill:(XJTopic *)topic {
-    
+    ZZSkillDetailViewController *controller = [[ZZSkillDetailViewController alloc] init];
+    controller.user = XJUserAboutManageer.uModel;
+    controller.topic = topic;
+    controller.isHideBar = NO;
+    controller.fromLiveStream = NO;
+    controller.type = SkillDetailTypePreview;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark tableviewDelegate and dataSource

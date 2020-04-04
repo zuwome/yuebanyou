@@ -263,4 +263,54 @@ static XJUserManager *userManger = nil;
     return user.avatar_manual_status == 1;
 }
 
+/**
+ *  MARK: 余额记录（分页）
+ */
++ (void)getUserBalanceRecordWithParam:(NSDictionary *)param next:(requestCallback)next {
+    [AskManager GET:[NSString stringWithFormat:@"api/user/capital2"] dict:param.mutableCopy succeed:^(id data, XJRequestError *rError) {
+        if (next) {
+            next(rError, data, nil);
+        }
+    } failure:^(NSError *error) {
+        XJRequestError *rError = [[XJRequestError alloc] init];
+        rError.code = error.code;
+        rError.message = error.localizedDescription;
+        if (next) {
+            next(rError, nil, nil);
+        }
+    }];
+//    [ZZRequest method:@"GET" path:[NSString stringWithFormat:@"/api/user/capital2"] params:param next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+//        if (next) {
+//            next(error, data, task);
+//        }
+//    }];
+}
+
+/**
+ * MARK: 检测文本是否违规
+ * type: 1个人签名 2昵称 3公开么么答 4私信么么答 5技能介绍
+ */
++ (void)checkTextWithText:(NSString *)text
+                     type:(NSInteger)type
+                     next:(requestCallback)next {
+    [AskManager POST:@"system/text_detect" dict:@{@"content":text,@"type":[NSNumber numberWithInteger:type]}.mutableCopy succeed:^(id data, XJRequestError *rError) {
+        if (next) {
+            next(rError, data, nil);
+        }
+    } failure:^(NSError *error) {
+        XJRequestError *rError = [[XJRequestError alloc] init];
+        rError.code = error.code;
+        rError.message = error.localizedDescription;
+        if (next) {
+            next(rError, nil, nil);
+        }
+    }];
+//    [ZZRequest method:@"POST" path:@"/system/text_detect" params:@{@"content":text,@"type":[NSNumber numberWithInteger:type]} next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+//        if (next) {
+//            next(error, data, task);
+//        }
+//    }];
+}
+
+
 @end

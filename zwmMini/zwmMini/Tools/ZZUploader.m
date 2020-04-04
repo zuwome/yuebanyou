@@ -7,8 +7,6 @@
 //
 
 #import "ZZUploader.h"
-#import "ZZUserHelper.h"
-#import "ZZPhoto.h"
 #import "QNUploadHelper.h"
 
 @interface ZZUploader ()
@@ -27,9 +25,8 @@
 }
 
 + (void)putData:(NSData *)data next:(QNUpCompletionHandler)next {
-    ZZUserHelper *userHelper = [ZZUserHelper shareInstance];
-    NSString *token = [userHelper uploadToken];
-    NSString *uid = userHelper.loginerId;
+    NSString *token = XJUserAboutManageer.qiniuUploadToken;
+    NSString *uid = XJUserAboutManageer.uModel.uid;
     
     NSString *strRandom = @"";
     
@@ -60,10 +57,9 @@
 }
 
 + (void)uploadImage:(UIImage *)image progress:(QNUpProgressHandler)progress success:(void (^)(NSString *))success failure:(void (^)(void))failure {
-    NSData *data = [ZZUtils imageRepresentationDataWithImage:image];
-    ZZUserHelper *userHelper = [ZZUserHelper shareInstance];
-    NSString *token = [userHelper uploadToken];
-    NSString *uid = userHelper.loginerId;
+    NSData *data = [XJUtils imageRepresentationDataWithImage:image];
+    NSString *token = XJUserAboutManageer.qiniuUploadToken;
+    NSString *uid = XJUserAboutManageer.uModel.uid;
     
     NSString *strRandom = @"";
     
@@ -134,14 +130,14 @@
 }
 
 + (void)uploadLogs:(QNResponseInfo *)info  key:(NSString *)key isImage:(BOOL)isImage {
-    if ([ZZUserHelper shareInstance].unreadModel.open_log) {
+    if (XJUserAboutManageer.unreadModel.open_log) {
         NSString *string = @"上传图片错误";
         if (!isImage) {
             string = @"上传视频错误";
         }
         NSMutableDictionary *param = [@{@"type":string} mutableCopy];
-        if ([ZZUserHelper shareInstance].uploadToken) {
-            [param setObject:[ZZUserHelper shareInstance].uploadToken forKey:@"uploadToken"];
+        if (XJUserAboutManageer.qiniuUploadToken) {
+            [param setObject:XJUserAboutManageer.qiniuUploadToken forKey:@"uploadToken"];
         }
         if (info.error) {
             [param setObject:[NSString stringWithFormat:@"%@",info.error] forKey:@"error"];
@@ -149,34 +145,34 @@
         if (info.statusCode) {
             [param setObject:[NSNumber numberWithInt:info.statusCode] forKey:@"statusCode"];
         }
-        if ([ZZUserHelper shareInstance].isLogin) {
-            NSDictionary *dict = @{@"uid":[ZZUserHelper shareInstance].loginer.uid,
-                                   @"content":[ZZUtils dictionaryToJson:param]};
-            [ZZUserHelper uploadLogWithParam:dict next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
-                
-            }];
-        }
+//        if ([ZZUserHelper shareInstance].isLogin) {
+//            NSDictionary *dict = @{@"uid":[ZZUserHelper shareInstance].loginer.uid,
+//                                   @"content":[ZZUtils dictionaryToJson:param]};
+//            [ZZUserHelper uploadLogWithParam:dict next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+//
+//            }];
+//        }
     }
 }
 
-+ (void)uploadPhotos:(NSArray<ZZPhoto *> *)photos progress:(void (^)(CGFloat))progress success:(void (^)(NSArray *))success failure:(void (^)(void))failure {
++ (void)uploadPhotos:(NSArray<XJPhoto *> *)photos progress:(void (^)(CGFloat))progress success:(void (^)(NSArray *))success failure:(void (^)(void))failure {
     
     dispatch_group_t uploadGroup = dispatch_group_create();
 
-    [photos enumerateObjectsUsingBlock:^(ZZPhoto * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [photos enumerateObjectsUsingBlock:^(XJPhoto * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         dispatch_group_enter(uploadGroup);
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSData *data = [ZZUtils userImageRepresentationDataWithImage:obj.image];
+            NSData *data = [XJUtils userImageRepresentationDataWithImage:obj.image];
                         
             // 上传七牛
             [ZZUploader putData:data next:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
                 if (resp) {
-                    ZZPhoto *photo = [[ZZPhoto alloc] init];
+                    XJPhoto *photo = [[XJPhoto alloc] init];
                     photo.url = resp[@"key"];
                     
                     // 上传自己服务器
-                    [photo add:^(ZZError *error, id data, NSURLSessionDataTask *task) {
+                    [photo add:^(XJRequestError *error, id data, NSURLSessionDataTask *task) {
                         dispatch_group_leave(uploadGroup);
                         
                         [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
@@ -185,7 +181,7 @@
                         }
                         else {
                             [ZZHUD dismiss];
-                            ZZPhoto *newPhoto = [[ZZPhoto alloc] initWithDictionary:data error:nil];
+                            XJPhoto *newPhoto = [[XJPhoto alloc] initWithDictionary:data error:nil];
                             obj.url = newPhoto.url;
                         }
                     }];
@@ -199,7 +195,7 @@
     
     dispatch_group_notify(uploadGroup, dispatch_get_main_queue(), ^{
         __block BOOL isSuccess = YES;
-        [photos enumerateObjectsUsingBlock:^(ZZPhoto * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [photos enumerateObjectsUsingBlock:^(XJPhoto * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (isNullString(obj.url)) {
                 isSuccess = NO;
                 *stop = YES;
@@ -220,8 +216,7 @@
 }
 
 + (void)uploadAacData:(NSData *)data fileName:(NSString *)fileName success:(void (^)(NSString *url))success failure:(void (^)(void))failure {
-    ZZUserHelper *userHelper = [ZZUserHelper shareInstance];
-    NSString *token = [userHelper uploadToken];
+    NSString *token = XJUserAboutManageer.qiniuUploadToken;
     QNUploadManager *upManager = [[QNUploadManager alloc] init];
     [upManager putData:data key:fileName token:token
               complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {

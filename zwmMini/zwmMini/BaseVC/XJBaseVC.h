@@ -29,8 +29,9 @@
  */
 -(void)showNavRightButton:(NSString*)title action:(SEL)sel image:(UIImage *)imageName imageOn:(UIImage*)imageOnName;
 
+- (void)createNavigationLeftButton;
 - (void)createNavigationRightDoneBtn;
-
+- (void)navigationLeftBtnClick;
 /**
  *  显示左按钮
  *

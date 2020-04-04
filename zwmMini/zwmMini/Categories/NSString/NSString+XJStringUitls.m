@@ -103,4 +103,27 @@
     return result;
 }
 
+- (BOOL)isEmptyOrWhitespace {
+    // A nil or NULL string is not the same as an empty string
+    return 0 == self.length ||
+           ![self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length;
+}
+
++ (BOOL)isBlank:(NSString *)str {
+    return str == nil || [str isEmptyOrWhitespace];
+}
+
++ (BOOL)isNotBlank:(NSString *)str {
+    return ![NSString isBlank:str];
+}
+
++ (BOOL)isNumeric:(NSString *)str {
+    NSScanner *scanner = [NSScanner scannerWithString:str];
+    NSInteger hold;
+    if ([scanner scanInteger:&hold] && [scanner isAtEnd]) return YES;
+    return NO;
+}
+
+
+
 @end

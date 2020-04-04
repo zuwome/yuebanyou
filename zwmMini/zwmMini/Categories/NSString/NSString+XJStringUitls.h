@@ -27,6 +27,22 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSMutableAttributedString *)changeStringColorAndFontWithOldStr:(NSString *)oldStr changeStr:(NSString *)changeStr color:(UIColor *)color font:(UIFont *)font;
 
 + (CGFloat)findWidthForText:(NSString *)text havingWidth:(CGFloat)widthValue andFont:(UIFont *)font;
+
+/**
+ * return yes if the str is nil or empty or contains only whitespace.
+ */
++ (BOOL)isBlank:(NSString *)str;
+
+/**
+ * return no if the str is nil or empty or contains only whitespace.
+ */
++ (BOOL)isNotBlank:(NSString *)str;
+
+/**
+ * return yes if the str is numeric ,otherwise no.
+ */
++ (BOOL)isNumeric:(NSString *)str;
+
 @end
 
 NS_ASSUME_NONNULL_END

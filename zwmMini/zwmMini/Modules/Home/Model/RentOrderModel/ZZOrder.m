@@ -146,7 +146,7 @@
 - (void)add:(requestCallback)next {
     [self yy_modelCopy];
     NSString *path = [NSString stringWithFormat:@"api/user/%@/order", self.to.uid];
-    [AskManager POST:path dict:[self toDictionary].mutableCopy succeed:^(id data, XJRequestError *rError) {
+    [AskManager POST:path dict:[self toDictionaryWithYY] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -165,8 +165,21 @@
     if (isNullString(self.to.uid)) {
         uid = self.to.uuid;
     }
+    NSString *jsonString = [self yy_modelToJSONString];
+    if (jsonString == nil) {
+        NSLog(@"json解析失败");
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic1 = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+    
+    }
     NSString *path = [NSString stringWithFormat:@"api/user/%@/order_deposit", uid];
-    NSMutableDictionary *dic = [self toDictionary].mutableCopy;
+    NSMutableDictionary *dic = dic1.mutableCopy;//self.mj_keyValues; //[self toDictionary].mutableCopy
     if (dic[@"wechat_service"] && [dic[@"wechat_service"] boolValue]) {
         [dic removeObjectForKey:@"wechat_service"];
         dic[@"wechat_service"] = @"true";
@@ -178,7 +191,7 @@
     else {
         [dic removeObjectForKey:@"xdf_price"];
     }
-    
+
     [AskManager POST:path dict:dic.mutableCopy succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
@@ -199,7 +212,7 @@
 
 - (void)update:(requestCallback)next {
     NSString *path = [NSString stringWithFormat:@"api/order/%@", self.id];
-    [AskManager POST:path dict:[self toDictionary].mutableCopy succeed:^(id data, XJRequestError *rError) {
+    [AskManager POST:path dict:[self toDictionaryWithYY] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -217,8 +230,8 @@
 }
 
 - (void)cancel:(NSString *)reason status:(NSString *)status next:(requestCallback)next {
-    NSString *path = [NSString stringWithFormat:@"api/order/%@/cancel?order_status=%@", self.id,status];
-    [AskManager POST:path dict:@{@"reason": reason}.mutableCopy succeed:^(id data, XJRequestError *rError) {
+    NSString *path = [NSString stringWithFormat:@"api/order/%@/cancel", self.id];
+    [AskManager POST:path dict:@{@"reason": reason}.mutableCopy extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -236,8 +249,8 @@
 }
 
 - (void)refuse:(NSString *)reason status:(NSString *)status next:(requestCallback)next{
-    NSString *path = [NSString stringWithFormat:@"api/order/%@/refuse?order_status=%@", self.id,status];
-    [AskManager POST:path dict:@{@"reason": reason}.mutableCopy succeed:^(id data, XJRequestError *rError) {
+    NSString *path = [NSString stringWithFormat:@"api/order/%@/refuse", self.id];
+    [AskManager POST:path dict:@{@"reason": reason}.mutableCopy extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -263,8 +276,8 @@
 //}
 
 - (void)accept:(NSString *)status next:(requestCallback)next {
-    NSString *path = [NSString stringWithFormat:@"api/order/%@/accept?order_status=%@", self.id,status];
-    [AskManager POST:path dict:nil succeed:^(id data, XJRequestError *rError) {
+    NSString *path = [NSString stringWithFormat:@"api/order/%@/accept", self.id];
+    [AskManager POST:path dict:nil extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -302,27 +315,29 @@
 }
 
 - (void)met:(CLLocation *)location status:(NSString *)status next:(requestCallback)next {
-    NSString *path = [NSString stringWithFormat:@"api/order/%@/met?order_status=%@", self.id,status];
-    [AskManager POST:path dict:@{@"lat":[NSNumber numberWithFloat:location.coordinate.latitude],@"lng":[NSNumber numberWithFloat:location.coordinate.longitude]}.mutableCopy succeed:^(id data, XJRequestError *rError) {
-        if (next) {
-            next(rError, data, nil);
-        }
-    } failure:^(NSError *error) {
-        XJRequestError *rError = [[XJRequestError alloc] init];
-        rError.code = error.code;
-        rError.message = error.localizedDescription;
-        if (next) {
-            next(rError, nil, nil);
-        }
-    }];
+    NSString *path = [NSString stringWithFormat:@"api/order/%@/met", self.id];
+    [AskManager POST:path
+                dict:@{@"lat":[NSNumber numberWithFloat:location.coordinate.latitude],@"lng":[NSNumber numberWithFloat:location.coordinate.longitude]}.mutableCopy
+             extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
+                 if (next) {
+                     next(rError, data, nil);
+                 }
+             } failure:^(NSError *error) {
+                 XJRequestError *rError = [[XJRequestError alloc] init];
+                 rError.code = error.code;
+                 rError.message = error.localizedDescription;
+                 if (next) {
+                     next(rError, nil, nil);
+                 }
+             }];
 //    [ZZRequest method:@"POST" path:path params:@{@"lat":[NSNumber numberWithFloat:location.coordinate.latitude],@"lng":[NSNumber numberWithFloat:location.coordinate.longitude]} next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
 //        next(error, data, task);
 //    }];
 }
 
 - (void)refund:(NSString *)status next:(requestCallback)next {
-    NSString *path = [NSString stringWithFormat:@"api/order/%@/refund?order_status=%@", self.id,status];
-    [AskManager POST:path dict:[self toDictionaryWithKeys:@[@"refund"]].mutableCopy succeed:^(id data, XJRequestError *rError) {
+    NSString *path = [NSString stringWithFormat:@"api/order/%@/refund", self.id,status];
+    [AskManager POST:path dict:[self toDictionaryWithKeys:@[@"refund"]].mutableCopy extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -341,7 +356,7 @@
 
 - (void)refundDeposit:(NSDictionary *)param status:(NSString *)status orderId:(NSString *)orderId next:(requestCallback)next
 {
-    [AskManager POST:[NSString stringWithFormat:@"api/order/%@/refund?order_status=%@",orderId,status] dict:param.mutableCopy succeed:^(id data, XJRequestError *rError) {
+    [AskManager POST:[NSString stringWithFormat:@"api/order/%@/refund",orderId] dict:param.mutableCopy extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -359,8 +374,8 @@
 }
 
 - (void)refundYes:(NSString *)status next:(requestCallback)next {
-    NSString *path = [NSString stringWithFormat:@"api/order/%@/refund/yes?order_status=%@", self.id,status];
-    [AskManager POST:path dict:nil succeed:^(id data, XJRequestError *rError) {
+    NSString *path = [NSString stringWithFormat:@"api/order/%@/refund/yes", self.id];
+    [AskManager POST:path dict:nil extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -377,8 +392,8 @@
 //    }];
 }
 - (void)refundNo:(NSString *)status param:(NSDictionary *)param next:(requestCallback)next {
-    NSString *path = [NSString stringWithFormat:@"api/order/%@/refund/no?order_status=%@", self.id,status];
-    [AskManager POST:path dict:param.mutableCopy succeed:^(id data, XJRequestError *rError) {
+    NSString *path = [NSString stringWithFormat:@"api/order/%@/refund/no", self.id];
+    [AskManager POST:path dict:param.mutableCopy extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -437,8 +452,8 @@
     NSMutableDictionary *d = [NSMutableDictionary dictionary];
     [d setObject:channel forKey:@"channel"];
     [d setObject:@"kxp" forKey:@"pingxxtype"];
-    NSString *path = [NSString stringWithFormat:@"api/order/%@/pay?order_status=%@", self.id,status];
-    [AskManager POST:path dict:d succeed:^(id data, XJRequestError *rError) {
+    NSString *path = [NSString stringWithFormat:@"api/order/%@/pay", self.id];
+    [AskManager POST:path dict:d extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -459,8 +474,9 @@
     NSMutableDictionary *d = [NSMutableDictionary dictionary];
     [d setObject:channel forKey:@"channel"];
     [d setObject:@"kxp" forKey:@"pingxxtype"];
-    NSString *path = [NSString stringWithFormat:@"api/order/%@/pay_deposit?order_status=%@", self.id,status];
-    [AskManager POST:path dict:d succeed:^(id data, XJRequestError *rError) {
+    
+    NSString *path = [NSString stringWithFormat:@"api/order/%@/pay_deposit", self.id];
+    [AskManager POST:path dict:d extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -472,6 +488,18 @@
             next(rError, nil, nil);
         }
     }];
+//    [AskManager POST:path dict:d succeed:^(id data, XJRequestError *rError) {
+//        if (next) {
+//            next(rError, data, nil);
+//        }
+//    } failure:^(NSError *error) {
+//        XJRequestError *rError = [[XJRequestError alloc] init];
+//        rError.code = error.code;
+//        rError.message = error.localizedDescription;
+//        if (next) {
+//            next(rError, nil, nil);
+//        }
+//    }];
 //    [ZZRequest method:@"POST" path:path params:d next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
 //        next(error, data, task);
 //    }];
@@ -498,9 +526,9 @@
 
 - (void)remindWithOrderId:(NSString *)orderId status:(NSString *)status next:(requestCallback)next
 {
-    NSString *path = [NSString stringWithFormat:@"api/order/%@/notify?order_status=%@", self.id,status];
+    NSString *path = [NSString stringWithFormat:@"api/order/%@/notify?", self.id];
     
-    [AskManager POST:path dict:nil succeed:^(id data, XJRequestError *rError) {
+    [AskManager POST:path dict:nil extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -519,8 +547,8 @@
 
 + (void)cancelOrder:(NSDictionary *)param status:(NSString *)status orderId:(NSString *)orderId next:(requestCallback)next
 {
-    NSString *path = [NSString stringWithFormat:@"api/order/%@/cancel?order_status=%@", orderId,status];
-    [AskManager POST:path dict:param.mutableCopy succeed:^(id data, XJRequestError *rError) {
+    NSString *path = [NSString stringWithFormat:@"api/order/%@/cancel", orderId,status];
+    [AskManager POST:path dict:param.mutableCopy extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -539,8 +567,8 @@
 
 + (void)refuseOrder:(NSDictionary *)param status:(NSString *)status orderId:(NSString *)orderId next:(requestCallback)next
 {
-    NSString *path = [NSString stringWithFormat:@"api/order/%@/refuse?order_status=%@", orderId,status];
-    [AskManager POST:path dict:param.mutableCopy succeed:^(id data, XJRequestError *rError) {
+    NSString *path = [NSString stringWithFormat:@"api/order/%@/refuse?", orderId];
+    [AskManager POST:path dict:param.mutableCopy extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -559,7 +587,7 @@
 
 + (void)refundOrder:(NSDictionary *)param status:(NSString *)status orderId:(NSString *)orderId next:(requestCallback)next
 {
-    [AskManager POST:[NSString stringWithFormat:@"api/order/%@/refund?order_status=%@",orderId,status] dict:param.mutableCopy succeed:^(id data, XJRequestError *rError) {
+    [AskManager POST:[NSString stringWithFormat:@"api/order/%@/refund",orderId] dict:param.mutableCopy extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -645,7 +673,7 @@
 
 + (void)revokeRefundOrder:(NSString *)orderId status:(NSString *)status next:(requestCallback)next
 {
-    [AskManager POST:[NSString stringWithFormat:@"api/order/%@/refund/cancel?order_status=%@",orderId,status] dict:nil succeed:^(id data, XJRequestError *rError) {
+    [AskManager POST:[NSString stringWithFormat:@"api/order/%@/refund/cancel?",orderId] dict:nil extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -665,7 +693,7 @@
 
 + (void)editRefundOrder:(NSDictionary *)param status:(NSString *)status orderId:(NSString *)orderId next:(requestCallback)next
 {
-    [AskManager POST:[NSString stringWithFormat:@"api/order/%@/refund/modify?order_status=%@",orderId,status] dict:param.mutableCopy succeed:^(id data, XJRequestError *rError) {
+    [AskManager POST:[NSString stringWithFormat:@"api/order/%@/refund/modify",orderId] dict:param.mutableCopy extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -684,9 +712,9 @@
 
 + (void)commentOrder:(NSDictionary *)param status:(NSString *)status orderId:(NSString *)orderId next:(requestCallback)next
 {
-    NSString *path = [NSString stringWithFormat:@"api/order/%@/comment?order_status=%@", orderId,status];
+    NSString *path = [NSString stringWithFormat:@"api/order/%@/comment", orderId];
     
-    [AskManager POST:path dict:param.mutableCopy succeed:^(id data, XJRequestError *rError) {
+    [AskManager POST:path dict:param.mutableCopy extraUrlPar:[NSString stringWithFormat:@"order_status=%@",status] succeed:^(id data, XJRequestError *rError) {
         if (next) {
             next(rError, data, nil);
         }
@@ -762,6 +790,23 @@
 
 - (void)setXdf_price:(NSNumber *)xdf_price {
     _xdf_price = xdf_price;
+}
+
+- (NSMutableDictionary *)toDictionaryWithYY {
+    NSString *jsonString = [self yy_modelToJSONString];
+    if (jsonString == nil) {
+        NSLog(@"json解析失败");
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic1 = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+    
+    }
+    return dic1;
 }
 
 @end

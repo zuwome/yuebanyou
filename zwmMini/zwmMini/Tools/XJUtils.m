@@ -758,4 +758,89 @@
     }
 }
 
++ (BOOL)isIdentifierAuthority:(XJUserModel *)user {
+    if (user.realname.status == 2) {
+        return YES;
+    }
+    if (user.realname_abroad.status == 2) {
+        return YES;
+    }
+    return NO;
+}
+
++ (NSComparisonResult)compareWithValue1:(id)value1 value2:(id)value2
+{
+    NSDecimalNumber *number1 = [self getNumberWithValue:value1];
+    NSDecimalNumber *number2 = [self getNumberWithValue:value2];
+    return [number1 compare:number2];
+}
+
++ (NSDecimalNumber *)getNumberWithValue:(id)value
+{
+    if ([value isKindOfClass:[NSString class]]) {
+        return [[NSDecimalNumber alloc] initWithString:value];
+    }
+    if ([value isKindOfClass:[NSNumber class]]) {
+        return [[NSDecimalNumber alloc] initWithString:[NSString stringWithFormat:@"%@",value]];
+    }
+    return [[NSDecimalNumber alloc] initWithFloat:[value floatValue]];
+}
+
+
+/**
+ 设置首字母不能为0 或小数点
+  且最多只能有1个小数点
+ */
++ (BOOL)limitTextFieldWithTextField:(UITextField *)textField range:(NSRange)range replacementString:(NSString *)string  {
+    
+    BOOL isHaveDian = YES;
+    if ([textField.text rangeOfString:@"."].location == NSNotFound) {
+        isHaveDian = NO;
+    }
+    if ([string length] > 0) {
+        unichar single = [string characterAtIndex:0];//当前输入的字符
+        if ((single >= '0' && single <= '9') || single == '.') {
+            //数据格式正确
+            //首字母不能为0和小数点
+            if([textField.text length] == 0) {
+                if(single == '.'||single =='0') {
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+            }
+            
+            //输入的字符是否是小数点
+            if (single == '.') {
+                if(!isHaveDian) {
+                    //text中还没有小数点
+                    return YES;
+                    
+                }else {
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+            }else{
+                if (isHaveDian) {
+                    //存在小数点
+                    //判断小数点的位数
+                    NSRange ran = [textField.text rangeOfString:@"."];
+                    if (range.location - ran.location <= 2) {
+                        return YES;
+                    } else {
+                        return NO;
+                    }
+                } else {
+                    return YES;
+                }
+            }
+        }else {//输入的数据格式不正确
+            [textField.text stringByReplacingCharactersInRange:range withString:@""];
+            return NO;
+        }
+    }
+    else {
+        return YES;
+    }
+}
+
 @end

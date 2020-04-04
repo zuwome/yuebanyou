@@ -31,14 +31,42 @@
     if (self.navigationController.viewControllers.count > 1) {
         [self showBack:@selector(goBackActin:)];
     }
+    
+    [self createNavigationLeftButton];
 }
 
 - (void)dealloc{
 
     
 }
+
+- (void)createNavigationLeftButton
+{
+    
+    _navigationLeftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0,0, 44,44)];
+    _navigationLeftBtn.contentEdgeInsets =UIEdgeInsetsMake(0, -20,0, 0);
+    _navigationLeftBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -15,0, 0);
+    
+    [_navigationLeftBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+   
+    [_navigationLeftBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateHighlighted];
+    
+    [_navigationLeftBtn addTarget:self action:@selector(navigationLeftBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:_navigationLeftBtn];
+    
+    self.navigationItem.leftBarButtonItems =@[leftItem];
+  
+}
+
 -(void)showBack:(SEL)sel{
     [self showNavLeftButton:nil action:sel image:[UIImage imageNamed:@"fanhui"] imageOn:nil];
+}
+
+- (void)navigationLeftBtnClick
+{
+    [ZZHUD dismiss];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)createNavigationRightDoneBtn
