@@ -17,7 +17,8 @@
     
     if (self) {
         _ingBtn = [[ZZSelfOrderButton alloc] init];
-        _ingBtn.imgView.image = [UIImage imageNamed:@"icon_order_ing"];
+//        _ingBtn.backgroundColor = UIColor.redColor;
+        _ingBtn.imgView.image = [UIImage imageNamed:@"icJinxingzhong"];
         _ingBtn.typeLabel.text = @"进行中";
         [_ingBtn addTarget:self action:@selector(ingBtnClick) forControlEvents:UIControlEventTouchUpInside];
         _ingBtn.badgeLabel.hidden = YES;
@@ -30,7 +31,7 @@
         }];
         
         _commentBtn = [[ZZSelfOrderButton alloc] init];
-        _commentBtn.imgView.image = [UIImage imageNamed:@"icon_order_comment"];
+        _commentBtn.imgView.image = [UIImage imageNamed:@"icDaipingjia"];
         _commentBtn.typeLabel.text = @"待评价";
         [_commentBtn addTarget:self action:@selector(commentBtnClick) forControlEvents:UIControlEventTouchUpInside];
         _commentBtn.badgeView.hidden = YES;
@@ -44,7 +45,7 @@
         }];
         
         _doneBtn = [[ZZSelfOrderButton alloc] init];
-        _doneBtn.imgView.image = [UIImage imageNamed:@"icon_order_done"];
+        _doneBtn.imgView.image = [UIImage imageNamed:@"icYijieshu"];
         _doneBtn.typeLabel.text = @"已结束";
         [_doneBtn addTarget:self action:@selector(doneBtnClick) forControlEvents:UIControlEventTouchUpInside];
         _doneBtn.badgeView.hidden = YES;

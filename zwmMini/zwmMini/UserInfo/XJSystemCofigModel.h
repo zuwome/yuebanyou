@@ -18,6 +18,9 @@
 @class ZZDisableModuleModel;
 @interface XJSystemCofigModel : NSObject
 
+// 全局开关，true代表开启出租收费模块
+@property (nonatomic, assign) BOOL open_rent_need_pay_module;
+
 /**
 最高提现金额
 */
@@ -55,6 +58,8 @@
 
 // 出租 邀约优享邀约服务查看微信价格 开关
 @property (nonatomic, assign) BOOL order_wechat_enable;
+
+- (BOOL)canProceedWithoutRealAvatar:(NavigationType)type;
 
 @end
 

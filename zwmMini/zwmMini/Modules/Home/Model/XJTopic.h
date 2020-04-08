@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @class XJSkill;
+@protocol XJTopic 
+
+@end
 @interface XJTopic : JSONModel
 
 @property (strong, nonatomic) NSString *price;

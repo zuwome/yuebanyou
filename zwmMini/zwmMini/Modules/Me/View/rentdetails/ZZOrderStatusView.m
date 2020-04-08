@@ -129,7 +129,6 @@
 }
 
 #pragma mark -
-
 - (void)setOrder:(ZZOrder *)order type:(OrderDetailType)type
 {
     _order = order;

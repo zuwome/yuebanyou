@@ -57,6 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 //上次支付方式
 @property (strong, nonatomic) NSString *lastPayMethod;
 
+@property (strong, nonatomic) NSString *userFirstRent;//出租红点
 
 + (XJUserManager *)sharedInstance;
 
@@ -77,7 +78,9 @@ NS_ASSUME_NONNULL_BEGIN
 MARK: 检测文本是否违规
 */
 + (void)checkTextWithText:(NSString *)text type:(NSInteger)type
-next:(requestCallback)next;
+                     next:(requestCallback)next;
+
+- (BOOL)canApplyTalentWithBlock:(void (^)(BOOL success, NSInteger infoIncompleteType, BOOL isCancel))block;
 
 @end
 

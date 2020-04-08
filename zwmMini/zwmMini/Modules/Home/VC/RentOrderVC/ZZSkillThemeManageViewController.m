@@ -65,7 +65,7 @@
             XJUserModel *user= XJUserAboutManageer.uModel;
             [self.themesArray removeAllObjects];
             for (NSDictionary *topicDict in data) {
-                XJTopic *topic = [[XJTopic alloc] initWithDictionary:topicDict error:nil];
+                XJTopic *topic = [XJTopic yy_modelWithDictionary:topicDict];
                 //旧数据price在ZZTopic中，新版本price在ZZSkill中，对旧数据兼容 -- lql.2018.8.9
                 if (!topic.skills || topic.skills.count == 0) continue;
                 XJSkill *skill = topic.skills[0];

@@ -9,6 +9,7 @@
 #import "XJChatUtils.h"
 #import "ZZMessageChatWechatPayModel.h"
 #import "ZZChatReportModel.h"
+#import "ZZChatOrderInfoModel.h"
 
 @implementation XJChatUtils
 
@@ -95,7 +96,12 @@ static XJChatUtils *ChatManager = nil;
         }if([model.lastestMessage isKindOfClass:[ZZChatReportModel class]]){
             ZZChatReportModel *message = (ZZChatReportModel *)model.lastestMessage;
             return @"骚扰信息";
-        }else {
+        }
+        else if ([model.lastestMessage isKindOfClass:[ZZChatOrderInfoModel class]]) {
+            ZZChatOrderInfoModel *message = (ZZChatOrderInfoModel *)model.lastestMessage;
+            return message.title;
+        }
+        else {
             
             return @"未知类型";
 

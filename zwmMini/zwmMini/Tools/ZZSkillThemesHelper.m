@@ -170,7 +170,7 @@ static id _instance = nil;
  *  @param  addType "add" :添加,”apply“:申请    非达人用apply, 达人用add
  */
 - (void)addSkill:(NSDictionary *)params next:(requestCallback)next {
-    [AskManager GET:@"api/skills/add" dict:params succeed:^(id data, XJRequestError *rError) {
+    [AskManager POST:@"api/skills/add" dict:params.mutableCopy succeed:^(id data, XJRequestError *rError) {
         if (rError) [ZZHUD showTastInfoErrorWithString:rError.message];
         else next(rError, data, nil);
     } failure:^(NSError *error) {

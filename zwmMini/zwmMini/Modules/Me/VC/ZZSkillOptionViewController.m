@@ -246,11 +246,15 @@
 }
 
 - (void)showAlert:(NSDictionary *)params {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kMsg_UserRentInfoDidChanged object:nil];
     //退出编辑，重置修改标记
     [[ZZSkillThemesHelper shareInstance] resetUpdateSign];
     NSMutableArray *arr = self.navigationController.viewControllers.mutableCopy;
     [arr removeLastObject];
     [arr removeLastObject];
+    if ([arr.lastObject isKindOfClass:[ZZChooseSkillViewController class]]) {
+        [arr removeLastObject];
+    }
     [self.navigationController setViewControllers:arr.copy animated:YES];
 //    ZZRegisterRentViewController *registerRent = [[ZZRegisterRentViewController alloc] init];
 //    registerRent.type = RentTypeComplete;

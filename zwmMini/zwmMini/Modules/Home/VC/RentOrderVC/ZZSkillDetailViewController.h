@@ -9,12 +9,21 @@
 #import "XJBaseVC.h"
 
 @class XJTopic;
+@class ZZSkillDetailViewController;
 typedef NS_ENUM(NSInteger, SkillDetailType) {
     SkillDetailTypeShow = 0,    //技能展示
     SkillDetailTypePreview,     //编辑技能前的预览
 };
 
+@protocol ZZSkillDetailViewControllerDelegate <NSObject>
+
+- (void)controllerWechatActions:(ZZSkillDetailViewController *)controller;
+
+@end
+
 @interface ZZSkillDetailViewController : XJBaseVC
+
+@property (nonatomic, weak) id<ZZSkillDetailViewControllerDelegate> delegate;
 
 @property (nonatomic, strong) XJTopic *topic;   //所选他人的技能
 @property (nonatomic, strong) XJUserModel *user;     //所选他人的用户信息

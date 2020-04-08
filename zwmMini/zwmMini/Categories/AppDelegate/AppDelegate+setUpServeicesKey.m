@@ -14,6 +14,8 @@
 #import <RongIMKit/RongIMKit.h>
 #import "ZZMessageChatWechatPayModel.h"
 #import "ZZChatReportModel.h"
+#import "ZZChatOrderInfoModel.h"
+#import "ZZChatOrderNotifyModel.h"
 //百度face
 #import "FaceParameterConfig.h"
 #import <IDLFaceSDK/IDLFaceSDK.h>
@@ -41,7 +43,8 @@
     
     [[RCIM sharedRCIM] registerMessageType:[ZZMessageChatWechatPayModel class]];
     [[RCIM sharedRCIM] registerMessageType:[ZZChatReportModel class]];
-    
+    [[RCIM sharedRCIM] registerMessageType:[ZZChatOrderInfoModel class]];
+    [[RCIM sharedRCIM] registerMessageType:[ZZChatOrderNotifyModel class]];
     //连接融云
     if (XJUserAboutManageer.isLogin) {
         [[XJRongIMManager sharedInstance] connectRongIM];

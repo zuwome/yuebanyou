@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,assign) BOOL isNeedCharge; //是否需要私信付费  1:是 0:否
 
+@property (nonatomic, copy) dispatch_block_t statusChange;
+
 @end
 
 NS_ASSUME_NONNULL_END

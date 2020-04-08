@@ -26,7 +26,7 @@
 #import "XJEditMyInfoVC.h"
 #import "ZZSkillDetailViewController.h"
 
-@interface XJLookoverOtherUserVC ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,XJPersonalDetailTbCellDelegate, XJRentSkillCellDelegate>
+@interface XJLookoverOtherUserVC ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,XJPersonalDetailTbCellDelegate, XJRentSkillCellDelegate, ZZSkillDetailViewControllerDelegate>
 
 
 @property(nonatomic,strong) UITableView *tableView;
@@ -649,6 +649,11 @@
     self.realFaceTipsView.hidden = isShow ? NO : YES;
 }
 
+#pragma mark - ZZSkillDetailViewControllerDelegate
+- (void)controllerWechatActions:(ZZSkillDetailViewController *)controller {
+    [self lookoverWx];
+}
+
 #pragma mark - XJRentSkillCellDelegate
 - (void)cell:(XJRentSkillCell *)cell selectSkill:(XJTopic *)topic {
     ZZSkillDetailViewController *controller = [[ZZSkillDetailViewController alloc] init];
@@ -656,7 +661,7 @@
     controller.topic = topic;
     controller.isHideBar = NO;
     controller.fromLiveStream = NO;
-
+    controller.delegate = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

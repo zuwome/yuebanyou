@@ -185,6 +185,7 @@
 		BD7217462437323B00209AC3 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7217412437323B00209AC3 /* UILabel+Extension.swift */; };
 		BD7217472437323B00209AC3 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7217422437323B00209AC3 /* UIImage+Extension.swift */; };
 		BD7217492437334400209AC3 /* ConfigSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7217482437334400209AC3 /* ConfigSwift.swift */; };
+		BD93C86924397027004573E9 /* ZZUserCenterBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD93C86724397027004573E9 /* ZZUserCenterBaseCell.m */; };
 		BD9DC07C2435C6AF00E99B5F /* ZZTimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9DC0792435C6AF00E99B5F /* ZZTimelineCell.m */; };
 		BD9DC07D2435C6AF00E99B5F /* ZZOrderTimeLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9DC07A2435C6AF00E99B5F /* ZZOrderTimeLineView.m */; };
 		BD9DC0862435C74600E99B5F /* ZZOrderDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9DC07F2435C74600E99B5F /* ZZOrderDetailCell.m */; };
@@ -484,6 +485,42 @@
 		BDCCC53D23C8209700718F42 /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDCCC53B23C8209700718F42 /* UMAnalytics.framework */; };
 		BDCCC53F23C8213A00718F42 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDCCC53E23C8213A00718F42 /* CoreTelephony.framework */; };
 		BDCCC54123C8214800718F42 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BDCCC54023C8214800718F42 /* libsqlite3.0.tbd */; };
+		BDE75BAC2438712D0038A7F8 /* ZZChatOrderInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BAB2438712D0038A7F8 /* ZZChatOrderInfoCell.m */; };
+		BDE75BAF2438718F0038A7F8 /* ZZChatBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BAD2438718E0038A7F8 /* ZZChatBaseModel.m */; };
+		BDE75BB2243872250038A7F8 /* UIResponder+ZZRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BB0243872250038A7F8 /* UIResponder+ZZRouter.m */; };
+		BDE75BB6243872DE0038A7F8 /* ZZChatTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BB4243872DE0038A7F8 /* ZZChatTimeView.m */; };
+		BDE75BB9243873280038A7F8 /* ZZChatOrderInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BB8243873280038A7F8 /* ZZChatOrderInfoModel.m */; };
+		BDE75BBC243873A70038A7F8 /* ZZChatOrderNotifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BBA243873A70038A7F8 /* ZZChatOrderNotifyModel.m */; };
+		BDE75BBF243887920038A7F8 /* ZZChatOrderStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BBD243887920038A7F8 /* ZZChatOrderStatusView.m */; };
+		BDE75BC2243887C70038A7F8 /* ZZChatStatusCountDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BC1243887C70038A7F8 /* ZZChatStatusCountDownView.m */; };
+		BDE75BC5243887DF0038A7F8 /* ZZChatStatusBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BC4243887DF0038A7F8 /* ZZChatStatusBtnView.m */; };
+		BDE75BC8243889660038A7F8 /* ZZChatStatusSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BC6243889660038A7F8 /* ZZChatStatusSheetView.m */; };
+		BDE75BCB24388AD10038A7F8 /* ZZGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BCA24388AD10038A7F8 /* ZZGradientView.m */; };
+		BDE75BCE243893B30038A7F8 /* ZZChatOrderDealView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BCC243893B30038A7F8 /* ZZChatOrderDealView.m */; };
+		BDE75BD92438D8030038A7F8 /* ZZUserCenterRentGuideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BD62438D8030038A7F8 /* ZZUserCenterRentGuideCell.m */; };
+		BDE75BDA2438D8030038A7F8 /* ZZUserCenterRespondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BD82438D8030038A7F8 /* ZZUserCenterRespondCell.m */; };
+		BDE75BDD2438D8600038A7F8 /* ZZUserCenterRespondItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BDC2438D8600038A7F8 /* ZZUserCenterRespondItemView.m */; };
+		BDE75BE02438D9E10038A7F8 /* ZZUserStatisDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BDE2438D9E10038A7F8 /* ZZUserStatisDataViewController.m */; };
+		BDE75BE32438DF4E0038A7F8 /* ZZRentalAgreementVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BE12438DF4D0038A7F8 /* ZZRentalAgreementVC.m */; };
+		BDE75BE62438E0A60038A7F8 /* ZZUserChuzuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BE42438E0A60038A7F8 /* ZZUserChuzuViewController.m */; };
+		BDE75BE92438E1400038A7F8 /* ZZStoreKey.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BE82438E1400038A7F8 /* ZZStoreKey.m */; };
+		BDE75BEC2438E31E0038A7F8 /* ZZUserSkillChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BEA2438E31E0038A7F8 /* ZZUserSkillChooseViewController.m */; };
+		BDE75BF12438E3770038A7F8 /* ZZChuzuSkillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BED2438E3770038A7F8 /* ZZChuzuSkillCell.m */; };
+		BDE75BF22438E3770038A7F8 /* ZZChuzuReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BF02438E3770038A7F8 /* ZZChuzuReusableView.m */; };
+		BDE75BF52438E43A0038A7F8 /* ZZChuZuPrivateChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BF42438E4390038A7F8 /* ZZChuZuPrivateChatCell.m */; };
+		BDE75BF82438E5CD0038A7F8 /* ZZSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BF72438E5CD0038A7F8 /* ZZSelectView.m */; };
+		BDE75BFB2438E6180038A7F8 /* ZZRentTopicAddCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BF92438E6170038A7F8 /* ZZRentTopicAddCell.m */; };
+		BDE75BFE2438E6300038A7F8 /* ZZRentRangeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BFD2438E6300038A7F8 /* ZZRentRangeTableViewCell.m */; };
+		BDE75C032438E6530038A7F8 /* ZZRentInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75BFF2438E6520038A7F8 /* ZZRentInfoCell.m */; };
+		BDE75C042438E6530038A7F8 /* ZZRentTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75C002438E6520038A7F8 /* ZZRentTimeCell.m */; };
+		BDE75C072438E66D0038A7F8 /* ZZRentBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75C052438E66D0038A7F8 /* ZZRentBaseTableViewCell.m */; };
+		BDE75C102438E9B30038A7F8 /* ZZSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75C0F2438E9B30038A7F8 /* ZZSelectCell.m */; };
+		BDE75C132438EB1E0038A7F8 /* ZZActivityUrlNetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75C112438EB1E0038A7F8 /* ZZActivityUrlNetManager.m */; };
+		BDE75C162438ED880038A7F8 /* ZZActivityUrlModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75C142438ED880038A7F8 /* ZZActivityUrlModel.m */; };
+		BDE75C192438EEEB0038A7F8 /* ZZOpenSuccessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75C182438EEEA0038A7F8 /* ZZOpenSuccessVC.m */; };
+		BDE75C1C2438EF9A0038A7F8 /* ZZNewRentSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75C1A2438EF9A0038A7F8 /* ZZNewRentSuccessViewController.m */; };
+		BDE75C1F2438F00E0038A7F8 /* ZZRentSuccessShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75C1E2438F00D0038A7F8 /* ZZRentSuccessShadowView.m */; };
+		BDE75C252438F4300038A7F8 /* ZZOpenNotificationGuide.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE75C232438F4300038A7F8 /* ZZOpenNotificationGuide.m */; };
 		BDE7CD6623C9755D00E4C78E /* ZZProtocalChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE7CD6523C9755D00E4C78E /* ZZProtocalChooseView.m */; };
 		BDE7CD7023C9B83600E4C78E /* yuebanyoulg1111.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE7CD6D23C9B83500E4C78E /* yuebanyoulg1111.png */; };
 		BDE7CD7123C9B83600E4C78E /* yuebanyoulg1111@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE7CD6E23C9B83500E4C78E /* yuebanyoulg1111@2x.png */; };
@@ -860,6 +897,8 @@
 		BD7217412437323B00209AC3 /* UILabel+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		BD7217422437323B00209AC3 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		BD7217482437334400209AC3 /* ConfigSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSwift.swift; sourceTree = "<group>"; };
+		BD93C86724397027004573E9 /* ZZUserCenterBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZZUserCenterBaseCell.m; path = zwmMini/Modules/Home/View/ZZUserCenterBaseCell.m; sourceTree = SOURCE_ROOT; };
+		BD93C86824397027004573E9 /* ZZUserCenterBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZZUserCenterBaseCell.h; path = zwmMini/Modules/Home/View/ZZUserCenterBaseCell.h; sourceTree = SOURCE_ROOT; };
 		BD9DC0782435C6AF00E99B5F /* ZZTimelineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZTimelineCell.h; sourceTree = "<group>"; };
 		BD9DC0792435C6AF00E99B5F /* ZZTimelineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZTimelineCell.m; sourceTree = "<group>"; };
 		BD9DC07A2435C6AF00E99B5F /* ZZOrderTimeLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZOrderTimeLineView.m; sourceTree = "<group>"; };
@@ -1446,6 +1485,79 @@
 		BDCCC53B23C8209700718F42 /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMAnalytics.framework; sourceTree = "<group>"; };
 		BDCCC53E23C8213A00718F42 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		BDCCC54023C8214800718F42 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		BDE75BAA2438712D0038A7F8 /* ZZChatOrderInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZChatOrderInfoCell.h; sourceTree = "<group>"; };
+		BDE75BAB2438712D0038A7F8 /* ZZChatOrderInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZChatOrderInfoCell.m; sourceTree = "<group>"; };
+		BDE75BAD2438718E0038A7F8 /* ZZChatBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZChatBaseModel.m; sourceTree = "<group>"; };
+		BDE75BAE2438718F0038A7F8 /* ZZChatBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZChatBaseModel.h; sourceTree = "<group>"; };
+		BDE75BB0243872250038A7F8 /* UIResponder+ZZRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+ZZRouter.m"; sourceTree = "<group>"; };
+		BDE75BB1243872250038A7F8 /* UIResponder+ZZRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+ZZRouter.h"; sourceTree = "<group>"; };
+		BDE75BB3243872AF0038A7F8 /* ZZChatConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZChatConst.h; sourceTree = "<group>"; };
+		BDE75BB4243872DE0038A7F8 /* ZZChatTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZChatTimeView.m; sourceTree = "<group>"; };
+		BDE75BB5243872DE0038A7F8 /* ZZChatTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZChatTimeView.h; sourceTree = "<group>"; };
+		BDE75BB7243873280038A7F8 /* ZZChatOrderInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZChatOrderInfoModel.h; sourceTree = "<group>"; };
+		BDE75BB8243873280038A7F8 /* ZZChatOrderInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZChatOrderInfoModel.m; sourceTree = "<group>"; };
+		BDE75BBA243873A70038A7F8 /* ZZChatOrderNotifyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZChatOrderNotifyModel.m; sourceTree = "<group>"; };
+		BDE75BBB243873A70038A7F8 /* ZZChatOrderNotifyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZChatOrderNotifyModel.h; sourceTree = "<group>"; };
+		BDE75BBD243887920038A7F8 /* ZZChatOrderStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZChatOrderStatusView.m; sourceTree = "<group>"; };
+		BDE75BBE243887920038A7F8 /* ZZChatOrderStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZChatOrderStatusView.h; sourceTree = "<group>"; };
+		BDE75BC0243887C70038A7F8 /* ZZChatStatusCountDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZChatStatusCountDownView.h; sourceTree = "<group>"; };
+		BDE75BC1243887C70038A7F8 /* ZZChatStatusCountDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZChatStatusCountDownView.m; sourceTree = "<group>"; };
+		BDE75BC3243887DF0038A7F8 /* ZZChatStatusBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZChatStatusBtnView.h; sourceTree = "<group>"; };
+		BDE75BC4243887DF0038A7F8 /* ZZChatStatusBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZChatStatusBtnView.m; sourceTree = "<group>"; };
+		BDE75BC6243889660038A7F8 /* ZZChatStatusSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZChatStatusSheetView.m; sourceTree = "<group>"; };
+		BDE75BC7243889660038A7F8 /* ZZChatStatusSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZChatStatusSheetView.h; sourceTree = "<group>"; };
+		BDE75BC924388AD00038A7F8 /* ZZGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZGradientView.h; sourceTree = "<group>"; };
+		BDE75BCA24388AD10038A7F8 /* ZZGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZGradientView.m; sourceTree = "<group>"; };
+		BDE75BCC243893B30038A7F8 /* ZZChatOrderDealView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZChatOrderDealView.m; sourceTree = "<group>"; };
+		BDE75BCD243893B30038A7F8 /* ZZChatOrderDealView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZChatOrderDealView.h; sourceTree = "<group>"; };
+		BDE75BD52438D8030038A7F8 /* ZZUserCenterRespondCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZUserCenterRespondCell.h; sourceTree = "<group>"; };
+		BDE75BD62438D8030038A7F8 /* ZZUserCenterRentGuideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZUserCenterRentGuideCell.m; sourceTree = "<group>"; };
+		BDE75BD72438D8030038A7F8 /* ZZUserCenterRentGuideCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZUserCenterRentGuideCell.h; sourceTree = "<group>"; };
+		BDE75BD82438D8030038A7F8 /* ZZUserCenterRespondCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZUserCenterRespondCell.m; sourceTree = "<group>"; };
+		BDE75BDB2438D8600038A7F8 /* ZZUserCenterRespondItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZUserCenterRespondItemView.h; sourceTree = "<group>"; };
+		BDE75BDC2438D8600038A7F8 /* ZZUserCenterRespondItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZUserCenterRespondItemView.m; sourceTree = "<group>"; };
+		BDE75BDE2438D9E10038A7F8 /* ZZUserStatisDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZUserStatisDataViewController.m; sourceTree = "<group>"; };
+		BDE75BDF2438D9E10038A7F8 /* ZZUserStatisDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZUserStatisDataViewController.h; sourceTree = "<group>"; };
+		BDE75BE12438DF4D0038A7F8 /* ZZRentalAgreementVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentalAgreementVC.m; sourceTree = "<group>"; };
+		BDE75BE22438DF4E0038A7F8 /* ZZRentalAgreementVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentalAgreementVC.h; sourceTree = "<group>"; };
+		BDE75BE42438E0A60038A7F8 /* ZZUserChuzuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZUserChuzuViewController.m; sourceTree = "<group>"; };
+		BDE75BE52438E0A60038A7F8 /* ZZUserChuzuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZUserChuzuViewController.h; sourceTree = "<group>"; };
+		BDE75BE72438E1400038A7F8 /* ZZStoreKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZStoreKey.h; sourceTree = "<group>"; };
+		BDE75BE82438E1400038A7F8 /* ZZStoreKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZStoreKey.m; sourceTree = "<group>"; };
+		BDE75BEA2438E31E0038A7F8 /* ZZUserSkillChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZUserSkillChooseViewController.m; sourceTree = "<group>"; };
+		BDE75BEB2438E31E0038A7F8 /* ZZUserSkillChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZUserSkillChooseViewController.h; sourceTree = "<group>"; };
+		BDE75BED2438E3770038A7F8 /* ZZChuzuSkillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZChuzuSkillCell.m; sourceTree = "<group>"; };
+		BDE75BEE2438E3770038A7F8 /* ZZChuzuReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZChuzuReusableView.h; sourceTree = "<group>"; };
+		BDE75BEF2438E3770038A7F8 /* ZZChuzuSkillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZChuzuSkillCell.h; sourceTree = "<group>"; };
+		BDE75BF02438E3770038A7F8 /* ZZChuzuReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZChuzuReusableView.m; sourceTree = "<group>"; };
+		BDE75BF32438E4390038A7F8 /* ZZChuZuPrivateChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZChuZuPrivateChatCell.h; sourceTree = "<group>"; };
+		BDE75BF42438E4390038A7F8 /* ZZChuZuPrivateChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZChuZuPrivateChatCell.m; sourceTree = "<group>"; };
+		BDE75BF62438E5CD0038A7F8 /* ZZSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZSelectView.h; sourceTree = "<group>"; };
+		BDE75BF72438E5CD0038A7F8 /* ZZSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZSelectView.m; sourceTree = "<group>"; };
+		BDE75BF92438E6170038A7F8 /* ZZRentTopicAddCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentTopicAddCell.m; sourceTree = "<group>"; };
+		BDE75BFA2438E6180038A7F8 /* ZZRentTopicAddCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentTopicAddCell.h; sourceTree = "<group>"; };
+		BDE75BFC2438E6300038A7F8 /* ZZRentRangeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentRangeTableViewCell.h; sourceTree = "<group>"; };
+		BDE75BFD2438E6300038A7F8 /* ZZRentRangeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentRangeTableViewCell.m; sourceTree = "<group>"; };
+		BDE75BFF2438E6520038A7F8 /* ZZRentInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentInfoCell.m; sourceTree = "<group>"; };
+		BDE75C002438E6520038A7F8 /* ZZRentTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentTimeCell.m; sourceTree = "<group>"; };
+		BDE75C012438E6520038A7F8 /* ZZRentInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentInfoCell.h; sourceTree = "<group>"; };
+		BDE75C022438E6520038A7F8 /* ZZRentTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentTimeCell.h; sourceTree = "<group>"; };
+		BDE75C052438E66D0038A7F8 /* ZZRentBaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentBaseTableViewCell.m; sourceTree = "<group>"; };
+		BDE75C062438E66D0038A7F8 /* ZZRentBaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentBaseTableViewCell.h; sourceTree = "<group>"; };
+		BDE75C0E2438E9B30038A7F8 /* ZZSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZSelectCell.h; sourceTree = "<group>"; };
+		BDE75C0F2438E9B30038A7F8 /* ZZSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZSelectCell.m; sourceTree = "<group>"; };
+		BDE75C112438EB1E0038A7F8 /* ZZActivityUrlNetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZActivityUrlNetManager.m; sourceTree = "<group>"; };
+		BDE75C122438EB1E0038A7F8 /* ZZActivityUrlNetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZActivityUrlNetManager.h; sourceTree = "<group>"; };
+		BDE75C142438ED880038A7F8 /* ZZActivityUrlModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZActivityUrlModel.m; sourceTree = "<group>"; };
+		BDE75C152438ED880038A7F8 /* ZZActivityUrlModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZActivityUrlModel.h; sourceTree = "<group>"; };
+		BDE75C172438EEEA0038A7F8 /* ZZOpenSuccessVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZOpenSuccessVC.h; sourceTree = "<group>"; };
+		BDE75C182438EEEA0038A7F8 /* ZZOpenSuccessVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZOpenSuccessVC.m; sourceTree = "<group>"; };
+		BDE75C1A2438EF9A0038A7F8 /* ZZNewRentSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZNewRentSuccessViewController.m; sourceTree = "<group>"; };
+		BDE75C1B2438EF9A0038A7F8 /* ZZNewRentSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZNewRentSuccessViewController.h; sourceTree = "<group>"; };
+		BDE75C1D2438F00D0038A7F8 /* ZZRentSuccessShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZRentSuccessShadowView.h; sourceTree = "<group>"; };
+		BDE75C1E2438F00D0038A7F8 /* ZZRentSuccessShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZRentSuccessShadowView.m; sourceTree = "<group>"; };
+		BDE75C232438F4300038A7F8 /* ZZOpenNotificationGuide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZOpenNotificationGuide.m; sourceTree = "<group>"; };
+		BDE75C242438F4300038A7F8 /* ZZOpenNotificationGuide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZOpenNotificationGuide.h; sourceTree = "<group>"; };
 		BDE7CD6423C9755D00E4C78E /* ZZProtocalChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZProtocalChooseView.h; sourceTree = "<group>"; };
 		BDE7CD6523C9755D00E4C78E /* ZZProtocalChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZProtocalChooseView.m; sourceTree = "<group>"; };
 		BDE7CD6D23C9B83500E4C78E /* yuebanyoulg1111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuebanyoulg1111.png; sourceTree = "<group>"; };
@@ -1545,6 +1657,8 @@
 		8108A8AA21C8C5B6002789CD /* DifferentKindOfCell */ = {
 			isa = PBXGroup;
 			children = (
+				BDE75BAA2438712D0038A7F8 /* ZZChatOrderInfoCell.h */,
+				BDE75BAB2438712D0038A7F8 /* ZZChatOrderInfoCell.m */,
 				810A37E721C5063F00380A8A /* XJRCMTextsCollectionViewCell.h */,
 				810A37E821C5063F00380A8A /* XJRCMTextsCollectionViewCell.m */,
 				BD39973321D5C0AD00EB3667 /* XJRCMImageCollectionViewCell.h */,
@@ -1626,10 +1740,24 @@
 				81E2722521C89A79005DFBF5 /* SystemInfoView */,
 				810A37CD21C0F3FE00380A8A /* XJMessageListTbCell.h */,
 				810A37CE21C0F3FE00380A8A /* XJMessageListTbCell.m */,
+				BDE75BBE243887920038A7F8 /* ZZChatOrderStatusView.h */,
+				BDE75BBD243887920038A7F8 /* ZZChatOrderStatusView.m */,
 				81E2721F21C8914C005DFBF5 /* XJSystemNotiTableViewCell.h */,
 				81E2722021C8914C005DFBF5 /* XJSystemNotiTableViewCell.m */,
 				810A37D621C256E800380A8A /* XJMsgInputTophintView.h */,
 				810A37D721C256E800380A8A /* XJMsgInputTophintView.m */,
+				BDE75BC0243887C70038A7F8 /* ZZChatStatusCountDownView.h */,
+				BDE75BC1243887C70038A7F8 /* ZZChatStatusCountDownView.m */,
+				BDE75BCD243893B30038A7F8 /* ZZChatOrderDealView.h */,
+				BDE75BCC243893B30038A7F8 /* ZZChatOrderDealView.m */,
+				BDE75BC3243887DF0038A7F8 /* ZZChatStatusBtnView.h */,
+				BDE75BC4243887DF0038A7F8 /* ZZChatStatusBtnView.m */,
+				BDE75BC924388AD00038A7F8 /* ZZGradientView.h */,
+				BDE75BCA24388AD10038A7F8 /* ZZGradientView.m */,
+				BDE75BC7243889660038A7F8 /* ZZChatStatusSheetView.h */,
+				BDE75BC6243889660038A7F8 /* ZZChatStatusSheetView.m */,
+				BDE75BB5243872DE0038A7F8 /* ZZChatTimeView.h */,
+				BDE75BB4243872DE0038A7F8 /* ZZChatTimeView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1637,6 +1765,12 @@
 		812D3145219BCFE20061CA14 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BDE75BAE2438718F0038A7F8 /* ZZChatBaseModel.h */,
+				BDE75BAD2438718E0038A7F8 /* ZZChatBaseModel.m */,
+				BDE75BB7243873280038A7F8 /* ZZChatOrderInfoModel.h */,
+				BDE75BB8243873280038A7F8 /* ZZChatOrderInfoModel.m */,
+				BDE75BBB243873A70038A7F8 /* ZZChatOrderNotifyModel.h */,
+				BDE75BBA243873A70038A7F8 /* ZZChatOrderNotifyModel.m */,
 				8108A8A821C8A782002789CD /* ZZMessageChatWechatPayModel.h */,
 				8108A8A721C8A782002789CD /* ZZMessageChatWechatPayModel.m */,
 				8106877C21CD190C007BF0B0 /* ZZChatReportModel.h */,
@@ -1917,7 +2051,6 @@
 			isa = PBXGroup;
 			children = (
 				BDCCC53523C80BEA00718F42 /* Common */,
-				812D4DD0219AB3560007DCC0 /* BaseVC */,
 				812D4DDF219ABEA90007DCC0 /* Modules */,
 				81CB59E421A2627400FEF732 /* LiveCheckFace */,
 				810A37C621C0AE7A00380A8A /* RongIMManager */,
@@ -1968,6 +2101,8 @@
 		81801DE4219AABB400020537 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				BDE75BB1243872250038A7F8 /* UIResponder+ZZRouter.h */,
+				BDE75BB0243872250038A7F8 /* UIResponder+ZZRouter.m */,
 				BD72173D2437323B00209AC3 /* Swift */,
 				BDA58568243570480053D820 /* Block */,
 				BDA5856424356EAC0053D820 /* UITextView */,
@@ -1999,8 +2134,13 @@
 				BDBD1EC52435C2EB00C9B3C3 /* WeiChatEvaluationManager */,
 				BDA5854F24356CA00053D820 /* ZZRuleHelper.h */,
 				BDA5854E24356CA00053D820 /* ZZRuleHelper.m */,
+				BDE75BB3243872AF0038A7F8 /* ZZChatConst.h */,
+				BDE75C122438EB1E0038A7F8 /* ZZActivityUrlNetManager.h */,
+				BDE75C112438EB1E0038A7F8 /* ZZActivityUrlNetManager.m */,
 				BD9DC160243651A700E99B5F /* ZZUploader.h */,
 				BD9DC161243651A700E99B5F /* ZZUploader.m */,
+				BDE75BE72438E1400038A7F8 /* ZZStoreKey.h */,
+				BDE75BE82438E1400038A7F8 /* ZZStoreKey.m */,
 				BD7216A62436EB8000209AC3 /* ZZSkillThemesHelper.h */,
 				BD7216A72436EB8100209AC3 /* ZZSkillThemesHelper.m */,
 				BD7216D024370B0000209AC3 /* ZZTaskConfig.h */,
@@ -2343,68 +2483,68 @@
 		BD07D8C624332D7000FC5E4D /* RentOrderVC */ = {
 			isa = PBXGroup;
 			children = (
-				BD9DC15B2436510000E99B5F /* ZZOrderLocationViewController.h */,
-				BD9DC15A2436510000E99B5F /* ZZOrderLocationViewController.m */,
-				BD9DC14E2436471B00E99B5F /* ZZFillBankViewController.h */,
-				BD9DC14F2436471B00E99B5F /* ZZFillBankViewController.m */,
-				BD7216A12436EAD000209AC3 /* ZZChooseTagViewController.h */,
-				BD7216A02436EAD000209AC3 /* ZZChooseTagViewController.m */,
-				BD9DC1132436245B00E99B5F /* ZZRechargeViewController.h */,
-				BD9DC1122436245B00E99B5F /* ZZRechargeViewController.m */,
-				BD9DC0F72435E54900E99B5F /* ZZOrderTalentShowViewController.h */,
-				BD9DC0F62435E54900E99B5F /* ZZOrderTalentShowViewController.m */,
-				BD7216B22436FD6E00209AC3 /* ZZScheduleEditViewController.h */,
-				BD7216B32436FD6E00209AC3 /* ZZScheduleEditViewController.m */,
-				BD9DC0F12435E3AE00E99B5F /* ZZNewOrderRefuseReasonViewController.h */,
-				BD9DC0F02435E3AE00E99B5F /* ZZNewOrderRefuseReasonViewController.m */,
-				BD72169D2436EA6B00209AC3 /* ZZSkillOptionViewController.h */,
-				BD72169E2436EA6C00209AC3 /* ZZSkillOptionViewController.m */,
-				BD9DC0AA2435D23700E99B5F /* ZZOrderApplyRefundReasonVC.h */,
-				BD9DC0AB2435D23800E99B5F /* ZZOrderApplyRefundReasonVC.m */,
-				BD9DC0A52435D19D00E99B5F /* ZZEvidenceInformationVC.h */,
-				BD9DC0A42435D19D00E99B5F /* ZZEvidenceInformationVC.m */,
-				BD7216BE2436FF2700209AC3 /* ZZRegisterRentViewController.h */,
-				BD7216BF2436FF2700209AC3 /* ZZRegisterRentViewController.m */,
+				BD721736243730A800209AC3 /* zwmMini-Bridging-Header.h */,
+				BD721739243730A900209AC3 /* ZZAutoCreateInputCell.swift */,
+				BD721738243730A900209AC3 /* ZZAutoCreateSelectCell.swift */,
+				BD721737243730A900209AC3 /* ZZAutoCreateView.swift */,
+				BD9DC0942435CEA000E99B5F /* ZZCancelOrderDetailCell.h */,
+				BD9DC0952435CEA000E99B5F /* ZZCancelOrderDetailCell.m */,
 				BD9DC0A12435D16F00E99B5F /* ZZCheckOtherUploadEvidence.h */,
 				BD9DC0A22435D16F00E99B5F /* ZZCheckOtherUploadEvidence.m */,
-				BDA585902435B7B60053D820 /* ZZOrderRefuseRefundViewController.h */,
-				BDA585912435B7DB0053D820 /* ZZOrderRefuseRefundViewController.m */,
-				BD7216C824370A5000209AC3 /* ZZSkillEditViewController.h */,
-				BD7216C724370A5000209AC3 /* ZZSkillEditViewController.m */,
 				BD7216CE24370AC200209AC3 /* ZZChooseSkillViewController.h */,
 				BD7216CD24370AC200209AC3 /* ZZChooseSkillViewController.m */,
-				BD7216CA24370A9600209AC3 /* ZZSubmitThemePictureViewController.h */,
-				BD7216CB24370A9700209AC3 /* ZZSubmitThemePictureViewController.m */,
-				BDA584B5243490B80053D820 /* ZZSkillDetailViewController.h */,
-				BDA584B6243490B80053D820 /* ZZSkillDetailViewController.m */,
+				BD7216A12436EAD000209AC3 /* ZZChooseTagViewController.h */,
+				BD7216A02436EAD000209AC3 /* ZZChooseTagViewController.m */,
+				BD9DC0A52435D19D00E99B5F /* ZZEvidenceInformationVC.h */,
+				BD9DC0A42435D19D00E99B5F /* ZZEvidenceInformationVC.m */,
+				BD9DC14E2436471B00E99B5F /* ZZFillBankViewController.h */,
+				BD9DC14F2436471B00E99B5F /* ZZFillBankViewController.m */,
+				BDA584A0243440740053D820 /* ZZLocationSearchedController.h */,
+				BDA584A1243440750053D820 /* ZZLocationSearchedController.m */,
+				BD9DC0F12435E3AE00E99B5F /* ZZNewOrderRefuseReasonViewController.h */,
+				BD9DC0F02435E3AE00E99B5F /* ZZNewOrderRefuseReasonViewController.m */,
+				BD9DC0AA2435D23700E99B5F /* ZZOrderApplyRefundReasonVC.h */,
+				BD9DC0AB2435D23800E99B5F /* ZZOrderApplyRefundReasonVC.m */,
+				BD9DC15B2436510000E99B5F /* ZZOrderLocationViewController.h */,
+				BD9DC15A2436510000E99B5F /* ZZOrderLocationViewController.m */,
+				BDA585902435B7B60053D820 /* ZZOrderRefuseRefundViewController.h */,
+				BDA585912435B7DB0053D820 /* ZZOrderRefuseRefundViewController.m */,
+				BD9DC0F72435E54900E99B5F /* ZZOrderTalentShowViewController.h */,
+				BD9DC0F62435E54900E99B5F /* ZZOrderTalentShowViewController.m */,
+				BD7216DE24370D3900209AC3 /* ZZPictureExampleViewController.h */,
+				BD7216DD24370D3900209AC3 /* ZZPictureExampleViewController.m */,
+				BD9DC1132436245B00E99B5F /* ZZRechargeViewController.h */,
+				BD9DC1122436245B00E99B5F /* ZZRechargeViewController.m */,
+				BD7216BE2436FF2700209AC3 /* ZZRegisterRentViewController.h */,
+				BD7216BF2436FF2700209AC3 /* ZZRegisterRentViewController.m */,
+				BDA5848E243439D80053D820 /* ZZRentAbroadLocationViewController.h */,
+				BDA5848F243439D80053D820 /* ZZRentAbroadLocationViewController.m */,
+				BDA5844424339F7B0053D820 /* ZZRentChooseSkillViewController.h */,
+				BDA5844324339F7B0053D820 /* ZZRentChooseSkillViewController.m */,
+				BDA58456243424860053D820 /* ZZRentOrderInfoViewController.h */,
+				BDA58455243424860053D820 /* ZZRentOrderInfoViewController.m */,
 				BDA584AF24347A330053D820 /* ZZRentOrderPayCompleteViewController.h */,
 				BDA584B024347A330053D820 /* ZZRentOrderPayCompleteViewController.m */,
 				BDA584AC243471340053D820 /* ZZRentOrderPaymentViewController.h */,
 				BDA584AD243471350053D820 /* ZZRentOrderPaymentViewController.m */,
-				BDA584A0243440740053D820 /* ZZLocationSearchedController.h */,
-				BDA584A1243440750053D820 /* ZZLocationSearchedController.m */,
+				BD7216B22436FD6E00209AC3 /* ZZScheduleEditViewController.h */,
+				BD7216B32436FD6E00209AC3 /* ZZScheduleEditViewController.m */,
 				BDA58491243439EC0053D820 /* ZZSearchLocationController.h */,
 				BDA58492243439ED0053D820 /* ZZSearchLocationController.m */,
-				BD7216C4243709E300209AC3 /* ZZSkillThemeManageViewController.h */,
-				BD7216C5243709E300209AC3 /* ZZSkillThemeManageViewController.m */,
-				BD7216E024370D5D00209AC3 /* ZZSkillCameraViewController.h */,
-				BD7216E124370D5D00209AC3 /* ZZSkillCameraViewController.m */,
-				BDA5848E243439D80053D820 /* ZZRentAbroadLocationViewController.h */,
-				BDA5848F243439D80053D820 /* ZZRentAbroadLocationViewController.m */,
-				BD9DC0942435CEA000E99B5F /* ZZCancelOrderDetailCell.h */,
-				BD9DC0952435CEA000E99B5F /* ZZCancelOrderDetailCell.m */,
-				BDA58456243424860053D820 /* ZZRentOrderInfoViewController.h */,
-				BDA58455243424860053D820 /* ZZRentOrderInfoViewController.m */,
-				BDA5844424339F7B0053D820 /* ZZRentChooseSkillViewController.h */,
-				BD7216DE24370D3900209AC3 /* ZZPictureExampleViewController.h */,
-				BD7216DD24370D3900209AC3 /* ZZPictureExampleViewController.m */,
-				BDA5844324339F7B0053D820 /* ZZRentChooseSkillViewController.m */,
 				BD7216A92436EE0300209AC3 /* ZZSignEditViewController.h */,
 				BD7216AA2436EE0300209AC3 /* ZZSignEditViewController.m */,
-				BD721739243730A900209AC3 /* ZZAutoCreateInputCell.swift */,
-				BD721738243730A900209AC3 /* ZZAutoCreateSelectCell.swift */,
-				BD721737243730A900209AC3 /* ZZAutoCreateView.swift */,
-				BD721736243730A800209AC3 /* zwmMini-Bridging-Header.h */,
+				BD7216E024370D5D00209AC3 /* ZZSkillCameraViewController.h */,
+				BD7216E124370D5D00209AC3 /* ZZSkillCameraViewController.m */,
+				BDA584B5243490B80053D820 /* ZZSkillDetailViewController.h */,
+				BDA584B6243490B80053D820 /* ZZSkillDetailViewController.m */,
+				BD7216C824370A5000209AC3 /* ZZSkillEditViewController.h */,
+				BD7216C724370A5000209AC3 /* ZZSkillEditViewController.m */,
+				BD72169D2436EA6B00209AC3 /* ZZSkillOptionViewController.h */,
+				BD72169E2436EA6C00209AC3 /* ZZSkillOptionViewController.m */,
+				BD7216C4243709E300209AC3 /* ZZSkillThemeManageViewController.h */,
+				BD7216C5243709E300209AC3 /* ZZSkillThemeManageViewController.m */,
+				BD7216CA24370A9600209AC3 /* ZZSubmitThemePictureViewController.h */,
+				BD7216CB24370A9700209AC3 /* ZZSubmitThemePictureViewController.m */,
 			);
 			path = RentOrderVC;
 			sourceTree = "<group>";
@@ -2901,6 +3041,7 @@
 				BDB2D4C621D7109000F6CBA6 /* BeReviewWechatVC */,
 				BDB2D48A21D7109000F6CBA6 /* EditMyInfoVC */,
 				BDB2D49A21D7109000F6CBA6 /* HasReviewWXVC */,
+				812D4DD0219AB3560007DCC0 /* BaseVC */,
 				BDB2D4C921D7109000F6CBA6 /* MyWalletVC */,
 				BDB2D47B21D7109000F6CBA6 /* MywechatVC */,
 				BDB2D48721D7109000F6CBA6 /* PerSonalDataVC */,
@@ -2912,9 +3053,13 @@
 				BDA58579243574C20053D820 /* ZZOrderCommentViewController.m */,
 				BDB2D47921D7109000F6CBA6 /* XJUploadRealHeadImgVC.h */,
 				BDB2D49921D7109000F6CBA6 /* XJUploadRealHeadImgVC.m */,
+				BDE75BE22438DF4E0038A7F8 /* ZZRentalAgreementVC.h */,
+				BDE75BE12438DF4D0038A7F8 /* ZZRentalAgreementVC.m */,
 				BDA58573243572E00053D820 /* ZZPayViewController.h */,
 				BDA58572243572E00053D820 /* ZZPayViewController.m */,
 				BDA584E72434FD3A0053D820 /* ZZOrderListViewController.h */,
+				BDE75C1B2438EF9A0038A7F8 /* ZZNewRentSuccessViewController.h */,
+				BDE75C1A2438EF9A0038A7F8 /* ZZNewRentSuccessViewController.m */,
 				BDA584E82434FD3A0053D820 /* ZZOrderListViewController.m */,
 				BDA584F12434FE550053D820 /* ZZOrderDetailViewController.h */,
 				BDA584ED2434FE540053D820 /* ZZOrderDetailViewController.m */,
@@ -2927,6 +3072,12 @@
 				BDA584F9243500E10053D820 /* ZZOrderOptionsTableViewController.m */,
 				BDA58520243507250053D820 /* ZZOrderRefundViewController.h */,
 				BDA58521243507250053D820 /* ZZOrderRefundViewController.m */,
+				BDE75BDF2438D9E10038A7F8 /* ZZUserStatisDataViewController.h */,
+				BDE75BDE2438D9E10038A7F8 /* ZZUserStatisDataViewController.m */,
+				BDE75BE52438E0A60038A7F8 /* ZZUserChuzuViewController.h */,
+				BDE75BE42438E0A60038A7F8 /* ZZUserChuzuViewController.m */,
+				BDE75BEB2438E31E0038A7F8 /* ZZUserSkillChooseViewController.h */,
+				BDE75BEA2438E31E0038A7F8 /* ZZUserSkillChooseViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -3129,6 +3280,8 @@
 				BDB2D4EA21D7109000F6CBA6 /* XJHasReviewListModel.m */,
 				BDB2D4EB21D7109000F6CBA6 /* XJYoubiRecordModel.h */,
 				BDB2D4EC21D7109000F6CBA6 /* XJSubYoubiRecordModel.m */,
+				BDE75C152438ED880038A7F8 /* ZZActivityUrlModel.h */,
+				BDE75C142438ED880038A7F8 /* ZZActivityUrlModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3148,10 +3301,14 @@
 				BDB2D4F721D7109000F6CBA6 /* SetUpView */,
 				BDB2D4EE21D7109000F6CBA6 /* XJMyHeadView.h */,
 				BDB2D50221D7109000F6CBA6 /* XJMyHeadView.m */,
+				BDE75C242438F4300038A7F8 /* ZZOpenNotificationGuide.h */,
+				BDE75C232438F4300038A7F8 /* ZZOpenNotificationGuide.m */,
 				BD9DC0C62435D72200E99B5F /* ZZShowOriginalImageView.h */,
 				BD9DC0C52435D72200E99B5F /* ZZShowOriginalImageView.m */,
 				BDB2D50D21D7109000F6CBA6 /* XJMyTableViewCell.h */,
 				BDB2D4FE21D7109000F6CBA6 /* XJMyTableViewCell.m */,
+				BD93C86824397027004573E9 /* ZZUserCenterBaseCell.h */,
+				BD93C86724397027004573E9 /* ZZUserCenterBaseCell.m */,
 				BDA584E42434FA7D0053D820 /* ZZBadgeView.h */,
 				BDA584E52434FA7D0053D820 /* ZZBadgeView.m */,
 				BDA584E22434FA580053D820 /* ZZSelfOrderButton.h */,
@@ -3162,6 +3319,8 @@
 				BDA584FD243501490053D820 /* ZZOrderEmptyView.m */,
 				BDA584FB243501480053D820 /* ZZOrderListCell.h */,
 				BDA58500243501490053D820 /* ZZOrderListCell.m */,
+				BDE75C172438EEEA0038A7F8 /* ZZOpenSuccessVC.h */,
+				BDE75C182438EEEA0038A7F8 /* ZZOpenSuccessVC.m */,
 				BDA584FF243501490053D820 /* ZZOrderListHeadView.h */,
 				BDA584FC243501490053D820 /* ZZOrderListHeadView.m */,
 				BDA58505243501850053D820 /* ZZNotNetEmptyView.h */,
@@ -3178,6 +3337,34 @@
 				BDA5856024356DB10053D820 /* ZZOrderRefundTitleCell.m */,
 				BDA58576243573690053D820 /* ZZRefundPhotoCell.h */,
 				BDA58575243573690053D820 /* ZZRefundPhotoCell.m */,
+				BDE75BD72438D8030038A7F8 /* ZZUserCenterRentGuideCell.h */,
+				BDE75BD62438D8030038A7F8 /* ZZUserCenterRentGuideCell.m */,
+				BDE75BDB2438D8600038A7F8 /* ZZUserCenterRespondItemView.h */,
+				BDE75BDC2438D8600038A7F8 /* ZZUserCenterRespondItemView.m */,
+				BDE75BD52438D8030038A7F8 /* ZZUserCenterRespondCell.h */,
+				BDE75BD82438D8030038A7F8 /* ZZUserCenterRespondCell.m */,
+				BDE75BEE2438E3770038A7F8 /* ZZChuzuReusableView.h */,
+				BDE75BF02438E3770038A7F8 /* ZZChuzuReusableView.m */,
+				BDE75BEF2438E3770038A7F8 /* ZZChuzuSkillCell.h */,
+				BDE75BED2438E3770038A7F8 /* ZZChuzuSkillCell.m */,
+				BDE75BF32438E4390038A7F8 /* ZZChuZuPrivateChatCell.h */,
+				BDE75BF42438E4390038A7F8 /* ZZChuZuPrivateChatCell.m */,
+				BDE75BF62438E5CD0038A7F8 /* ZZSelectView.h */,
+				BDE75BF72438E5CD0038A7F8 /* ZZSelectView.m */,
+				BDE75C1D2438F00D0038A7F8 /* ZZRentSuccessShadowView.h */,
+				BDE75C1E2438F00D0038A7F8 /* ZZRentSuccessShadowView.m */,
+				BDE75BFA2438E6180038A7F8 /* ZZRentTopicAddCell.h */,
+				BDE75BF92438E6170038A7F8 /* ZZRentTopicAddCell.m */,
+				BDE75BFC2438E6300038A7F8 /* ZZRentRangeTableViewCell.h */,
+				BDE75BFD2438E6300038A7F8 /* ZZRentRangeTableViewCell.m */,
+				BDE75C012438E6520038A7F8 /* ZZRentInfoCell.h */,
+				BDE75BFF2438E6520038A7F8 /* ZZRentInfoCell.m */,
+				BDE75C022438E6520038A7F8 /* ZZRentTimeCell.h */,
+				BDE75C002438E6520038A7F8 /* ZZRentTimeCell.m */,
+				BDE75C062438E66D0038A7F8 /* ZZRentBaseTableViewCell.h */,
+				BDE75C052438E66D0038A7F8 /* ZZRentBaseTableViewCell.m */,
+				BDE75C0E2438E9B30038A7F8 /* ZZSelectCell.h */,
+				BDE75C0F2438E9B30038A7F8 /* ZZSelectCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3757,6 +3944,7 @@
 				81D7DE7421ABDC3500095E1C /* RACollectionViewReorderableTripletLayout.m in Sources */,
 				BD9DC10E2435EE3200E99B5F /* ZZOrderArOtherARPriceCell.m in Sources */,
 				BDB2D5D221D710BE00F6CBA6 /* XJMessageLoginVC.m in Sources */,
+				BDE75BB2243872250038A7F8 /* UIResponder+ZZRouter.m in Sources */,
 				BDB2D54921D7109000F6CBA6 /* XJUploadRealHeadImgVC.m in Sources */,
 				BD9DC0872435C74600E99B5F /* ZZOrderFirstGuideView.m in Sources */,
 				BDB2D55421D7109000F6CBA6 /* XJPrivacyVC.m in Sources */,
@@ -3767,10 +3955,12 @@
 				810A37C921C0AEBE00380A8A /* XJRongIMManager.m in Sources */,
 				8106877821CC75C3007BF0B0 /* XJReportOhterTbCell.m in Sources */,
 				BDB2D57721D7109000F6CBA6 /* XJMyHeadView.m in Sources */,
+				BDE75C1F2438F00E0038A7F8 /* ZZRentSuccessShadowView.m in Sources */,
 				BDB2D5D121D710BE00F6CBA6 /* XJLoginVC.m in Sources */,
 				BD9DC09D2435D03400E99B5F /* ZZInvitationModel.m in Sources */,
 				BD7216DB24370BC900209AC3 /* ZZSkillsSelectResponseModel.m in Sources */,
 				BD9DC12C2436289C00E99B5F /* ZZMemedaTopicModel.m in Sources */,
+				BDE75BE92438E1400038A7F8 /* ZZStoreKey.m in Sources */,
 				BD72172B243718C200209AC3 /* ZZSkillEditTagCell.m in Sources */,
 				BDB2D53C21D7109000F6CBA6 /* XJMywechatVC.m in Sources */,
 				BD9DC0A32435D16F00E99B5F /* ZZCheckOtherUploadEvidence.m in Sources */,
@@ -3778,6 +3968,7 @@
 				BDA585872435753C0053D820 /* ZZStarsView.m in Sources */,
 				BDB2D58C21D7109100F6CBA6 /* XJSelectJobsTbCell.m in Sources */,
 				BDB2D58F21D7109100F6CBA6 /* XJEditInfoTableViewCell.m in Sources */,
+				BDE75BAF2438718F0038A7F8 /* ZZChatBaseModel.m in Sources */,
 				BDB2D56821D7109000F6CBA6 /* XJMyCoinVC.m in Sources */,
 				BDBD1EC32435C2C500C9B3C3 /* ZZWeiChatBadEvaluationReasonModel.m in Sources */,
 				BDA58490243439D80053D820 /* ZZRentAbroadLocationViewController.m in Sources */,
@@ -3789,9 +3980,13 @@
 				812D3175219C19670061CA14 /* PinyinHelper.m in Sources */,
 				BDB2D54D21D7109000F6CBA6 /* XJAboutBanyouVC.m in Sources */,
 				BDB2D56721D7109000F6CBA6 /* XJRechargeProtocalVC.m in Sources */,
+				BDE75C1C2438EF9A0038A7F8 /* ZZNewRentSuccessViewController.m in Sources */,
+				BDE75BFB2438E6180038A7F8 /* ZZRentTopicAddCell.m in Sources */,
+				BDE75BBF243887920038A7F8 /* ZZChatOrderStatusView.m in Sources */,
 				BD721716243715F500209AC3 /* ZZUploadPhotoExampleView.m in Sources */,
 				BDB2D57321D7109000F6CBA6 /* XJChangePsView.m in Sources */,
 				BD721728243718A300209AC3 /* ZZSkillEditPictureCell.m in Sources */,
+				BDE75BCE243893B30038A7F8 /* ZZChatOrderDealView.m in Sources */,
 				BDB2D56121D7109000F6CBA6 /* XJWithDrawRecordVC.m in Sources */,
 				810A37D221C12D6100380A8A /* XJUnreadModel.m in Sources */,
 				812D3177219C19670061CA14 /* HanyuPinyinOutputFormat.m in Sources */,
@@ -3823,6 +4018,7 @@
 				BDB2D55821D7109000F6CBA6 /* ZZContactModel.m in Sources */,
 				BDF3AEAD21FBEF5B00657CDC /* TZPhotoPickerController.m in Sources */,
 				BDB2D5D521D710BE00F6CBA6 /* XJLoginView.m in Sources */,
+				BDE75BEC2438E31E0038A7F8 /* ZZUserSkillChooseViewController.m in Sources */,
 				BD7216CF24370AC200209AC3 /* ZZChooseSkillViewController.m in Sources */,
 				BD9DC15324364C2000E99B5F /* ZZFillBankCell.m in Sources */,
 				81D7DDE221A6863B00095E1C /* ZZCityHotCell.m in Sources */,
@@ -3831,6 +4027,8 @@
 				BDF3AEA321FBEF5B00657CDC /* TZImageCropManager.m in Sources */,
 				BDB2D58121D7109100F6CBA6 /* XJMyBalanceHeadView.m in Sources */,
 				81D7DEA021AE976E00095E1C /* NSString+XJStringUitls.m in Sources */,
+				BDE75BDD2438D8600038A7F8 /* ZZUserCenterRespondItemView.m in Sources */,
+				BDE75BDA2438D8030038A7F8 /* ZZUserCenterRespondCell.m in Sources */,
 				BD9DC1502436471B00E99B5F /* ZZFillBankViewController.m in Sources */,
 				BDB2D55221D7109000F6CBA6 /* XJSetUpVC.m in Sources */,
 				81E2721E21C7AFF9005DFBF5 /* XJFirstOpenChatHintVC.m in Sources */,
@@ -3842,6 +4040,7 @@
 				BDA5845A243428F60053D820 /* ZZHoursPicker.m in Sources */,
 				BDA58503243501490053D820 /* ZZOrderListCell.m in Sources */,
 				BDB2D56221D7109000F6CBA6 /* XJWithDrawProtocalVC.m in Sources */,
+				BDE75BE02438D9E10038A7F8 /* ZZUserStatisDataViewController.m in Sources */,
 				BDB2D5C621D710BE00F6CBA6 /* XJRestPasswordView.m in Sources */,
 				810A37E921C5064000380A8A /* XJRCMTextsCollectionViewCell.m in Sources */,
 				BD7216D224370B0000209AC3 /* ZZTaskConfig.m in Sources */,
@@ -3876,6 +4075,7 @@
 				BDA5844524339F7C0053D820 /* ZZRentChooseSkillViewController.m in Sources */,
 				BD9DC1202436257E00E99B5F /* ZZLiveStreamEndAlert.m in Sources */,
 				BD9DC14D243646CE00E99B5F /* ZZTiXianDetailNumberCell.m in Sources */,
+				BD93C86924397027004573E9 /* ZZUserCenterBaseCell.m in Sources */,
 				BDB2D5CF21D710BE00F6CBA6 /* XJRegistDoneView.m in Sources */,
 				BD7216F1243711FC00209AC3 /* ZZSkillThemeCell.m in Sources */,
 				BD07D8BF2432EFC000FC5E4D /* XJTopic.m in Sources */,
@@ -3886,6 +4086,7 @@
 				812D4DFE219ACA790007DCC0 /* UILabel+ShadowText.m in Sources */,
 				BDA5843C24338F0D0053D820 /* XJRentSkillCell.m in Sources */,
 				BD9DC123243625C200E99B5F /* ZZPayTonggaoCell.m in Sources */,
+				BDE75BF12438E3770038A7F8 /* ZZChuzuSkillCell.m in Sources */,
 				8104EABB21CB81CC00856FDE /* PEResizeControl.m in Sources */,
 				81E271FF21C6254F005DFBF5 /* FaceBaseViewController.m in Sources */,
 				BDB2D57221D7109000F6CBA6 /* XJSetUpSitchTbCell.m in Sources */,
@@ -3896,6 +4097,7 @@
 				81C098F121BE445000226AB8 /* XJNoEvaluateVC.m in Sources */,
 				8106877B21CC7DC5007BF0B0 /* XJReportImgsTbCell.m in Sources */,
 				819CA23821D07A9B00B831EF /* UIViewController+XJShowSeletcController.m in Sources */,
+				BDE75BAC2438712D0038A7F8 /* ZZChatOrderInfoCell.m in Sources */,
 				BD7216BA2436FE1700209AC3 /* ZZSkillEditCellFooter.m in Sources */,
 				BDA584A2243440750053D820 /* ZZLocationSearchedController.m in Sources */,
 				BDF3AEA821FBEF5B00657CDC /* UIView+Layout.m in Sources */,
@@ -3910,6 +4112,7 @@
 				BDB2D5CD21D710BE00F6CBA6 /* XJLivewCheckFaceView.m in Sources */,
 				BDA5858D2435B73B0053D820 /* ZZChatServerViewController.m in Sources */,
 				BDB2D54521D7109000F6CBA6 /* XJEditMyIntroduceVC.m in Sources */,
+				BDE75C252438F4300038A7F8 /* ZZOpenNotificationGuide.m in Sources */,
 				810A37D521C1ED3400380A8A /* XJChatUtils.m in Sources */,
 				BDB2D56021D7109000F6CBA6 /* XJMyBlanceVC.m in Sources */,
 				BDB2D54421D7109000F6CBA6 /* XJEditMyInfoVC.m in Sources */,
@@ -3940,6 +4143,7 @@
 				BDF3AEA621FBEF5B00657CDC /* TZAssetModel.m in Sources */,
 				BDB2D57A21D7109000F6CBA6 /* XJPersonalTagsTbCell.m in Sources */,
 				BD9DC162243651A700E99B5F /* ZZUploader.m in Sources */,
+				BDE75BBC243873A70038A7F8 /* ZZChatOrderNotifyModel.m in Sources */,
 				BDA584E92434FD3A0053D820 /* ZZOrderListViewController.m in Sources */,
 				812D4DE9219AC3DB0007DCC0 /* XJUIFactory.m in Sources */,
 				BDB2D57E21D7109100F6CBA6 /* XJBlanceTbCell.m in Sources */,
@@ -3948,16 +4152,20 @@
 				BD9DC13224363A9200E99B5F /* ZZWalletHeadView.m in Sources */,
 				BD9DC0932435CD4000E99B5F /* ZZNewOrderRefundOptionsViewController.m in Sources */,
 				BDB2D56C21D7109000F6CBA6 /* XJYoubiRecordModel.m in Sources */,
+				BDE75BD92438D8030038A7F8 /* ZZUserCenterRentGuideCell.m in Sources */,
 				812D4DE5219AC1440007DCC0 /* XJRequestManager.m in Sources */,
 				BD9DC0BD2435D44600E99B5F /* ZZOrderArCheckEvidenceNickCell.m in Sources */,
 				810E589321A3E966005AE4B2 /* UIActionSheet+Blocks.m in Sources */,
+				BDE75BE32438DF4E0038A7F8 /* ZZRentalAgreementVC.m in Sources */,
 				BD9DC13824363AC500E99B5F /* ZZWalletTypeCell.m in Sources */,
 				81D7DE4821A8E56100095E1C /* XJNearTableViewCell.m in Sources */,
 				BD7217492437334400209AC3 /* ConfigSwift.swift in Sources */,
 				BD7216B72436FDB100209AC3 /* ZZScheduleTableHeader.m in Sources */,
 				81E2722421C89725005DFBF5 /* XJSystemNotiVC.m in Sources */,
+				BDE75BE62438E0A60038A7F8 /* ZZUserChuzuViewController.m in Sources */,
 				BD9DC0EE2435E2A300E99B5F /* WBTokenButton.m in Sources */,
 				BDB2D55121D7109000F6CBA6 /* XJAccountAndSafeVC.m in Sources */,
+				BDE75BB9243873280038A7F8 /* ZZChatOrderInfoModel.m in Sources */,
 				81E2720A21C625B2005DFBF5 /* ImageUtils.m in Sources */,
 				81C098EE21BE0DE700226AB8 /* XJLookWxEnougCoinVC.m in Sources */,
 				BDA5855D24356CFA0053D820 /* TPKeyboardAvoidingCollectionView.m in Sources */,
@@ -3971,7 +4179,9 @@
 				BDF3AEA721FBEF5B00657CDC /* NSBundle+TZImagePicker.m in Sources */,
 				BDA58501243501490053D820 /* ZZOrderListHeadView.m in Sources */,
 				81D7DE2121A6A91000095E1C /* UIImage+Additions.m in Sources */,
+				BDE75BFE2438E6300038A7F8 /* ZZRentRangeTableViewCell.m in Sources */,
 				81D7DDEC21A686A000095E1C /* SKTag.m in Sources */,
+				BDE75BC5243887DF0038A7F8 /* ZZChatStatusBtnView.m in Sources */,
 				BDB2D58A21D7109100F6CBA6 /* XJEditHeadViewPhotoCollCell.m in Sources */,
 				812D4DD7219AB4D40007DCC0 /* XJBaseVC.m in Sources */,
 				BDA5858A2435753C0053D820 /* ZZCommentLabelCell.m in Sources */,
@@ -3989,6 +4199,7 @@
 				BDA584AB243449130053D820 /* ZZLinkWebNavigationView.m in Sources */,
 				BD9DC0A92435D20200E99B5F /* ZZPlatformRentRulesFootView.m in Sources */,
 				BD7216EB243710DC00209AC3 /* ZZThemePictureFooter.m in Sources */,
+				BDE75BF52438E43A0038A7F8 /* ZZChuZuPrivateChatCell.m in Sources */,
 				BDA585862435753C0053D820 /* ZZCommentInputCell.m in Sources */,
 				BD9DC1142436245B00E99B5F /* ZZRechargeViewController.m in Sources */,
 				BDA584E62434FA7D0053D820 /* ZZBadgeView.m in Sources */,
@@ -4000,6 +4211,7 @@
 				BD7216CC24370A9700209AC3 /* ZZSubmitThemePictureViewController.m in Sources */,
 				810A37CF21C0F3FE00380A8A /* XJMessageListTbCell.m in Sources */,
 				BDA5850F243502100053D820 /* ZZRefreshHeader.m in Sources */,
+				BDE75BB6243872DE0038A7F8 /* ZZChatTimeView.m in Sources */,
 				BDB2D54021D7109000F6CBA6 /* XJIDCardFailVC.m in Sources */,
 				BDF3AEA521FBEF5B00657CDC /* TZVideoPlayerController.m in Sources */,
 				BDB2D53D21D7109000F6CBA6 /* XJIDCardAbroadVC.m in Sources */,
@@ -4017,6 +4229,7 @@
 				81D7DE7521ABDC3500095E1C /* RACollectionViewTripletLayout.m in Sources */,
 				BD9DC0C72435D72200E99B5F /* ZZShowOriginalImageView.m in Sources */,
 				BDA5856224356DB10053D820 /* ZZOrderRefundPhotoCell.m in Sources */,
+				BDE75C132438EB1E0038A7F8 /* ZZActivityUrlNetManager.m in Sources */,
 				BDA584E02434F9E20053D820 /* ZZUserCenterOrderCell.m in Sources */,
 				BDA5849624343A4A0053D820 /* ZZRentLocationCell.m in Sources */,
 				BDB2D55A21D7109000F6CBA6 /* ZZContactAuthorityAlert.m in Sources */,
@@ -4025,6 +4238,7 @@
 				81D7DE2B21A6B0FF00095E1C /* XJSeachUserVC.m in Sources */,
 				BD721704243714D100209AC3 /* ZZUserEditHeadView.m in Sources */,
 				BD9DC0902435CCAC00E99B5F /* ZZFalsePhoneAlertViewGuide.m in Sources */,
+				BDE75C192438EEEB0038A7F8 /* ZZOpenSuccessVC.m in Sources */,
 				BD721710243715BA00209AC3 /* ZZUserEditPhotoAddCell.m in Sources */,
 				BD7217472437323B00209AC3 /* UIImage+Extension.swift in Sources */,
 				BDA584CE2434D41F0053D820 /* ZZSkillDetailContentCell.m in Sources */,
@@ -4032,6 +4246,7 @@
 				812D4DDB219AB5910007DCC0 /* XJBaseWebVC.m in Sources */,
 				BDB2D54221D7109000F6CBA6 /* XJEditNicknameVC.m in Sources */,
 				BD07D8BC2432EF0D00FC5E4D /* XJRentModel.m in Sources */,
+				BDE75C102438E9B30038A7F8 /* ZZSelectCell.m in Sources */,
 				812D3173219C19670061CA14 /* ChineseToPinyinResource.m in Sources */,
 				BDB2D5CC21D710BE00F6CBA6 /* XJUsePrivaProtocalVC.m in Sources */,
 				BDB2D58621D7109100F6CBA6 /* XJMyCoinView.m in Sources */,
@@ -4048,12 +4263,14 @@
 				BDA5847E2434307F0053D820 /* ZZRentDropdownCell.m in Sources */,
 				812D312C219BC92D0061CA14 /* XJMessageVC.m in Sources */,
 				BDA5843F2433946D0053D820 /* XJRentSkillItemView.m in Sources */,
+				BDE75BC8243889660038A7F8 /* ZZChatStatusSheetView.m in Sources */,
 				81D7DEF121B138CE00095E1C /* PPPersonModel.m in Sources */,
 				BDA5855024356CA00053D820 /* ZZRuleHelper.m in Sources */,
 				BDF3AE8421FBEDFA00657CDC /* UIImagePickerController+Block.m in Sources */,
 				BDB2D5D421D710BE00F6CBA6 /* XJContryListModel.m in Sources */,
 				81CB59D621A24E4E00FEF732 /* XJUserManager.m in Sources */,
 				BDA5844E2433ADB40053D820 /* ZZDateHelper.m in Sources */,
+				BDE75BF82438E5CD0038A7F8 /* ZZSelectView.m in Sources */,
 				8106878121CD1CA3007BF0B0 /* XJRCMReportCollectionViewCell.m in Sources */,
 				BDA584B124347A330053D820 /* ZZRentOrderPayCompleteViewController.m in Sources */,
 				BDB2D58721D7109100F6CBA6 /* XJEditAgeTableViewCell.m in Sources */,
@@ -4101,6 +4318,7 @@
 				BDB2D55021D7109000F6CBA6 /* XJChangePsVC.m in Sources */,
 				BDB2D58221D7109100F6CBA6 /* XJWithDrawView.m in Sources */,
 				BDBD1EC42435C2C500C9B3C3 /* ZZWeiChatEvaluationModel.m in Sources */,
+				BDE75BC2243887C70038A7F8 /* ZZChatStatusCountDownView.m in Sources */,
 				BD7217252437188B00209AC3 /* ZZSkillEditIntroduceCell.m in Sources */,
 				BD7217222437186400209AC3 /* ZZSkillEditPressCell.m in Sources */,
 				BDA5844B2433AD800053D820 /* ZZRentChooseSkillCell.m in Sources */,
@@ -4125,6 +4343,7 @@
 				BD9DC0AC2435D23800E99B5F /* ZZOrderApplyRefundReasonVC.m in Sources */,
 				BD7216A52436EB0900209AC3 /* ZZChooseTagCell.m in Sources */,
 				8108A8AD21C8C681002789CD /* XJChatPayCollectionViewCell.m in Sources */,
+				BDE75BF22438E3770038A7F8 /* ZZChuzuReusableView.m in Sources */,
 				BDA585C02435BECA0053D820 /* ZZReportImageCell.m in Sources */,
 				BD72169F2436EA6C00209AC3 /* ZZSkillOptionViewController.m in Sources */,
 				BD9DC12F2436323500E99B5F /* ZZThirdPayHelper.m in Sources */,
@@ -4136,6 +4355,7 @@
 				BD9DC11A2436251800E99B5F /* ZZPayGuaranteeCell.m in Sources */,
 				BDA5857A243574C20053D820 /* ZZOrderCommentViewController.m in Sources */,
 				BDCCC53823C80BEA00718F42 /* ZZUpdateAlertView.m in Sources */,
+				BDE75C042438E6530038A7F8 /* ZZRentTimeCell.m in Sources */,
 				BDB2D56521D7109000F6CBA6 /* XJMyWalletVC.m in Sources */,
 				81D7DE9721AE838100095E1C /* NSDate+Utilities.m in Sources */,
 				810A37E321C49BD600380A8A /* XJChatLbel.m in Sources */,
@@ -4155,6 +4375,7 @@
 				BDB2D5C921D710BE00F6CBA6 /* XJRegistDoneVC.m in Sources */,
 				BD9DC07C2435C6AF00E99B5F /* ZZTimelineCell.m in Sources */,
 				BDA58457243424860053D820 /* ZZRentOrderInfoViewController.m in Sources */,
+				BDE75C072438E66D0038A7F8 /* ZZRentBaseTableViewCell.m in Sources */,
 				81D7DEBE21B0DEE500095E1C /* ZZFileHelper.m in Sources */,
 				BD9DC15624364C4000E99B5F /* ZZFillBankView.m in Sources */,
 				BDB2D57121D7109000F6CBA6 /* XJRealNameVCTbCell.m in Sources */,
@@ -4171,12 +4392,15 @@
 				BD9DC07D2435C6AF00E99B5F /* ZZOrderTimeLineView.m in Sources */,
 				BDB2D55E21D7109000F6CBA6 /* XJBeReviewWechatVC.m in Sources */,
 				BD07D8C22432F03700FC5E4D /* XJSkill.m in Sources */,
+				BDE75BCB24388AD10038A7F8 /* ZZGradientView.m in Sources */,
 				BDB2D5C521D710BE00F6CBA6 /* XJForgetResetPasswordVC.m in Sources */,
 				812D4DEC219AC6FE0007DCC0 /* XJUtils.m in Sources */,
 				BDB2D55D21D7109000F6CBA6 /* XJMyVC.m in Sources */,
 				819CA24921D1D0DD00B831EF /* NSObject+Extensions.m in Sources */,
 				BDA58522243507250053D820 /* ZZOrderRefundViewController.m in Sources */,
+				BDE75C162438ED880038A7F8 /* ZZActivityUrlModel.m in Sources */,
 				BDA585C22435BECA0053D820 /* ZZReportTitleCell.m in Sources */,
+				BDE75C032438E6530038A7F8 /* ZZRentInfoCell.m in Sources */,
 				BDA584CB2434D41F0053D820 /* ZZSkillDetailScheduleCell.m in Sources */,
 				BD9DC0CE2435D8DE00E99B5F /* WBPopoverContainerView.m in Sources */,
 				BD721713243715C900209AC3 /* ZZUserEditPhotoEmptyCell.m in Sources */,
@@ -4389,7 +4613,8 @@
 				);
 				MARKETING_VERSION = 4.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiamen.yuebanyou;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = zwmMini;
+				PRODUCT_NAME = "租我吗";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "zwmMini/Modules/Home/VC/RentOrderVC/zwmMini-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4433,7 +4658,8 @@
 				);
 				MARKETING_VERSION = 4.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiamen.yuebanyou;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = zwmMini;
+				PRODUCT_NAME = "租我吗";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "zwmMini/Modules/Home/VC/RentOrderVC/zwmMini-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

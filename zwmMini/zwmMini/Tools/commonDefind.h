@@ -43,6 +43,8 @@ typedef NS_ENUM(NSInteger,NavigationType) {
     NavigationTypeUnknow = -1,       // unknow
 };
 
+
+
 #define RegisterRentUrl @"http://static.zuwome.com/rent/apply.html"
 #define RentCompleteUrl @"/rent/rentinfo"
 
@@ -104,6 +106,7 @@ object:OBJ];
 #define KMsg_CreateOrderNotification    @"KMsg_CreateOrderNotification" // 创建订单的通知
 #define kMsg_UpdateOrder                @"OrderDidUpdateNotification"//更新订单
 #define kMsg_OrderStatusChante          @"kUpdateOrderStatus"//订单状态更新
+#define kMsg_UserRentInfoDidChanged     @"kMsg_UserRentInfoDidChanged" // 用户出租信息发生变化
 
 /**
  *  安全地调用 block
@@ -328,5 +331,10 @@ return _instance; \
 [UIScrollView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;\
 [UICollectionView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;\
 }
+
+typedef NS_ENUM(NSInteger, ShowHUDType) {
+    ShowHUDType_OpenSanChat =100,//开通闪聊的提示
+    ShowHUDType_OpenRentSuccess,//开通闪租的提示
+};
 
 #endif /* commonDefind_h */

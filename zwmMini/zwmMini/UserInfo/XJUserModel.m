@@ -16,7 +16,7 @@
 //// 声明自定义类参数类型
 + (NSDictionary *)modelContainerPropertyGenericClass {
 
-    return @{@"emergency_contacts" : [XJContactPeople class],@"interests_new":[XJInterstsModel class],@"photos":[XJPhoto class],@"photos_origin":[XJPhoto class],@"tags_new":[XJInterstsModel class],@"works_new":[XJInterstsModel class]};
+    return @{@"emergency_contacts" : [XJContactPeople class],@"interests_new":[XJInterstsModel class],@"photos":[XJPhoto class],@"photos_origin":[XJPhoto class],@"tags_new":[XJInterstsModel class],@"works_new":[XJInterstsModel class],@"last_days" : [ZZStatisDataModel class]};
 }
 
 /*
@@ -421,6 +421,12 @@
 @end
 
 @implementation XJWeibo
+
+
+
+@end
+
+@implementation ZZStatisDataModel
 
 
 

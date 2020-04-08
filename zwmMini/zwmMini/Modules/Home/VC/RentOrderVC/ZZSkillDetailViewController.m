@@ -42,11 +42,18 @@
 
 @property (nonatomic, strong) ZZRentPageNavigationView *navigationView;//导航view
 @property (nonatomic, strong) UITableView *tableview;
-@property (nonatomic, strong) ZZRentPageBottomView *bottomView;
+//@property (nonatomic, strong) ZZRentPageBottomView *bottomView;
+@property (nonatomic, strong) UIView *footerView;
 @property (nonatomic, strong) ESAutoHeightImageScroll *imageScroll;
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) UIView *tableHeader;
 @property (nonatomic, strong) UIButton *bottomEditBtn;
+
+@property(nonatomic,strong) UIButton *priLetterBtn;
+
+@property(nonatomic,strong) UIButton *lookwxBtn;
+
+@property (nonatomic, strong) UIButton *rentBtn;
 
 @end
 
@@ -77,16 +84,213 @@
     isUserSelf = [self.user.uid isEqualToString:XJUserAboutManageer.uModel.uid];
     marginTop = [self getPassPhoto].count > 0 ? 0 : NAVIGATIONBAR_HEIGHT;
     topHeight = kScreenWidth;
-    bottomHeight = (isUserSelf && _type == SkillDetailTypeShow) ? 0 : isIPhoneX ? 89 : 55;
+    if (isUserSelf && _type == SkillDetailTypeShow) {
+        bottomHeight = 0;
+    }
+    else {
+        bottomHeight = 80;
+    }
+//    bottomHeight = (isUserSelf && _type == SkillDetailTypeShow) ? 0 : isIPhoneX ? 89 : 55;
 }
 
 - (void)editCompleet:(BOOL)isComplete {
     [self reload];
 }
 
+- (void)createBtns {
+    //没有微信隐藏查看微信按钮
+    BOOL haveWechat = self.user.have_wechat_no;
+    BOOL canBeRent = YES;//self.skillsArray.count > 0;
+    
+    _priLetterBtn.hidden = YES;
+    _lookwxBtn.hidden = YES;
+    _rentBtn.hidden = YES;
+    if (haveWechat && canBeRent) {
+        CGFloat btnWidth = (kScreenWidth - 30 - 22 - 28 * 2) / 2;
+        
+        _priLetterBtn.hidden = NO;
+        _lookwxBtn.hidden = NO;
+        _rentBtn.hidden = NO;
+        
+        [_priLetterBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_footerView).offset(29);
+            make.width.equalTo(@(30));
+        }];
+        
+        [_lookwxBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_priLetterBtn.mas_right).offset(22);
+            make.width.equalTo(@(btnWidth));
+            make.height.equalTo(@(52));
+        }];
+        
+        [_rentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_lookwxBtn.mas_right).offset(13);
+            make.width.equalTo(@(btnWidth));
+            make.height.equalTo(@(52));
+        }];
+    
+        [_priLetterBtn setImage:[UIImage imageNamed:@"iconTest"] forState:UIControlStateNormal];
+        [_priLetterBtn setTitle:@"私信" forState:UIControlStateNormal];
+        [_priLetterBtn setTitleColor:RGB(63, 58, 58) forState:UIControlStateNormal];
+        _priLetterBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        _priLetterBtn.imageView.size = CGSizeMake(23, 20);
+        [_priLetterBtn setImagePosition:LXMImagePositionTop spacing:2];
+    }
+    else if (!haveWechat && canBeRent) {
+        CGFloat btnWidth = (kScreenWidth - 30 - 22 - 28 * 2);
+        
+        _priLetterBtn.hidden = NO;
+        _lookwxBtn.hidden = YES;
+        _rentBtn.hidden = NO;
+        
+        [_priLetterBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_footerView).offset(29);
+            make.width.equalTo(@(30));
+        }];
+        
+        [_rentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_priLetterBtn.mas_right).offset(22);
+            make.width.equalTo(@(btnWidth));
+            make.height.equalTo(@(52));
+        }];
+    
+        [_priLetterBtn setImage:[UIImage imageNamed:@"iconTest"] forState:UIControlStateNormal];
+        [_priLetterBtn setTitle:@"私信" forState:UIControlStateNormal];
+        [_priLetterBtn setTitleColor:RGB(63, 58, 58) forState:UIControlStateNormal];
+        _priLetterBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        _priLetterBtn.imageView.size = CGSizeMake(23, 20);
+        [_priLetterBtn setImagePosition:LXMImagePositionTop spacing:2];
+    }
+    else if (haveWechat && !canBeRent) {
+        CGFloat btnWidth = (kScreenWidth - 30 - 22 - 28 * 2);
+            
+        _priLetterBtn.hidden = NO;
+        _lookwxBtn.hidden = NO;
+        _rentBtn.hidden = YES;
+        
+        [_priLetterBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_footerView).offset(29);
+            make.width.equalTo(@(30));
+        }];
+        
+        [_lookwxBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_priLetterBtn.mas_right).offset(22);
+            make.width.equalTo(@(btnWidth));
+            make.height.equalTo(@(52));
+        }];
+    
+        [_priLetterBtn setImage:[UIImage imageNamed:@"iconTest"] forState:UIControlStateNormal];
+        [_priLetterBtn setTitle:@"私信" forState:UIControlStateNormal];
+        [_priLetterBtn setTitleColor:RGB(63, 58, 58) forState:UIControlStateNormal];
+        _priLetterBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        _priLetterBtn.imageView.size = CGSizeMake(23, 20);
+        [_priLetterBtn setImagePosition:LXMImagePositionTop spacing:2];
+    }
+    else {
+        _priLetterBtn.hidden = NO;
+        _lookwxBtn.hidden = YES;
+        _rentBtn.hidden = YES;
+        
+        [_priLetterBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_footerView);
+            make.left.equalTo(_footerView).offset(29);
+            make.right.equalTo(_footerView).offset(-29);
+            make.height.equalTo(@(52));
+        }];
+        
+        [_priLetterBtn setImage:nil forState:UIControlStateNormal];
+        [_priLetterBtn setTitle:@"私信" forState:UIControlStateNormal];
+        [_priLetterBtn setTitleColor:RGB(63, 58, 58) forState:UIControlStateNormal];
+        _priLetterBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+//        _priLetterBtn.imageView.size = CGSizeMake(23, 20);
+//        [_priLetterBtn setImagePosition:LXMImagePositionTop spacing:0];
+    }
+    
+//    if (!self.lookuserModel.have_wechat_no) {
+//        self.lookwxBtn.hidden = YES;
+//        [self.priLetterBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.bottom.equalTo(self.view).offset(-38);
+//            make.centerX.equalTo(self.view);
+//            make.width.mas_equalTo(340);
+//            make.height.mas_equalTo(64);
+//        }];
+//        [self.priLetterBtn setBackgroundImage:GetImage(@"sixinbtnimgy") forState:UIControlStateNormal];
+//    }
+    
+    [self.view layoutIfNeeded];
+    if (!haveWechat && !canBeRent) {
+        CAGradientLayer *btnGragientLayer = [XJUtils setGradualChangingColor:_priLetterBtn fromColor:RGB(252, 134, 98) toColor:RGB(254, 53, 53) endPoint:CGPointMake(1.0, 0) locations:@[@0.1, @0.8] type:nil];
+        btnGragientLayer.frame = _priLetterBtn.bounds;
+        btnGragientLayer.cornerRadius = 26;
+        [_priLetterBtn.layer addSublayer:btnGragientLayer];
+        [_priLetterBtn bringSubviewToFront:_priLetterBtn.titleLabel];
+        [_priLetterBtn bringSubviewToFront:_priLetterBtn.imageView];
+    }
+    else {
+        CAGradientLayer *btnGragientLayer = [XJUtils setGradualChangingColor:_lookwxBtn fromColor:RGB(252, 134, 98) toColor:RGB(254, 53, 53) endPoint:CGPointMake(1.0, 0) locations:@[@0.1, @0.8] type:nil];
+        btnGragientLayer.frame = _lookwxBtn.bounds;
+        btnGragientLayer.cornerRadius = 26;
+        [_lookwxBtn.layer addSublayer:btnGragientLayer];
+        [_lookwxBtn bringSubviewToFront:_lookwxBtn.titleLabel];
+        [_lookwxBtn bringSubviewToFront:_lookwxBtn.imageView];
+        
+        CAGradientLayer *btnGragientLayer1 = [XJUtils setGradualChangingColor:_rentBtn fromColor:RGB(252, 134, 98) toColor:RGB(254, 53, 53) endPoint:CGPointMake(1.0, 0) locations:@[@0.1, @0.8] type:nil];
+        btnGragientLayer1.frame = _rentBtn.bounds;
+        btnGragientLayer1.cornerRadius = 26;
+        [_rentBtn.layer addSublayer:btnGragientLayer1];
+        [_rentBtn bringSubviewToFront:_rentBtn.titleLabel];
+        [_rentBtn bringSubviewToFront:_rentBtn.imageView];
+    }
+}
+
+//设置查看微信按钮图片
+- (void)setUpbottonBtnType{
+    
+    //已查看微信
+    if (self.user.can_see_wechat_no) {
+        //已评价
+        if (self.user.have_commented_wechat_no) {
+
+            [self.lookwxBtn setTitle:@"微信号已评价" forState:UIControlStateNormal];
+
+            //未评价
+        }else{
+            [self.lookwxBtn setTitle:@"评价微信号" forState:UIControlStateNormal];
+        }
+
+        //未查看微信
+    }else{
+        [self.lookwxBtn setTitle:@"查看微信" forState:UIControlStateNormal];
+//        [self.lookwxBtn setBackgroundImage:GetImage(@"lookwximg") forState:UIControlStateNormal];
+    }
+}
+
+
 - (void)createView {
+    
+//    [self.view addSubview:self.bottomView];
+    if (!isUserSelf) {
+        _footerView = [[UIView alloc] init];
+        _footerView.backgroundColor = UIColor.whiteColor;
+        [self.view addSubview:_footerView];
+        [_footerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(self.view);
+            make.height.equalTo(@80.0);
+        }];
+        
+        [_footerView addSubview:self.priLetterBtn];
+        [_footerView addSubview:self.lookwxBtn];
+        [_footerView addSubview:self.rentBtn];
+    }
+    
     [self.view addSubview:self.tableview];
-    [self.view addSubview:self.bottomView];
     [self.view addSubview:self.bottomEditBtn];
     if ([self getPassPhoto].count > 0) {
         [self.view addSubview:self.navigationView];
@@ -96,26 +300,26 @@
 - (void)reload {
     self.navigationView.titleLabel.text = @"技能详情";
     [self.tableview reloadData];
-    if ((self.user.rent.status == 2 && self.user.rent.show)) {
-        if ([XJUserAboutManageer isUsersAvatarManuallReviewing:_user]) {
-            if ([XJUserAboutManageer canShowUserOldAvatarWhileIsManualReviewingg:_user]) {
-                [self.bottomView.rentBtn setTitleColor:kBlackTextColor forState:UIControlStateNormal];
-                self.bottomView.rentBtn.backgroundColor = kYellowColor;
-            }
-            else {
-                [self.bottomView.rentBtn setTitleColor:HEXCOLOR(0x979797) forState:UIControlStateNormal];
-                self.bottomView.rentBtn.backgroundColor = HEXCOLOR(0xd8d8d8);
-            }
-        }
-        else {
-            [self.bottomView.rentBtn setTitleColor:kBlackTextColor forState:UIControlStateNormal];
-            self.bottomView.rentBtn.backgroundColor = kYellowColor;
-        }
-    }
-    else {
-        [self.bottomView.rentBtn setTitleColor:HEXCOLOR(0x979797) forState:UIControlStateNormal];
-        self.bottomView.rentBtn.backgroundColor = HEXCOLOR(0xd8d8d8);
-    }
+//    if ((self.user.rent.status == 2 && self.user.rent.show)) {
+//        if ([XJUserAboutManageer isUsersAvatarManuallReviewing:_user]) {
+//            if ([XJUserAboutManageer canShowUserOldAvatarWhileIsManualReviewingg:_user]) {
+//                [self.bottomView.rentBtn setTitleColor:kBlackTextColor forState:UIControlStateNormal];
+//                self.bottomView.rentBtn.backgroundColor = kYellowColor;
+//            }
+//            else {
+//                [self.bottomView.rentBtn setTitleColor:HEXCOLOR(0x979797) forState:UIControlStateNormal];
+//                self.bottomView.rentBtn.backgroundColor = HEXCOLOR(0xd8d8d8);
+//            }
+//        }
+//        else {
+//            [self.bottomView.rentBtn setTitleColor:kBlackTextColor forState:UIControlStateNormal];
+//            self.bottomView.rentBtn.backgroundColor = kYellowColor;
+//        }
+//    }
+//    else {
+//        [self.bottomView.rentBtn setTitleColor:HEXCOLOR(0x979797) forState:UIControlStateNormal];
+//        self.bottomView.rentBtn.backgroundColor = HEXCOLOR(0xd8d8d8);
+//    }
     [self reloadUser];
 }
 
@@ -127,6 +331,8 @@
         else if (data) {
             self.user = [XJUserModel yy_modelWithDictionary:data];//[[ZZUser alloc] initWithDictionary:data error:nil];
             [self.tableview reloadData];
+            [self createBtns];
+            [self setUpbottonBtnType];
         }
     } failure:^(NSError *error) {
         if (error) {
@@ -235,7 +441,7 @@
     controller.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:controller animated:YES];
 }
-
+ 
 #pragma mark -- 验证用户信息（人脸信息，用户头像）
 //判断是否需要验证-->需要-->是否需要人脸验证-->需要-->人脸验证
 //                                   -->不需要-->头像对比通过-->不通过-->上传头像
@@ -246,7 +452,7 @@
             NSString *title = [info isEqualToString:@"chat"] ? @"目前账户安全级别较低，将进行身份识别，否则不能聊天" : @"目前账户安全级别较低，将进行身份识别，否则无法下单";
             NavigationType type = [info isEqualToString:@"chat"] ? NavigationTypeChat : NavigationTypeOrder;
             [UIAlertController presentAlertControllerWithTitle:title message:nil doneTitle:@"前往" cancelTitle:@"取消" completeBlock:^(BOOL isCancelled) {
-                Weakself.bottomView.chatBtn.userInteractionEnabled = YES;
+                Weakself.priLetterBtn.userInteractionEnabled = YES;
                 if (!isCancelled) {
                     [Weakself gotoVerifyFace:type];   // 去验证人脸
                 }
@@ -271,6 +477,13 @@
 }
 
 #pragma mark -- bottomViewAction
+- (void)lookwxAction {
+    [self.navigationController popViewControllerAnimated:YES];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(controllerWechatActions:)]) {
+        [self.delegate controllerWechatActions:self];
+    }
+}
+
 //判断是否需要验证-->不需要-->打招呼状态-->say_hi_status != 0-->去聊天
 //                                -->say_hi_status == 0-->type == 1-->编辑本人信息
 //                                                        type == 2-->发红包
@@ -282,12 +495,12 @@
     if ([XJUserAboutManageer isUserBanned]) {
         return;
     }
-    _bottomView.chatBtn.userInteractionEnabled = NO;
+    _priLetterBtn.userInteractionEnabled = NO;
     if (![self verifyUserInfo:@"chat"]) {   //验证不通过
         return;
     }
     [AskManager GET:[NSString stringWithFormat:@"api/user/%@/say_hi_status",self.user.uid] dict:nil succeed:^(id data, XJRequestError *rError) {
-        _bottomView.chatBtn.userInteractionEnabled = YES;
+        _priLetterBtn.userInteractionEnabled = YES;
         if (rError) {
             [ZZHUD showErrorWithStatus:rError.message];
         } else {
@@ -567,26 +780,26 @@
 
 #pragma mark -- setter
 - (void)setChooseType:(NSInteger)chooseType {
-    _chooseType = chooseType;
-    _bottomView.userInteractionEnabled = YES;
-    [_bottomView.chooseBtn setTitleColor:kBlackTextColor forState:UIControlStateNormal];
-    switch (chooseType) {
-        case 1: {
-            [_bottomView.chooseBtn setTitle:@"选TA" forState:UIControlStateNormal];
-            [_bottomView.chooseBtn setTitleColor:HEXCOLOR(0xFC2F52) forState:UIControlStateNormal];
-            _bottomView.chooseBtn.backgroundColor = [UIColor whiteColor];;
-        } break;
-        case 2: {
-            [_bottomView.chooseBtn setTitle:@"已选定" forState:UIControlStateNormal];
-            _bottomView.chooseBtn.backgroundColor = kYellowColor;
-        } break;
-        case 3: {
-            [_bottomView.chooseBtn setTitle:@"不可选" forState:UIControlStateNormal];
-            _bottomView.chooseBtn.backgroundColor = HEXCOLOR(0xDCDCDC);
-            _bottomView.userInteractionEnabled = NO;
-        } break;
-        default: break;
-    }
+//    _chooseType = chooseType;
+//    _bottomView.userInteractionEnabled = YES;
+//    [_bottomView.chooseBtn setTitleColor:kBlackTextColor forState:UIControlStateNormal];
+//    switch (chooseType) {
+//        case 1: {
+//            [_bottomView.chooseBtn setTitle:@"选TA" forState:UIControlStateNormal];
+//            [_bottomView.chooseBtn setTitleColor:HEXCOLOR(0xFC2F52) forState:UIControlStateNormal];
+//            _bottomView.chooseBtn.backgroundColor = [UIColor whiteColor];;
+//        } break;
+//        case 2: {
+//            [_bottomView.chooseBtn setTitle:@"已选定" forState:UIControlStateNormal];
+//            _bottomView.chooseBtn.backgroundColor = kYellowColor;
+//        } break;
+//        case 3: {
+//            [_bottomView.chooseBtn setTitle:@"不可选" forState:UIControlStateNormal];
+//            _bottomView.chooseBtn.backgroundColor = HEXCOLOR(0xDCDCDC);
+//            _bottomView.userInteractionEnabled = NO;
+//        } break;
+//        default: break;
+//    }
 }
 
 #pragma mark -- getter
@@ -630,32 +843,32 @@
     }
     return _tableview;
 }
-- (ZZRentPageBottomView *)bottomView {
-    if (nil == _bottomView) {
-          __weak typeof(self) weakSelf = self;
-        _bottomView = [[ZZRentPageBottomView alloc] initWithFrame:CGRectMake(0, kScreenHeight - marginTop - bottomHeight, kScreenWidth, bottomHeight)];
-        _bottomView.hidden = isUserSelf;
-        _bottomView.touchChat = ^{
-            [weakSelf chatBtnClick];
-        };
-        _bottomView.touchAsk = ^{
-            [weakSelf askBtnClick:NO];
-        };
-        _bottomView.touchRent = ^{
-            [weakSelf rentBtnClick];
-        };
-        _bottomView.touchChoose = ^{
-            [weakSelf chooseBtnClick];
-        };
-        _bottomView.fromLiveStream = self.fromLiveStream;
-    }
-    return _bottomView;
-}
+//- (ZZRentPageBottomView *)bottomView {
+//    if (nil == _bottomView) {
+//          __weak typeof(self) weakSelf = self;
+//        _bottomView = [[ZZRentPageBottomView alloc] initWithFrame:CGRectMake(0, kScreenHeight - marginTop - bottomHeight, kScreenWidth, bottomHeight)];
+//        _bottomView.hidden = isUserSelf;
+//        _bottomView.touchChat = ^{
+//            [weakSelf chatBtnClick];
+//        };
+//        _bottomView.touchAsk = ^{
+//            [weakSelf askBtnClick:NO];
+//        };
+//        _bottomView.touchRent = ^{
+//            [weakSelf rentBtnClick];
+//        };
+//        _bottomView.touchChoose = ^{
+//            [weakSelf chooseBtnClick];
+//        };
+//        _bottomView.fromLiveStream = self.fromLiveStream;
+//    }
+//    return _bottomView;
+//}
 - (UIButton *)bottomEditBtn {
     if (nil == _bottomEditBtn) {
         _bottomEditBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, kScreenHeight - marginTop - bottomHeight, kScreenWidth, bottomHeight - SafeAreaBottomHeight)];
         _bottomEditBtn.backgroundColor = kGoldenRod;
-        _bottomEditBtn.hidden = _type == SkillDetailTypeShow;   //编辑预览才显示
+        _bottomEditBtn.hidden = YES;//_type == SkillDetailTypeShow;   //编辑预览才显示
         [_bottomEditBtn setTitle:@"编辑" forState:(UIControlStateNormal)];
         [_bottomEditBtn setTitleColor:kBlackColor forState:(UIControlStateNormal)];
         [_bottomEditBtn.titleLabel setFont:[UIFont systemFontOfSize:16 weight:(UIFontWeightMedium)]];
@@ -701,5 +914,42 @@
     }
     return _tableHeader;
 }
+
+- (UIButton *)priLetterBtn{
+    if (!_priLetterBtn) {
+        _priLetterBtn = [[UIButton alloc] init];
+        [_priLetterBtn addTarget:self action:@selector(chatBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _priLetterBtn;
+    
+}
+- (UIButton *)lookwxBtn{
+    if (!_lookwxBtn) {
+        _lookwxBtn = [[UIButton alloc] init];
+        [_lookwxBtn setTitle:@"查看微信" forState:UIControlStateNormal];
+        [_lookwxBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        _lookwxBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        [_lookwxBtn addTarget:self action:@selector(lookwxAction) forControlEvents:UIControlEventTouchUpInside];
+        _lookwxBtn.backgroundColor = UIColor.greenColor;
+        _lookwxBtn.layer.cornerRadius = 26.0;
+    }
+    return _lookwxBtn;
+    
+}
+
+- (UIButton *)rentBtn {
+    if (!_rentBtn) {
+        _rentBtn = [[UIButton alloc] init];
+        [_rentBtn setTitle:@"马上约TA" forState:UIControlStateNormal];
+        [_rentBtn setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+        _rentBtn.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+        [_rentBtn addTarget:self action:@selector(rentBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        _rentBtn.backgroundColor = UIColor.greenColor;
+        _rentBtn.layer.cornerRadius = 26.0;
+        
+    }
+    return _rentBtn;
+}
+
 
 @end

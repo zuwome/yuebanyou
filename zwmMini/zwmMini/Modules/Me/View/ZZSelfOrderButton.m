@@ -21,7 +21,7 @@
         [self addSubview:_imgView];
         
         [_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.mas_top);
+            make.top.mas_equalTo(self.mas_top).offset(10);
             make.left.mas_equalTo(self.mas_left);
             make.right.mas_equalTo(self.mas_right);
             make.height.mas_equalTo(25);
@@ -50,7 +50,7 @@
         
         [_badgeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.mas_centerX).offset(13);
-            make.top.mas_equalTo(_imgView.mas_top).offset(5);
+            make.top.mas_equalTo(_imgView.mas_top).offset(-10);//.offset(5);
             make.size.mas_equalTo(CGSizeMake(10, 10));
         }];
         
@@ -63,7 +63,7 @@
         
         [_badgeView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.mas_centerX).offset(13);
-            make.top.mas_equalTo(_imgView.mas_top).offset(5);
+            make.top.mas_equalTo(_imgView.mas_top).offset(-10);//.offset(5);
             make.height.mas_equalTo(15);
         }];
     }

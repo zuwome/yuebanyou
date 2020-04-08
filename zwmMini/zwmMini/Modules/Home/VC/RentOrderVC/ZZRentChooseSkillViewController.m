@@ -102,7 +102,7 @@
         
         [XJUserModel loadUser:uid param:nil succeed:^(id data, XJRequestError *rError) {
             if (!rError && data) {
-                XJUserModel *userModel = [XJUserModel yy_modelWithDictionary:data[@"user"]];
+                XJUserModel *userModel = [XJUserModel yy_modelWithDictionary:data];
                 self.user = userModel;
                 [self reload];
             }

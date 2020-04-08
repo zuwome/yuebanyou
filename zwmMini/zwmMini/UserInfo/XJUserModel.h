@@ -26,8 +26,14 @@
 @class XJWechat;
 @class XJWeibo;
 @class XJZmxy;
+@class ZZStatisDataModel;
 
 @interface XJUserModel : JSONModel
+
+@property (strong,nonatomic)  NSString *open_charge_channel;//当前用户是否拥有私聊付费开通渠道
+
+@property (strong, nonatomic) ZZStatisDataModel *last_days;//过去30天的统计
+
 @property (assign,nonatomic)  BOOL open_charge;//该用户是否开启了私聊付费的
 
 @property (strong, nonatomic) NSString * forzen;//冻结资金带有文字了
@@ -455,3 +461,11 @@
 
 @end
 
+//过去30天的统计
+@interface ZZStatisDataModel : JSONModel
+
+@property (assign, nonatomic) NSInteger bebrowsed_count;//浏览数
+@property (assign, nonatomic) NSInteger beordered_count;//预约数
+@property (assign, nonatomic) NSInteger order_respond_rate;//响应率
+
+@end

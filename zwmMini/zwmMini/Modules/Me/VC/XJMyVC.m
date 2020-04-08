@@ -24,6 +24,15 @@
 #import "XJUploadRealHeadImgVC.h"
 #import "ZZUserCenterOrderCell.h"
 #import "ZZOrderListViewController.h"
+#import "ZZUserCenterRentGuideCell.h"
+#import "ZZUserCenterRespondCell.h"
+#import "ZZUserStatisDataViewController.h"
+#import "ZZKeyValueStore.h"
+#import "ZZRentalAgreementVC.h"
+#import "ZZRegisterRentViewController.h"
+#import "ZZChooseSkillViewController.h"
+#import "ZZSkillThemeManageViewController.h"
+#import "ZZUserCenterBaseCell.h"
 
 static NSString *myTableviewIdentifier = @"mytableviewIdentifier";
 static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
@@ -33,9 +42,11 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
 @property(nonatomic,strong) XJMyHeadView *headView;
 @property(nonatomic,copy) NSArray *titlesArray;
 @property(nonatomic,copy) NSArray *imgsArray;
-@property(nonatomic,assign) NSInteger selecttype;//0 设置微信号 1实名认证
+@property(nonatomic,assign) NSInteger selecttype;//0 设置微信号 1实名认证 3出租
 
 @property(nonatomic,assign) BOOL shouldRefresh;
+
+@property (nonatomic, assign) BOOL hideChuzuRedPoint;
 
 @end
 
@@ -49,6 +60,8 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
     [self creatUI];
     _shouldRefresh = NO;
 }
+
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -87,6 +100,13 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+- (void)manageRedView {
+    _hideChuzuRedPoint = YES;
+    if (XJUserAboutManageer.uModel.rent.status != 2 && !XJUserAboutManageer.userFirstRent) {
+        _hideChuzuRedPoint = NO;
+    }
+    [_tableView reloadData];
+}
 
 - (void)clickHeadIV {
     if ([XJUserAboutManageer isUserBanned]) {
@@ -118,8 +138,11 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
 
 #pragma mark tableviewDelegate and dataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 && indexPath.row == 1) {
-        return 76;
+    if ((indexPath.section == 0 || indexPath.section == 1)) {
+        if (indexPath.row == 1) {
+            return 76;
+        }
+        return 56;
     }
     return 65.f;
 }
@@ -129,12 +152,11 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return section == 0 ? 2 : self.imgsArray.count;
+    return (section == 0) ? 2 : self.imgsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        
         if (indexPath.row == 0) {
             XJMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:myTableviewIdentifierr];
             
@@ -153,6 +175,24 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
             return cell;
         }
     }
+//    else if (indexPath.section == 1) {
+//        if (indexPath.row == 1) {
+//            if (XJUserAboutManageer.uModel.rent.status == 0 || XJUserAboutManageer.uModel.banStatus) {
+//                ZZUserCenterRentGuideCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZZUserCenterRentGuideCell"];
+//                return cell;
+//            } else {
+//                ZZUserCenterRespondCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZZUserCenterRespondCell"];
+//                [cell setData:XJUserAboutManageer.uModel];
+//                return cell;
+//            }
+//        }
+//        else {
+//            ZZUserCenterBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZZUserCenterBaseCell"];
+//            [cell setData:XJUserAboutManageer.uModel indexPath:indexPath hideRedPoint:_hideChuzuRedPoint];
+//            return cell;
+//        }
+//
+//    }
     else {
         XJMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:myTableviewIdentifier];
         
@@ -170,6 +210,28 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
     if (indexPath.section == 0) {
         [self gotoOrderWithIndex:4];
     }
+//    else if (indexPath.section == 1) {
+//        if (indexPath.row == 0) {
+//            [self gotoChuzu];
+//        }
+//        else {
+//            if (XJUserAboutManageer.uModel.rent.status == 0 || XJUserAboutManageer.uModel.banStatus) {
+//                //出租信息简介
+//                ZZLinkWebViewController *controller = [[ZZLinkWebViewController alloc] init];
+//                controller.urlString = @"http://7xwsly.com1.z0.glb.clouddn.com/wmgy/playHelp.html";
+//                controller.isHideBar = YES;
+//                controller.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:controller animated:YES];
+//            }
+//            else {
+//                //用户数据统计
+//                ZZUserStatisDataViewController *controller = [[ZZUserStatisDataViewController alloc] init];
+//                controller.urlString = [NSString stringWithFormat:@"%@user/%@/stats/page",APIBASE,XJUserAboutManageer.uModel.uid];
+//                controller.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:controller animated:YES];
+//            }
+//        }
+//    }
     else {
         switch (indexPath.row) {
             case 0: {
@@ -239,6 +301,59 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
     return 10;
 }
 
+// 申请达人(出租自己)
+- (void)gotoChuzu {
+    WEAK_SELF();
+    BOOL canProceed = [XJUserAboutManageer canApplyTalentWithBlock:^(BOOL success, NSInteger infoIncompleteType, BOOL isCancel) {
+        if (!success) {
+            if (infoIncompleteType == 0) {
+                self.selecttype = 3;
+                // 去验证人脸
+                if (!isCancel) {
+                    XJCheckingFaceVC* lvc = [[XJCheckingFaceVC alloc] init];
+                    [lvc livenesswithList:@[@(0),@(4),@(6)] order:YES numberOfLiveness:3];
+                    [self presentViewController:lvc animated:YES completion:nil];
+                    lvc.endBlock = ^(UIImage * _Nonnull bestImg) {
+                        [self checkIshack:bestImg];
+                    };
+                }
+            }
+            else if (infoIncompleteType == 1) {
+                self.selecttype = 3;
+                // 去上传真实头像
+                if (!isCancel) {
+                    XJUploadRealHeadImgVC *upVC = [XJUploadRealHeadImgVC new];
+                    [self.navigationController pushViewController:upVC animated:YES];
+                    upVC.endBlock = ^{
+                        [self isNeedToCheck:self.selecttype];
+                    };
+                }
+            }
+        }
+    }];
+    
+    if (!canProceed) {
+        return;
+    }
+    
+    if (XJUserAboutManageer.sysCofigModel.open_rent_need_pay_module) {   // 有开启出租收费
+        if (XJUserAboutManageer.uModel.rent_need_pay) { //此人出租需要付费
+            if (![ZZKeyValueStore getValueWithKey:[ZZStoreKey sharedInstance].firstProtocol]) { // 需要先去同意协议
+                [self gotoRentalAgreementVC];
+            }
+            else {
+                [self gotoUserChuZuVC];
+            }
+        }
+        else {   //不需要付费（字段的值会根据用户是否是男性，大陆，是否已付费，老用户等条件）
+            [self gotoUserChuZuVC];
+        }
+    }
+    else {
+        [self gotoUserChuZuVC];
+    }
+}
+
 #pragma mark 是否需要验证
 //0 设置微信号 1实名认证
 - (BOOL)isNeedToCheck:(NSInteger)type{
@@ -272,7 +387,17 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
     }
     
     XJPhoto *photo = XJUserAboutManageer.uModel.photos_origin.firstObject;
+
     NSString *phototitle = type == 0 ?@"为确保资料真实有效，填写微信号需要您上传本人真实头像":@"您未上传本人正脸五官清晰照，不能实名认证，请前往上传真实头像";
+    if (type == 0) {
+        phototitle = @"为确保资料真实有效，填写微信号需要您上传本人真实头像";
+    }
+    else if (type == 1) {
+        phototitle = @"您未上传本人正脸五官清晰照，不能实名认证，请前往上传真实头像";
+    }
+    else if (type == 3) {
+        phototitle =  @"您未上传本人正脸五官清晰照，无法发布出租信息，请前往上传真实头像";
+    }
     if (photo == nil || photo.face_detect_status != 3) {
         
         [self showAlerVCtitle:phototitle message:@"" sureTitle:@"前往" cancelTitle:@"取消" sureBlcok:^{
@@ -354,6 +479,46 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
     }];
 }
 
+// 出租协议
+- (void)gotoRentalAgreementVC {
+    ZZRentalAgreementVC *vc = [ZZRentalAgreementVC new];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+/**
+ 出租信息
+ */
+- (void)gotoUserChuZuVC {
+    WEAK_SELF()
+    //未出租状态前往申请达人，其余状态进入主题管理
+    if (XJUserAboutManageer.uModel.rent.status == 0) {
+        // 没有打开定位权限不给去添加技能
+        if (![XJUtils isAllowLocation]) {
+            return;
+        }
+        
+        ZZRegisterRentViewController *registerRent = [[ZZRegisterRentViewController alloc] init];
+        registerRent.type = RentTypeRegister;
+        [registerRent setRegisterRentCallback:^(NSDictionary *iDict) {
+            ZZChooseSkillViewController *controller = [[ZZChooseSkillViewController alloc] init];
+            controller.hidesBottomBarWhenPushed = YES;
+            [weakSelf.navigationController pushViewController:controller animated:YES];
+        }];
+        [self.navigationController presentViewController:registerRent animated:YES completion:nil];
+    }
+    else {
+        ZZSkillThemeManageViewController *controller = [[ZZSkillThemeManageViewController alloc] init];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    
+    if (!XJUserAboutManageer.userFirstRent) {
+        XJUserAboutManageer.userFirstRent = @"userFirstRent";
+        [self manageRedView];
+    }
+}
+
 #pragma mark lazy
 
 - (UITableView *)tableView
@@ -379,6 +544,9 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
         }
         
         [_tableView registerClass:[ZZUserCenterOrderCell class] forCellReuseIdentifier:@"ordercell"];
+        [_tableView registerClass:[ZZUserCenterRentGuideCell class] forCellReuseIdentifier:@"ZZUserCenterRentGuideCell"];
+        [_tableView registerClass:[ZZUserCenterRespondCell class] forCellReuseIdentifier:@"ZZUserCenterRespondCell"];
+        [_tableView registerClass:[ZZUserCenterBaseCell class] forCellReuseIdentifier:@"ZZUserCenterBaseCell"];
         
     }
     return _tableView;
@@ -415,7 +583,7 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
 
 - (void)viewWillAppear:(BOOL)animated{
     [MBManager showLoading];
-    
+    [self manageRedView];
 //    if (!_shouldRefresh) {
     [XJUserModel loadUser:XJUserAboutManageer.uModel.uid param:nil succeed:^(id data, XJRequestError *rError) {
             if (!rError && data) {
@@ -423,9 +591,11 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
                 XJUserAboutManageer.uModel = userModel;
                 XJUserAboutManageer.isLogin = YES;
                 [self.headView setUpHeadViewInfo:XJUserAboutManageer.uModel];
+                [self manageRedView];
                 if (self.tableView) {
                     [self.tableView reloadData];
                 }
+                
             }
             [MBManager hideAlert];
         } failure:^(NSError *error) {

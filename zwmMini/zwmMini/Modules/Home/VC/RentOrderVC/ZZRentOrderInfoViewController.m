@@ -487,8 +487,8 @@
         else {
             [ZZHUD dismiss];
             [Weakself dismissViewControllerAnimated:YES completion:^{
-//                [[NSNotificationCenter defaultCenter] postNotificationName:kMsg_UpdateOrder object:self userInfo:data];
-//                [[NSNotificationCenter defaultCenter] postNotificationName:kMsg_OrderStatusChante object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kMsg_UpdateOrder object:self userInfo:data];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kMsg_OrderStatusChante object:nil];
             }];
             
             [Weakself backupLocationArray];

@@ -312,5 +312,120 @@ static XJUserManager *userManger = nil;
 //    }];
 }
 
+#pragma mark 活体
+/**
+ *  MARK: 是否拥有活体
+ */
+- (BOOL)didHaveRealFace {
+    // 活体
+    if (self.uModel.faces.count != 0) {
+        return YES;
+    }
+    return NO;
+}
+
+#pragma mark 真实头像
+/**
+ *  MARK: 是否拥有真实头像
+ */
+- (BOOL)didHaveRealAvatar {
+    XJPhoto *photo = self.uModel.photos_origin.firstObject;
+    if (photo && photo.face_detect_status == 3) {
+        return YES;
+    }
+    return NO;
+}
+
+/**
+ *  MARK: 头像是否在审核中
+ */
+- (BOOL)isAvatarManualReviewing {
+    return self.uModel.avatar_manual_status == 1;
+}
+
+
+/**
+ *  MARK: 身份信息不完整不能继续的action
+ */
+- (void)cantProceedAction:(NSInteger)incompleteType
+                    title:(NSString *)title
+                  message:(NSString *)message
+                     done:(NSString *)doneTitle
+              cancelTitle:(NSString *)cancelTitle
+                    block:(void (^)(BOOL success, NavigationType type, BOOL isCancel))block {
+    [UIAlertController presentAlertControllerWithTitle:title
+                                               message:message
+                                             doneTitle:doneTitle
+                                           cancelTitle:cancelTitle
+                                         completeBlock:^(BOOL isCancelled) {
+        if (block) {
+            block(NO, incompleteType, isCancelled);
+        }
+    }];
+}
+
+/**
+ * MARK: 是否可以申请达人
+ * 检查循序:
+ *  一、是否有活体。
+ *  二、是否有真实头像
+ *      1.系统配置。
+ *      2.是否拥有真实头像。
+ *      3.头像审核中，是否有旧的可用头像。
+ */
+- (BOOL)canApplyTalentWithBlock:(void (^)(BOOL success, NSInteger infoIncompleteType, BOOL isCancel))block {
+    if (![self didHaveRealFace]) {
+        [self cantProceedAction:0
+                          title:@"目前账户安全级别较低，将进行身份识别，否则无法发布出租信息"
+                        message:nil
+                           done:@"前往"
+                    cancelTitle:@"取消"
+                          block:block];
+        return NO;
+    }
+    else {
+        if ([self didHaveRealAvatar]) {
+            if (block) {
+                block(YES, 1, NO);
+            }
+            return YES;
+        }
+        else {
+            if (![self.sysCofigModel canProceedWithoutRealAvatar:NavigationTypeApplyTalent]) {
+                
+                // 人工审核失败
+                if (self.uModel.avatar_manual_status == 3) {
+                    [self cantProceedAction:1
+                                      title:@"您需要使用本人正脸五官清晰照，才能获取达人资格，请前往上传真实头像"
+                                    message:nil
+                                       done:@"前往"
+                                cancelTitle:@"取消"
+                                      block:block];
+                    return NO;
+                }
+                else if (![self didHaveRealAvatar] && ![self isAvatarManualReviewing]) {
+                    [self cantProceedAction:1
+                                      title:@"您未上传本人正脸五官清晰照，无法发布出租信息，请前往上传真实头像"
+                                    message:nil
+                                       done:@"前往"
+                                cancelTitle:@"取消"
+                                      block:block];
+                    return NO;
+                }
+            }
+            
+            if (block) {
+                block(YES, 1, NO);
+            }
+            return YES;
+        }
+        
+    }
+}
+
+- (NSString *)userFirstRent {
+    NSString *name = [NSString stringWithFormat:@"userFirstRentuid=%@",self.uModel.uid];
+    return [ZZUserDefaultsHelper objectForDestKey:name];
+}
 
 @end

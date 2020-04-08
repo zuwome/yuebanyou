@@ -16,7 +16,7 @@
 #import "XJTopic.h"
 #import "ZZSkillDetailViewController.h"
 #import "XJSkill.h"
-#import "ZZSkillDetailViewController.h"
+
 
 @interface XJPernalDataVC ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,XJEditMyInfoVCDelegate,XJRentSkillCellDelegate>
 
@@ -46,6 +46,11 @@
     [self createSkills];
     [self createCellTypes];
     
+    [self loadUserInfo];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadUserInfos) name:kMsg_UserRentInfoDidChanged object:nil];
+}
+
+- (void)reloadUserInfos {
     [self loadUserInfo];
 }
 
