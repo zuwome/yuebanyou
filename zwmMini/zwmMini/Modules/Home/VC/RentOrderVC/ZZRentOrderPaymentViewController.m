@@ -191,11 +191,12 @@
     }
     
     if (!_isEdit && _paySelectIndex == 0 && XJUserAboutManageer.uModel.balance < _price) {
-        [UIAlertView showWithTitle:@"钱包当前余额不足" message:nil cancelButtonTitle:@"其他支付方式" otherButtonTitles:@[@"马上充值"] tapBlock:^(UIAlertView * _Nonnull alertView, NSInteger buttonIndex) {
-            if (buttonIndex == 1) {
-                [self gotoRechargeView];
-            }
-        }];
+        [ZZHUD showErrorWithStatus:@"钱包当前余额不足,请选择其他支付方式"];
+//        [UIAlertView showWithTitle:@"钱包当前余额不足" message:nil cancelButtonTitle:@"其他支付方式" otherButtonTitles:@[@"马上充值"] tapBlock:^(UIAlertView * _Nonnull alertView, NSInteger buttonIndex) {
+//            if (buttonIndex == 1) {
+//                [self gotoRechargeView];
+//            }
+//        }];
         return;
     }
     

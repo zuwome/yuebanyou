@@ -112,7 +112,8 @@ static NSString *RCMTextCell = @"rcmtextcell";
 //    [self registerClass:[XJRCMImageCollectionViewCell class] forMessageClass:[RCImageMessage class]];
 
     [self ceratRightView];
-    
+    [self fetchLastOrder];
+
     //收到消息通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveMessageNofitication:) name:chatVieewReceiveMessagtNoti object:nil];
     if (NULLString([XJChatUtils sharedInstance].isFirstOpenChatView)) {
@@ -142,9 +143,6 @@ static NSString *RCMTextCell = @"rcmtextcell";
     self.chatSessionInputBarControl.delegate = self;
     
     [self privateChatPayManagerCallBack:nil];
-    
-    [self fetchLastOrder];
-
 }
 
 #pragma mark - 私聊付费模块
@@ -989,7 +987,7 @@ static NSString *RCMTextCell = @"rcmtextcell";
         fram.origin.y = fram.origin.y - 20;
         fram.size.height = fram.size.height + 20;
         self.conversationMessageCollectionView.frame = fram;
-        return;
+        
     }
  
     _isFrom = [self.order.from.uid isEqualToString:XJUserAboutManageer.uModel.uid];

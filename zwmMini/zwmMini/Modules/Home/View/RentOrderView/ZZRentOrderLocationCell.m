@@ -70,11 +70,15 @@
     
     [self.contentView addSubview:self.downBtn];
     [_downBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.contentView.mas_right);
-        make.top.mas_equalTo(self.contentView.mas_top);
-        make.bottom.mas_equalTo(self.contentView.mas_bottom);
-        make.width.mas_equalTo(50);
+        make.right.mas_equalTo(self.contentView.mas_right).offset(-15);
+        make.centerY.mas_equalTo(self.contentView);
+//        make.top.mas_equalTo(self.contentView.mas_top);
+//        make.bottom.mas_equalTo(self.contentView.mas_bottom);
+        make.width.mas_equalTo(20);
+        make.height.mas_equalTo(20);
     }];
+    [self layoutIfNeeded];
+//    _downBtn.imageView.frame = CGRectMake(0.0, 0.0, 30, 30);
     
     [self.contentView addSubview:self.locationTF];
     [_locationTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -138,8 +142,8 @@
 - (UIButton *)downBtn {
     if (!_downBtn) {
         _downBtn = [[UIButton alloc] init];
-        [_downBtn setImage:[UIImage imageNamed:@"btn_rent_dropdown_black"] forState:UIControlStateNormal];
-        [_downBtn setImage:[UIImage imageNamed:@"btn_rent_dropUp_black"] forState:UIControlStateSelected];
+        [_downBtn setImage:[UIImage imageNamed:@"btn_rent_dropdown"] forState:UIControlStateNormal];
+        [_downBtn setImage:[UIImage imageNamed:@"btn_rent_dropUp"] forState:UIControlStateSelected];
         [_downBtn addTarget:self action:@selector(downBtnClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _downBtn;

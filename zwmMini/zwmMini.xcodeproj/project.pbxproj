@@ -355,6 +355,9 @@
 		BDA585C12435BECA0053D820 /* ZZReportBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA585BA2435BECA0053D820 /* ZZReportBottomView.m */; };
 		BDA585C22435BECA0053D820 /* ZZReportTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA585BD2435BECA0053D820 /* ZZReportTitleCell.m */; };
 		BDA585C32435BECA0053D820 /* ZZReportInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA585BE2435BECA0053D820 /* ZZReportInputView.m */; };
+		BDAE62B0243DD65400BBC9D3 /* opentitileimg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAE62AE243DD65300BBC9D3 /* opentitileimg2@2x.png */; };
+		BDAE62B1243DD65400BBC9D3 /* opentitileimg2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAE62AF243DD65400BBC9D3 /* opentitileimg2@3x.png */; };
+		BDAE62B3243DDC6200BBC9D3 /* ReadMe in Resources */ = {isa = PBXBuildFile; fileRef = BDAE62B2243DDC6100BBC9D3 /* ReadMe */; };
 		BDB2D46A21D70E4F00F6CBA6 /* IDLFaceSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB2D46521D70E4F00F6CBA6 /* IDLFaceSDK.framework */; };
 		BDB2D46B21D70E4F00F6CBA6 /* idl-license.face-ios in Resources */ = {isa = PBXBuildFile; fileRef = BDB2D46721D70E4F00F6CBA6 /* idl-license.face-ios */; };
 		BDB2D46C21D70E4F00F6CBA6 /* com.baidu.idl.face.model.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BDB2D46821D70E4F00F6CBA6 /* com.baidu.idl.face.model.bundle */; };
@@ -1250,6 +1253,9 @@
 		BDA585BD2435BECA0053D820 /* ZZReportTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZReportTitleCell.m; sourceTree = "<group>"; };
 		BDA585BE2435BECA0053D820 /* ZZReportInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZReportInputView.m; sourceTree = "<group>"; };
 		BDA585BF2435BECA0053D820 /* ZZReportBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZReportBottomView.h; sourceTree = "<group>"; };
+		BDAE62AE243DD65300BBC9D3 /* opentitileimg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "opentitileimg2@2x.png"; sourceTree = "<group>"; };
+		BDAE62AF243DD65400BBC9D3 /* opentitileimg2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "opentitileimg2@3x.png"; sourceTree = "<group>"; };
+		BDAE62B2243DDC6100BBC9D3 /* ReadMe */ = {isa = PBXFileReference; lastKnownFileType = text; path = ReadMe; sourceTree = "<group>"; };
 		BDB2D46521D70E4F00F6CBA6 /* IDLFaceSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IDLFaceSDK.framework; sourceTree = "<group>"; };
 		BDB2D46621D70E4F00F6CBA6 /* FaceParameterConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceParameterConfig.h; sourceTree = "<group>"; };
 		BDB2D46721D70E4F00F6CBA6 /* idl-license.face-ios */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "idl-license.face-ios"; sourceTree = "<group>"; };
@@ -2068,6 +2074,8 @@
 		812D4DFF219ACDEF0007DCC0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BDAE62AE243DD65300BBC9D3 /* opentitileimg2@2x.png */,
+				BDAE62AF243DD65400BBC9D3 /* opentitileimg2@3x.png */,
 				BDC911E023D703610085286C /* yuebanyoulg1.png */,
 				BDC911DC23D703610085286C /* yuebanyoulg1@2x.png */,
 				BDC911E123D703610085286C /* yuebanyoulg1@3x.png */,
@@ -2082,6 +2090,7 @@
 		81801DBC219A8DFD00020537 = {
 			isa = PBXGroup;
 			children = (
+				BDAE62B2243DDC6100BBC9D3 /* ReadMe */,
 				81801DC7219A8DFD00020537 /* zwmMini */,
 				81801DC6219A8DFD00020537 /* Products */,
 				7A03D354312B86F0F53C9813 /* Pods */,
@@ -3994,6 +4003,7 @@
 			files = (
 				BDC911E623D703610085286C /* yuebanyoulg1.png in Resources */,
 				81801DD5219A8DFF00020537 /* LaunchScreen.storyboard in Resources */,
+				BDAE62B3243DDC6200BBC9D3 /* ReadMe in Resources */,
 				BDB2D46D21D70E4F00F6CBA6 /* com.baidu.idl.face.faceSDK.bundle in Resources */,
 				812D4E01219ACE2B0007DCC0 /* city.plist in Resources */,
 				81801DD2219A8DFF00020537 /* Assets.xcassets in Resources */,
@@ -4010,6 +4020,8 @@
 				BDD0998F243D72D8002BD541 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				BDB2D46B21D70E4F00F6CBA6 /* idl-license.face-ios in Resources */,
 				BDC911E223D703610085286C /* yuebanyoulg1@2x.png in Resources */,
+				BDAE62B1243DD65400BBC9D3 /* opentitileimg2@3x.png in Resources */,
+				BDAE62B0243DD65400BBC9D3 /* opentitileimg2@2x.png in Resources */,
 				BDE7CD7223C9B83600E4C78E /* yuebanyoulg1111@3x.png in Resources */,
 				BDF3AEAA21FBEF5B00657CDC /* TZImagePickerController.bundle in Resources */,
 				BDA584F42434FE550053D820 /* ZZOrderLiveStreamDetailVC.xib in Resources */,
@@ -4759,7 +4771,7 @@
 					"$(PROJECT_DIR)/zwmMini/Vendors/SocialLibraries/Sina/SinaSDK",
 					"$(PROJECT_DIR)/zwmMini/Vendors/SocialLibraries/QQ",
 				);
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 4.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiamen.yuebanyou;
 				PRODUCT_MODULE_NAME = zwmMini;
 				PRODUCT_NAME = "租我吗";
@@ -4814,7 +4826,7 @@
 					"$(PROJECT_DIR)/zwmMini/Vendors/SocialLibraries/Sina/SinaSDK",
 					"$(PROJECT_DIR)/zwmMini/Vendors/SocialLibraries/QQ",
 				);
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 4.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiamen.yuebanyou;
 				PRODUCT_MODULE_NAME = zwmMini;
 				PRODUCT_NAME = "租我吗";

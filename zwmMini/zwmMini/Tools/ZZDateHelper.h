@@ -20,7 +20,7 @@
 /**
  *  获取完整时间(含秒数)
  *
- *  @param date date
+ *  @param update date
  *
  *  @return 例: 2000-11-11 11:11:11
 
@@ -77,8 +77,6 @@
 
 /**
  *  获取到日
- *
- *  @param date date
  *
  *  @return 例:11
  */
@@ -161,9 +159,8 @@
 /**
  *  获取时间model
  *
- *  @param intervel 相差几天
- *
- *  @return zzdatemodel
+ *  @param days 相差几天
+ *daysturn zzdatemodel
  */
 - (ZZDateModel *)getDateModelWithDays:(NSInteger)days;
 

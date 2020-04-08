@@ -71,10 +71,10 @@
         return;
 
     }
-    if (NULLString(self.wechatNum) && !_isBoy) {
-        [MBManager showBriefAlert:@"微信号不能为空"];
-        return;
-    }
+//    if (NULLString(self.wechatNum) && !_isBoy) {
+//        [MBManager showBriefAlert:@"微信号不能为空"];
+//        return;
+//    }
     
    
     

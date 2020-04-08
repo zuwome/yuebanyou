@@ -63,12 +63,18 @@
                                              selector:@selector(isloginsuccessAction) name:loginISSuccess
                                                object:nil];
     
+    [self isloginsuccessAction];
+    
     // 注册成功
 //    [[NSNotificationCenter defaultCenter] addObserver:self
 //                                             selector:@selector(registrationSuccessAction) name:RegistrationSuccessNotification
 //                                               object:nil];
 
     
+}
+
+- (void)dealloc {
+    NSLog(@"12312312");
 }
 
 - (void)applicationBecomeActive{
