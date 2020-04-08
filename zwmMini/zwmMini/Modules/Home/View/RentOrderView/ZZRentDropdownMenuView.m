@@ -49,39 +49,39 @@
 }
 
 - (void)touchClearWithIndexPath:(NSIndexPath *)indexPath {
-//    NSMutableArray *mutablArr = _historyLocationArray.mutableCopy;
-//    [mutablArr removeObjectAtIndex:indexPath.row];
-//    _historyLocationArray = mutablArr.copy;
-//    [[ZZUserHelper shareInstance] setLocationArray:_historyLocationArray];
-//    [_tableView reloadData];
-//
-//    if (_historyLocationArray.count) {
-//        _emptyView.hidden = YES;
-//    }
-//    else {
-//        _emptyView.hidden = NO;
-//    }
+    NSMutableArray *mutablArr = _historyLocationArray.mutableCopy;
+    [mutablArr removeObjectAtIndex:indexPath.row];
+    _historyLocationArray = mutablArr.copy;
+    [XJUserAboutManageer setLocationArray:_historyLocationArray];
+    [_tableView reloadData];
+
+    if (_historyLocationArray.count) {
+        _emptyView.hidden = YES;
+    }
+    else {
+        _emptyView.hidden = NO;
+    }
 }
 
 #pragma mark - response method
 - (void)selecteMyLocation:(UITapGestureRecognizer *)recognizer {
-//    if (recognizer.view.tag >= _user.userGooToAddress.count) {
-//        return;
-//    }
-//    ZZMyLocationModel *model = _user.userGooToAddress[recognizer.view.tag];
-//    ZZRentDropdownModel *dropModel = [[ZZRentDropdownModel alloc] init];
-//    dropModel.city = model.city;
-//    dropModel.province = model.province;
-//    dropModel.detaiString = model.address;
-//    dropModel.name = model.simple_address;
-//    dropModel.address_lat = model.address_lat;
-//    dropModel.address_lng = model.address_lng;
-//
-//    CLLocation *location = [[CLLocation alloc] initWithLatitude:model.address_lat longitude:model.address_lng];
-//    dropModel.location = location;
-//    if (_delegate && [_delegate respondsToSelector:@selector(selectLocation:)]) {
-//        [_delegate selectLocation:dropModel];
-//    }
+    if (recognizer.view.tag >= _user.userGooToAddress.count) {
+        return;
+    }
+    ZZMyLocationModel *model = _user.userGooToAddress[recognizer.view.tag];
+    ZZRentDropdownModel *dropModel = [[ZZRentDropdownModel alloc] init];
+    dropModel.city = model.city;
+    dropModel.province = model.province;
+    dropModel.detaiString = model.address;
+    dropModel.name = model.simple_address;
+    dropModel.address_lat = model.address_lat;
+    dropModel.address_lng = model.address_lng;
+
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:model.address_lat longitude:model.address_lng];
+    dropModel.location = location;
+    if (_delegate && [_delegate respondsToSelector:@selector(selectLocation:)]) {
+        [_delegate selectLocation:dropModel];
+    }
 }
 
 #pragma mark - UITableViewMethod
@@ -158,36 +158,36 @@
 }
 
 - (void)createMyLocations {
-//    CGFloat offsetX = 15.0;
-//    __block ZZRentDropdownMyLocationView *lastView = nil;
-//
-//    NSMutableArray<ZZMyLocationModel *> *citys = @[].mutableCopy;
-//    [_user.userGooToAddress enumerateObjectsUsingBlock:^(ZZMyLocationModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if ([obj.city isEqualToString:[ZZUserHelper shareInstance].loginer.rent.city.name]) {
-//            [citys addObject:obj];
-//        }
-//    }];
-//
-//
-//    for (NSInteger i = 0; i < citys.count; i++) {
-//        ZZMyLocationModel *model = citys[i];
-//        ZZRentDropdownMyLocationView *view = [[ZZRentDropdownMyLocationView alloc] init];
-//        view.tag = i;
-//        [view configureTitle:model.simple_address
-//                    distance:[model currentDistance:[ZZUserHelper shareInstance].location]];
-//        CGFloat x = offsetX;
-//        if (i != 0) {
-//            x = lastView.right + 12.0;
-//        }
-//        view.frame = CGRectMake(x, 0.0, view.totalWidth, 44.0);
-//        [_scrollView addSubview:view];
-//
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selecteMyLocation:)];
-//        [view addGestureRecognizer:tap];
-//        lastView = view;
-//    }
-//
-//    _scrollView.contentSize = CGSizeMake(lastView.right + 15.0, 0.0);
+    CGFloat offsetX = 15.0;
+    __block ZZRentDropdownMyLocationView *lastView = nil;
+
+    NSMutableArray<ZZMyLocationModel *> *citys = @[].mutableCopy;
+    [_user.userGooToAddress enumerateObjectsUsingBlock:^(ZZMyLocationModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.city isEqualToString:XJUserAboutManageer.uModel.rent.city.name]) {
+            [citys addObject:obj];
+        }
+    }];
+
+
+    for (NSInteger i = 0; i < citys.count; i++) {
+        ZZMyLocationModel *model = citys[i];
+        ZZRentDropdownMyLocationView *view = [[ZZRentDropdownMyLocationView alloc] init];
+        view.tag = i;
+        [view configureTitle:model.simple_address
+                    distance:[model currentDistance:XJUserAboutManageer.location]];
+        CGFloat x = offsetX;
+        if (i != 0) {
+            x = lastView.right + 12.0;
+        }
+        view.frame = CGRectMake(x, 0.0, view.totalWidth, 44.0);
+        [_scrollView addSubview:view];
+
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selecteMyLocation:)];
+        [view addGestureRecognizer:tap];
+        lastView = view;
+    }
+
+    _scrollView.contentSize = CGSizeMake(lastView.right + 15.0, 0.0);
 }
 
 #pragma mark - getters and setters
@@ -267,7 +267,7 @@
 
 - (NSArray *)historyLocationArray {
     if (!_historyLocationArray) {
-//        _historyLocationArray = [ZZUserHelper shareInstance].locationArray;
+        _historyLocationArray = XJUserAboutManageer.locationArray;
     }
     return _historyLocationArray;
 }

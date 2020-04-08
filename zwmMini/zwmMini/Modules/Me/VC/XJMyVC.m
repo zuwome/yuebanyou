@@ -63,6 +63,7 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
 
 
 
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 //    [XJUserModel loadUser:XJUserAboutManageer.uModel.uid param:nil];
@@ -73,6 +74,10 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
     if (XJUserAboutManageer.uModel) {
         [self.headView setUpHeadViewInfo:XJUserAboutManageer.uModel];
     }
+}
+
+- (void)createNavigationLeftButton {
+    
 }
 
 /**

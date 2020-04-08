@@ -84,8 +84,8 @@
                     NSData* data = [[NSData alloc] initWithBase64EncodedString:[images[@"bestImage"] lastObject] options:NSDataBase64DecodingIgnoreUnknownCharacters];
                     UIImage* bestImage = [UIImage imageWithData:data];
                     NSLog(@"bestImage = %@",bestImage);
-                    if (self.endBlock) {
-                        self.endBlock(bestImage);
+                    if (weakSelf.endBlock) {
+                        weakSelf.endBlock(bestImage);
                     }
                 }
                 if (images[@"liveEye"] != nil) {
@@ -122,8 +122,8 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [weakSelf closeAction];
                 });
-                self.circleView.conditionStatusFit = true;
-                [self singleActionSuccess:true];
+                weakSelf.circleView.conditionStatusFit = true;
+                [weakSelf singleActionSuccess:true];
                 break;
             }
             case LivenessRemindCodePitchOutofDownRange:

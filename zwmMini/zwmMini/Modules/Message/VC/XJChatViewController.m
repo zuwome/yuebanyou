@@ -48,6 +48,9 @@
 #import "ZZOrderTimeLineView.h"
 #import "ZZOrderCommentViewController.h"
 
+#import "ZZPrivateChatPayModel.h"
+#import "ZZPrivateChatPayManager.h"
+
 static NSString *PrivateChatPay = @"PrivateChatPay";
 static NSString *RCMTextCell = @"rcmtextcell";
 
@@ -83,6 +86,8 @@ static NSString *RCMTextCell = @"rcmtextcell";
 @property (nonatomic, strong) NSMutableArray *messageArray;
 
 @property (nonatomic, strong) ZZOrderTimeLineView *timeLineView;
+
+@property (nonatomic, strong) ZZPrivateChatPayModel *payChatModel;//当前聊天的用户的私聊收费的model
 
 @end
 
@@ -136,9 +141,39 @@ static NSString *RCMTextCell = @"rcmtextcell";
 //    NSLog(@"%@",test.extra);
     self.chatSessionInputBarControl.delegate = self;
     
+    [self privateChatPayManagerCallBack:nil];
+    
     [self fetchLastOrder];
 
 }
+
+#pragma mark - 私聊付费模块
+- (void)privateChatPayManagerCallBack:(void(^)(ZZPrivateChatPayModel *payModel))privateChatPayCallBack {
+    [ZZPrivateChatPayManager requestUserInfoAndSensitiveNumberWithUid:self.targetId privateChatPay:^(ZZPrivateChatPayModel *payModel) {
+        NSLog(@"PY_当前的用户是否可以私聊付费%d",payModel.isPay);
+//        [ZZUserHelper shareInstance].consumptionMebi = 0;
+        self.payChatModel = payModel;
+        //为过审，隐藏私信付费弹窗
+//        [self alertPayChatprompt];
+        self.payChatModel.isFirst = YES;
+        if (privateChatPayCallBack) {
+            privateChatPayCallBack(payModel);
+        }
+    }];
+}
+
+- (void)askForAPrivateChatFeeAgain {
+     NSLog(@"PY_开始请求私聊付费的数据");
+    [ZZPrivateChatPayManager requestUserInfoWithUid:self.targetId privateChatPay:^(ZZPrivateChatPayModel *payModel) {
+        self.payChatModel.globaChatCharge = payModel.globaChatCharge;
+        self.payChatModel.open_charge = payModel.open_charge;
+        self.payChatModel.chatUserVersion = payModel.chatUserVersion;
+        self.payChatModel.bothfollowing = payModel.bothfollowing;
+        self.payChatModel.ordering = payModel.ordering;
+        self.payChatModel.isFirst = NO;
+    }];
+}
+
 
 - (void)ceratRightView {
     
@@ -273,7 +308,7 @@ static NSString *RCMTextCell = @"rcmtextcell";
     // 小于30需要校验敏感词
     BOOL isneedCheck = self.conversationDataRepository.count <= 30 ? YES : NO;
     
-    if (self.isNeedCharge) {
+    if (self.payChatModel.isRequessSuccess && self.payChatModel.isPay && !self.payChatModel.wechat_flag && !self.payChatModel.following_flag) {
         // 需要付费
         
         // 么币不足去充值
@@ -281,8 +316,10 @@ static NSString *RCMTextCell = @"rcmtextcell";
             [self gotoPayVC:[XJUserAboutManageer.priceConfig.per_chat_cost_mcoin integerValue]];
             return;
         }
+        
 
     extraDic = isneedCheck ? @{@"payChat":PrivateChatPay,@"check":@(isneedCheck)}.mutableCopy:@{@"payChat":PrivateChatPay,@"check":@(isneedCheck)}.mutableCopy;
+        [self askForAPrivateChatFeeAgain];
     }else{
         // 不需要付费
         extraDic = @{@"payChat":@"",@"check":@(isneedCheck)}.mutableCopy;
@@ -401,7 +438,6 @@ static NSString *RCMTextCell = @"rcmtextcell";
         [[RCIM sharedRCIM] sendMediaMessage:self.conversationType targetId:self.targetId content:messagecontent pushContent:nil pushData:nil progress:^(int progress, long messageId) {
             
         } success:^(long messageId) {
-            NSLog(@"%ld",(long)self.unreadnum);
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (XJUserAboutManageer.uModel.gender == 2 && self.hasreceive) {
                     
@@ -948,6 +984,11 @@ static NSString *RCMTextCell = @"rcmtextcell";
     if (_topHintView) {
         [_topHintView removeFromSuperview];
         _topHintView = nil;
+        
+        CGRect fram = self.conversationMessageCollectionView.frame;
+        fram.origin.y = fram.origin.y - 20;
+        fram.size.height = fram.size.height + 20;
+        self.conversationMessageCollectionView.frame = fram;
         return;
     }
  

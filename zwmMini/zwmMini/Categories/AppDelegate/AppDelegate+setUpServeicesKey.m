@@ -9,8 +9,7 @@
 #import "AppDelegate+setUpServeicesKey.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import "APPKeys.h"
-#import <UMShare/UMShare.h>
-#import <UMCommon/UMCommon.h>
+#import <UMSocialCore/UMSocialCore.h>
 #import <RongIMKit/RongIMKit.h>
 #import "ZZMessageChatWechatPayModel.h"
 #import "ZZChatReportModel.h"
@@ -19,7 +18,7 @@
 //百度face
 #import "FaceParameterConfig.h"
 #import <IDLFaceSDK/IDLFaceSDK.h>
-#import <UMAnalytics/MobClick.h>
+
 
 @implementation AppDelegate (setUpServeicesKey)
 
@@ -29,11 +28,14 @@
     [AMapServices sharedServices].apiKey = GAODE_KEY;
     
     //友盟
-    [UMConfigure initWithAppkey:NUMENG_APPKEY channel:nil];
+    // UMeng 社会化分享
+    [[UMSocialManager defaultManager] setUmSocialAppkey:UMENG_KEY];
+//    
+//    [UMConfigure initWithAppkey:NUMENG_APPKEY channel:nil];
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:WEIXIN_ID appSecret:WEIXIN_SECRET redirectURL:@"http://mobile.umeng.com/social"];
     
         //友盟统计、自定义事件
-    [MobClick setScenarioType:E_UM_NORMAL];
+//    [MobClick setScenarioType:E_UM_NORMAL];
 //
     //融云
     NSLog(@"app key is %@", NRONGCLOUD_IM_APPKEY);

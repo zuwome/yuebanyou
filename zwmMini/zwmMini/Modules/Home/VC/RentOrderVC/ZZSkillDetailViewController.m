@@ -531,9 +531,6 @@
     } failure:^(NSError *error) {
         
     }];
-//    [ZZRequest method:@"GET" path:[NSString stringWithFormat:@"/api/user/%@/say_hi_status",self.user.uid] params:nil next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
-//
-//    }];
 }
 
 //马上租他

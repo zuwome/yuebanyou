@@ -428,4 +428,51 @@ static XJUserManager *userManger = nil;
     return [ZZUserDefaultsHelper objectForDestKey:name];
 }
 
+- (NSArray *)locationArray {
+    NSString *locationArrPath = [NSString stringWithFormat:@"locationuid=%@",XJUserAboutManageer.uModel.uid];
+    
+    NSData *objectData = [ZZUserDefaultsHelper objectForDestKey:locationArrPath];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:objectData];
+}
+
+- (void)setLocationArray:(NSArray *)locationArray {
+    NSString *locationArrPath = [NSString stringWithFormat:@"locationuid=%@",XJUserAboutManageer.uModel.uid];
+    NSData *objectData = [NSKeyedArchiver archivedDataWithRootObject:locationArray];
+    [ZZUserDefaultsHelper setObject:objectData forDestKey:locationArrPath];
+}
+
+/**
+ * MARK: 请求么币和余额,并且更新
+ */
++ (void)requestMeBiAndMoneynext:(requestCallback)next {
+    [AskManager GET:@"api/user/mcoin" dict:nil succeed:^(id data, XJRequestError *rError) {
+        if (rError) {
+            [ZZHUD showTastInfoErrorWithString:rError.message];
+        } else {
+            [ZZHUD dismiss];
+            XJUserModel *user = XJUserAboutManageer.uModel;
+            NSLog(@"之前有的么币: %d", user.mcoin);
+            
+            NSNumber *balance = [NSNumber numberWithDouble:[data[@"balance"] doubleValue]];
+            NSNumber *mcoin = [NSNumber numberWithInteger:[data[@"mcoin_total"] integerValue]];
+            user.balance = [balance floatValue];
+            user.mcoin = mcoin;
+            NSLog(@"之后的么币: %d", user.mcoin);
+            XJUserAboutManageer.uModel = user;
+//            [[ZZUserHelper shareInstance] saveLoginer:[user toDictionary] postNotif:NO];
+        }
+        if (next) {
+            next(rError,data,nil);
+        }
+    } failure:^(NSError *error) {
+        XJRequestError *rError = [[XJRequestError alloc] init];
+        rError.code = error.code;
+        rError.message = error.localizedDescription;
+        if (next) {
+            next(rError,nil,nil);
+        }
+    }];
+
+}
+
 @end

@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XJUserManager : NSObject
 
+@property (strong, nonatomic) NSArray *locationArray;//历史地址
+
 //上次打赏的金额
 @property (strong, nonatomic) NSString *lastPacketMoney;
 
@@ -81,6 +83,8 @@ MARK: 检测文本是否违规
                      next:(requestCallback)next;
 
 - (BOOL)canApplyTalentWithBlock:(void (^)(BOOL success, NSInteger infoIncompleteType, BOOL isCancel))block;
+
++ (void)requestMeBiAndMoneynext:(requestCallback)next;
 
 @end
 

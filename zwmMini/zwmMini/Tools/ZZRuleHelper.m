@@ -70,7 +70,7 @@
 
 + (void)pullRefund:(NSDictionary *)param next:(requestCallback)next
 {
-    [AskManager GET:@"api/rule" dict:nil succeed:^(id data, XJRequestError *rError) {
+    [AskManager GET:@"api/rule" dict:param.mutableCopy succeed:^(id data, XJRequestError *rError) {
         if (rError) [ZZHUD showTastInfoErrorWithString:rError.message];
         else next(rError, data, nil);
     } failure:^(NSError *error) {

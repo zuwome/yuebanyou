@@ -74,23 +74,23 @@
 
 //保存搜索过的地址
 - (void)backupLocationArray {
-//    if (self.addressModel) {
-//        NSMutableArray *array = [NSMutableArray arrayWithArray:[ZZUserHelper shareInstance].locationArray];
-//        __block BOOL have = NO;
-//        [array enumerateObjectsUsingBlock:^(ZZRentDropdownModel *downModel, NSUInteger idx, BOOL * _Nonnull stop) {
-//            if ([downModel.name isEqualToString:self.addressModel.name]) {
-//                have = YES;
-//                *stop = YES;
-//            }
-//        }];
-//        if (!have) {
-//            if (array.count == 100) {
-//                [array removeLastObject];
-//            }
-//            [array insertObject:self.addressModel atIndex:0];
-//        }
-//        [[ZZUserHelper shareInstance] setLocationArray:array];
-//    }
+    if (self.addressModel) {
+        NSMutableArray *array = [NSMutableArray arrayWithArray:XJUserAboutManageer.locationArray];
+        __block BOOL have = NO;
+        [array enumerateObjectsUsingBlock:^(ZZRentDropdownModel *downModel, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([downModel.name isEqualToString:self.addressModel.name]) {
+                have = YES;
+                *stop = YES;
+            }
+        }];
+        if (!have) {
+            if (array.count == 100) {
+                [array removeLastObject];
+            }
+            [array insertObject:self.addressModel atIndex:0];
+        }
+        [XJUserAboutManageer setLocationArray:array];
+    }
 }
 
 - (void)savePayMethod {

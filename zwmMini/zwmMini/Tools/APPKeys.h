@@ -39,6 +39,9 @@
 
 #define NUMENG_APPKEY @"5e17daaacb23d21c6b000362"
 
+#define Umeng_appkey @"569ba0f3e0f55a457d002306"
+
+
 #define AgoraAppId  @"3a8bebe2285f45f2999dbca9763b4c5d"
 
 

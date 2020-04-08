@@ -131,7 +131,6 @@
 }
 //获取内购coin数据
 - (void)getPayCoinData{
-    
     [AskManager GET:API_PAY_COIN_DATA_GET dict:@{}.mutableCopy succeed:^(id data, XJRequestError *rError) {
         if (!rError) {
             for (NSDictionary *dic in data) {
@@ -146,15 +145,10 @@
     } failure:^(NSError *error) {
         
     }];
-    
 }
 
-
-
 #pragma mark lazy
-
 - (XJMyCoinView *)myCoinView{
-    
     if (!_myCoinView) {
         _myCoinView = [[XJMyCoinView alloc] initWithFrame:self.view.frame];
         _myCoinView.delegate = self;
@@ -168,17 +162,5 @@
     }
     return _payDataArray;
 }
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

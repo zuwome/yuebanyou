@@ -64,22 +64,22 @@
             make.right.equalTo(self).offset(-30);
         }];
         
-        [self.wechatLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.width.equalTo(self.nameLb);
-            make.top.equalTo(self.nameLb.mas_bottom).offset(37);
-            
-        }];
-        [self.wechatTf mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.wechatLb);
-            make.left.equalTo(self.wechatLb.mas_right).offset(5);
-            make.right.equalTo(self).offset(-30);
-
-        }];
-        [self.wchatExplainLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.wechatLb.mas_bottom).offset(12);
-            make.left.equalTo(self.wechatLb);
-            make.right.equalTo(self.wechatTf);
-        }];
+//        [self.wechatLb mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.width.equalTo(self.nameLb);
+//            make.top.equalTo(self.nameLb.mas_bottom).offset(37);
+//            
+//        }];
+//        [self.wechatTf mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerY.equalTo(self.wechatLb);
+//            make.left.equalTo(self.wechatLb.mas_right).offset(5);
+//            make.right.equalTo(self).offset(-30);
+//
+//        }];
+//        [self.wchatExplainLb mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.wechatLb.mas_bottom).offset(12);
+//            make.left.equalTo(self.wechatLb);
+//            make.right.equalTo(self.wechatTf);
+//        }];
         
         [self.doneBackView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self);

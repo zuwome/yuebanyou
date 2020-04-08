@@ -10,7 +10,8 @@
 #import "XJWithDrawView.h"
 #import "XJWithDrawRecordVC.h"
 #import "XJWithDrawProtocalVC.h"
-#import <UMShare/UMShare.h>
+//#import <UMShare/UMShare.h>
+#import <UMSocialCore/UMSocialCore.h>
 #import "XJMyWalletVC.h"
 
 
@@ -60,62 +61,118 @@
 
 - (void)getUserInfoForPlatform:(UMSocialPlatformType)platformType
 {
-    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:nil completion:^(id result, NSError *error) {
-        if (error) {
-            
-            [MBManager showBriefAlert:@"授权失败"];
-            
-        } else {
-            UMSocialUserInfoResponse *resp = result;
-            NSMutableDictionary *pdic = @{
-                                          @"channel":@"wx",
-                                          @"amount":self.postMoney,
-                                          @"recipient":resp.openid
-                                          }.mutableCopy;
-            [AskManager POST:API_WITHDRAW_POST dict:pdic succeed:^(id data, XJRequestError *rError) {
-                
-                if (!rError) {
-                    
-                    [self showAlerVCtitle:@"提示" message:@"您的提现申请已提交，请等待审核，预计1-2日到账。" sureTitle:@"确定" cancelTitle:@"" sureBlcok:^{
-                        
-                        for (UIViewController* vc in self.navigationController.viewControllers) {
-                            if ([vc isKindOfClass:[XJMyWalletVC class]]) {
-                                [self.navigationController popToViewController:vc animated:YES];
-                                break;
-                            }};
-                        
-                        
-                    } cancelBlock:^{
-                        
+    [[UMSocialManager defaultManager] authWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
+                if (error) {
+
+                    [MBManager showBriefAlert:@"授权失败"];
+
+                } else {
+                    UMSocialUserInfoResponse *resp = result;
+                    NSMutableDictionary *pdic = @{
+                                                  @"channel":@"wx",
+                                                  @"amount":self.postMoney,
+                                                  @"recipient":resp.openid
+                                                  }.mutableCopy;
+                    [AskManager POST:API_WITHDRAW_POST dict:pdic succeed:^(id data, XJRequestError *rError) {
+
+                        if (!rError) {
+
+                            [self showAlerVCtitle:@"提示" message:@"您的提现申请已提交，请等待审核，预计1-2日到账。" sureTitle:@"确定" cancelTitle:@"" sureBlcok:^{
+
+                                for (UIViewController* vc in self.navigationController.viewControllers) {
+                                    if ([vc isKindOfClass:[XJMyWalletVC class]]) {
+                                        [self.navigationController popToViewController:vc animated:YES];
+                                        break;
+                                    }};
+
+
+                            } cancelBlock:^{
+
+                            }];
+
+                        }else{
+
+
+                        }
+
+                    } failure:^(NSError *error) {
+
                     }];
-                    
-                }else{
-                    
-                    
+
+
+                    // 授权信息
+        //            NSLog(@"Wechat uid: %@", resp.uid);
+        //            NSLog(@"Wechat openid: %@", resp.openid);
+        //            NSLog(@"Wechat unionid: %@", resp.unionId);
+        //            NSLog(@"Wechat accessToken: %@", resp.accessToken);
+        //            NSLog(@"Wechat refreshToken: %@", resp.refreshToken);
+        //            NSLog(@"Wechat expiration: %@", resp.expiration);
+        //            // 用户信息
+        //            NSLog(@"Wechat name: %@", resp.name);
+        //            NSLog(@"Wechat iconurl: %@", resp.iconurl);
+        //            NSLog(@"Wechat gender: %@", resp.unionGender);
+        //            // 第三方平台SDK源数据
+        //            NSLog(@"Wechat originalResponse: %@", resp.originalResponse);
+
+
                 }
-                
-            } failure:^(NSError *error) {
-                
-            }];
-           
-            
-            // 授权信息
-//            NSLog(@"Wechat uid: %@", resp.uid);
-//            NSLog(@"Wechat openid: %@", resp.openid);
-//            NSLog(@"Wechat unionid: %@", resp.unionId);
-//            NSLog(@"Wechat accessToken: %@", resp.accessToken);
-//            NSLog(@"Wechat refreshToken: %@", resp.refreshToken);
-//            NSLog(@"Wechat expiration: %@", resp.expiration);
-//            // 用户信息
-//            NSLog(@"Wechat name: %@", resp.name);
-//            NSLog(@"Wechat iconurl: %@", resp.iconurl);
-//            NSLog(@"Wechat gender: %@", resp.unionGender);
-//            // 第三方平台SDK源数据
-//            NSLog(@"Wechat originalResponse: %@", resp.originalResponse);
-            
-            
-        }
     }];
+//    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
+//        if (error) {
+//
+//            [MBManager showBriefAlert:@"授权失败"];
+//
+//        } else {
+//            UMSocialUserInfoResponse *resp = result;
+//            NSMutableDictionary *pdic = @{
+//                                          @"channel":@"wx",
+//                                          @"amount":self.postMoney,
+//                                          @"recipient":resp.openid
+//                                          }.mutableCopy;
+//            [AskManager POST:API_WITHDRAW_POST dict:pdic succeed:^(id data, XJRequestError *rError) {
+//
+//                if (!rError) {
+//
+//                    [self showAlerVCtitle:@"提示" message:@"您的提现申请已提交，请等待审核，预计1-2日到账。" sureTitle:@"确定" cancelTitle:@"" sureBlcok:^{
+//
+//                        for (UIViewController* vc in self.navigationController.viewControllers) {
+//                            if ([vc isKindOfClass:[XJMyWalletVC class]]) {
+//                                [self.navigationController popToViewController:vc animated:YES];
+//                                break;
+//                            }};
+//
+//
+//                    } cancelBlock:^{
+//
+//                    }];
+//
+//                }else{
+//
+//
+//                }
+//
+//            } failure:^(NSError *error) {
+//
+//            }];
+//
+//
+//            // 授权信息
+////            NSLog(@"Wechat uid: %@", resp.uid);
+////            NSLog(@"Wechat openid: %@", resp.openid);
+////            NSLog(@"Wechat unionid: %@", resp.unionId);
+////            NSLog(@"Wechat accessToken: %@", resp.accessToken);
+////            NSLog(@"Wechat refreshToken: %@", resp.refreshToken);
+////            NSLog(@"Wechat expiration: %@", resp.expiration);
+////            // 用户信息
+////            NSLog(@"Wechat name: %@", resp.name);
+////            NSLog(@"Wechat iconurl: %@", resp.iconurl);
+////            NSLog(@"Wechat gender: %@", resp.unionGender);
+////            // 第三方平台SDK源数据
+////            NSLog(@"Wechat originalResponse: %@", resp.originalResponse);
+//
+//
+//        }
+//    }];
 }
 
 - (void)clickWithDarwProtocal{

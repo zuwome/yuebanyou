@@ -137,7 +137,10 @@ static XJRequestManager *Request = nil;
                         break;
                     }
                     default: {
-                        [MBManager showBriefAlert:errorModel.message];
+                        if (!isNullString(errorModel.message)) {
+                            [MBManager showBriefAlert:errorModel.message];
+                        }
+                        
                         break;
                     }
                         
@@ -439,7 +442,7 @@ static XJRequestManager *Request = nil;
                 succeed(responseObject[@"data"],nil);
                 
             }else{
-                
+                [ZZHUD dismiss];
                 
                 XJRequestError *errorModel = [XJRequestError yy_modelWithDictionary:responseObject[@"error"]];
                 NSLog(@"error ==%@---",responseObject[@"error"]);
@@ -452,8 +455,7 @@ static XJRequestManager *Request = nil;
                     }
                         break;
                         //登录过期
-                   case 4034:
-                       {
+                   case 4034: {
                            
                            UIViewController *currVC = [self getCurrentVC];
                            if ([currVC isMemberOfClass:[XJLoginVC class]]) {
@@ -472,31 +474,20 @@ static XJRequestManager *Request = nil;
     //
     //                       }];
     //
-                           
-                          
                        }
                         break;
-                    case 4044:
-                    {
+                    case 4044: {
                         
                     }
                         break;
-                    case 4045:
-                    {
-                    
-                        
+                    case 4045: {
                     }
                         break;
-                    case 8000:
-                    {
-                       
+                    case 8000: {
                     }
                         break;
-                    
-                        
-                    default:{
+                    default: {
                         [MBManager showBriefAlert:errorModel.message];
-
                     }
                         break;
                 }

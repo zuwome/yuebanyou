@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <JSONModel/JSONModel.h>
 #import "XJRequestManager.h"
+#import "ZZMyLocationModel.h"
 
 @class XJCityModel;
 @class XJBanModel;
@@ -29,6 +30,9 @@
 @class ZZStatisDataModel;
 
 @interface XJUserModel : JSONModel
+
+// 用户的常去地点
+@property (nonatomic, copy) NSArray<ZZMyLocationModel> *userGooToAddress;
 
 @property (strong,nonatomic)  NSString *open_charge_channel;//当前用户是否拥有私聊付费开通渠道
 
