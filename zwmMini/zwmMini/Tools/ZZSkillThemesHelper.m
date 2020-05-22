@@ -121,7 +121,7 @@ static id _instance = nil;
 }
 
 - (void)getSkillsCatalogList:(requestCallback)next {  //获取系统主题
-    NSString *path = XJUserAboutManageer.isLogin ? @"api/skills/cataloglist" : @"/skills/cataloglist";
+    NSString *path = XJUserAboutManageer.isLogin ? @"api/skills/cataloglist" : @"skills/cataloglist";
     [AskManager GET:path dict:nil succeed:^(id data, XJRequestError *rError) {
         if (rError) [ZZHUD showTastInfoErrorWithString:rError.message];
         else next(rError, data, nil);

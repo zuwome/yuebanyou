@@ -71,6 +71,10 @@
 // 计算 text 对应的高度
 + (CGFloat)heightForCellWithText:(NSString *)contentText fontSize:(CGFloat)labelFont labelWidth:(CGFloat)labelWidth;
 
++ (CGFloat)heightForCellWithText:(NSString *)contentText font:(UIFont *)font labelWidth:(CGFloat)labelWidth;
+
++ (CGFloat)heightForCellWithText:(NSString *)contentText font:(UIFont *)font labelWidth:(CGFloat)labelWidth maximunLine:(NSUInteger)line;
+
 //计算 text 对应的宽度
 + (CGFloat)widthForCellWithText:(NSString *)contentText fontSize:(CGFloat)labelFont;
 

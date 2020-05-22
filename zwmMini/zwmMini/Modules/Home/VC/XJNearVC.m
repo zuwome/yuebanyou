@@ -30,7 +30,7 @@ static NSString *tableIdentifier = @"nearTableviewidentifier";
     self.sortValue = @"";
  
     
-      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAddress) name:refreshNearTableViewName object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAddress) name:refreshNearTableViewName object:nil];
 
     
 
@@ -42,6 +42,9 @@ static NSString *tableIdentifier = @"nearTableviewidentifier";
 - (void)creatUI{
     
     [self.view addSubview:self.tableView];
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
     [self.tableView.mj_header beginRefreshing];
     
 }
@@ -199,7 +202,7 @@ static NSString *tableIdentifier = @"nearTableviewidentifier";
 - (UITableView *)tableView
 {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0,kScreenWidth , kScreenHeight - SafeAreaBottomHeight-SafeAreaTopHeight-iPhoneTabbarHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0,0 , 0) style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor whiteColor];
         _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _tableView.separatorColor = defaultLineColor;
@@ -208,19 +211,26 @@ static NSString *tableIdentifier = @"nearTableviewidentifier";
         [_tableView setTableFooterView:[UIView new]];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        WEAK_SELF()
+        self.tableView.mj_header = [ZZRefreshHeader headerWithRefreshingBlock:^{
+            [weakSelf headerRereshing];
+        }];
+        self.tableView.mj_footer = [ZZRefreshFooter footerWithRefreshingBlock:^{
+            [weakSelf footerRereshing];
+        }];
         
-        //头部刷新
-        MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
-        header.automaticallyChangeAlpha = YES;
-        header.lastUpdatedTimeLabel.hidden = NO;
-        _tableView.mj_header = header;
-        
-        //底部刷新
-        MJRefreshBackNormalFooter *footer =  [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
-        [footer setTitle:@"我是有底线的～" forState: MJRefreshStateNoMoreData];
-        footer.stateLabel.font = [UIFont systemFontOfSize:14.f];
-        footer.stateLabel.textColor = [UIColor lightGrayColor];
-        _tableView.mj_footer = footer;
+//        //头部刷新
+//        MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
+//        header.automaticallyChangeAlpha = YES;
+//        header.lastUpdatedTimeLabel.hidden = NO;
+//        _tableView.mj_header = header;
+//
+//        //底部刷新
+//        MJRefreshBackNormalFooter *footer =  [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
+//        [footer setTitle:@"我是有底线的～" forState: MJRefreshStateNoMoreData];
+//        footer.stateLabel.font = [UIFont systemFontOfSize:14.f];
+//        footer.stateLabel.textColor = [UIColor lightGrayColor];
+//        _tableView.mj_footer = footer;
         
         
         if (@available(iOS 11.0, *)) {

@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface XJLookoverOtherUserVC : XJBaseVC
 @property(nonatomic,strong) XJUserModel *topUserModel;
 
+@property (nonatomic, assign) BOOL shouldLookForWx;
+- (void)lookoverWx;
+
 @end
 
 NS_ASSUME_NONNULL_END

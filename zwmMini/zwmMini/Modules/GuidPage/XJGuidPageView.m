@@ -108,8 +108,8 @@
 - (UILabel *)contetlb{
     if (!_contetlb) {
         
-        _contetlb = [XJUIFactory creatUILabelWithFrame:CGRectZero addToView:self.bgIV textColor:RGB(102, 102, 102) text:@"" font:defaultFont(16) textInCenter:YES];
-        _contetlb.numberOfLines = 0;
+        _contetlb = [XJUIFactory creatUILabelWithFrame:CGRectZero addToView:self.bgIV textColor:RGB(102, 102, 102) text:@"" font:defaultFont(16) textInCenter:NO];
+//        _contetlb.numberOfLines = 0;
     }
     return _contetlb;
 }

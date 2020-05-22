@@ -453,6 +453,38 @@
     return titleHeight;
 }
 
++ (CGFloat)heightForCellWithText:(NSString *)contentText font:(UIFont *)font labelWidth:(CGFloat)labelWidth maximunLine:(NSUInteger)line {
+    CGFloat singleLineHeight = [self heightForCellWithText:@"哈哈" font:font labelWidth:labelWidth];
+    CGFloat maximunHeight = singleLineHeight * line;
+    
+    CGFloat titleHeight = 0.0;
+    if ([contentText respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
+    {
+        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:contentText attributes:@{ NSFontAttributeName:font}];
+        CGRect rect = [attributedText boundingRectWithSize:CGSizeMake(labelWidth, maximunHeight)
+                                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                                   context:nil];
+        titleHeight = ceilf(rect.size.height);
+    }
+    
+    return titleHeight;
+}
+
++ (CGFloat)heightForCellWithText:(NSString *)contentText font:(UIFont *)font labelWidth:(CGFloat)labelWidth
+{
+    CGFloat titleHeight = 0.0;
+    if ([contentText respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
+    {
+        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:contentText attributes:@{ NSFontAttributeName:font}];
+        CGRect rect = [attributedText boundingRectWithSize:CGSizeMake(labelWidth, CGFLOAT_MAX)
+                                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                                   context:nil];
+        titleHeight = ceilf(rect.size.height);
+    }
+    
+    return titleHeight;
+}
+
 + (CGFloat)widthForCellWithText:(NSString *)contentText fontSize:(CGFloat)labelFont
 {
     CGFloat titleWidth;

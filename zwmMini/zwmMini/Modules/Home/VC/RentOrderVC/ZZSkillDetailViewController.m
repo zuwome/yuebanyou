@@ -30,6 +30,7 @@
 #import "XJSkill.h"
 #import "XJEditMyInfoVC.h"
 #import "XJChatViewController.h"
+#import "XJLookoverOtherUserVC.h"
 
 @interface ZZSkillDetailViewController () <UITableViewDelegate, UITableViewDataSource,XJEditMyInfoVCDelegate> {
     CGFloat marginTop;      //列表据头部高度，（有无技能图片时，会隐藏顶部导航栏）
@@ -67,6 +68,12 @@
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     }
 //    self.tabBarController.tabBar.hidden = YES;  //跳转聊天等界面后，返回后显示底部tabbar，未找到原因
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO
+                                             animated:YES];
 }
 
 - (void)viewDidLoad {
@@ -478,10 +485,27 @@
 
 #pragma mark -- bottomViewAction
 - (void)lookwxAction {
-    [self.navigationController popViewControllerAnimated:YES];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(controllerWechatActions:)]) {
-        [self.delegate controllerWechatActions:self];
+    __block BOOL isFromLookover = NO;
+    NSArray<UIViewController *> *vcs = self.navigationController.viewControllers;
+    [vcs enumerateObjectsUsingBlock:^(UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[XJLookoverOtherUserVC class]]) {
+            isFromLookover = YES;
+            *stop = YES;
+        }
+    }];
+    if (isFromLookover) {
+        [self.navigationController popViewControllerAnimated:YES];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(controllerWechatActions:)]) {
+            [self.delegate controllerWechatActions:self];
+        }
     }
+    else {
+        XJLookoverOtherUserVC *otherVC = [XJLookoverOtherUserVC new];
+        otherVC.topUserModel = self.user;
+        otherVC.shouldLookForWx = YES;
+        [self.navigationController pushViewController:otherVC animated:YES];
+    }
+    
 }
 
 //判断是否需要验证-->不需要-->打招呼状态-->say_hi_status != 0-->去聊天
@@ -575,6 +599,7 @@
         [self gotoRentOrderView];
     }
 }
+
 - (void)gotoRentOrderView {
     ZZRentOrderInfoViewController *vc = [[ZZRentOrderInfoViewController alloc] init];
     XJSkill *skill = _topic.skills[0];

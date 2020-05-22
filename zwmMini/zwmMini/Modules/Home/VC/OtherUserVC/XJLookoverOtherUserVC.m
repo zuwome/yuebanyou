@@ -67,6 +67,18 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:reloadLookOtherInfo object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(createOrderReload) name:KMsg_CreateOrderNotification object:nil];
+    
+    [AskManager GET:@"api/system/ybyUpApp"
+               dict:@{}.mutableCopy
+            succeed:^(id data, XJRequestError *rError) {
+        if (!rError && (!data && [data count] != 0)) {
+            XJUserAboutManageer.shouldChangeAppTips = NO;
+            ZZUpdateAlertView *alertView = [[ZZUpdateAlertView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) upgradeTips:data];
+            [self.view.window addSubview:alertView];
+        }
+    }
+            failure:^(NSError *error) {
+    }];
 }
 
 - (void)dealloc {
@@ -83,17 +95,7 @@
         return;
     }
     
-    [AskManager GET:@"api/system/ybyUpApp"
-               dict:@{}.mutableCopy
-            succeed:^(id data, XJRequestError *rError) {
-        if (!rError && (!data && [data count] != 0)) {
-            XJUserAboutManageer.shouldChangeAppTips = NO;
-            ZZUpdateAlertView *alertView = [[ZZUpdateAlertView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) upgradeTips:data];
-            [self.view.window addSubview:alertView];
-        }
-    }
-            failure:^(NSError *error) {
-    }];
+
 }
 
 //购买成功刷新数据
@@ -371,6 +373,9 @@
         
         [self showUserFaceTips];
         
+        if (self.shouldLookForWx) {
+            [self lookoverWx];
+        }
     } failure:^(NSError *error) {
         
     }];

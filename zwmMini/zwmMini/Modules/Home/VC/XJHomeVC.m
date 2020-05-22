@@ -20,6 +20,10 @@
 #import "XJPernalDataVC.h"
 
 #import "XJMessageLoginVC.h"
+#import "ZZHomeModel.h"
+#import "ZZNewHomeTopicView.h"
+#import "ZZTopicClassifyViewController.h"
+#import "ZZAllTopicsViewController.h"
 //#import "MGFaceIDNetWork.h"
 //#import <MGFaceIDLiveDetect/MGFaceIDLiveDetect.h>
 
@@ -34,7 +38,7 @@
 @property(nonatomic,strong) XJRecommondVC *recommondVC;
 @property(nonatomic,strong) XJNearVC *nearVC;
 
-
+@property (nonatomic, strong) ZZHomeModel *homeModel;
 
 
 @end
@@ -49,6 +53,7 @@
 //    });
 
     [self creatUI];
+    [self fetchHomeData];
     //未登录跳到登录页
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(pushToLogin)
@@ -71,10 +76,6 @@
 //                                               object:nil];
 
     
-}
-
-- (void)dealloc {
-    NSLog(@"12312312");
 }
 
 - (void)applicationBecomeActive{
@@ -102,55 +103,6 @@
         [self getLocationAddress];
     });
 }
-
-- (void)creatUI{
-    
-    
-    UIBarButtonItem *leftitem = [[UIBarButtonItem alloc] initWithCustomView:self.leftButton];
-    self.navigationItem.leftBarButtonItem = leftitem;
-    
-    [self showNavRightButton:@"" action:@selector(rigthAction) image:GetImage(@"fangdajing") imageOn:GetImage(@"fangdajing")];
-    self.navigationItem.titleView = self.titilView;
-    [self addChildViewController:self.recommondVC];
-    UIView *recommondView = self.recommondVC.view;
-    [self.backScrollView addSubview:recommondView];
-    recommondView.frame = CGRectMake(0, 0,kScreenWidth , kScreenHeight - SafeAreaBottomHeight-SafeAreaTopHeight-iPhoneTabbarHeight);
-    @WeakObj(self);
-    self.recommondVC.block = ^(XJHomeListModel * _Nonnull homelistModel) {
-        @StrongObj(self);
-
-        if ([XJUserAboutManageer.uModel.uid isEqualToString:homelistModel.user.uid]) {
-            [self.navigationController pushViewController:[XJPernalDataVC new] animated:YES];
-        }else{
-            XJLookoverOtherUserVC *lookvc = [XJLookoverOtherUserVC new];
-            lookvc.topUserModel = homelistModel.user;
-            [self.navigationController pushViewController:lookvc animated:YES];
-            
-        }
-                
-    };
-    [self addChildViewController:self.nearVC];
-    UIView *nearView = self.nearVC.view;
-    [self.backScrollView addSubview:nearView];
-    nearView.frame = CGRectMake(kScreenWidth, 0,kScreenWidth , kScreenHeight - SafeAreaBottomHeight-SafeAreaTopHeight-iPhoneTabbarHeight);
-
-    self.nearVC.block = ^(XJHomeListModel * _Nonnull homelistModel) {
-        @StrongObj(self);
-        //是自己就跳到个人详情
-        if ([XJUserAboutManageer.uModel.uid isEqualToString:homelistModel.user.uid]) {
-            [self.navigationController pushViewController:[XJPernalDataVC new] animated:YES];
-        }else{
-            XJLookoverOtherUserVC *lookvc = [XJLookoverOtherUserVC new];
-            lookvc.topUserModel = homelistModel.user;
-            [self.navigationController pushViewController:lookvc animated:YES];
-        }
-       
-        
-    };
-
-}
-
-
 
 - (void)getLocationAddress {
     if (!NULLString(XJUserAboutManageer.cityName)) {
@@ -286,11 +238,100 @@
 }
 //筛选
 - (void)rigthAction{
-    
     [self.navigationController pushViewController:[XJSeachUserVC new] animated:YES];
-    
 }
 
+- (void)gotoTopicClassify:(ZZHomeCatalogModel *)topic {
+    if (isNullString(topic.id)) {
+        ZZAllTopicsViewController *allTopics = [[ZZAllTopicsViewController alloc] init];
+        allTopics.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:allTopics animated:YES];
+        return;
+    }
+    ZZTopicClassifyViewController *controller = [[ZZTopicClassifyViewController alloc] init];
+    controller.topic = topic;
+    controller.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+
+- (void)fetchHomeData {
+    NSDictionary *params;
+    if (XJUserAboutManageer.isLogin) {
+        if (!isNullString(XJUserAboutManageer.uModel.uid)) {
+            params = @{@"uid":XJUserAboutManageer.uModel.uid};
+        }
+    }
+    [AskManager GET:@"index/page_data" dict:params.mutableCopy succeed:^(id data, XJRequestError *rError) {
+        if (data) {
+            self.homeModel = [[ZZHomeModel alloc] initWithDictionary:data error:nil];
+            [self createCataView];
+        }
+        else {
+            [ZZHUD showTastInfoErrorWithString:rError.message];
+        }
+    } failure:^(NSError *error) {
+        [ZZHUD showTastInfoErrorWithString:error.localizedDescription];
+    }];
+}
+
+- (void)createCataView {
+    ZZNewHomeTopicView *view = [[ZZNewHomeTopicView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, 90)];
+    view.topics = self.homeModel.catalog;
+    [view setTopicChooseCallback:^(ZZHomeCatalogModel *topic) {
+        [self gotoTopicClassify:topic];
+    }];
+    [self.view addSubview:view];
+    
+    self.backScrollView.top += view.height;
+    self.backScrollView.height -= view.height;
+    
+    self.recommondVC.view.height = self.backScrollView.height;
+    self.nearVC.view.height = self.backScrollView.height;
+}
+
+- (void)creatUI{
+    UIBarButtonItem *leftitem = [[UIBarButtonItem alloc] initWithCustomView:self.leftButton];
+    self.navigationItem.leftBarButtonItem = leftitem;
+    
+    [self showNavRightButton:@"" action:@selector(rigthAction) image:GetImage(@"fangdajing") imageOn:GetImage(@"fangdajing")];
+    self.navigationItem.titleView = self.titilView;
+    [self addChildViewController:self.recommondVC];
+    UIView *recommondView = self.recommondVC.view;
+    [self.backScrollView addSubview:recommondView];
+    recommondView.frame = CGRectMake(0, 0,kScreenWidth , self.backScrollView.height);
+    @WeakObj(self);
+    self.recommondVC.block = ^(XJHomeListModel * _Nonnull homelistModel) {
+        @StrongObj(self);
+        if ([XJUserAboutManageer.uModel.uid isEqualToString:homelistModel.user.uid]) {
+            [self.navigationController pushViewController:[XJPernalDataVC new] animated:YES];
+        }
+        else{
+            XJLookoverOtherUserVC *lookvc = [XJLookoverOtherUserVC new];
+            lookvc.topUserModel = homelistModel.user;
+            [self.navigationController pushViewController:lookvc animated:YES];
+            
+        }
+    };
+    
+    [self addChildViewController:self.nearVC];
+    UIView *nearView = self.nearVC.view;
+    [self.backScrollView addSubview:nearView];
+    nearView.frame = CGRectMake(kScreenWidth, 0,kScreenWidth , self.backScrollView.height);
+
+    self.nearVC.block = ^(XJHomeListModel * _Nonnull homelistModel) {
+        @StrongObj(self);
+        //是自己就跳到个人详情
+        if ([XJUserAboutManageer.uModel.uid isEqualToString:homelistModel.user.uid]) {
+            [self.navigationController pushViewController:[XJPernalDataVC new] animated:YES];
+        }
+        else{
+            XJLookoverOtherUserVC *lookvc = [XJLookoverOtherUserVC new];
+            lookvc.topUserModel = homelistModel.user;
+            [self.navigationController pushViewController:lookvc animated:YES];
+        }
+    };
+}
 
 #pragma mark titleViewDlegate
 
@@ -301,11 +342,8 @@
 
 - (void)clickNear{
     [self.backScrollView setContentOffset:CGPointMake(kScreenWidth, 0) animated:YES];
-
     
 }
-
-
 
 
 #pragma mark UIScrollViewDelegate

@@ -120,8 +120,12 @@ static XJRequestManager *Request = nil;
                             [XJUserAboutManageer managerRemoveUserInfo];
                             [[XJRongIMManager sharedInstance] logOutRongIM];
                             XJLoginVC *loginV = [[XJLoginVC alloc] init];
-                            XJNaviVC *nav = [[XJNaviVC alloc] initWithRootViewController:loginV];
-                            ([UIApplication sharedApplication].delegate).window.rootViewController=nav;
+//                            XJNaviVC *nav = [[XJNaviVC alloc] initWithRootViewController:loginV];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [[UIViewController currentDisplayViewController].navigationController pushViewController:loginV animated:YES];
+                        });
+                        
+//                            ([UIApplication sharedApplication].delegate).window.rootViewController=nav;
     //                    } cancelBlock:^{
     //
     //                    }];

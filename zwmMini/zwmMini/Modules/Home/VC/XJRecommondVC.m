@@ -8,9 +8,13 @@
 
 #import "XJRecommondVC.h"
 #import "XJRecommondCollectionViewCell.h"
+#import "XRWaterfallLayout.h"
+#import "XJTopic.h"
+#import "XJSkill.h"
+#import "XJRecommondCell.h"
 
 static NSString *collectionIdentifier = @"recollectionidentifier";
-@interface XJRecommondVC ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface XJRecommondVC ()<UICollectionViewDelegate,UICollectionViewDataSource,XRWaterfallLayoutDelegate, UITableViewDelegate, UITableViewDataSource>
 
 
 @property(nonatomic,strong) UICollectionView *recollectionView;
@@ -23,8 +27,9 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
 @property(nonatomic,copy) NSString *lat;
 @property(nonatomic,copy) NSString *lng;
 
+@property (nonatomic, strong) UITableView *tableView;
 
-
+@property (nonatomic, strong) XRWaterfallLayout *waterfall;
 
 @end
 
@@ -41,19 +46,26 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isloginsuccessAction) name:loginISSuccess object:nil];
 }
 - (void)isloginsuccessAction{
-    [self.recollectionView.mj_header beginRefreshing];
-
+//    [self.recollectionView.mj_header beginRefreshing];
+    [_tableView.mj_header beginRefreshing];
     
 }
 - (void)creatUI{
+    self.view.backgroundColor = RGB(245, 245, 245);
+//    [self.view addSubview:self.recollectionView];
+//    [self.recollectionView.mj_header beginRefreshing];
     
-    [self.view addSubview:self.recollectionView];
-    [self.recollectionView.mj_header beginRefreshing];
+    [self.view addSubview:self.tableView];
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    [_tableView.mj_header beginRefreshing];
    
 }
 
 - (void)refresh {
-    [_recollectionView.mj_header beginRefreshing];
+//    [_recollectionView.mj_header beginRefreshing];
+    [_tableView.mj_header beginRefreshing];
 }
 
 //下拉刷新
@@ -64,7 +76,7 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
     [MBManager showLoading];
    
   
-    [self endfresh];
+//    [self endfresh];
     self.lat = NULLString(XJUserAboutManageer.localLatitude) ? @"":XJUserAboutManageer.localLatitude;
     self.lng = NULLString(XJUserAboutManageer.localLongitude) ? @"":XJUserAboutManageer.localLongitude;
     self.sortValue = @"";
@@ -126,11 +138,11 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
            
             if ([data[@"recommend"] count] == 0) {
                 
-                [self.recollectionView.mj_footer endRefreshingWithNoMoreData];
-                
+//                [self.recollectionView.mj_footer endRefreshingWithNoMoreData];
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
-            [self.recollectionView reloadData];
-
+//            [self.recollectionView reloadData];
+            [self.tableView reloadData];
        
             
         }else{
@@ -148,12 +160,12 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
 }
 
 - (void)endfresh{
-    if ([self.recollectionView.mj_header isRefreshing]) {
-        [self.recollectionView.mj_header endRefreshing];
+    if ([self.tableView.mj_header isRefreshing]) {
+        [self.tableView.mj_header endRefreshing];
     }
     
-    if ([self.recollectionView.mj_footer isRefreshing]) {
-        [self.recollectionView.mj_footer endRefreshing];
+    if ([self.tableView.mj_footer isRefreshing]) {
+        [self.tableView.mj_footer endRefreshing];
     }
 }
 
@@ -169,9 +181,7 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     XJRecommondCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionIdentifier forIndexPath:indexPath];
-    if (cell == nil) {
-        cell = [[XJRecommondCollectionViewCell alloc] initWithFrame:CGRectZero];
-    }
+
     if (self.homeListArray.count > 0) {
         [cell setUpContent:self.homeListArray[indexPath.item] withIndexpath:indexPath];
     }
@@ -179,32 +189,48 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
     
 }
 
-#pragma mark  定义每个UICollectionView的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGSize size = CGSizeMake((kScreenWidth/2.f) -3.5,(kScreenWidth/2.f)-3.5);
-    return  size;
-}
+#pragma mark - XRWaterfallLayoutDelegate methods
+- (CGFloat)waterfallLayout:(XRWaterfallLayout *)waterfallLayout itemHeightForWidth:(CGFloat)itemWidth atIndexPath:(NSIndexPath *)indexPath {
+    if (self.homeListArray.count == 0) {
+        return 0;
+    }
+    //根据图片的原始尺寸，及显示宽度，等比例缩放来计算显示高度
+    CGFloat height = (kScreenWidth/2.f) - 3.5;
+    
+    XJHomeListModel *model = self.homeListArray[indexPath.item];
+    
+    XJSkill *mostCheapSkill = nil;
+    for (XJTopic *topic in model.user.rent.topics) {
+        if (topic.skills.count == 0) {  //主题无技能，跳过
+            continue;
+        }
+        for (XJSkill *skill in topic.skills) {
+            if (!mostCheapSkill) {
+                mostCheapSkill = skill;
+            }
+            else if ([skill.price doubleValue] < [mostCheapSkill.price doubleValue]) {
+                mostCheapSkill = skill;
+            }
+        }
+    }
+    
+    // 技能名称、价格、介绍
+    if (mostCheapSkill != nil) {
+        if (!NULLString(mostCheapSkill.detail.content)) {
+            height += 10.0;
+            CGFloat textHeight = [XJUtils heightForCellWithText:mostCheapSkill.detail.content font:ADaptedFontBoldSize(16) labelWidth:(kScreenWidth/2.f) -3.5 maximunLine:3];
+            height += textHeight;
+        }
+        height += 10.0;
+        CGFloat textHeight = [XJUtils heightForCellWithText:mostCheapSkill.name font:ADaptedFontBoldSize(16) labelWidth:(kScreenWidth/2.f) -3.5];
+        height += textHeight;
+        height += 5;
+        return height;
+    }
+    else {
+        return (kScreenWidth/2.f) -3.5;
+    }
 
-
-
-#pragma mark  定义整个CollectionViewCell与整个View的间距
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(7, 0, 0, 0);//（上、左、下、右）
-}
-
-
-#pragma mark  定义每个UICollectionView的横向间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 7;
-}
-
-#pragma mark  定义每个UICollectionView的纵向间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 7;
 }
 
 #pragma mark  点击CollectionView触发事件
@@ -216,9 +242,35 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
     }
 }
 
+#pragma mark tableviewDelegate and dataSource
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 135.f;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 
+{
+    return self.homeListArray.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    XJRecommondCell *cell = [tableView dequeueReusableCellWithIdentifier:@"XJRecommondCell"];
+    if (cell == nil) {
+        cell = [[XJRecommondCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"XJRecommondCell"];
+    }
+    if (self.homeListArray.count > 0) {
+        cell.model = self.homeListArray[indexPath.row];
 
-
+    }
+    return cell;
+    
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (self.block) {
+        self.block(self.homeListArray[indexPath.item]);
+    }
+    
+}
 
 #pragma mark lazy
 - (NSMutableArray *)homeHotArray{
@@ -240,9 +292,14 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
 - (UICollectionView *)recollectionView{
     if (!_recollectionView) {
         
-        UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc] init];
+//        UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc] init];
         
-        _recollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0,kScreenWidth , kScreenHeight - SafeAreaBottomHeight-SafeAreaTopHeight-iPhoneTabbarHeight) collectionViewLayout:flow];
+        self.waterfall = [XRWaterfallLayout waterFallLayoutWithColumnCount:2];
+        //或者一次性设置
+        [self.waterfall setColumnSpacing:7 rowSpacing:7 sectionInset:UIEdgeInsetsMake(7, 0, 0, 0)];
+        self.waterfall.delegate = self;
+        
+        _recollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0,kScreenWidth , kScreenHeight - SafeAreaBottomHeight-SafeAreaTopHeight-iPhoneTabbarHeight) collectionViewLayout:self.waterfall];
         
          [_recollectionView registerClass:[XJRecommondCollectionViewCell class] forCellWithReuseIdentifier:collectionIdentifier];
         
@@ -258,7 +315,7 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
         footer.stateLabel.textColor = [UIColor lightGrayColor];
         _recollectionView.mj_footer = footer;
         
-        _recollectionView.backgroundColor= defaultWhite;
+        _recollectionView.backgroundColor= RGB(245, 245, 245);
 //        _recollectionView.scrollsToTop = YES;
         _recollectionView.delegate = self;
         _recollectionView.dataSource = self;
@@ -269,14 +326,44 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
     
     
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UITableView *)tableView
+{
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0,kScreenWidth , kScreenHeight - SafeAreaBottomHeight-SafeAreaTopHeight-iPhoneTabbarHeight) style:UITableViewStylePlain];
+        _tableView.backgroundColor = RGB(245, 245, 245);
+        _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        _tableView.separatorColor = defaultLineColor;
+        _tableView.estimatedSectionHeaderHeight = 0;
+        _tableView.estimatedSectionFooterHeight = 0;
+        [_tableView setTableFooterView:[UIView new]];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        
+        //头部刷新
+        MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
+        header.automaticallyChangeAlpha = YES;
+        header.lastUpdatedTimeLabel.hidden = NO;
+        _tableView.mj_header = header;
+        
+        //底部刷新
+        MJRefreshBackNormalFooter *footer =  [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
+        [footer setTitle:@"我是有底线的～" forState: MJRefreshStateNoMoreData];
+        footer.stateLabel.font = [UIFont systemFontOfSize:14.f];
+        footer.stateLabel.textColor = [UIColor lightGrayColor];
+        _tableView.mj_footer = footer;
+        
+        
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+            _tableView.scrollIndicatorInsets = _tableView.contentInset;
+        }else{
+            //            self.automaticallyAdjustsScrollViewInsets = NO;
+        }
+        
+    }
+    return _tableView;
 }
-*/
+
 
 @end

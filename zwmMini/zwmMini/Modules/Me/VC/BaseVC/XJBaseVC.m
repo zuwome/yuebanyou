@@ -271,6 +271,7 @@
         _theTableView.separatorColor = defaultLineColor;
         _theTableView.estimatedSectionHeaderHeight = 0;
         _theTableView.estimatedSectionFooterHeight = 0;
+        _theTableView.estimatedRowHeight = 0;
         [_theTableView setTableFooterView:[UIView new]];
 
         
@@ -291,8 +292,9 @@
         if (@available(iOS 11.0, *)) {
             _theTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
             _theTableView.scrollIndicatorInsets = _theTableView.contentInset;
-        }else{
-//            self.automaticallyAdjustsScrollViewInsets = NO;
+        }
+        else{
+            self.automaticallyAdjustsScrollViewInsets = NO;
         }
         
     }

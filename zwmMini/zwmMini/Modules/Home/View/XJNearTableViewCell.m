@@ -7,7 +7,8 @@
 //
 
 #import "XJNearTableViewCell.h"
-
+#import "XJTopic.h"
+#import "XJSkill.h"
 
 @interface XJNearTableViewCell()
 
@@ -17,10 +18,8 @@
 @property(nonatomic,strong) UIImageView *identificationIV;
 @property(nonatomic,strong) UIImageView *distanceIV;
 @property(nonatomic,strong) UILabel *distanceLb;
-
-
-
-
+@property (nonatomic, strong) UILabel *skillLabel;
+@property (nonatomic, strong) UILabel *skillDesLabel;
 
 @end
 
@@ -35,7 +34,6 @@
         self.headIV.frame = CGRectMake(11, 4, 124, 124);
         [self.headIV cornerRadiusViewWithRadius:6 andTopLeft:YES andTopRight:NO andBottomLeft:YES andBottomRight:NO];
 
-        
         [self.nameLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView).offset(10);
             make.left.equalTo(self.headIV.mas_right).offset(10);
@@ -56,11 +54,23 @@
         }];
         [self.distanceLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView).offset(-17);
-            make.bottom.equalTo(self.contentView).offset(-10);
+            make.centerY.equalTo(self.nameLb);
         }];
         [self.distanceIV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.distanceLb);
+            make.centerY.equalTo(self.nameLb);
             make.right.equalTo(self.distanceLb.mas_left).offset(-4);
+        }];
+        
+        [self.skillLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.nameLb.mas_bottom).offset(5);
+            make.left.equalTo(self.headIV.mas_right).offset(10);
+            make.right.equalTo(self.contentView).offset(-10);
+        }];
+        
+        [self.skillDesLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.headIV).offset(-8);
+            make.left.equalTo(self.headIV.mas_right).offset(10);
+            make.right.equalTo(self.contentView).offset(-10);
         }];
         
     }
@@ -73,6 +83,38 @@
     self.genderIV.image = model.user.gender == 1? GetImage(@"boyiimghome"):GetImage(@"girlimghome");
     self.identificationIV.hidden = model.user.realname.status == 2 ? NO: YES;
     self.distanceLb.text = model.distance;
+    
+    
+    XJSkill *mostCheapSkill = nil;
+    for (XJTopic *topic in model.user.rent.topics) {
+        if (topic.skills.count == 0) {  //主题无技能，跳过
+            continue;
+        }
+        for (XJSkill *skill in topic.skills) {
+//            if (skill.topicStatus != 2 && skill.topicStatus != 4) { //没通过审核
+//                continue;
+//            }
+            if (!mostCheapSkill) {
+                mostCheapSkill = skill;
+            }
+            else if ([skill.price doubleValue] < [mostCheapSkill.price doubleValue]) {
+                mostCheapSkill = skill;
+            }
+//            if (mostCheapSkill == nil || [skill.price floatValue] < [mostCheapSkill.price floatValue]) {
+//                mostCheapSkill = skill;
+//            }
+        }
+    }
+    
+    // 技能名称、价格、介绍
+    if (mostCheapSkill == nil) {
+        _skillLabel.text = @" ";
+        _skillDesLabel.text = @" ";
+    }
+    else {
+        _skillLabel.text = mostCheapSkill.name;
+        _skillDesLabel.text = mostCheapSkill.detail.content;
+    }
 }
 
 
@@ -104,7 +146,7 @@
     
     if (!_nameLb) {
         
-        _nameLb = [XJUIFactory creatUILabelWithFrame:CGRectZero addToView:self.contentView textColor:defaultBlack text:@"" font:defaultFont(17) textInCenter:NO];
+        _nameLb = [XJUIFactory creatUILabelWithFrame:CGRectZero addToView:self.contentView textColor:defaultBlack text:@"" font:ADaptedFontSCBoldSize(17) textInCenter:NO];
     }
     return _nameLb;
 }
@@ -137,6 +179,21 @@
     return _distanceIV;
     
     
+}
+
+- (UILabel *)skillLabel{
+    if (!_skillLabel) {
+        _skillLabel = [XJUIFactory creatUILabelWithFrame:CGRectZero addToView:self.contentView textColor:RGB(63, 58, 58) text:@"" font:[UIFont fontWithName:@"PingFangSC-Medium" size:12] textInCenter:NO];
+    }
+    return _skillLabel;
+}
+
+- (UILabel *)skillDesLabel{
+    if (!_skillDesLabel) {
+        _skillDesLabel = [XJUIFactory creatUILabelWithFrame:CGRectZero addToView:self.contentView textColor:RGB(102, 102, 102) text:@"" font:[UIFont fontWithName:@"PingFangSC-Medium" size:13] textInCenter:NO];
+        _skillDesLabel.numberOfLines = 3;
+    }
+    return _skillDesLabel;
 }
 
 - (void)awakeFromNib {

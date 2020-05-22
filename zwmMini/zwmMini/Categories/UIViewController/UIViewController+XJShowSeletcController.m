@@ -12,9 +12,9 @@
 
 + (UIViewController *)currentDisplayViewController {
     __kindof __block UIViewController *viewController = nil;
-    dispatch_async(dispatch_get_main_queue(), ^{
+//    dispatch_async(dispatch_get_main_queue(), ^{
         viewController = [self findCurrentDisplayViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
-    });
+//    });
     return viewController;
 }
 
