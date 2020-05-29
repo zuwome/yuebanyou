@@ -1,5 +1,5 @@
+source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 project 'zwmMini/zwmMini.project'
-
 
 platform :ios, '9.0'
 inhibit_all_warnings!
@@ -19,8 +19,8 @@ pod 'MJRefresh'
 pod 'NJKScrollFullScreen'
 pod 'MBProgressHUD'
 pod 'Qiniu'
-pod 'Pingpp/Alipay'
-pod 'Pingpp/Wx'
+#pod 'Pingpp/Alipay'
+#pod 'Pingpp/Wx'
 pod 'Masonry'
 pod 'RongCloudIM/IMLib'
 pod 'RongCloudIM/IMKit'

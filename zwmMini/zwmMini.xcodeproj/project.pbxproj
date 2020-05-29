@@ -4797,7 +4797,7 @@
 				CODE_SIGN_ENTITLEMENTS = zwmMini/zwmMini.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.0.21;
+				CURRENT_PROJECT_VERSION = 4.0.23;
 				DEVELOPMENT_TEAM = 5XRRG8R2BU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4826,7 +4826,7 @@
 					"$(PROJECT_DIR)/zwmMini/Vendors/SocialLibraries/Sina/SinaSDK",
 					"$(PROJECT_DIR)/zwmMini/Vendors/SocialLibraries/QQ",
 				);
-				MARKETING_VERSION = 4.3.1;
+				MARKETING_VERSION = 4.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiamen.yuebanyou;
 				PRODUCT_MODULE_NAME = zwmMini;
 				PRODUCT_NAME = "租我吗";
@@ -4851,7 +4851,7 @@
 				CODE_SIGN_ENTITLEMENTS = zwmMini/zwmMini.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.0.21;
+				CURRENT_PROJECT_VERSION = 4.0.23;
 				DEVELOPMENT_TEAM = 5XRRG8R2BU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4881,7 +4881,7 @@
 					"$(PROJECT_DIR)/zwmMini/Vendors/SocialLibraries/Sina/SinaSDK",
 					"$(PROJECT_DIR)/zwmMini/Vendors/SocialLibraries/QQ",
 				);
-				MARKETING_VERSION = 4.3.1;
+				MARKETING_VERSION = 4.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiamen.yuebanyou;
 				PRODUCT_MODULE_NAME = zwmMini;
 				PRODUCT_NAME = "租我吗";

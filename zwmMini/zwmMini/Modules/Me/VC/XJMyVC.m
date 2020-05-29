@@ -143,43 +143,44 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
 
 #pragma mark tableviewDelegate and dataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ((indexPath.section == 0 || indexPath.section == 1)) {
-        if (indexPath.row == 1) {
-            return 76;
-        }
+//    if ((indexPath.section == 0 || indexPath.section == 1)) {
+//        if (indexPath.row == 1) {
+//            return 76;
+//        }
         return 56;
-    }
-    return 65.f;
+//    }
+//    return 65.f;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return (section == 0) ? 2 : self.imgsArray.count;
+    return self.imgsArray.count;
+//    return (section == 0) ? 2 : self.imgsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            XJMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:myTableviewIdentifierr];
-            
-            if (cell == nil) {
-                cell = [[XJMyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:myTableviewIdentifierr];
-            }
-            [cell setUpIndexPath:indexPath Imge:nil Title:@"我的档期"];
-            return cell;
-        }
-        else {
-            ZZUserCenterOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ordercell"];
-            cell.selectOrder = ^(NSInteger index) {
-                [self gotoOrderWithIndex:index];
-            };
-            [cell setData];
-            return cell;
-        }
-    }
+//    if (indexPath.section == 0) {
+//        if (indexPath.row == 0) {
+//            XJMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:myTableviewIdentifierr];
+//
+//            if (cell == nil) {
+//                cell = [[XJMyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:myTableviewIdentifierr];
+//            }
+//            [cell setUpIndexPath:indexPath Imge:nil Title:@"我的档期"];
+//            return cell;
+//        }
+//        else {
+//            ZZUserCenterOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ordercell"];
+//            cell.selectOrder = ^(NSInteger index) {
+//                [self gotoOrderWithIndex:index];
+//            };
+//            [cell setData];
+//            return cell;
+//        }
+//    }
 //    else if (indexPath.section == 1) {
 //        if (indexPath.row == 1) {
 //            if (XJUserAboutManageer.uModel.rent.status == 0 || XJUserAboutManageer.uModel.banStatus) {
@@ -198,7 +199,7 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
 //        }
 //
 //    }
-    else {
+//    else {
         XJMyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:myTableviewIdentifier];
         
         if (cell == nil) {
@@ -206,15 +207,15 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
         }
         [cell setUpIndexPath:indexPath Imge:self.imgsArray[indexPath.row] Title:self.titlesArray[indexPath.row]];
         return cell;
-    }
+//    }
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 0) {
-        [self gotoOrderWithIndex:4];
-    }
+//    if (indexPath.section == 0) {
+//        [self gotoOrderWithIndex:4];
+//    }
 //    else if (indexPath.section == 1) {
 //        if (indexPath.row == 0) {
 //            [self gotoChuzu];
@@ -237,41 +238,41 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
 //            }
 //        }
 //    }
-    else {
+//    else {
         switch (indexPath.row) {
+//            case 0: {
+//                //我的钱包
+//                [self.navigationController pushViewController:[XJMyWalletVC new] animated:YES];
+//                break;
+//            }
+//            case 1: {
+//                //我的微信号
+//                self.selecttype = 0;
+//
+//                if (XJUserAboutManageer.uModel.faces.count == 0) {
+//                    [self showAlerVCtitle:@"目前账户安全级别较低，将进行身份识别，否则无法设置微信号" message:@"" sureTitle:@"前往" cancelTitle:@"取消" sureBlcok:^{
+//                        //验证人脸
+//                        XJCheckingFaceVC* lvc = [[XJCheckingFaceVC alloc] init];
+//                        [lvc livenesswithList:@[@(0),@(4),@(6)] order:YES numberOfLiveness:3];
+//                        [self presentViewController:lvc animated:YES completion:nil];
+//                        lvc.endBlock = ^(UIImage * _Nonnull bestImg) {
+//                            [self checkIshack:bestImg];
+//                        };
+//                    } cancelBlock:^{
+//
+//                    }];
+//                    return;
+//                }
+//
+//                [self.navigationController pushViewController:[XJMywechatVC new] animated:YES];
+//                break;
+//            }
             case 0: {
-                //我的钱包
-                [self.navigationController pushViewController:[XJMyWalletVC new] animated:YES];
-                break;
-            }
-            case 1: {
-                //我的微信号
-                self.selecttype = 0;
-
-                if (XJUserAboutManageer.uModel.faces.count == 0) {
-                    [self showAlerVCtitle:@"目前账户安全级别较低，将进行身份识别，否则无法设置微信号" message:@"" sureTitle:@"前往" cancelTitle:@"取消" sureBlcok:^{
-                        //验证人脸
-                        XJCheckingFaceVC* lvc = [[XJCheckingFaceVC alloc] init];
-                        [lvc livenesswithList:@[@(0),@(4),@(6)] order:YES numberOfLiveness:3];
-                        [self presentViewController:lvc animated:YES completion:nil];
-                        lvc.endBlock = ^(UIImage * _Nonnull bestImg) {
-                            [self checkIshack:bestImg];
-                        };
-                    } cancelBlock:^{
-                        
-                    }];
-                    return;
-                }
-                
-                [self.navigationController pushViewController:[XJMywechatVC new] animated:YES];
-                break;
-            }
-            case 2: {
                 //已查看微信号
                 [self.navigationController pushViewController:[XJHasReviewWechatVC new] animated:YES];
                 break;
             }
-            case 3: {
+            case 1: {
                 //实名认证
               
                 self.selecttype = 1;
@@ -299,7 +300,7 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
             default:
                 break;
         }
-    }
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -571,16 +572,16 @@ static NSString *myTableviewIdentifierr = @"mytableviewIdentifierr";
 - (NSArray *)imgsArray{
     
     if (!_imgsArray) {
-        
-        _imgsArray = @[@"mywalletimg",@"mywechatimg",@"myreviewimg",@"myattimg"];
+        _imgsArray = @[@"myreviewimg",@"myattimg"];
+//        _imgsArray = @[@"mywalletimg",@"mywechatimg",@"myreviewimg",@"myattimg"];
     }
     return _imgsArray;
 }
 - (NSArray *)titlesArray{
     
     if (!_titlesArray) {
-        
-        _titlesArray = @[@"我的钱包",@"我的微信号",@"已查看微信号",@"实名认证"];
+        _titlesArray = @[@"已查看微信号",@"实名认证"];
+//        _titlesArray = @[@"我的钱包",@"我的微信号",@"已查看微信号",@"实名认证"];
     }
     return _titlesArray;
 }

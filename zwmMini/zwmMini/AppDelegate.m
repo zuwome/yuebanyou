@@ -16,7 +16,7 @@
 #import "XYIAPKit.h"
 #import "XYStoreiTunesReceiptVerifier.h"
 #import "XJUrlSchemaModel.h"
-#import "Pingpp.h"
+//#import "Pingpp.h"
 #import "ZZThirdPayHelper.h"
 #import "ZZPayViewController.h"
 @interface AppDelegate ()
@@ -46,15 +46,15 @@
                                                  name:changeRootVCNotifi object:nil];
     
     // 生成跟控制器
-    if (NULLString(XJUserAboutManageer.isFirstOpenApp)) {
-        self.window.rootViewController = [[XJGuidPageVC alloc] init];
-        [self.window makeKeyWindow];
-
-    }else{
+//    if (NULLString(XJUserAboutManageer.isFirstOpenApp)) {
+//        self.window.rootViewController = [[XJGuidPageVC alloc] init];
+//        [self.window makeKeyWindow];
+//
+//    }else{
         _haveLoad = YES;
         self.window.rootViewController = [[XJTabBarVC alloc] init];
         [self.window makeKeyWindow];
-    }
+//    }
    
     //授权通知
     [self setUpPushMessage];
@@ -160,7 +160,6 @@
         __weak typeof(self) weakSelf = self;
         NSString *urlString = [url.absoluteString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
-        [Pingpp handleOpenURL:url withCompletion:nil];
         if (result == NO) {
             NSRange range = [urlString rangeOfString:@"iOSZuwomaAppOpenApp://"];
             if (range.location != NSNotFound) {

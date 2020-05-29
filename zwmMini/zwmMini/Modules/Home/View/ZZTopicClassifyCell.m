@@ -368,6 +368,7 @@
         _skillPrice = [[UILabel alloc] init];
         _skillPrice.textColor = kReddishPink;
         _skillPrice.font = [UIFont systemFontOfSize:15];
+        _skillPrice.hidden = YES;
     }
     return _skillPrice;
 }

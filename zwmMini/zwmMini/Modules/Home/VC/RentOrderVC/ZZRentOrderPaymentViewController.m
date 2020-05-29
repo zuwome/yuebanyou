@@ -14,7 +14,6 @@
 #import "ZZRentOrderHeaderView.h"
 #import "ZZRentOrderPayCell.h"
 
-#import "Pingpp.h"
 #import "ZZRentDropdownModel.h"
 #import "ZZOrder.h"
 #import "MJExtension.h"
@@ -331,25 +330,7 @@
                 
                 [Weakself gotoChatView];
             } else {
-                [Pingpp createPayment:data
-                       viewController:self
-                         appURLScheme:@"zuwoma"
-                       withCompletion:^(NSString *result, PingppError *error) {
-                           if ([result isEqualToString:@"success"]) {
-                               dispatch_async(dispatch_get_main_queue(), ^{
-                                   
-                                   // 目前只有当优享邀约打开之后才需要通知个人页刷洗一下下
-                                   if (Weakself.order.wechat_service) {
-                                       [[NSNotificationCenter defaultCenter] postNotificationName:KMsg_CreateOrderNotification object:nil];
-                                   }
-                                   [Weakself gotoChatView];
-//                                   [Weakself showPayCompleteView];
-                               });
-                           } else {
-                               // 支付失败或取消
-                               NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-                           }
-                       }];
+                
             }
         }
     }];

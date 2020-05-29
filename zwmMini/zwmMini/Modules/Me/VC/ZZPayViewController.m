@@ -20,7 +20,7 @@
 #import "ZZPayTonggaoCell.h"
 #import "ZZInfoToastView.h"
 
-#import "Pingpp.h"
+
 #import "ZZMemedaModel.h"
         
 #import "XJLookoverOtherUserVC.h"
@@ -577,19 +577,6 @@
                 //缓存当前订单数据
                 NSDictionary *paymentData = @{@"id":data[@"id"], @"type":@(_type)};
                 [ZZUserDefaultsHelper setObject:paymentData forDestKey:kPaymentData];
-                [Pingpp createPayment:data
-                       viewController:self
-                         appURLScheme:@"zuwoma"
-                       withCompletion:^(NSString *result, PingppError *error) {
-                           [ZZUserDefaultsHelper removeObjectForDestKey:kPaymentData];
-                           if ([result isEqualToString:@"success"]) {
-                               [self payOrderSuccess];
-                           } else {
-                               // 支付失败或取消
-                               [ZZHUD showErrorWithStatus:@"支付失败"];
-                               NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-                           }
-                       }];
             } else {
                 _order.status = data[@"status"];
                 [self.navigationController popViewControllerAnimated:YES];
@@ -615,19 +602,7 @@
                                      //缓存当前订单数据
                                      NSDictionary *paymentData = @{@"id":data[@"id"], @"type":@(_type)};
                                      [ZZUserDefaultsHelper setObject:paymentData forDestKey:kPaymentData];
-                                     [Pingpp createPayment:data
-                                            viewController:self
-                                              appURLScheme:@"zuwoma"
-                                            withCompletion:^(NSString *result, PingppError *error) {
-                                                [ZZUserDefaultsHelper removeObjectForDestKey:kPaymentData];
-                                                if ([result isEqualToString:@"success"]) {
-                                                    [self payMemedaSuccess];
-                                                } else {
-                                                    // 支付失败或取消
-                                                    [ZZHUD showErrorWithStatus:@"支付失败"];
-                                                    NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-                                                }
-                                            }];
+                                     
                                  } else {
                                      XJUserAboutManageer.lastAskMoney = [NSString stringWithFormat:@"%.2f",_price];
                                      [self gotoUserCenter];
@@ -722,21 +697,7 @@
                                           NSDictionary *paymentData = @{@"id":data[@"id"], @"type":@(_type)};
                                           [ZZUserDefaultsHelper setObject:paymentData forDestKey:kPaymentData];
                                           WEAK_SELF();
-                                          [Pingpp createPayment:data
-                                                 viewController:self
-                                                   appURLScheme:@"zuwoma"
-                                                 withCompletion:^(NSString *result, PingppError *error) {
-                                                     [ZZUserDefaultsHelper removeObjectForDestKey:kPaymentData];
-                                                     if ([result isEqualToString:@"success"]) {
-                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                             [weakSelf dashangSuccess];
-                                                         });
-                                                     } else {
-                                                         // 支付失败或取消
-                                                         [ZZHUD showErrorWithStatus:@"支付失败"];
-                                                         NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-                                                     }
-                                                 }];
+                                          
                                       } else {
                                           [self dashangSuccess];
                                       }
@@ -765,21 +726,7 @@
                 NSDictionary *paymentData = @{@"id":data[@"id"], @"type":@(_type)};
                 [ZZUserDefaultsHelper setObject:paymentData forDestKey:kPaymentData];
                 WEAK_SELF();
-                [Pingpp createPayment:data
-                       viewController:self
-                         appURLScheme:@"zuwoma"
-                       withCompletion:^(NSString *result, PingppError *error) {
-                           [ZZUserDefaultsHelper removeObjectForDestKey:kPaymentData];
-                           if ([result isEqualToString:@"success"]) {
-                               dispatch_async(dispatch_get_main_queue(), ^{
-                                   [weakSelf payTaskSuccess];
-                               });
-                           } else {
-                               // 支付失败或取消
-                               [ZZHUD showErrorWithStatus:@"支付失败"];
-                               NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-                           }
-                       }];
+                
             } else {
                 XJUserAboutManageer.lastPacketMoney = [NSString stringWithFormat:@"%.2f",_price];
                 [self payTaskSuccess];
@@ -788,37 +735,7 @@
     } failure:^(NSError *error) {
         [ZZHUD showErrorWithStatus:error.localizedDescription];
     }];
-//    [ZZRequest method:@"POST" path:[NSString stringWithFormat:@"api/pd/%@/pay_deposit",_pId] params:@{@"channel":channel, @"pingxxtype": @"kxp",} next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
-//        if (error) {
-//            [ZZHUD showErrorWithStatus:error.message];
-//        } else {
-//            [ZZHUD dismiss];
-//            if (![channel isEqualToString:@"wallet"]) {
-//                //缓存当前订单数据
-//                NSDictionary *paymentData = @{@"id":data[@"id"], @"type":@(_type)};
-//                [ZZUserDefaultsHelper setObject:paymentData forDestKey:kPaymentData];
-//                WeakSelf;
-//                [Pingpp createPayment:data
-//                       viewController:self
-//                         appURLScheme:@"kongxia"
-//                       withCompletion:^(NSString *result, PingppError *error) {
-//                           [ZZUserDefaultsHelper removeObjectForDestKey:kPaymentData];
-//                           if ([result isEqualToString:@"success"]) {
-//                               dispatch_async(dispatch_get_main_queue(), ^{
-//                                   [weakSelf payTaskSuccess];
-//                               });
-//                           } else {
-//                               // 支付失败或取消
-//                               [ZZHUD showErrorWithStatus:@"支付失败"];
-//                               NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-//                           }
-//                       }];
-//            } else {
-//                [ZZUserHelper shareInstance].lastPacketMoney = [NSString stringWithFormat:@"%.2f",_price];
-//                [self payTaskSuccess];
-//            }
-//        }
-//    }];
+
 }
 
 - (void)payTaskSuccess {
@@ -841,21 +758,7 @@
                 NSDictionary *paymentData = @{@"id":data[@"id"], @"type":@(_type)};
                 [ZZUserDefaultsHelper setObject:paymentData forDestKey:kPaymentData];
                 WEAK_SELF()
-                [Pingpp createPayment:data
-                       viewController:self
-                         appURLScheme:@"zuwoma"
-                       withCompletion:^(NSString *result, PingppError *error) {
-                           [ZZUserDefaultsHelper removeObjectForDestKey:kPaymentData];
-                           if ([result isEqualToString:@"success"]) {
-                               dispatch_async(dispatch_get_main_queue(), ^{
-                                   [weakSelf payTaskSumSuccess];
-                               });
-                           } else {
-                               // 支付失败或取消
-                               [ZZHUD showErrorWithStatus:@"支付失败"];
-                               NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-                           }
-                       }];
+                
             } else {
                 XJUserAboutManageer.lastPacketMoney = [NSString stringWithFormat:@"%.2f",_price];
                 [self payTaskSumSuccess];
@@ -864,43 +767,6 @@
     } failure:^(NSError *error) {
         [ZZHUD showErrorWithStatus:error.localizedDescription];
     }];
-//    [ZZRequest method:@"POST"
-//                 path:[NSString stringWithFormat:@"api/pd/%@/pay",_pId]
-//               params:@{@"channel":channel,
-//                        @"rids":_values,
-//                        @"pingxxtype": @"kxp",
-//                        }
-//                 next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
-//                     if (error) {
-//                         [ZZHUD showErrorWithStatus:error.message];
-//                     } else {
-//                         [ZZHUD dismiss];
-//                         if (![channel isEqualToString:@"wallet"]) {
-//                             //缓存当前订单数据
-//                             NSDictionary *paymentData = @{@"id":data[@"id"], @"type":@(_type)};
-//                             [ZZUserDefaultsHelper setObject:paymentData forDestKey:kPaymentData];
-//                             WeakSelf;
-//                             [Pingpp createPayment:data
-//                                    viewController:self
-//                                      appURLScheme:@"kongxia"
-//                                    withCompletion:^(NSString *result, PingppError *error) {
-//                                        [ZZUserDefaultsHelper removeObjectForDestKey:kPaymentData];
-//                                        if ([result isEqualToString:@"success"]) {
-//                                            dispatch_async(dispatch_get_main_queue(), ^{
-//                                                [weakSelf payTaskSumSuccess];
-//                                            });
-//                                        } else {
-//                                            // 支付失败或取消
-//                                            [ZZHUD showErrorWithStatus:@"支付失败"];
-//                                            NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-//                                        }
-//                                    }];
-//                         } else {
-//                             [ZZUserHelper shareInstance].lastPacketMoney = [NSString stringWithFormat:@"%.2f",_price];
-//                             [self payTaskSumSuccess];
-//                         }
-//                     }
-//                 }];
 }
 
 - (void)payRentsPrice:(NSString *)channel {
@@ -922,21 +788,7 @@
                 NSDictionary *paymentData = @{@"id":data[@"id"], @"type":@(_type)};
                 [ZZUserDefaultsHelper setObject:paymentData forDestKey:kPaymentData];
                 WEAK_SELF();
-                [Pingpp createPayment:data
-                       viewController:self
-                         appURLScheme:@"zuwoma"
-                       withCompletion:^(NSString *result, PingppError *error) {
-                           [ZZUserDefaultsHelper removeObjectForDestKey:kPaymentData];
-                           if ([result isEqualToString:@"success"]) {
-                               dispatch_async(dispatch_get_main_queue(), ^{
-                                   [weakSelf payRentsPriceSuccess];
-                               });
-                           } else {
-                               // 支付失败或取消
-                               [ZZHUD showErrorWithStatus:@"支付失败"];
-                               NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-                           }
-                       }];
+                
             } else {
                 XJUserAboutManageer.lastPacketMoney = [NSString stringWithFormat:@"%.2f",_price];
                 [self payRentsPriceSuccess];
@@ -973,21 +825,7 @@
                 NSDictionary *paymentData = @{@"id":data[@"id"], @"type":@(_type)};
                 [ZZUserDefaultsHelper setObject:paymentData forDestKey:kPaymentData];
                 WEAK_SELF();
-                [Pingpp createPayment:data
-                       viewController:self
-                         appURLScheme:@"zuwoma"
-                       withCompletion:^(NSString *result, PingppError *error) {
-                           [ZZUserDefaultsHelper removeObjectForDestKey:kPaymentData];
-                           if ([result isEqualToString:@"success"]) {
-                               dispatch_async(dispatch_get_main_queue(), ^{
-                                   [weakSelf payRentsPriceSuccess];
-                               });
-                           } else {
-                               // 支付失败或取消
-                               [ZZHUD showErrorWithStatus:@"支付失败"];
-                               NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-                           }
-                       }];
+                
             }
             else {
                 XJUserAboutManageer.lastPacketMoney = [NSString stringWithFormat:@"%.2f",_price];
@@ -997,42 +835,7 @@
     } failure:^(NSError *error) {
         [ZZHUD showErrorWithStatus:error.localizedDescription];
     }];
-//    [ZZRequest method:@"POST"
-//                 path:@"api/pd4/pdPayEndPirce"
-//               params: params
-//                 next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
-//                     if (error) {
-//                         [ZZHUD showErrorWithStatus:error.message];
-//                     }
-//                     else {
-//                         [ZZHUD dismiss];
-//                         if (![channel isEqualToString:@"wallet"]) {
-//                             //缓存当前订单数据
-//                             NSDictionary *paymentData = @{@"id":data[@"id"], @"type":@(_type)};
-//                             [ZZUserDefaultsHelper setObject:paymentData forDestKey:kPaymentData];
-//                             WeakSelf;
-//                             [Pingpp createPayment:data
-//                                    viewController:self
-//                                      appURLScheme:@"kongxia"
-//                                    withCompletion:^(NSString *result, PingppError *error) {
-//                                        [ZZUserDefaultsHelper removeObjectForDestKey:kPaymentData];
-//                                        if ([result isEqualToString:@"success"]) {
-//                                            dispatch_async(dispatch_get_main_queue(), ^{
-//                                                [weakSelf payRentsPriceSuccess];
-//                                            });
-//                                        } else {
-//                                            // 支付失败或取消
-//                                            [ZZHUD showErrorWithStatus:@"支付失败"];
-//                                            NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-//                                        }
-//                                    }];
-//                         }
-//                         else {
-//                             [ZZUserHelper shareInstance].lastPacketMoney = [NSString stringWithFormat:@"%.2f",_price];
-//                             [self payRentsPriceSuccess];
-//                         }
-//                     }
-//                 }];
+
 }
 
 - (void)prepayTonggao:(NSString *)channel {
@@ -1053,21 +856,7 @@
                 NSDictionary *paymentData = @{@"id":data[@"id"], @"type":@(_type)};
                 [ZZUserDefaultsHelper setObject:paymentData forDestKey:kPaymentData];
                 WEAK_SELF();
-                [Pingpp createPayment:data
-                       viewController:self
-                         appURLScheme:@"kongxia"
-                       withCompletion:^(NSString *result, PingppError *error) {
-                           [ZZUserDefaultsHelper removeObjectForDestKey:kPaymentData];
-                           if ([result isEqualToString:@"success"]) {
-                               dispatch_async(dispatch_get_main_queue(), ^{
-                                   [weakSelf payRentsPriceSuccess];
-                               });
-                           } else {
-                               // 支付失败或取消
-                               [ZZHUD showErrorWithStatus:@"支付失败"];
-                               NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-                           }
-                       }];
+                
             }
             else {
                 XJUserAboutManageer.lastPacketMoney = [NSString stringWithFormat:@"%.2f",_price];
@@ -1077,47 +866,7 @@
     } failure:^(NSError *error) {
         [ZZHUD showErrorWithStatus:error.localizedDescription];
     }];
-    
-//    [ZZRequest method:@"POST"
-//                 path:[NSString stringWithFormat:@"api/pd4/%@/pay_deposit", _pId]
-//               params:@{
-//                        @"channel": channel,
-//                        @"pid": _pId,
-//                        @"pingxxtype": @"kxp",
-//                        }
-//                 next:^(ZZError *error, id data, NSURLSessionDataTask *task) {
-//                     if (error) {
-//                         [ZZHUD showErrorWithStatus:error.message];
-//                     }
-//                     else {
-//                         [ZZHUD dismiss];
-//                         if (![channel isEqualToString:@"wallet"]) {
-//                             //缓存当前订单数据
-//                             NSDictionary *paymentData = @{@"id":data[@"id"], @"type":@(_type)};
-//                             [ZZUserDefaultsHelper setObject:paymentData forDestKey:kPaymentData];
-//                             WeakSelf;
-//                             [Pingpp createPayment:data
-//                                    viewController:self
-//                                      appURLScheme:@"kongxia"
-//                                    withCompletion:^(NSString *result, PingppError *error) {
-//                                        [ZZUserDefaultsHelper removeObjectForDestKey:kPaymentData];
-//                                        if ([result isEqualToString:@"success"]) {
-//                                            dispatch_async(dispatch_get_main_queue(), ^{
-//                                                [weakSelf payRentsPriceSuccess];
-//                                            });
-//                                        } else {
-//                                            // 支付失败或取消
-//                                            [ZZHUD showErrorWithStatus:@"支付失败"];
-//                                            NSLog(@"Error: code=%lu msg=%@", (unsigned long)error.code, [error getMsg]);
-//                                        }
-//                                    }];
-//                         }
-//                         else {
-//                             [ZZUserHelper shareInstance].lastPacketMoney = [NSString stringWithFormat:@"%.2f",_price];
-//                             [self payRentsPriceSuccess];
-//                         }
-//                     }
-//                 }];
+
 }
 
 - (void)payRentsPriceSuccess {

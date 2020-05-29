@@ -40,6 +40,7 @@
         _priceLabel.textAlignment = NSTextAlignmentRight;
         _priceLabel.textColor = RGB(254, 83, 108);
         _priceLabel.font = [UIFont systemFontOfSize:15 weight:(UIFontWeightMedium)];
+        _priceLabel.hidden = YES;
         [self addSubview:_priceLabel];
         [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.trailing.equalTo(self).offset(-15);

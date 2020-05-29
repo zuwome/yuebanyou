@@ -97,6 +97,7 @@
         _priceLab.font = [UIFont systemFontOfSize:15 weight:(UIFontWeightBold)];
         _priceLab.textColor = kGoldenRod;
         _priceLab.textAlignment = NSTextAlignmentRight;
+        _priceLab.hidden = YES;
     }
     return _priceLab;
 }
