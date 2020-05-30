@@ -30,6 +30,7 @@
 @interface XJHomeVC ()<XJHomeTitleViewDlegate,UIScrollViewDelegate>
 //@property (strong, nonatomic) UISegmentedControl *isMeglive;
 
+
 @property(nonatomic,strong) UIButton *leftButton;
 @property (nonatomic, strong) AMapLocationManager *mapLocationManager;
 @property(nonatomic,copy) NSString *selectCity;
@@ -53,7 +54,7 @@
 //    });
 
     [self creatUI];
-    [self fetchHomeData];
+//    [self fetchHomeData];
     //未登录跳到登录页
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(pushToLogin)
@@ -285,7 +286,7 @@
     
     self.backScrollView.top += view.height;
     self.backScrollView.height -= view.height;
-    
+
     self.recommondVC.view.height = self.backScrollView.height;
     self.nearVC.view.height = self.backScrollView.height;
 }
@@ -296,6 +297,8 @@
     
     [self showNavRightButton:@"" action:@selector(rigthAction) image:GetImage(@"fangdajing") imageOn:GetImage(@"fangdajing")];
     self.navigationItem.titleView = self.titilView;
+
+    
     [self addChildViewController:self.recommondVC];
     UIView *recommondView = self.recommondVC.view;
     [self.backScrollView addSubview:recommondView];
@@ -310,10 +313,10 @@
             XJLookoverOtherUserVC *lookvc = [XJLookoverOtherUserVC new];
             lookvc.topUserModel = homelistModel.user;
             [self.navigationController pushViewController:lookvc animated:YES];
-            
+
         }
     };
-    
+
     [self addChildViewController:self.nearVC];
     UIView *nearView = self.nearVC.view;
     [self.backScrollView addSubview:nearView];
@@ -348,9 +351,7 @@
 
 #pragma mark UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    
     if ([scrollView isEqual:self.backScrollView]) {
-        
         CGPoint offset=scrollView.contentOffset;
         CGFloat page = offset.x/kScreenWidth;
         [self.titilView setBtnIndex:page];
@@ -360,11 +361,7 @@
     
 }
 
-
-
-
 #pragma mark lazy
-
 - (AMapLocationManager *)mapLocationManager{
     
     if (!_mapLocationManager) {

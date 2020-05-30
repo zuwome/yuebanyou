@@ -85,36 +85,36 @@
     self.distanceLb.text = model.distance;
     
     
-    XJSkill *mostCheapSkill = nil;
-    for (XJTopic *topic in model.user.rent.topics) {
-        if (topic.skills.count == 0) {  //主题无技能，跳过
-            continue;
-        }
-        for (XJSkill *skill in topic.skills) {
-//            if (skill.topicStatus != 2 && skill.topicStatus != 4) { //没通过审核
-//                continue;
-//            }
-            if (!mostCheapSkill) {
-                mostCheapSkill = skill;
-            }
-            else if ([skill.price doubleValue] < [mostCheapSkill.price doubleValue]) {
-                mostCheapSkill = skill;
-            }
-//            if (mostCheapSkill == nil || [skill.price floatValue] < [mostCheapSkill.price floatValue]) {
+//    XJSkill *mostCheapSkill = nil;
+//    for (XJTopic *topic in model.user.rent.topics) {
+//        if (topic.skills.count == 0) {  //主题无技能，跳过
+//            continue;
+//        }
+//        for (XJSkill *skill in topic.skills) {
+////            if (skill.topicStatus != 2 && skill.topicStatus != 4) { //没通过审核
+////                continue;
+////            }
+//            if (!mostCheapSkill) {
 //                mostCheapSkill = skill;
 //            }
-        }
-    }
-    
-    // 技能名称、价格、介绍
-    if (mostCheapSkill == nil) {
-        _skillLabel.text = @" ";
-        _skillDesLabel.text = @" ";
-    }
-    else {
-        _skillLabel.text = mostCheapSkill.name;
-        _skillDesLabel.text = mostCheapSkill.detail.content;
-    }
+//            else if ([skill.price doubleValue] < [mostCheapSkill.price doubleValue]) {
+//                mostCheapSkill = skill;
+//            }
+////            if (mostCheapSkill == nil || [skill.price floatValue] < [mostCheapSkill.price floatValue]) {
+////                mostCheapSkill = skill;
+////            }
+//        }
+//    }
+//    
+//    // 技能名称、价格、介绍
+//    if (mostCheapSkill == nil) {
+//        _skillLabel.text = @" ";
+//        _skillDesLabel.text = @" ";
+//    }
+//    else {
+//        _skillLabel.text = mostCheapSkill.name;
+//        _skillDesLabel.text = mostCheapSkill.detail.content;
+//    }
 }
 
 

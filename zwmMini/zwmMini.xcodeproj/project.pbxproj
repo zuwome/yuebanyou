@@ -475,6 +475,8 @@
 		BDBD1EC42435C2C500C9B3C3 /* ZZWeiChatEvaluationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBD1EC02435C2C500C9B3C3 /* ZZWeiChatEvaluationModel.m */; };
 		BDBD1ECB2435C2EC00C9B3C3 /* ZZWeiChatEvaluationNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBD1EC82435C2EB00C9B3C3 /* ZZWeiChatEvaluationNetwork.m */; };
 		BDBD1ECE2435C42000C9B3C3 /* ZZWeiChatBaseEvaluation.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBD1ECD2435C42000C9B3C3 /* ZZWeiChatBaseEvaluation.m */; };
+		BDBEA8552481630D00832884 /* XJUserInfoWarningCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBEA8542481630C00832884 /* XJUserInfoWarningCell.m */; };
+		BDBEA858248296C100832884 /* XJBannerCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBEA857248296C100832884 /* XJBannerCollectionCell.m */; };
 		BDC6230C2465939700B69D2C /* ZZNewHomeTopicView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC6230A2465939700B69D2C /* ZZNewHomeTopicView.m */; };
 		BDC6230D2465939700B69D2C /* ZZNewHomeTopicItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC6230B2465939700B69D2C /* ZZNewHomeTopicItemCell.m */; };
 		BDC623102465953300B69D2C /* ZZHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC6230E2465953300B69D2C /* ZZHomeModel.m */; };
@@ -1498,6 +1500,10 @@
 		BDBD1EC82435C2EB00C9B3C3 /* ZZWeiChatEvaluationNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZWeiChatEvaluationNetwork.m; sourceTree = "<group>"; };
 		BDBD1ECC2435C42000C9B3C3 /* ZZWeiChatBaseEvaluation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZWeiChatBaseEvaluation.h; sourceTree = "<group>"; };
 		BDBD1ECD2435C42000C9B3C3 /* ZZWeiChatBaseEvaluation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZWeiChatBaseEvaluation.m; sourceTree = "<group>"; };
+		BDBEA8532481630C00832884 /* XJUserInfoWarningCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJUserInfoWarningCell.h; sourceTree = "<group>"; };
+		BDBEA8542481630C00832884 /* XJUserInfoWarningCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJUserInfoWarningCell.m; sourceTree = "<group>"; };
+		BDBEA856248296C100832884 /* XJBannerCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJBannerCollectionCell.h; sourceTree = "<group>"; };
+		BDBEA857248296C100832884 /* XJBannerCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJBannerCollectionCell.m; sourceTree = "<group>"; };
 		BDC623082465939700B69D2C /* ZZNewHomeTopicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZNewHomeTopicView.h; sourceTree = "<group>"; };
 		BDC623092465939700B69D2C /* ZZNewHomeTopicItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZNewHomeTopicItemCell.h; sourceTree = "<group>"; };
 		BDC6230A2465939700B69D2C /* ZZNewHomeTopicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZNewHomeTopicView.m; sourceTree = "<group>"; };
@@ -1903,6 +1909,8 @@
 				81D7DE3B21A7D04900095E1C /* XJHomeTitleSelectView.m */,
 				81D7DE4021A7E42C00095E1C /* XJRecommondCollectionViewCell.h */,
 				81D7DE4121A7E42C00095E1C /* XJRecommondCollectionViewCell.m */,
+				BDBEA856248296C100832884 /* XJBannerCollectionCell.h */,
+				BDBEA857248296C100832884 /* XJBannerCollectionCell.m */,
 				81D7DE4621A8E56100095E1C /* XJNearTableViewCell.h */,
 				81D7DE4721A8E56100095E1C /* XJNearTableViewCell.m */,
 				BDD84E96245AD38800433123 /* XJRecommondCell.h */,
@@ -3522,6 +3530,8 @@
 			children = (
 				BDB2D50821D7109000F6CBA6 /* XJPersonalDataNameTbCell.h */,
 				BDB2D50C21D7109000F6CBA6 /* XJPersonalDataNameTbCell.m */,
+				BDBEA8532481630C00832884 /* XJUserInfoWarningCell.h */,
+				BDBEA8542481630C00832884 /* XJUserInfoWarningCell.m */,
 				BDB2D50B21D7109000F6CBA6 /* XJPersonalDetailTbCell.h */,
 				BDB2D50921D7109000F6CBA6 /* XJPersonalDetailTbCell.m */,
 				BDB2D50721D7109000F6CBA6 /* XJPersonalTagsTbCell.h */,
@@ -4257,6 +4267,7 @@
 				BD7217442437323B00209AC3 /* UIFont+Extension.swift in Sources */,
 				819CA24C21D1D2E100B831EF /* JX_GCDTimerManager.m in Sources */,
 				819CA24521D1D0A200B831EF /* ZZPrivateChatPayMoneyView.m in Sources */,
+				BDBEA8552481630D00832884 /* XJUserInfoWarningCell.m in Sources */,
 				8104EABA21CB81CC00856FDE /* PECropRectView.m in Sources */,
 				BDC623192465A14F00B69D2C /* ZZAllTopicsViewController.m in Sources */,
 				BDA58471243429930053D820 /* ZZRentDropdownMenuView.m in Sources */,
@@ -4559,6 +4570,7 @@
 				819CA24F21D1D7D000B831EF /* ZZPrivateChatShowMoneyView.m in Sources */,
 				BD9DC11A2436251800E99B5F /* ZZPayGuaranteeCell.m in Sources */,
 				BDA5857A243574C20053D820 /* ZZOrderCommentViewController.m in Sources */,
+				BDBEA858248296C100832884 /* XJBannerCollectionCell.m in Sources */,
 				BDCCC53823C80BEA00718F42 /* ZZUpdateAlertView.m in Sources */,
 				BDE75C042438E6530038A7F8 /* ZZRentTimeCell.m in Sources */,
 				BDB2D56521D7109000F6CBA6 /* XJMyWalletVC.m in Sources */,
@@ -4797,7 +4809,7 @@
 				CODE_SIGN_ENTITLEMENTS = zwmMini/zwmMini.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.0.23;
+				CURRENT_PROJECT_VERSION = 4.0.25;
 				DEVELOPMENT_TEAM = 5XRRG8R2BU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4826,7 +4838,7 @@
 					"$(PROJECT_DIR)/zwmMini/Vendors/SocialLibraries/Sina/SinaSDK",
 					"$(PROJECT_DIR)/zwmMini/Vendors/SocialLibraries/QQ",
 				);
-				MARKETING_VERSION = 4.3.2;
+				MARKETING_VERSION = 4.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiamen.yuebanyou;
 				PRODUCT_MODULE_NAME = zwmMini;
 				PRODUCT_NAME = "租我吗";
@@ -4851,7 +4863,7 @@
 				CODE_SIGN_ENTITLEMENTS = zwmMini/zwmMini.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.0.23;
+				CURRENT_PROJECT_VERSION = 4.0.25;
 				DEVELOPMENT_TEAM = 5XRRG8R2BU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4881,7 +4893,7 @@
 					"$(PROJECT_DIR)/zwmMini/Vendors/SocialLibraries/Sina/SinaSDK",
 					"$(PROJECT_DIR)/zwmMini/Vendors/SocialLibraries/QQ",
 				);
-				MARKETING_VERSION = 4.3.2;
+				MARKETING_VERSION = 4.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiamen.yuebanyou;
 				PRODUCT_MODULE_NAME = zwmMini;
 				PRODUCT_NAME = "租我吗";

@@ -79,62 +79,62 @@
     self.nameLb.text = model.user.nickname;
     self.genderIV.image = model.user.gender == 1? GetImage(@"boyiimghome"):GetImage(@"girlimghome");
     
-    XJSkill *mostCheapSkill = nil;
-    for (XJTopic *topic in model.user.rent.topics) {
-        if (topic.skills.count == 0) {  //主题无技能，跳过
-            continue;
-        }
-        for (XJSkill *skill in topic.skills) {
-            if (!mostCheapSkill) {
-                mostCheapSkill = skill;
-            }
-            else if ([skill.price doubleValue] < [mostCheapSkill.price doubleValue]) {
-                mostCheapSkill = skill;
-            }
-        }
-    }
-    
-    if (mostCheapSkill != nil) {
-        _skillLabel.hidden = NO;
-        _skillDesLabel.hidden = NO;
-        _skillLabel.text = mostCheapSkill.name;
-        _skillDesLabel.text = mostCheapSkill.detail.content;
-        
-        
-        if (NULLString(mostCheapSkill.detail.content)) {
-//            _skillDesLabel.hidden = YES;
-//            [_skillLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+//    XJSkill *mostCheapSkill = nil;
+//    for (XJTopic *topic in model.user.rent.topics) {
+//        if (topic.skills.count == 0) {  //主题无技能，跳过
+//            continue;
+//        }
+//        for (XJSkill *skill in topic.skills) {
+//            if (!mostCheapSkill) {
+//                mostCheapSkill = skill;
+//            }
+//            else if ([skill.price doubleValue] < [mostCheapSkill.price doubleValue]) {
+//                mostCheapSkill = skill;
+//            }
+//        }
+//    }
+//    
+//    if (mostCheapSkill != nil) {
+//        _skillLabel.hidden = NO;
+//        _skillDesLabel.hidden = NO;
+//        _skillLabel.text = mostCheapSkill.name;
+//        _skillDesLabel.text = mostCheapSkill.detail.content;
+//        
+//        
+//        if (NULLString(mostCheapSkill.detail.content)) {
+////            _skillDesLabel.hidden = YES;
+////            [_skillLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+////                make.top.equalTo(self.headIV.mas_bottom).offset(10);
+////            }];
+//            if (mostCheapSkill.tags.count != 0) {
+//                NSMutableString *tagsStr = [[NSMutableString alloc] init];
+//                [mostCheapSkill.tags enumerateObjectsUsingBlock:^(ZZSkillTag * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                    [tagsStr appendString:[NSString stringWithFormat:@"#%@ ", obj.tagname]];
+//                }];
+//                
+//                _skillDesLabel.text = tagsStr.copy;
+//            }
+//        }
+//        else {
+//            _skillDesLabel.hidden = NO;
+//            [self.skillDesLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                make.left.equalTo(self.contentView).offset(10);
+//                make.right.equalTo(self.contentView).offset(-10);
 //                make.top.equalTo(self.headIV.mas_bottom).offset(10);
 //            }];
-            if (mostCheapSkill.tags.count != 0) {
-                NSMutableString *tagsStr = [[NSMutableString alloc] init];
-                [mostCheapSkill.tags enumerateObjectsUsingBlock:^(ZZSkillTag * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    [tagsStr appendString:[NSString stringWithFormat:@"#%@ ", obj.tagname]];
-                }];
-                
-                _skillDesLabel.text = tagsStr.copy;
-            }
-        }
-        else {
-            _skillDesLabel.hidden = NO;
-            [self.skillDesLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.contentView).offset(10);
-                make.right.equalTo(self.contentView).offset(-10);
-                make.top.equalTo(self.headIV.mas_bottom).offset(10);
-            }];
-            
-            [self.skillLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.contentView).offset(10);
-                make.right.equalTo(self.contentView).offset(-10);
-                make.top.equalTo(self.skillDesLabel.mas_bottom).offset(10);
-            }];
-        }
-    }
-    else {
-        _skillDesLabel.hidden = YES;
-        _skillLabel.hidden = YES;
-    }
-    
+//            
+//            [self.skillLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+//                make.left.equalTo(self.contentView).offset(10);
+//                make.right.equalTo(self.contentView).offset(-10);
+//                make.top.equalTo(self.skillDesLabel.mas_bottom).offset(10);
+//            }];
+//        }
+//    }
+//    else {
+//        _skillDesLabel.hidden = YES;
+//        _skillLabel.hidden = YES;
+//    }
+//    
 }
 
 - (UIImageView *)headIV{

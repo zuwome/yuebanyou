@@ -85,10 +85,10 @@
 
 - (void)createCellTypes {
     NSMutableArray *cellTypeArray = @[@"1"].mutableCopy;
-    // 技能
-    if (self.skillsArray.count > 0) {
-        [cellTypeArray addObject:@"5"];
-    }
+//    // 技能
+//    if (self.skillsArray.count > 0) {
+//        [cellTypeArray addObject:@"5"];
+//    }
     
     [cellTypeArray addObject:@"2"];
     

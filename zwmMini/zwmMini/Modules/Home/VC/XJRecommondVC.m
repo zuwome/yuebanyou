@@ -12,6 +12,7 @@
 #import "XJTopic.h"
 #import "XJSkill.h"
 #import "XJRecommondCell.h"
+#import "XJBannerCollectionCell.h"
 
 static NSString *collectionIdentifier = @"recollectionidentifier";
 @interface XJRecommondVC ()<UICollectionViewDelegate,UICollectionViewDataSource,XRWaterfallLayoutDelegate, UITableViewDelegate, UITableViewDataSource>
@@ -46,26 +47,29 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isloginsuccessAction) name:loginISSuccess object:nil];
 }
 - (void)isloginsuccessAction{
-//    [self.recollectionView.mj_header beginRefreshing];
-    [_tableView.mj_header beginRefreshing];
+    [self.recollectionView.mj_header beginRefreshing];
+//    [_tableView.mj_header beginRefreshing];
     
 }
 - (void)creatUI{
     self.view.backgroundColor = RGB(245, 245, 245);
-//    [self.view addSubview:self.recollectionView];
-//    [self.recollectionView.mj_header beginRefreshing];
-    
-    [self.view addSubview:self.tableView];
-    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.view addSubview:self.recollectionView];
+    [_recollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    [_tableView.mj_header beginRefreshing];
+    [self.recollectionView.mj_header beginRefreshing];
+    
+//    [self.view addSubview:self.tableView];
+//    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(self.view);
+//    }];
+//    [_tableView.mj_header beginRefreshing];
    
 }
 
 - (void)refresh {
-//    [_recollectionView.mj_header beginRefreshing];
-    [_tableView.mj_header beginRefreshing];
+    [_recollectionView.mj_header beginRefreshing];
+//    [_tableView.mj_header beginRefreshing];
 }
 
 //下拉刷新
@@ -138,11 +142,11 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
            
             if ([data[@"recommend"] count] == 0) {
                 
-//                [self.recollectionView.mj_footer endRefreshingWithNoMoreData];
-                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+                [self.recollectionView.mj_footer endRefreshingWithNoMoreData];
+//                [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
-//            [self.recollectionView reloadData];
-            [self.tableView reloadData];
+            [self.recollectionView reloadData];
+//            [self.tableView reloadData];
        
             
         }else{
@@ -160,13 +164,20 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
 }
 
 - (void)endfresh{
-    if ([self.tableView.mj_header isRefreshing]) {
-        [self.tableView.mj_header endRefreshing];
+    if ([self.recollectionView.mj_header isRefreshing]) {
+        [self.recollectionView.mj_header endRefreshing];
     }
     
-    if ([self.tableView.mj_footer isRefreshing]) {
-        [self.tableView.mj_footer endRefreshing];
+    if ([self.recollectionView.mj_footer isRefreshing]) {
+        [self.recollectionView.mj_footer endRefreshing];
     }
+//    if ([self.tableView.mj_header isRefreshing]) {
+//        [self.tableView.mj_header endRefreshing];
+//    }
+//
+//    if ([self.tableView.mj_footer isRefreshing]) {
+//        [self.tableView.mj_footer endRefreshing];
+//    }
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -174,62 +185,96 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
     return 1;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section;{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
     return self.homeListArray.count;
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    XJRecommondCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionIdentifier forIndexPath:indexPath];
+//    if (indexPath.section == 0) {
+//        XJBannerCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"XJBannerCollectionCell" forIndexPath:indexPath];
+//
+//        return cell;
+//    }
+//    else {
+        XJRecommondCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionIdentifier forIndexPath:indexPath];
 
-    if (self.homeListArray.count > 0) {
-        [cell setUpContent:self.homeListArray[indexPath.item] withIndexpath:indexPath];
+        if (self.homeListArray.count > 0) {
+            [cell setUpContent:self.homeListArray[indexPath.item] withIndexpath:indexPath];
+        }
+        return cell;
+//    }
+    
+    
+}
+
+//这个方法是返回 Header的大小 size
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    return CGSizeMake(SCREEN_WIDTH, 120.0);
+}
+
+//这个也是最重要的方法 获取Header的 方法。
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionReusableView *reusableview = nil;
+
+    if (kind == UICollectionElementKindSectionHeader)
+    {
+        XJBannerCollectionCell *cell = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"XJBannerCollectionCell" forIndexPath:indexPath];
+        reusableview = cell;
     }
-    return cell;
+
+    return reusableview;
     
 }
 
 #pragma mark - XRWaterfallLayoutDelegate methods
 - (CGFloat)waterfallLayout:(XRWaterfallLayout *)waterfallLayout itemHeightForWidth:(CGFloat)itemWidth atIndexPath:(NSIndexPath *)indexPath {
-    if (self.homeListArray.count == 0) {
-        return 0;
-    }
-    //根据图片的原始尺寸，及显示宽度，等比例缩放来计算显示高度
-    CGFloat height = (kScreenWidth/2.f) - 3.5;
-    
-    XJHomeListModel *model = self.homeListArray[indexPath.item];
-    
-    XJSkill *mostCheapSkill = nil;
-    for (XJTopic *topic in model.user.rent.topics) {
-        if (topic.skills.count == 0) {  //主题无技能，跳过
-            continue;
+//    if (indexPath.section == 0) {
+//        return (kScreenWidth/2.f) - 3.5;
+//    }
+//    else {
+        if (self.homeListArray.count == 0) {
+            return 0;
         }
-        for (XJSkill *skill in topic.skills) {
-            if (!mostCheapSkill) {
-                mostCheapSkill = skill;
-            }
-            else if ([skill.price doubleValue] < [mostCheapSkill.price doubleValue]) {
-                mostCheapSkill = skill;
-            }
-        }
-    }
+        //根据图片的原始尺寸，及显示宽度，等比例缩放来计算显示高度
+        return (kScreenWidth/2.f) - 3.5;
+//    }
     
-    // 技能名称、价格、介绍
-    if (mostCheapSkill != nil) {
-        if (!NULLString(mostCheapSkill.detail.content)) {
-            height += 10.0;
-            CGFloat textHeight = [XJUtils heightForCellWithText:mostCheapSkill.detail.content font:ADaptedFontBoldSize(16) labelWidth:(kScreenWidth/2.f) -3.5 maximunLine:3];
-            height += textHeight;
-        }
-        height += 10.0;
-        CGFloat textHeight = [XJUtils heightForCellWithText:mostCheapSkill.name font:ADaptedFontBoldSize(16) labelWidth:(kScreenWidth/2.f) -3.5];
-        height += textHeight;
-        height += 5;
-        return height;
-    }
-    else {
-        return (kScreenWidth/2.f) -3.5;
-    }
+//    
+//    XJHomeListModel *model = self.homeListArray[indexPath.item];
+//    
+//    XJSkill *mostCheapSkill = nil;
+//    for (XJTopic *topic in model.user.rent.topics) {
+//        if (topic.skills.count == 0) {  //主题无技能，跳过
+//            continue;
+//        }
+//        for (XJSkill *skill in topic.skills) {
+//            if (!mostCheapSkill) {
+//                mostCheapSkill = skill;
+//            }
+//            else if ([skill.price doubleValue] < [mostCheapSkill.price doubleValue]) {
+//                mostCheapSkill = skill;
+//            }
+//        }
+//    }
+//    
+//    // 技能名称、价格、介绍
+//    if (mostCheapSkill != nil) {
+//        if (!NULLString(mostCheapSkill.detail.content)) {
+//            height += 10.0;
+//            CGFloat textHeight = [XJUtils heightForCellWithText:mostCheapSkill.detail.content font:ADaptedFontBoldSize(16) labelWidth:(kScreenWidth/2.f) -3.5 maximunLine:3];
+//            height += textHeight;
+//        }
+//        height += 10.0;
+//        CGFloat textHeight = [XJUtils heightForCellWithText:mostCheapSkill.name font:ADaptedFontBoldSize(16) labelWidth:(kScreenWidth/2.f) -3.5];
+//        height += textHeight;
+//        height += 5;
+//        return height;
+//    }
+//    else {
+//        return (kScreenWidth/2.f) -3.5;
+//    }
 
 }
 
@@ -292,16 +337,17 @@ static NSString *collectionIdentifier = @"recollectionidentifier";
 - (UICollectionView *)recollectionView{
     if (!_recollectionView) {
         
-//        UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc] init];
-        
         self.waterfall = [XRWaterfallLayout waterFallLayoutWithColumnCount:2];
         //或者一次性设置
         [self.waterfall setColumnSpacing:7 rowSpacing:7 sectionInset:UIEdgeInsetsMake(7, 0, 0, 0)];
         self.waterfall.delegate = self;
+        self.waterfall.sectionInset = UIEdgeInsetsMake(120, 0, 0, 0  );
+        self.waterfall.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 120.f);
         
         _recollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0,kScreenWidth , kScreenHeight - SafeAreaBottomHeight-SafeAreaTopHeight-iPhoneTabbarHeight) collectionViewLayout:self.waterfall];
         
          [_recollectionView registerClass:[XJRecommondCollectionViewCell class] forCellWithReuseIdentifier:collectionIdentifier];
+        [_recollectionView registerClass:[XJBannerCollectionCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"XJBannerCollectionCell"];
         
         MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
         header.automaticallyChangeAlpha = YES;

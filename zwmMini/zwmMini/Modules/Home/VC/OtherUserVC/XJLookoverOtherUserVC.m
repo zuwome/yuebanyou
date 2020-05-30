@@ -25,6 +25,7 @@
 #import "ZZRentChooseSkillViewController.h"
 #import "XJEditMyInfoVC.h"
 #import "ZZSkillDetailViewController.h"
+#import "XJUserInfoWarningCell.h"
 
 @interface XJLookoverOtherUserVC ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,XJPersonalDetailTbCellDelegate, XJRentSkillCellDelegate, ZZSkillDetailViewControllerDelegate>
 
@@ -335,12 +336,12 @@
             self.skillsArray = skillsArr.copy;
         }
         
-        NSMutableArray *cellTypeArray = @[@"1"].mutableCopy;
+        NSMutableArray *cellTypeArray = @[@"-1", @"1"].mutableCopy;
         
         // 技能
-        if (self.skillsArray.count > 0) {
-            [cellTypeArray addObject:@"5"];
-        }
+//        if (self.skillsArray.count > 0) {
+//            [cellTypeArray addObject:@"5"];
+//        }
         
         [cellTypeArray addObject:@"2"];
         
@@ -735,7 +736,11 @@
     XJUserModel *umodel = self.lookuserModel;
     NSString *type = _cellTypeArray[indexPath.row];
     
-    if ([type isEqualToString:@"1"]) {
+    if ([type isEqualToString:@"-1"]) {
+        XJUserInfoWarningCell  *cell = [[XJUserInfoWarningCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"XJUserInfoWarningCell"];
+        return cell;
+    }
+    else if ([type isEqualToString:@"1"]) {
         XJPersonalDataNameTbCell  *cell = [[XJPersonalDataNameTbCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"namecell"];
         [cell setUpName:umodel.nickname Gender:umodel.gender == 1 ? YES:NO Distance:umodel.distance isOneself:NO];
         return cell;

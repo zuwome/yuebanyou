@@ -65,9 +65,16 @@
         self.maxYDic[@(i)] = @(self.sectionInset.top);
     }
     
+    
     //根据collectionView获取总共有多少个item
     NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
     [self.attributesArray removeAllObjects];
+    
+    UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForSupplementaryViewOfKind:@"UICollectionElementKindSectionHeader" atIndexPath:[NSIndexPath indexPathWithIndex:0]];
+    
+    [self.attributesArray addObject:attributes];
+    
+    
     //为每一个item创建一个attributes并存入数组
     for (int i = 0; i < itemCount; i++) {
         UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
@@ -86,7 +93,7 @@
     }];
     
     //collectionView的contentSize.height就等于最长列的最大y值+下内边距
-    return CGSizeMake(0, [self.maxYDic[maxIndex] floatValue] + self.sectionInset.bottom);
+    return CGSizeMake(0, [self.maxYDic[maxIndex] floatValue] + self.sectionInset.bottom + 90.0);
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -129,6 +136,14 @@
     
     return attributes;
 }
+
+//- (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+//    UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:kind withIndexPath:indexPath];
+//    CGFloat x = 0.0;
+//    CGFloat y = 0.0;
+//    attributes.frame = CGRectMake(x, y, SCREEN_WIDTH, 90.0);
+//    return attributes;
+//}
 
 //返回rect范围内item的attributes
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
